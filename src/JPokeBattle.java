@@ -22,6 +22,6 @@ public class JPokeBattle {
             pokemon.forEach( poke -> System.out.println(poke));
 
             // Prova Stampa Commit
-            System.out.println("Porcaccio Iddio");
+            System.out.println("aaaaaaaaaaaaaa");
         }
 }
