@@ -146,7 +146,7 @@ public abstract class Pokemon {
                 "Gender= " + gender + '\n' +
                 "Attack= " + attack + '\n' +
                 "Defense= " + defense +'\n' +
-                "Speed= " + speed +'\n' ;
-                //"Moves= " + moves +'\n';
+                "Speed= " + speed +'\n' +
+                "Moves= " + moves +'\n';
     }
 }
