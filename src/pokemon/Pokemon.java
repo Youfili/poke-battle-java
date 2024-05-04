@@ -19,6 +19,7 @@ public abstract class Pokemon {
      private int attack;
      private int defense;
      private int speed;
+     private Boolean isAlive;
      private List<Move> moves=new ArrayList<>();
 
      private List<DefaultMoves> defaultMoves=new ArrayList<>(); // questo va inizializzato con le mosse base
@@ -33,7 +34,50 @@ public abstract class Pokemon {
         this.attack = attack;
         this.defense = defense;
         this.speed = speed;
+        this.isAlive = true;
+
     }
+
+
+    public void setDefaultMoves(){
+        /*itera su un arrayList di mosse default e ne assegna
+          casualmente 2 alla lista mosse del pokemon
+        */
+    }
+
+    public void addMove(Move move){
+        if (moves.size()<4){
+            moves.add(move);
+        }
+        else{
+            //Rimuovi mossa selezionata
+        }
+    }
+
+    public void removeMove(Move move){
+        moves.remove(move);
+
+    }
+
+
+
+    @Override
+    public String toString() {
+        return
+                "Name= " + name + '\n' +
+                "Level= " + level + '\n'+
+                "Ps= " + ps + '\n'+
+                "Gender= " + gender + '\n' +
+                "Attack= " + attack + '\n' +
+                "Defense= " + defense +'\n' +
+                "Speed= " + speed +'\n' +
+                "Moves= " + moves +'\n';
+    }
+
+
+
+
+    //Getter and Setter
 
     public Boolean getAlive() {
         return isAlive;
@@ -51,7 +95,7 @@ public abstract class Pokemon {
         this.imageIcon = imageIcon;
     }
 
-    private Boolean isAlive;
+
 
 
 
@@ -114,39 +158,5 @@ public abstract class Pokemon {
 
     public List<Move> getMoves() {
         return moves;
-    }
-
-    public void setDefaultMoves(){
-        /*itera su un arrayList di mosse default e ne assegna
-          casualmente 2 alla lista mosse del pokemon
-        */
-    }
-
-    public void addMove(Move move){
-        if (moves.size()<4){
-            moves.add(move);
-        }
-        else{
-            //Rimuovi mossa selezionata
-        }
-    }
-    public void removeMove(Move move){
-        moves.remove(move);
-
-    }
-
-
-
-    @Override
-    public String toString() {
-        return
-                "Name= " + name + '\n' +
-                "Level= " + level + '\n'+
-                "Ps= " + ps + '\n'+
-                "Gender= " + gender + '\n' +
-                "Attack= " + attack + '\n' +
-                "Defense= " + defense +'\n' +
-                "Speed= " + speed +'\n' +
-                "Moves= " + moves +'\n';
     }
 }
