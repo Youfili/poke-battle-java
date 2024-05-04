@@ -135,9 +135,18 @@ public abstract class Pokemon {
 
     }
 
-   /* @Override
-    public String toString() {
-        //implementare il toString con tutte le informazioni del pokemon
 
-    }*/
+
+    @Override
+    public String toString() {
+        return
+                "Name= " + name + '\n' +
+                "Level= " + level + '\n'+
+                "Ps= " + ps + '\n'+
+                "Gender= " + gender + '\n' +
+                "Attack= " + attack + '\n' +
+                "Defense= " + defense +'\n' +
+                "Speed= " + speed +'\n' +
+                "Moves= " + moves +'\n';
+    }
 }
