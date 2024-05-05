@@ -47,6 +47,6 @@ public class ChoosePlayerPanel extends JPanel {
         add(femaleButton);
 
         // Commento per vedere il commit
-
+        // Comment commit online
     }
 }
