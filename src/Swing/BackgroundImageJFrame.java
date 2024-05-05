@@ -37,6 +37,7 @@ public class BackgroundImageJFrame extends JFrame {
         wallpaper.setBounds(0,0,600,650);
 
 
+
         JButton startButton=new JButton("START");//creating instance of JButton
         startButton.setBounds(240,500,100,40);//x axis, y axis, width, height
         startButton.addActionListener(new ActionListener() {
