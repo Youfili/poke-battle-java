@@ -1,5 +1,7 @@
 package Swing;
 
+import players.Player;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -37,6 +39,12 @@ public class SelectGame extends JFrame {
 
             JButton startButton=new JButton("Nuova Partita");//creating instance of JButton
             startButton.setBounds(240,500,100,40);//x axis, y axis, width, height
+            startButton.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    JOptionPane.setRootFrame(new ChooseTeam(new Player("Hash",0,0,"Male")));
+                    setVisible(false);
+                }
+            });
 
 
 

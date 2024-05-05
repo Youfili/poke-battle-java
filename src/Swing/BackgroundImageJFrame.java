@@ -9,6 +9,8 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
+//TEST SCHERMATA INIZIALE DI AVVIO
+
 public class BackgroundImageJFrame extends JFrame {
 
     public BackgroundImageJFrame() {

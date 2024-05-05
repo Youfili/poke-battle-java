@@ -4,6 +4,7 @@ import moves.Move;
 import moves.base.DefaultMoves;
 
 import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +25,7 @@ public abstract class Pokemon {
 
      private List<DefaultMoves> defaultMoves=new ArrayList<>(); // questo va inizializzato con le mosse base
 
-     private ImageIcon imageIcon;
+     private Image image;
 
     public Pokemon(String name, int level, int ps, String gender, int attack, int defense, int speed) {
         this.name = name;
@@ -87,12 +88,12 @@ public abstract class Pokemon {
         isAlive = alive;
     }
 
-    public ImageIcon getImageIcon() {
-        return imageIcon;
+    public Image getImage() {
+        return image;
     }
 
-    public void setImageIcon(ImageIcon imageIcon) {
-        this.imageIcon = imageIcon;
+    public void setImage(Image image) {
+        this.image = image;
     }
 
 

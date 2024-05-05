@@ -24,6 +24,7 @@ public class Player {
         }
 
     }
+
     //Stampa i nomi dei pokemon nella squadra
     public String stringArray() {
         String s="[";
