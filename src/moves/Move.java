@@ -15,9 +15,25 @@ public abstract class Move {
         this.pp = pp;
 
     }
+
+
     public void use(Pokemon pokeUser,Pokemon pokeTarget) {
         //da implementare
     }
+
+
+
+    @Override
+    public String toString() {
+        return name;
+    }
+
+
+
+
+
+
+    //Getter and Setter
 
     public String getName() {
         return name;
@@ -49,10 +65,5 @@ public abstract class Move {
 
     public void setPp(int pp) {
         this.pp = pp;
-    }
-
-    @Override
-    public String toString() {
-        return name;
     }
 }
