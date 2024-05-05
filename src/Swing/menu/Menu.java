@@ -34,6 +34,16 @@ public class Menu extends JFrame {
 
 
             JButton startButton=new JButton("Nuova Partita");//creating instance of JButton
+            startButton.setBounds(0,0,400,70);//x axis, y axis, width, height
+            startButton.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    JOptionPane.setRootFrame(new ChooseTeam(new Player("Hash",0,0,"Male")));
+                    setVisible(false);
+                }
+            });
+
+
+            JButton continueButton=new JButton("Continua Partita");//creating instance of JButton
             startButton.setBounds(240,500,100,40);//x axis, y axis, width, height
             startButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
@@ -46,7 +56,9 @@ public class Menu extends JFrame {
 
 
 
-            add(startButton);//adding button in JFrame
+
+            add(startButton); //adding button in JFrame
+            add(continueButton); //adding button in JFrame
 
             //add(wallpaper);
 
