@@ -18,9 +18,9 @@ import java.util.List;
 public class ChooseTeam extends JPanel {
     private List<Pokemon> pokemon=new ArrayList<Pokemon>();
     private Player player;
-    public ChooseTeam() {
-        this.player=player;
+    public ChooseTeam(Player player) {
 
+        this.player=player;
         pokemon.add(new Bulbasaur());
         pokemon.add(new Bulbasaur());
         pokemon.add(new Bulbasaur());
@@ -67,6 +67,7 @@ public class ChooseTeam extends JPanel {
 
 
         });
+
         add(playerButton);//adding button in JFrame
         setVisible(true);
 

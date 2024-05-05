@@ -32,11 +32,13 @@ public class Menu extends JFrame {
             JPanel cards = new JPanel(new CardLayout());
             cards.add(gameSelect, "Panel 1");
             cards.add(choosePlayerPanel, "Panel 2");
-            chooseTeam=new ChooseTeam();
-            cards.add(chooseTeam, "Panel 3");
+
+
+
 
             Container pane = this.getContentPane();
             pane.add(cards, BorderLayout.CENTER);
+            CardLayout cl = (CardLayout)(cards.getLayout());
 
 
 
@@ -46,16 +48,13 @@ public class Menu extends JFrame {
                 public void actionPerformed(ActionEvent e) {
                     //gameSelect.setVisible(false);
                     //choosePlayerPanel.setVisible(true);    // set visibile of panel choose "False"
-                    CardLayout cl = (CardLayout)(cards.getLayout());
                     cl.next(cards);
                     player=choosePlayerPanel.getChoosenPlayer();
 
+                    cards.add(new ChooseTeam(player), "Panel 3");
 
-                    //pane.add(choosePlayerPanel);
-                    //JOptionPane.setRootFrame(new ChooseTeam(player));
-                    //setVisible(false);
-                    chooseTeam.setPlayer(player);
                     cl.next(cards);
+
                 }
             });
 

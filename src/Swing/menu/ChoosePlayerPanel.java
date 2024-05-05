@@ -27,7 +27,8 @@ public class ChoosePlayerPanel extends JPanel {
                 choosenPlayer.setName(JOptionPane.showInputDialog("nome"));
                 //System.out.println(choosenPlayer);
                 //JOptionPane.setRootFrame(new ChooseTeam(choosenPlayer));
-                //setVisible(false);
+                setVisible(false);
+
             }
         });
 
