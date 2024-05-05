@@ -45,8 +45,6 @@ public class BackgroundImageJFrame extends JFrame {
                 JOptionPane.setRootFrame(new Menu());
                 setVisible(false);
             }
-
-
         });
 
         add(startButton);//adding button in JFrame

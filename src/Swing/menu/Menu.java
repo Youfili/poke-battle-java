@@ -17,11 +17,15 @@ import java.io.IOException;
 public class Menu extends JFrame {
 
         private JPanel gameSelect;
+        private ChoosePlayerPanel choosePlayerPanel;
 
         public Menu() {
             //creating instance of JFrame
             setSize(600,650);//400 width and 500 height
             gameSelect = new JPanel();
+            choosePlayerPanel = new ChoosePlayerPanel();
+            choosePlayerPanel.setVisible(false);    // set visibile of panel choose "False"
+
             gameSelect.setLayout(null);
 //            gameSelect.setLayout(new BorderLayout(BorderLayout.CENTER));
 
@@ -35,11 +39,10 @@ public class Menu extends JFrame {
                 throw new RuntimeException(e);
             }
 
+            // IMage
             Image dimg = img.getScaledInstance(getWidth(), getHeight(),
                     Image.SCALE_SMOOTH);
-
             ImageIcon imageIcon = new ImageIcon(dimg);
-
             JLabel wallpaper= new JLabel("",imageIcon,JLabel.CENTER);
             wallpaper.setBounds(0,0,600,650);
 
@@ -48,8 +51,9 @@ public class Menu extends JFrame {
             startButton.setBounds(115,350,350,85);//x axis, y axis, width, height
             startButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    JOptionPane.setRootFrame(new ChooseTeam(new Player("Hash",0,0,"Male")));
-                    setVisible(false);
+                    gameSelect.setVisible(false);
+                    choosePlayerPanel.setVisible(true);    // set visibile of panel choose "False"
+
                 }
             });
 
@@ -58,8 +62,7 @@ public class Menu extends JFrame {
             continueButton.setBounds(115,250,350,85);//x axis, y axis, width, height
             continueButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    JOptionPane.setRootFrame(new ChooseTeam(new Player("Hash",0,0,"Male")));
-                    setVisible(false);
+                    // Implementare
                 }
             });
 
@@ -77,11 +80,13 @@ public class Menu extends JFrame {
             continueButton.setBackground(Color.BLUE);
             continueButton.setBorder(BorderFactory.createLineBorder(Color.yellow)); // Simple Line Border
 
+
             // Add the button on the Frame
             gameSelect.add(startButton); //adding button in JFrame
             gameSelect.add(continueButton); //adding button in JFrame
 
             setVisible(true);//making the frame visible
+//            choosePlayerPanel.setVisible(false);    // set visibile of panel choose "False"
             setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);     // in questo modo, quando premo x chiuderò anche la pagina
         }
 
