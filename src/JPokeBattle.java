@@ -1,6 +1,7 @@
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 
+import Swing.BackgroundImageJFrame;
 import players.Player;
 import pokemon.Bulbasaur;
 import pokemon.Pokemon;
@@ -16,7 +17,7 @@ import java.util.List;
 public class JPokeBattle {
     public static void main(String[] arg) {
 
-        Player hash = new Player("Hash",0,0,"Male");
+        /*Player hash = new Player("Hash",0,0,"Male");
 
         hash.addPokemon(new Bulbasaur());
         hash.addPokemon(new Bulbasaur());
@@ -26,7 +27,9 @@ public class JPokeBattle {
 
         hash.addPokemon(new Bulbasaur());
 
-        System.out.println(hash);
+        System.out.println(hash);*/
+        new BackgroundImageJFrame();
+
 
 
 
