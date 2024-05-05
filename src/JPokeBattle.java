@@ -30,7 +30,6 @@ public class JPokeBattle {
         System.out.println(hash);*/
         new BackgroundImageJFrame();
 
-        System.out.println("PROVA MASI");
 
 
 

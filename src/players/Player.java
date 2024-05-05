@@ -51,7 +51,7 @@ public class Player {
                 "winMatch= " + winMatch + '\n' +
                 "lossMatch= " + lossMatch + '\n'+
 
-            (team.isEmpty()?"L'allenatore non ha pokemon":"team: " + pokemonStringList() )+'\n';
+            (teamIsEmpty()?"L'allenatore non ha pokemon":"team: " + pokemonStringList() )+'\n';
     }
 
     //matodo per aggiungere pokemon alla squadra durante la creazione
@@ -69,6 +69,15 @@ public class Player {
     //stampa le informazioni di un pokemon della squadra
     public String getPokemonInfo(int i){
         return (team.get(i)==null?"Non hai selezionato nessun Pokemon":team.get(i).toString());
+    }
+
+    public boolean teamIsEmpty(){
+        for(Pokemon p : team){
+            if(p!=null){
+                return false;
+            }
+        }
+        return true;
     }
 
 
