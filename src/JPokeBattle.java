@@ -3,6 +3,10 @@
 
 import players.Player;
 import pokemon.Bulbasaur;
+import pokemon.Pokemon;
+
+import java.util.ArrayList;
+import java.util.List;
 
 //TEST
 

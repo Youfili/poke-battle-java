@@ -38,7 +38,7 @@ public class ChooseTeam extends JFrame {
         int y=0;
         for (Pokemon poke : pokemon) {
 
-            JCheckBox startButton = new JCheckBox(poke.getName());//creating instance of JButton
+            JCheckBox startButton = new JCheckBox(poke.getName());//creating instance of JButton --> Return pokemon name
             startButton.setBounds(x,y, 100, 40);//x axis, y axis, width, height
 
             startButton.addActionListener(new ActionListener() {
