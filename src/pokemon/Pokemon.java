@@ -14,24 +14,31 @@ import java.util.List;
 public abstract class Pokemon {
 
      private String name;
+     private String gender;
+     private String type;
+
      private int level;
      private int ps;
-     private String gender;
+     private int exp;
      private int attack;
      private int defense;
      private int speed;
-     private Boolean isAlive;
-     private List<Move> moves=new ArrayList<>();
 
+     private Boolean isAlive;
+
+     private List<Move> moves=new ArrayList<>();
      private List<DefaultMoves> defaultMoves=new ArrayList<>(); // questo va inizializzato con le mosse base
 
      private Image image;
+     //aggiungere GIF per la battaglia
 
+
+    //Constructor
     public Pokemon(String name, int level, int ps, String gender, int attack, int defense, int speed) {
         this.name = name;
         this.level = level;
         this.ps = ps;
-        this.gender = gender;
+        this.gender = gender;//da implementare casuale
         this.attack = attack;
         this.defense = defense;
         this.speed = speed;
@@ -159,5 +166,21 @@ public abstract class Pokemon {
 
     public List<Move> getMoves() {
         return moves;
+    }
+
+    public int getExp() {
+        return exp;
+    }
+
+    public void setExp(int exp) {
+        this.exp = exp;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

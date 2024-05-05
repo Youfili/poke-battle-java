@@ -6,14 +6,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Player {
+
     private String name;
+    private String gender;
+
     private int winMatch;
     private int lossMatch;
-    private String gender;
+
     private List<Pokemon> team=new ArrayList<>(6);
 
 
-
+    //Constructor
     public Player(String name, int winMatch, int lossMatch, String gender) {
         this.name = name;
         this.winMatch = winMatch;
@@ -26,7 +29,7 @@ public class Player {
     }
 
     //Stampa i nomi dei pokemon nella squadra
-    public String stringArray() {
+    public String pokemonStringList() {
         String s="[";
         for(Pokemon p : team) {
             if(p!=null) {
@@ -44,10 +47,11 @@ public class Player {
     public String toString() {
         return
                 "name= " + name + '\n' +
+                "gender= " + gender + '\n' +
                 "winMatch= " + winMatch + '\n' +
                 "lossMatch= " + lossMatch + '\n'+
-                "gender= " + gender + '\n' +
-                        (team.isEmpty()?"L'allenatore non ha pokemon":"team: " + stringArray() )+'\n';
+
+            (team.isEmpty()?"L'allenatore non ha pokemon":"team: " + pokemonStringList() )+'\n';
     }
 
     //matodo per aggiungere pokemon alla squadra durante la creazione

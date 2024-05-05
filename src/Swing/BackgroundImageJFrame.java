@@ -20,7 +20,7 @@ public class BackgroundImageJFrame extends JFrame {
         setLayout(null);//using no layout managers
         BufferedImage img =null ;
         try {
-            img = ImageIO.read(new File("/Users/leonardo/Desktop/wallpaper.jpg"));
+            img = ImageIO.read(new File("/Users/leonardo/IdeaProjects/JPokeBattle_Beta/src/Img/wallpaper.jpg"));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

@@ -13,7 +13,7 @@ public class Bulbasaur extends Pokemon{
         addMove(new Action());
         BufferedImage img = null;
         try {
-            img = ImageIO.read(new File("/Users/leonardo/Desktop/bulbasaur.png"));
+            img = ImageIO.read(new File("/Users/leonardo/IdeaProjects/JPokeBattle_Beta/src/Img/bulbasaur.png"));
         } catch (IOException ex) {
             throw new RuntimeException(ex);
         }
