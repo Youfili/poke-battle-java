@@ -1,5 +1,7 @@
 package Swing;
 
+import Swing.menu.Menu;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -15,10 +17,10 @@ public class BackgroundImageJFrame extends JFrame {
 
     public BackgroundImageJFrame() {
         //creating instance of JFrame
-        setSize(600, 650);//400 width and 500 height
+        setSize(600,650);//400 width and 500 height
 
         setLayout(null);//using no layout managers
-        BufferedImage img = null;
+        BufferedImage img =null ;
         try {
             img = ImageIO.read(new File("src/Img/wallpaper.jpg"));
         } catch (IOException e) {
@@ -31,16 +33,15 @@ public class BackgroundImageJFrame extends JFrame {
 
         ImageIcon imageIcon = new ImageIcon(dimg);
 
-        JLabel wallpaper = new JLabel("", imageIcon, JLabel.CENTER);
-        wallpaper.setBounds(0, 0, 600, 650);
+        JLabel wallpaper= new JLabel("",imageIcon,JLabel.CENTER);
+        wallpaper.setBounds(0,0,600,650);
 
 
-        JButton startButton = new JButton("START");//creating instance of JButton
-        startButton.setBounds(240, 500, 100, 40);//x axis, y axis, width, height
+        JButton startButton=new JButton("START");//creating instance of JButton
+        startButton.setBounds(240,500,100,40);//x axis, y axis, width, height
         startButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.setRootFrame(new SelectGame());
-
+                JOptionPane.setRootFrame(new Menu());
                 setVisible(false);
             }
 
@@ -50,9 +51,14 @@ public class BackgroundImageJFrame extends JFrame {
         add(startButton);//adding button in JFrame
 
         add(wallpaper);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
         setVisible(true);//making the frame visible
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);     // in questo modo, quando premo x chiuderò anche la pagina
+
+    }
+
+
+    public static void main(String[] args) {
+    new BackgroundImageJFrame();
     }
 }
-
-

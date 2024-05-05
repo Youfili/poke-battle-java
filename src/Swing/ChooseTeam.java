@@ -31,7 +31,7 @@ public class ChooseTeam extends JFrame {
         setSize(600,650);//400 width and 500 height
         setLayout(null);//using no layout managers
 
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
 
 
         int x=0;

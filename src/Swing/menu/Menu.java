@@ -1,19 +1,15 @@
-package Swing;
+package Swing.menu;
 
+import Swing.ChooseTeam;
 import players.Player;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 
-public class SelectGame extends JFrame {
+public class Menu extends JFrame {
 
-        public SelectGame() {
+        public Menu() {
             //creating instance of JFrame
             setSize(600,650);//400 width and 500 height
 
@@ -55,6 +51,7 @@ public class SelectGame extends JFrame {
             //add(wallpaper);
 
             setVisible(true);//making the frame visible
+            setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);     // in questo modo, quando premo x chiuderò anche la pagina
         }
 
 
