@@ -17,7 +17,7 @@ public class Player {
 
     private ImageIcon image;
 
-    private List<Pokemon> team=new ArrayList<>(6);
+    private List<Pokemon> team = new ArrayList<>(6);
 
 
     //Constructor

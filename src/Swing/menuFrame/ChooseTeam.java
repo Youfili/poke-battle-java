@@ -5,6 +5,7 @@ import pokemon.Bulbasaur;
 import pokemon.Pokemon;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -82,8 +83,19 @@ public class ChooseTeam extends JFrame {
 
         // Bottone del giocatore
         JButton playerButton=new JButton();//creating instance of JButton
-        playerButton.setIcon(player.getImage());
-        playerButton.setBounds(400,500,100,75);//x axis, y axis, width, height
+        playerButton.setBounds(450,500,100,75);//x axis, y axis, width, height
+
+        // Controllo se il Gender = Maschio
+        if(player.getGender().equals("Male")){
+            playerButton.setIcon(player.getImage());
+            playerButton.setBackground(Color.CYAN);
+            playerButton.setBorder(BorderFactory.createLineBorder(Color.BLUE)); // Simple Line Border
+        }else{
+            playerButton.setIcon(player.getImage());
+            playerButton.setBackground(Color.PINK);
+            playerButton.setBorder(BorderFactory.createLineBorder(Color.RED)); // Simple Line Border
+        }
+        // Aggiungo l' Action Listener al player
         playerButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                   JOptionPane.showMessageDialog((Component) null, player.toString(), null, JOptionPane.INFORMATION_MESSAGE);
