@@ -5,29 +5,24 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-
 public class GameSelectPanel extends JPanel {
 
-    JButton startButton;
-    JButton continueButton;
-
+    private ImageBackgroundButton startButton, continueButton;
 
     public GameSelectPanel(GridLayout gridLayout){
         super(gridLayout);
 
-        this.startButton = new JButton("New Game");
-        this.continueButton = new JButton("Continua Partita");
+        // Creazione dei pulsanti con immagine e testo
+        this.startButton = new ImageBackgroundButton("", "src/Img/new_Game_Edited.png");
+        this.continueButton = new ImageBackgroundButton("", "src/Img/continue_Game_Edited.png");
 
-        // Set color background of the buttons del Pannello gameSelect
-        startButton.setBackground(Color.GREEN);
-        startButton.setBorder(BorderFactory.createLineBorder(Color.blue)); // Simple Line Border
-        continueButton.setBackground(Color.BLUE);
-        continueButton.setBorder(BorderFactory.createLineBorder(Color.yellow)); // Simple Line Border
+        // Setting the BorderLine of the Button
+        startButton.setBorder(BorderFactory.createLineBorder(Color.RED)); // Simple Line Border
+        continueButton.setBorder(BorderFactory.createLineBorder(Color.YELLOW)); // Simple Line Border
 
-        // Add the button on the Panell
-        this.add(startButton); //adding button on the GameSelectPanel
-        this.add(continueButton); //adding button on the GameSelectPanel
-
+        // Aggiungi i pannelli dei pulsanti al pannello principale
+        this.add(startButton); // Aggiungi il pannello del pulsante "New Game"
+        this.add(continueButton); // Aggiungi il pannello del pulsante "Continue Game"
     }
 
     public JButton getStartButton() {
@@ -37,5 +32,4 @@ public class GameSelectPanel extends JPanel {
     public JButton getContinueButton() {
         return continueButton;
     }
-
 }

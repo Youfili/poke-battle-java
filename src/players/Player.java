@@ -54,10 +54,10 @@ public class Player {
     @Override
     public String toString() {
         return
-                "name= " + name + '\n' +
-                "gender= " + gender + '\n' +
-                "winMatch= " + winMatch + '\n' +
-                "lossMatch= " + lossMatch + '\n'+
+                "Name = " + name + '\n' +
+                "Gender = " + gender + '\n' +
+                "Won Match= " + winMatch + '\n' +
+                "Lost Match= " + lossMatch + '\n'+
 
             (teamIsEmpty()?"L'allenatore non ha pokemon":"team: " + pokemonStringList() )+'\n';
     }

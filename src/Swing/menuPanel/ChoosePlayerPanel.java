@@ -17,26 +17,33 @@ import java.io.IOException;
 
 public class ChoosePlayerPanel extends JPanel {
 
-    private JButton maleButton, femaleButton;
+    private ImageBackgroundButton  maleButton, femaleButton;
 
     public ChoosePlayerPanel(GridLayout gridLayout){
         super(gridLayout);
 
-        maleButton = new JButton("Male");//creating instance of JButton
+        maleButton = new ImageBackgroundButton("","src/Img/male_trainer.png");//creating instance of maleButton
+        femaleButton = new ImageBackgroundButton("","src/Img/femaleTrainer.png");   // femaleButton
+
+        // Male Button
         maleButton.setBackground(Color.CYAN);
         maleButton.setFont(new Font("Arial", Font.ITALIC, 60)); // Imposta il font del testo
         maleButton.setSize(450, 450);
 //            maleButton.setBounds(240, 500, 100, 40);//x axis, y axis, width, height
         this.add(maleButton);      // aggiungo il pulsante al pannello
 
-        femaleButton = new JButton("Female");
+        // Female Button
         femaleButton.setBackground(Color.PINK);
         femaleButton.setFont(new Font("Arial", Font.BOLD, 60)); // Imposta il font del testo
         femaleButton.setSize(450, 450);
 //            femaleButton.setBounds(240, 200, 100, 40);//x axis, y axis, width, height
         this.add(femaleButton);
+
     }           // Fine Costruttore
 
+
+
+    // Get for the Gender Button
     public JButton getMaleButton() {
         return maleButton;
     }

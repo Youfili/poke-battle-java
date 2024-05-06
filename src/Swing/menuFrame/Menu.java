@@ -31,7 +31,7 @@ public class Menu extends JFrame {
             setLayout(new BorderLayout());      // Layout del Menu
 
             // creo l'istanza di GameSelectPanel
-            gameSelect = new GameSelectPanel(new GridLayout(4,2));      // Grid Layout con 3 colonne
+            gameSelect = new GameSelectPanel(new GridLayout(2,1));      // Grid Layout con 3 colonne
             // Creo l'istanza di ChoosePlayerPanel
             choosePlayerPanel = new ChoosePlayerPanel(new GridLayout(1, 2)); // GridLayout con 2 righe e 1 colonna
 
@@ -52,23 +52,23 @@ public class Menu extends JFrame {
             CardLayout cl = (CardLayout)(panels.getLayout());
 
 
-
-            // METODO PER METTERE L'IMMAGINE DI SFONDO
-            BufferedImage imgBackGround =null ;
-            try {
-                imgBackGround = ImageIO.read(new File("src/Img/wallpaper.jpg"));
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-
-            Image dimgB = imgBackGround.getScaledInstance(getWidth(), getHeight(),
-                    Image.SCALE_SMOOTH);
-
-            ImageIcon imageBack = new ImageIcon(dimgB);
-
-            JLabel wallpaper= new JLabel("",imageBack,JLabel.CENTER);       // Metto il background centrato al centro
-            wallpaper.setBounds(0,0,600,650);
-            wallpaper.setIcon(imageBack);
+//
+//            // METODO PER METTERE L'IMMAGINE DI SFONDO
+//            BufferedImage imgBackGround =null ;
+//            try {
+//                imgBackGround = ImageIO.read(new File("src/Img/wallpaper.jpg"));
+//            } catch (IOException e) {
+//                throw new RuntimeException(e);
+//            }
+//
+//            Image dimgB = imgBackGround.getScaledInstance(getWidth(), getHeight(),
+//                    Image.SCALE_SMOOTH);
+//
+//            ImageIcon imageBack = new ImageIcon(dimgB);
+//
+//            JLabel wallpaper= new JLabel("",imageBack,JLabel.CENTER);       // Metto il background centrato al centro
+//            wallpaper.setBounds(0,0,600,650);
+//            wallpaper.setIcon(imageBack);
 
 
 
