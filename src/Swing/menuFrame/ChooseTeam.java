@@ -1,4 +1,4 @@
-package Swing.menu;
+package Swing.menuFrame;
 
 import players.Player;
 import pokemon.Bulbasaur;

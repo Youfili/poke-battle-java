@@ -17,17 +17,6 @@ import java.util.List;
 public class JPokeBattle {
     public static void main(String[] arg) {
 
-        /*Player hash = new Player("Hash",0,0,"Male");
-
-        hash.addPokemon(new Bulbasaur());
-        hash.addPokemon(new Bulbasaur());
-
-        System.out.println(hash);
-        System.out.println(hash.getPokemonInfo(1));
-
-        hash.addPokemon(new Bulbasaur());
-
-        System.out.println(hash);*/
         new BackgroundImageJFrame();
 
 

@@ -1,6 +1,6 @@
 package Swing;
 
-import Swing.menu.Menu;
+import Swing.menuFrame.Menu;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;

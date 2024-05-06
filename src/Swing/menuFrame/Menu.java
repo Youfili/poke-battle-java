@@ -1,6 +1,6 @@
-package Swing.menu;
+package Swing.menuFrame;
 
-import Swing.BackgroundImageJFrame;
+import Swing.menuPanel.ChoosePlayerPanel;
 import players.Player;
 
 import javax.imageio.ImageIO;
@@ -17,7 +17,7 @@ import static java.awt.BorderLayout.*;
 public class Menu extends JFrame {
 
         private JPanel gameSelect;
-        private JPanel choosePlayerPanel;
+        private ChoosePlayerPanel choosePlayerPanel;
         private ChooseTeam chooseTeam;
         private Player player;
         private JButton maleButton, femaleButton;
@@ -30,23 +30,29 @@ public class Menu extends JFrame {
             setLayout(new BorderLayout());
 
             gameSelect = new JPanel();
-            choosePlayerPanel = new JPanel(new GridLayout(1, 2)); // GridLayout con 2 righe e 1 colonna
 
-            maleButton = new JButton("Male");//creating instance of JButton
-            maleButton.setBackground(Color.CYAN);
-            maleButton.setFont(new Font("Arial", Font.ITALIC, 60)); // Imposta il font del testo
-            maleButton.setSize(450, 450);
-//            maleButton.setBounds(240, 500, 100, 40);//x axis, y axis, width, height
-            choosePlayerPanel.add(maleButton);      // aggiungo il pulsante al pannello
-
-            femaleButton = new JButton("Female");
-            femaleButton.setBackground(Color.PINK);
-            femaleButton.setFont(new Font("Arial", Font.BOLD, 60)); // Imposta il font del testo
-            femaleButton.setSize(450, 450);
-//            femaleButton.setBounds(240, 200, 100, 40);//x axis, y axis, width, height
-            choosePlayerPanel.add(femaleButton);
+            // Creo l'istanza di ChoosePlayerPanel
+            choosePlayerPanel = new ChoosePlayerPanel(new GridLayout(1, 2)); // GridLayout con 2 righe e 1 colonna
 
 
+//            MESSO NELLA CLASSE CHOOSEPLAYERPANEL
+//
+//            maleButton = new JButton("Male");//creating instance of JButton
+//            maleButton.setBackground(Color.CYAN);
+//            maleButton.setFont(new Font("Arial", Font.ITALIC, 60)); // Imposta il font del testo
+//            maleButton.setSize(450, 450);
+////            maleButton.setBounds(240, 500, 100, 40);//x axis, y axis, width, height
+//            choosePlayerPanel.add(maleButton);      // aggiungo il pulsante al pannello
+//
+//            femaleButton = new JButton("Female");
+//            femaleButton.setBackground(Color.PINK);
+//            femaleButton.setFont(new Font("Arial", Font.BOLD, 60)); // Imposta il font del testo
+//            femaleButton.setSize(450, 450);
+////            femaleButton.setBounds(240, 200, 100, 40);//x axis, y axis, width, height
+//            choosePlayerPanel.add(femaleButton);
+
+
+            // Questo comando mi toglie il Layout, invece devo metterlo Diversamente
             gameSelect.setLayout(null);
 
 
@@ -57,25 +63,27 @@ public class Menu extends JFrame {
 
 
 
-
+            // Aggiungo i Panelli (composti dalle carte) all'interno di un Conteiner
             Container pane = this.getContentPane();
-            pane.add(panels, CENTER);
+            pane.add(panels, CENTER);                            // pannelli aggiunti al centro del Container
             CardLayout cl = (CardLayout)(panels.getLayout());
 
+
+
+            // METODO PER METTERE L'IMMAGINE DI SFONDO
             BufferedImage imgBackGround =null ;
             try {
                 imgBackGround = ImageIO.read(new File("src/Img/wallpaper.jpg"));
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-            //ImageIcon img =new ImageIcon( "/Users/leonardo/Desktop/wallpaper.jpg");
 
             Image dimgB = imgBackGround.getScaledInstance(getWidth(), getHeight(),
                     Image.SCALE_SMOOTH);
 
             ImageIcon imageBack = new ImageIcon(dimgB);
 
-            JLabel wallpaper= new JLabel("",imageBack,JLabel.CENTER);
+            JLabel wallpaper= new JLabel("",imageBack,JLabel.CENTER);       // Metto il background centrato al centro
             wallpaper.setBounds(0,0,600,650);
             wallpaper.setIcon(imageBack);
 
@@ -93,7 +101,10 @@ public class Menu extends JFrame {
                     Image.SCALE_SMOOTH);
             ImageIcon imageIcon = new ImageIcon(dimg);
 
-            // MALE BUTTON
+
+
+            // MALE Button
+            JButton maleButton = choosePlayerPanel.getMaleButton();         // Istanzio il Bottone Maschile
             maleButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     String name = JOptionPane.showInputDialog("Inserisci nome: ");
@@ -105,6 +116,8 @@ public class Menu extends JFrame {
                 }
 
             });
+            // FEMALE BUTTON
+            JButton femaleButton = choosePlayerPanel.getFemaleButton();
             femaleButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     String name = JOptionPane.showInputDialog("Inserisci nome: ");
