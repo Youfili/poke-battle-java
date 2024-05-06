@@ -3,8 +3,12 @@ package pokemon;
 import moves.Move;
 import moves.base.DefaultMoves;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,6 +49,28 @@ public abstract class Pokemon {
         this.isAlive = true;
 
     }
+    //Constructor with image
+    public Pokemon(String name, int level, int ps, String gender, int attack, int defense, int speed,String imgPath) {
+        this.name = name;
+        this.level = level;
+        this.ps = ps;
+        this.gender = gender;//da implementare casuale
+        this.attack = attack;
+        this.defense = defense;
+        this.speed = speed;
+        this.isAlive = true;
+
+        //assegna l'immagine
+        BufferedImage img = null;
+        try {
+            img = ImageIO.read(new File(imgPath));
+        } catch (IOException ex) {
+            throw new RuntimeException(ex);
+        }
+        this.setImage(img);
+
+    }
+
 
 
     public void setDefaultMoves(){

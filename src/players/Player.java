@@ -2,6 +2,8 @@ package players;
 
 import pokemon.Pokemon;
 
+import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +14,8 @@ public class Player {
 
     private int winMatch;
     private int lossMatch;
+
+    private ImageIcon image;
 
     private List<Pokemon> team=new ArrayList<>(6);
 
@@ -25,6 +29,10 @@ public class Player {
         for(int i=0;i<6;i++){
             team.add(null);
         }
+
+    }
+
+    public Player(){
 
     }
 
@@ -64,6 +72,14 @@ public class Player {
             }
         }
 
+    }
+
+    public void removePokemon(Pokemon pokemon) {
+        for(int i=0;i<team.size();i++){
+            if(team.get(i)==pokemon){
+                team.remove(i);
+            }
+        }
     }
 
     //stampa le informazioni di un pokemon della squadra
@@ -131,6 +147,13 @@ public class Player {
 
     public void setTeam(List<Pokemon> team) {
         this.team = team;
+    }
+    public ImageIcon getImage() {
+        return image;
+    }
+    public void setImage(ImageIcon image) {
+        this.image = image;
+
     }
 }
 

@@ -18,6 +18,8 @@ public class BackgroundImageJFrame extends JFrame {
     public BackgroundImageJFrame() {
         //creating instance of JFrame
         setSize(600,650);//400 width and 500 height
+        setLocationRelativeTo(null);//centro dello schermo
+        setResizable(false);
 
         setLayout(null);//using no layout managers
         BufferedImage img =null ;

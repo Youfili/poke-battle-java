@@ -9,15 +9,9 @@ import java.io.IOException;
 
 public class Bulbasaur extends Pokemon{
     public Bulbasaur() {
-        super("Bulbasaur",5,30,null,30,28,15);
+        super("Bulbasaur",5,30,null,30,28,15,"src/Img/bulbasaur.png");
         addMove(new Action());
-        BufferedImage img = null;
-        try {
-            img = ImageIO.read(new File("src/Img/bulbasaur.png"));
-        } catch (IOException ex) {
-            throw new RuntimeException(ex);
-        }
-        this.setImage(img);
+
 
     }
 

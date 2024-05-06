@@ -4,9 +4,10 @@ import pokemon.Pokemon;
 
 public abstract class Move {
     private String name;
-    private int damage;
     private String description;
+    private int damage;
     private int pp;
+    private int accuracy;
 
     public Move(String name, int damage,int pp, String description) {
         this.name = name;
