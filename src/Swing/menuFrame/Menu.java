@@ -52,58 +52,82 @@ public class Menu extends JFrame {
             CardLayout cl = (CardLayout)(panels.getLayout());
 
 
-//
-//            // METODO PER METTERE L'IMMAGINE DI SFONDO
-//            BufferedImage imgBackGround =null ;
+//            // IMMAGINE ICONA MASCHILE --> ChoosePlayerPanel --> Messa dentro l'action Listener
+//            Image img = null;
 //            try {
-//                imgBackGround = ImageIO.read(new File("src/Img/wallpaper.jpg"));
+//                img = ImageIO.read(new File("src/Img/maleTrainer.png"));
 //            } catch (IOException e) {
 //                throw new RuntimeException(e);
 //            }
 //
-//            Image dimgB = imgBackGround.getScaledInstance(getWidth(), getHeight(),
+//            Image dimg = img.getScaledInstance(60, 60,
 //                    Image.SCALE_SMOOTH);
-//
-//            ImageIcon imageBack = new ImageIcon(dimgB);
-//
-//            JLabel wallpaper= new JLabel("",imageBack,JLabel.CENTER);       // Metto il background centrato al centro
-//            wallpaper.setBounds(0,0,600,650);
-//            wallpaper.setIcon(imageBack);
-
-
-
-            // IMMAGINE ICONA MASCHILE --> ChoosePlayerPanel
-            Image img = null;
-            try {
-                img = ImageIO.read(new File("src/Img/maleTrainer.png"));
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-
-            Image dimg = img.getScaledInstance(60, 60,
-                    Image.SCALE_SMOOTH);
-            ImageIcon imageIcon = new ImageIcon(dimg);
+//            ImageIcon imageIcon = new ImageIcon(dimg);
 
 
             // Setto i Listener del ChoosePlayerPanel
+
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            // GENDER BUTTON
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            // Icona Pokeball
+            // IMMAGINE ICONA Pokeball --> ChoosePlayerPanel
+            Image imgPokeball = null;
+            try {
+                imgPokeball = ImageIO.read(new File("src/Img/maleTrainer.png"));
+            } catch (IOException er) {
+                throw new RuntimeException(er);
+            }
+
+            Image dimgPokeball = imgPokeball.getScaledInstance(60, 60,
+                    Image.SCALE_SMOOTH);
+            ImageIcon imageIconPokeball = new ImageIcon(dimgPokeball);
+
             // MALE Button
             JButton maleButton = choosePlayerPanel.getMaleButton();         // Istanzio il Bottone Maschile
             maleButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
+
                     String name = JOptionPane.showInputDialog("Inserisci nome: ");
                     player = new Player(name,0,0,"Male");
+
+                    // IMMAGINE ICONA MASCHILE --> ChoosePlayerPanel
+                    Image img = null;
+                    try {
+                        img = ImageIO.read(new File("src/Img/maleTrainer.png"));
+                    } catch (IOException er) {
+                        throw new RuntimeException(er);
+                    }
+
+                    Image dimg = img.getScaledInstance(60, 60,
+                            Image.SCALE_SMOOTH);
+                    ImageIcon imageIcon = new ImageIcon(dimg);
 
                     player.setImage(imageIcon);
                     chooseTeam=new ChooseTeam( player);
                     setVisible(false);
                 }
             });
+
             // FEMALE BUTTON
             JButton femaleButton = choosePlayerPanel.getFemaleButton();
             femaleButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    String name = JOptionPane.showInputDialog("Inserisci nome: ");
+                    String name = JOptionPane.showInputDialog(null,"Scegli il Nome: ", "Choose Name", JOptionPane.PLAIN_MESSAGE);
                     player = new Player(name,0,0,"Female");
+
+                    // IMMAGINE ICONA FEMMINILE --> ChoosePlayerPanel
+                    Image img = null;
+                    try {
+                        img = ImageIO.read(new File("src/Img/maleTrainer.png"));
+                    } catch (IOException er) {
+                        throw new RuntimeException(er);
+                    }
+
+                    Image dimg = img.getScaledInstance(60, 60,
+                            Image.SCALE_SMOOTH);
+                    ImageIcon imageIcon = new ImageIcon(dimg);
 
                     player.setImage(imageIcon);
                     chooseTeam=new ChooseTeam( player);
