@@ -12,6 +12,8 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
+import static java.awt.BorderLayout.*;
+
 public class Menu extends JFrame {
 
         private JPanel gameSelect;
@@ -25,16 +27,23 @@ public class Menu extends JFrame {
             setSize(600,650);//400 width and 500 height
             setLocationRelativeTo(null);//centro dello schermo
             setResizable(false);
+            setLayout(new BorderLayout());
 
             gameSelect = new JPanel();
-            choosePlayerPanel = new JPanel();
+            choosePlayerPanel = new JPanel(new GridLayout(1, 2)); // GridLayout con 2 righe e 1 colonna
 
             maleButton = new JButton("Male");//creating instance of JButton
-            //maleButton.setBounds(240, 500, 100, 40);//x axis, y axis, width, height
-            choosePlayerPanel.add(maleButton);
+            maleButton.setBackground(Color.CYAN);
+            maleButton.setFont(new Font("Arial", Font.ITALIC, 60)); // Imposta il font del testo
+            maleButton.setSize(450, 450);
+//            maleButton.setBounds(240, 500, 100, 40);//x axis, y axis, width, height
+            choosePlayerPanel.add(maleButton);      // aggiungo il pulsante al pannello
 
             femaleButton = new JButton("Female");
-            //femaleButton.setBounds(240, 200, 100, 40);//x axis, y axis, width, height
+            femaleButton.setBackground(Color.PINK);
+            femaleButton.setFont(new Font("Arial", Font.BOLD, 60)); // Imposta il font del testo
+            femaleButton.setSize(450, 450);
+//            femaleButton.setBounds(240, 200, 100, 40);//x axis, y axis, width, height
             choosePlayerPanel.add(femaleButton);
 
 
@@ -50,7 +59,7 @@ public class Menu extends JFrame {
 
 
             Container pane = this.getContentPane();
-            pane.add(panels, BorderLayout.CENTER);
+            pane.add(panels, CENTER);
             CardLayout cl = (CardLayout)(panels.getLayout());
 
             BufferedImage imgBackGround =null ;
@@ -72,8 +81,7 @@ public class Menu extends JFrame {
 
 
 
-
-            //cl.show(pane, "Panel 1");
+            // IMMAGINE ICONA MASCHILE
             Image img = null;
             try {
                 img = ImageIO.read(new File("src/Img/maleTrainer.png"));
@@ -85,6 +93,7 @@ public class Menu extends JFrame {
                     Image.SCALE_SMOOTH);
             ImageIcon imageIcon = new ImageIcon(dimg);
 
+            // MALE BUTTON
             maleButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     String name = JOptionPane.showInputDialog("Inserisci nome: ");
@@ -100,10 +109,12 @@ public class Menu extends JFrame {
             });
             femaleButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    player = new Player("",0,0,"Female");
+                    String name = JOptionPane.showInputDialog("Inserisci nome: ");
+                    player = new Player(name,0,0,"Female");
+
+                    player.setImage(imageIcon);
                     chooseTeam=new ChooseTeam( player);
-                    panels.add(chooseTeam, "Panel 3");
-                    cl.next(panels);                }
+                    setVisible(false);               }
             });
 
 
@@ -115,11 +126,7 @@ public class Menu extends JFrame {
             startButton.setBounds(115,350,350,85);//x axis, y axis, width, height
             startButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    //gameSelect.setVisible(false);
-                    //choosePlayerPanel.setVisible(true);    // set visibile of panel choose "False"
-cl.next(panels);                    //cards.remove(gameSelect);
-                    //player=choosePlayerPanel.getChoosenPlayer();
-                    //cards.remove(choosePlayerPanel);
+                    cl.next(panels);
                 }
             });
 
