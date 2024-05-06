@@ -1,6 +1,7 @@
 package Swing.menuFrame;
 
 import Swing.menuPanel.ChoosePlayerPanel;
+import Swing.menuPanel.GameSelectPanel;
 import players.Player;
 
 import javax.imageio.ImageIO;
@@ -16,7 +17,7 @@ import static java.awt.BorderLayout.*;
 
 public class Menu extends JFrame {
 
-        private JPanel gameSelect;
+        private GameSelectPanel gameSelect;
         private ChoosePlayerPanel choosePlayerPanel;
         private ChooseTeam chooseTeam;
         private Player player;
@@ -27,34 +28,16 @@ public class Menu extends JFrame {
             setSize(600,650);//400 width and 500 height
             setLocationRelativeTo(null);//centro dello schermo
             setResizable(false);
-            setLayout(new BorderLayout());
+            setLayout(new BorderLayout());      // Layout del Menu
 
-            gameSelect = new JPanel();
-
+            // creo l'istanza di GameSelectPanel
+            gameSelect = new GameSelectPanel(new GridLayout(4,2));      // Grid Layout con 3 colonne
             // Creo l'istanza di ChoosePlayerPanel
             choosePlayerPanel = new ChoosePlayerPanel(new GridLayout(1, 2)); // GridLayout con 2 righe e 1 colonna
 
 
-//            MESSO NELLA CLASSE CHOOSEPLAYERPANEL
-//
-//            maleButton = new JButton("Male");//creating instance of JButton
-//            maleButton.setBackground(Color.CYAN);
-//            maleButton.setFont(new Font("Arial", Font.ITALIC, 60)); // Imposta il font del testo
-//            maleButton.setSize(450, 450);
-////            maleButton.setBounds(240, 500, 100, 40);//x axis, y axis, width, height
-//            choosePlayerPanel.add(maleButton);      // aggiungo il pulsante al pannello
-//
-//            femaleButton = new JButton("Female");
-//            femaleButton.setBackground(Color.PINK);
-//            femaleButton.setFont(new Font("Arial", Font.BOLD, 60)); // Imposta il font del testo
-//            femaleButton.setSize(450, 450);
-////            femaleButton.setBounds(240, 200, 100, 40);//x axis, y axis, width, height
-//            choosePlayerPanel.add(femaleButton);
-
-
-            // Questo comando mi toglie il Layout, invece devo metterlo Diversamente
-            gameSelect.setLayout(null);
-
+//            // Questo comando mi toglie il Layout, invece devo metterlo Diversamente
+//            gameSelect.setLayout(null);
 
             // Creo un panels di Cards, cosi posso muovermi nella cards
             JPanel panels = new JPanel(new CardLayout());
@@ -102,7 +85,7 @@ public class Menu extends JFrame {
             ImageIcon imageIcon = new ImageIcon(dimg);
 
 
-
+            // Setto i Listener del ChoosePlayerPanel
             // MALE Button
             JButton maleButton = choosePlayerPanel.getMaleButton();         // Istanzio il Bottone Maschile
             maleButton.addActionListener(new ActionListener() {
@@ -114,7 +97,6 @@ public class Menu extends JFrame {
                     chooseTeam=new ChooseTeam( player);
                     setVisible(false);
                 }
-
             });
             // FEMALE BUTTON
             JButton femaleButton = choosePlayerPanel.getFemaleButton();
@@ -130,35 +112,25 @@ public class Menu extends JFrame {
 
 
 
-
-
-            // PANNELLO " gameSelect "
-            JButton startButton=new JButton("Nuova Partita");//creating instance of JButton
-            startButton.setBounds(115,350,350,85);//x axis, y axis, width, height
+//            // PANNELLO " gameSelect "
+            JButton startButton = gameSelect.getStartButton();
+//            startButton.setBounds(115,350,350,85);//x axis, y axis, width, height
+            // Aggiungo il listener al mio StartButton
             startButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     cl.next(panels);
                 }
             });
 
-            JButton continueButton=new JButton("Continua Partita");//creating instance of JButton
-            continueButton.setBounds(115,250,350,85);//x axis, y axis, width, height
+            JButton continueButton = gameSelect.getContinueButton();
+//            continueButton.setBounds(115,250,350,85);//x axis, y axis, width, height
+            // Aggiungo il listener al mio StartButton
             continueButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     // Implementare
                 }
             });
 
-            // Set color background of the buttons del Pannello gameSelect
-            startButton.setBackground(Color.GREEN);
-            startButton.setBorder(BorderFactory.createLineBorder(Color.blue)); // Simple Line Border
-            continueButton.setBackground(Color.BLUE);
-            continueButton.setBorder(BorderFactory.createLineBorder(Color.yellow)); // Simple Line Border
-
-
-            // Add the button on the Panell
-            gameSelect.add(startButton); //adding button in JFrame
-            gameSelect.add(continueButton); //adding button in JFrame
 
             setVisible(true);//making the frame visible
 //            choosePlayerPanel.setVisible(false);    // set visibile of panel choose "False"
