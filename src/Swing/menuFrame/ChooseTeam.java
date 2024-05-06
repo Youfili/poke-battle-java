@@ -58,32 +58,32 @@ public class ChooseTeam extends JFrame {
                     Image.SCALE_SMOOTH);
             ImageIcon imageIcon = new ImageIcon(dimg);
 
+            // Bottone dei Pokemon
             JCheckBox startButton = new JCheckBox(poke.getName());//creating instance of JButton --> Return pokemon name
             startButton.setBounds(x,y, 200, 50);//x axis, y axis, width, height
             startButton.setIcon(imageIcon);
             startButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
 
-
-
                     JOptionPane.showMessageDialog((Component) null, poke.toString(), null, JOptionPane.INFORMATION_MESSAGE, imageIcon);
 
                     if(startButton.isSelected()){
                         player.addPokemon(poke);
-
                     }else{
                         player.removePokemon(poke);
                     }
                     repaint();
                 }
             });
+
             y+=50;
             add(startButton);
         }
 
-        JButton playerButton=new JButton(player.getName());//creating instance of JButton
+        // Bottone del giocatore
+        JButton playerButton=new JButton();//creating instance of JButton
         playerButton.setIcon(player.getImage());
-        playerButton.setBounds(240,500,300,100);//x axis, y axis, width, height
+        playerButton.setBounds(400,500,100,75);//x axis, y axis, width, height
         playerButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                   JOptionPane.showMessageDialog((Component) null, player.toString(), null, JOptionPane.INFORMATION_MESSAGE);
@@ -92,7 +92,6 @@ public class ChooseTeam extends JFrame {
 
 
         });
-
 
         //add(pokeInfoTextArea, BorderLayout.CENTER);//Posizione relativa
         add(playerButton);//adding button in JFrame
