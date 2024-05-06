@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 public class GameSelectPanel extends JPanel {
 
     private ImageBackgroundButton startButton, continueButton;
+    // ImageBackGrounButton è una sottoclasse di Button, con l'aggiunto del parametro dell'immagine nel costruttore
 
     public GameSelectPanel(GridLayout gridLayout){
         super(gridLayout);

@@ -18,6 +18,7 @@ import java.io.IOException;
 public class ChoosePlayerPanel extends JPanel {
 
     private ImageBackgroundButton  maleButton, femaleButton;
+    // ImageBackGrounButton è una sottoclasse di Button, con l'aggiunto del parametro dell'immagine nel costruttore
 
     public ChoosePlayerPanel(GridLayout gridLayout){
         super(gridLayout);
