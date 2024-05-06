@@ -49,8 +49,8 @@ public class Menu extends JFrame {
 
             gameSelect.setLayout(null);
 
-            //giocatore di prova
 
+            // Creo un panels di Cards, cosi posso muovermi nella cards
             JPanel panels = new JPanel(new CardLayout());
             panels.add(gameSelect, "Panel 1");
             panels.add(choosePlayerPanel, "Panel 2");
@@ -81,7 +81,7 @@ public class Menu extends JFrame {
 
 
 
-            // IMMAGINE ICONA MASCHILE
+            // IMMAGINE ICONA MASCHILE --> ChoosePlayerPanel
             Image img = null;
             try {
                 img = ImageIO.read(new File("src/Img/maleTrainer.png"));
@@ -102,8 +102,6 @@ public class Menu extends JFrame {
                     player.setImage(imageIcon);
                     chooseTeam=new ChooseTeam( player);
                     setVisible(false);
-                    //panels.add(chooseTeam, "Panel 3");
-                    //cl.next(panels);
                 }
 
             });
@@ -121,7 +119,7 @@ public class Menu extends JFrame {
 
 
 
-
+            // PANNELLO " gameSelect "
             JButton startButton=new JButton("Nuova Partita");//creating instance of JButton
             startButton.setBounds(115,350,350,85);//x axis, y axis, width, height
             startButton.addActionListener(new ActionListener() {
@@ -129,7 +127,6 @@ public class Menu extends JFrame {
                     cl.next(panels);
                 }
             });
-
 
             JButton continueButton=new JButton("Continua Partita");//creating instance of JButton
             continueButton.setBounds(115,250,350,85);//x axis, y axis, width, height
@@ -139,18 +136,14 @@ public class Menu extends JFrame {
                 }
             });
 
-
-
-
-
-
-            // Set color background of the buttons
+            // Set color background of the buttons del Pannello gameSelect
             startButton.setBackground(Color.GREEN);
             startButton.setBorder(BorderFactory.createLineBorder(Color.blue)); // Simple Line Border
             continueButton.setBackground(Color.BLUE);
             continueButton.setBorder(BorderFactory.createLineBorder(Color.yellow)); // Simple Line Border
 
-            // Add the button on the Frame
+
+            // Add the button on the Panell
             gameSelect.add(startButton); //adding button in JFrame
             gameSelect.add(continueButton); //adding button in JFrame
 
