@@ -34,6 +34,7 @@ public class ChooseTeam extends JFrame {
     private JPanel playerInfoPanel;
 
     private Pokemon selectedPokemon;
+    private  Pokemon selectedPartyPokemon;
 
     public ChooseTeam(Player player) {
 
@@ -83,13 +84,13 @@ public class ChooseTeam extends JFrame {
 
 
 
-        //POKEMON INFO AREA
+        //POKEMON INFO AREA---------------------------
 
         JScrollPane sp = new JScrollPane(pokeInfoTextArea);
         JPanel wrapper = new JPanel(new BorderLayout());
         wrapper.setBorder(new TitledBorder("POKEMON INFO"));
         wrapper.add(sp, BorderLayout.CENTER);
-        wrapper.setBounds(325,20,300,400);
+        wrapper.setBounds(325,20,250,400);
         wrapper.setBackground(Color.WHITE);
         wrapper.setVisible(true);
         add(wrapper);
@@ -97,12 +98,30 @@ public class ChooseTeam extends JFrame {
         JLabel pokeIcon = new JLabel();
         wrapper.add(pokeIcon, BorderLayout.PAGE_START);
 
+        //TEST PROGRESSBAR-------------------------
+        JProgressBar progressBar = new JProgressBar(0,100);
+        progressBar.setBounds(325,450,250,20);
+        progressBar.setValue(50);
+        progressBar.setString("exp");
+        progressBar.setStringPainted(true);
+        add(progressBar);
+
+        JButton progressButton = new JButton("Progress");
+        progressButton.setBounds(325,480,40,20);
+        progressButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                progressBar.setValue(progressBar.getValue()+20);
+            }
+        });
+
+        add(progressButton);
+        //------------------------
 
 
 
 
 
-        //TEAM PANEL
+        //TEAM PANEL-----------------------------------------------
         /*JTextArea partyPokeTxt = new JTextArea(player.pokemonStringList());
         JScrollPane tm = new JScrollPane(partyPokeTxt);*/
         JPanel teamPanel = new JPanel(new GridLayout(1,6));
@@ -140,6 +159,103 @@ public class ChooseTeam extends JFrame {
         pokemon5.setIcon(imgPokeball);
         pokemon6.setIcon(imgPokeball);
 
+        pokemon1.addActionListener( new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if(pokemon1.getIcon()!=imgPokeball){
+                    selectedPartyPokemon=player.getTeam().get(0);
+                    Image dimg = selectedPartyPokemon.getImage().getScaledInstance(120, 120, Image.SCALE_SMOOTH);
+                    ImageIcon selectPartyPokeImage = new ImageIcon(dimg);
+                   int input= JOptionPane.showConfirmDialog(new JButton("elimina"),"Vuoi rimuovere "+ player.getTeam().get(0).getName()+ " dalla squadra?","remove?",2,1,selectPartyPokeImage);
+                   if(input==0){
+                       player.removePokemon(selectedPartyPokemon);
+                       pokemon1.setIcon(imgPokeball);
+                       teamPanel.repaint();
+                   }
+
+                }
+            }
+        });
+        pokemon2.addActionListener( new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if(pokemon2.getIcon()!=imgPokeball){
+                    selectedPartyPokemon=player.getTeam().get(1);
+                    Image dimg = selectedPartyPokemon.getImage().getScaledInstance(120, 120, Image.SCALE_SMOOTH);
+                    ImageIcon selectPartyPokeImage = new ImageIcon(dimg);
+                    int input= JOptionPane.showConfirmDialog(new JButton("elimina"),"Vuoi rimuovere "+ selectedPartyPokemon.getName()+ " dalla squadra?","remove?",2,1,selectPartyPokeImage);
+                    if(input==0){
+                        player.removePokemon(selectedPartyPokemon);
+                        pokemon2.setIcon(imgPokeball);
+                        teamPanel.repaint();
+
+                }
+            }
+        }});
+        pokemon3.addActionListener( new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if(pokemon3.getIcon()!=imgPokeball){
+                    selectedPartyPokemon=player.getTeam().get(2);
+
+                    Image dimg = selectedPartyPokemon.getImage().getScaledInstance(120, 120, Image.SCALE_SMOOTH);
+                    ImageIcon selectPartyPokeImage = new ImageIcon(dimg);
+                    int input= JOptionPane.showConfirmDialog(new JButton("elimina"),"Vuoi rimuovere "+ selectedPartyPokemon.getName()+ " dalla squadra?","remove?",2,1,selectPartyPokeImage);
+                    if(input==0){
+                        player.removePokemon(selectedPartyPokemon);
+                        pokemon3.setIcon(imgPokeball);
+                        teamPanel.repaint();
+
+                    }
+                }
+            }});
+
+        pokemon4.addActionListener( new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if(pokemon4.getIcon()!=imgPokeball){
+                    selectedPartyPokemon=player.getTeam().get(3);
+
+                    Image dimg = selectedPartyPokemon.getImage().getScaledInstance(120, 120, Image.SCALE_SMOOTH);
+                    ImageIcon selectPartyPokeImage = new ImageIcon(dimg);
+                    int input= JOptionPane.showConfirmDialog(new JButton("elimina"),"Vuoi rimuovere "+ selectedPartyPokemon.getName()+ " dalla squadra?","remove?",2,1,selectPartyPokeImage);
+                    if(input==0){
+                        player.removePokemon(selectedPartyPokemon);
+                        pokemon4.setIcon(imgPokeball);
+                        teamPanel.repaint();
+
+                    }
+                }
+            }});
+        pokemon5.addActionListener( new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if(pokemon5.getIcon()!=imgPokeball){
+                    selectedPartyPokemon=player.getTeam().get(4);
+
+                    Image dimg = selectedPartyPokemon.getImage().getScaledInstance(120, 120, Image.SCALE_SMOOTH);
+                    ImageIcon selectPartyPokeImage = new ImageIcon(dimg);
+                    int input= JOptionPane.showConfirmDialog(new JButton("elimina"),"Vuoi rimuovere "+ selectedPartyPokemon.getName()+ " dalla squadra?","remove?",2,1,selectPartyPokeImage);
+                    if(input==0){
+                        player.removePokemon(selectedPartyPokemon);
+                        pokemon5.setIcon(imgPokeball);
+                        teamPanel.repaint();
+
+                    }
+                }
+            }});
+        pokemon6.addActionListener( new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if(pokemon6.getIcon()!=imgPokeball){
+                    selectedPartyPokemon=player.getTeam().get(5);
+
+                    Image dimg = selectedPartyPokemon.getImage().getScaledInstance(120, 120, Image.SCALE_SMOOTH);
+                    ImageIcon selectPartyPokeImage = new ImageIcon(dimg);
+                    int input= JOptionPane.showConfirmDialog(new JButton("elimina"),"Vuoi rimuovere "+ selectedPartyPokemon.getName()+ " dalla squadra?","remove?",2,1,selectPartyPokeImage);
+                    if(input==0){
+                        player.removePokemon(selectedPartyPokemon);
+                        pokemon6.setIcon(imgPokeball);
+                        teamPanel.repaint();
+
+                    }
+                }
+            }});
+
 
 
 
@@ -154,8 +270,9 @@ public class ChooseTeam extends JFrame {
         add(teamPanel);
 
 
+        //-----------------------------------------------
 
-
+        //--PULSANTE AGGINGI POKEMON SELEZIONATO ALLA SQUADRA &  CAMBIA IMMAGINE RELATIVA AL PULSANTE DEL POKEMON NEL TEAM
 
         addTeam=new JButton("add");
         //addTeam.setBounds(330,100, 50, 50);
@@ -167,12 +284,49 @@ public class ChooseTeam extends JFrame {
                 *//**//*player.replacePokemon(inGame,evolution);
                  *//*playerInfo.setText(player.toString());
                 playerInfo.repaint();*/
-                player.addPokemon(selectedPokemon);
+                List<Pokemon> newTeam=player.getTeam();
+                int index =-1;
+
+                for(int i=0;i<newTeam.size();i++) {
+
+                    if (newTeam.get(i) == null) {
+                        newTeam.set(i, selectedPokemon);
+                        player.setTeam(newTeam);
+                         index = i;
+                        break;
+                    }
+                }
+                Image dimg = selectedPokemon.getImage().getScaledInstance(80, 80, Image.SCALE_SMOOTH);
+                ImageIcon selectPokeImage = new ImageIcon(dimg);
+
+                if(index==0){
+
+                    pokemon1.setIcon(selectPokeImage);
+                }
+                else if(index==1){
+                    pokemon2.setIcon(selectPokeImage);
+                }
+                else if(index==2){
+                    pokemon3.setIcon(selectPokeImage);
+                }
+                else if(index==3){
+                    pokemon4.setIcon(selectPokeImage);
+                }
+                else if(index==4){
+                    pokemon5.setIcon(selectPokeImage);
+
+                }
+                else if(index==5){
+                    pokemon6.setIcon(selectPokeImage);
+                }
+
+                //player.addPokemon(selectedPokemon);
 
                 //scrivi i party pokemon nell textarea
                 /*partyPokeTxt.setText("");
                 partyPokeTxt.append(player.pokemonStringList());
                 partyPokeTxt.repaint();*/
+
 
                 teamPanel.repaint();
 
@@ -216,12 +370,11 @@ public class ChooseTeam extends JFrame {
 
 
         //CREAZIONE PULSANTI POKEMON PER OGNI POKEMON NEL POKEDEX
-        int x=10;
+        int x=20;
         int y=30;
         for (Pokemon poke : pokedex.getPokedex()) {
 
-            Image dimg = poke.getImage().getScaledInstance(60, 60,
-                    Image.SCALE_SMOOTH);
+            Image dimg = poke.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
             ImageIcon imageIcon = new ImageIcon(dimg);
 
             JButton pokeButton = new JButton(poke.getName());//creating instance of JButton --> Return pokemon name
@@ -237,12 +390,7 @@ public class ChooseTeam extends JFrame {
 
                     //JOptionPane.showMessageDialog((Component) null, poke.toString(), null, JOptionPane.INFORMATION_MESSAGE, imageIcon);
 
-                    if(pokeButton.isSelected()){
-                        player.addPokemon(poke);
 
-                    }else{
-                        player.removePokemon(poke);
-                    }
 
                     //MOSTRO LE INFO DEL POKEMON SELEZIONATO
                     selectedPokemon=poke;
@@ -257,7 +405,7 @@ public class ChooseTeam extends JFrame {
                     repaint();*/
                 }
             });
-            y+=50;
+            y+=60;
 
 
             pokedexPanel.add(pokeButton);
