@@ -6,6 +6,7 @@ import pokemon.Pokemon;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -30,6 +31,7 @@ public class ChooseTeam extends JFrame {
     private JLabel playerIcon;
     private JTextArea playerInfo;
     private JButton addTeam;
+    private JPanel playerInfoPanel;
 
     private Pokemon selectedPokemon;
 
@@ -54,18 +56,30 @@ public class ChooseTeam extends JFrame {
         playerInfo=new JTextArea();
         playerIcon=new JLabel();
         pokeInfoTextArea=new JTextArea();
+        playerInfoPanel=new JPanel(new BorderLayout());
+
+
 
 
         //PLAYER INFO
         playerInfo=new JTextArea(player.playerInfo());
-        playerInfo.setBounds(90,520,100,65);//x axis, y axis, width, height
+        playerInfo.setBorder(BorderFactory.createLineBorder(Color.GRAY));
+        //playerInfo.setBounds(90,520,100,65);//x axis, y axis, width, height
         playerInfo.setFont(new Font("Arial", Font.BOLD,13));
-        add(playerInfo);//adding button in JFrame
+        //add(playerInfo);//adding button in JFrame
 
         //PLAYER ICON
-        playerIcon.setBounds(30,500,50,100);
+       // playerIcon.setBounds(30,500,50,100);
         playerIcon.setIcon(player.getImage());
-        add(playerIcon);
+        //add(playerIcon);
+
+        //PLAYER PANEL
+        playerInfoPanel.setBounds(5,500,190,100);
+        playerInfoPanel.setBorder(new TitledBorder("PLAYER INFO"));
+        playerInfoPanel.add(playerInfo,BorderLayout.CENTER);
+        playerInfoPanel.add(playerIcon,BorderLayout.WEST);
+        playerInfoPanel.setVisible(true);
+        add(playerInfoPanel);
 
 
 
@@ -89,13 +103,53 @@ public class ChooseTeam extends JFrame {
 
 
         //TEAM PANEL
-        JTextArea partyPokeTxt = new JTextArea(player.pokemonStringList());
-        JScrollPane tm = new JScrollPane(partyPokeTxt);
-        JPanel teamPanel = new JPanel(new BorderLayout());
+        /*JTextArea partyPokeTxt = new JTextArea(player.pokemonStringList());
+        JScrollPane tm = new JScrollPane(partyPokeTxt);*/
+        JPanel teamPanel = new JPanel(new GridLayout(1,6));
+        //teamPanel.setLayout(null);
         teamPanel.setBorder(new TitledBorder("PARTY POKEMON"));
-        teamPanel.add(tm);
+        //teamPanel.add(tm);
         teamPanel.setBounds(200,500,380,100);
         teamPanel.setVisible(true);
+
+        JButton pokemon1 = new JButton();
+        JButton pokemon2 = new JButton();
+        JButton pokemon3 = new JButton();
+        JButton pokemon4 = new JButton();
+        JButton pokemon5 = new JButton();
+        JButton pokemon6 = new JButton();
+
+        //IMPOSTIAMO IMMAGINE DI DEFAULT PILSANTI TEAM ---> POKEBALL
+        BufferedImage imgPoke =null ;
+        try {
+            imgPoke = ImageIO.read(new File("src/Img/pokeball.png"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        //ImageIcon img =new ImageIcon( "/Users/leonardo/Desktop/wallpaper.jpg");
+
+        Image imPoke = imgPoke.getScaledInstance(20, 20,
+                Image.SCALE_SMOOTH);
+
+        ImageIcon imgPokeball = new ImageIcon(imPoke);
+
+        pokemon1.setIcon(imgPokeball);
+        pokemon2.setIcon(imgPokeball);
+        pokemon3.setIcon(imgPokeball);
+        pokemon4.setIcon(imgPokeball);
+        pokemon5.setIcon(imgPokeball);
+        pokemon6.setIcon(imgPokeball);
+
+
+
+
+
+        teamPanel.add(pokemon1);
+        teamPanel.add(pokemon2);
+        teamPanel.add(pokemon3);
+        teamPanel.add(pokemon4);
+        teamPanel.add(pokemon5);
+        teamPanel.add(pokemon6);
 
         add(teamPanel);
 
@@ -114,9 +168,12 @@ public class ChooseTeam extends JFrame {
                  *//*playerInfo.setText(player.toString());
                 playerInfo.repaint();*/
                 player.addPokemon(selectedPokemon);
-                partyPokeTxt.setText("");
+
+                //scrivi i party pokemon nell textarea
+                /*partyPokeTxt.setText("");
                 partyPokeTxt.append(player.pokemonStringList());
-                partyPokeTxt.repaint();
+                partyPokeTxt.repaint();*/
+
                 teamPanel.repaint();
 
 

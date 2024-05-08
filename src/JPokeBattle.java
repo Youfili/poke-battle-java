@@ -34,7 +34,7 @@ public class JPokeBattle {
             throw new RuntimeException(e);
         }
 
-        Image dimg = img.getScaledInstance(60, 60,
+        Image dimg = img.getScaledInstance(70, 70,
                 Image.SCALE_SMOOTH);
         ImageIcon imageIcon = new ImageIcon(dimg);
 
