@@ -151,6 +151,32 @@ public class ChooseTeam extends JFrame {
 
 
 
+        // SELECT PLAYER TEAM BUTTON /////////////////////////////////////////////////////////////////7
+        JPanel selectPlayerTeamPanel = new JPanel(new GridLayout(2,1));
+        selectPlayerTeamPanel.setBorder(new TitledBorder("Player"));
+
+//        // Immagine Icon del Bottone Select Team Battaglia
+//        BufferedImage immBattleSelectTeam =null ;
+//        try {
+//            immBattleSelectTeam = ImageIO.read(new File("src/Img/batlle_Icon_Button.jpg"));
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
+//        Image immBattleSelectTeamButton = immBattleSelectTeam.getScaledInstance(115, 50,
+//                Image.SCALE_SMOOTH);
+//        ImageIcon immBattleSelectTeamButtonIcon = new ImageIcon(immBattleSelectTeamButton);
+
+        // Creo il pulsante SelectTeam
+        JButton selectPlayerTeamButton1 = new JButton("Player 1");
+        JButton selectPlayerTeamButton2 = new JButton("Player 2");
+//        selectPlayerTeamButton.setIcon(immBattleSelectTeamButton);
+        selectPlayerTeamPanel.add(selectPlayerTeamButton1, BorderLayout.CENTER);           // Imposto il pulsante al centro del pannello
+        selectPlayerTeamPanel.add(selectPlayerTeamButton2, BorderLayout.CENTER);
+        selectPlayerTeamPanel.setBounds(325,420,110,85);     // posiziono il pannello nello spazio
+        add(selectPlayerTeamPanel);             // Aggiungo il pannello al frame ChooseTeam
+
+
+
 
 
 
