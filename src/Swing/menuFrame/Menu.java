@@ -52,21 +52,6 @@ public class Menu extends JFrame {
             CardLayout cl = (CardLayout)(panels.getLayout());
 
 
-//            // IMMAGINE ICONA MASCHILE --> ChoosePlayerPanel --> Messa dentro l'action Listener
-//            Image img = null;
-//            try {
-//                img = ImageIO.read(new File("src/Img/maleTrainer.png"));
-//            } catch (IOException e) {
-//                throw new RuntimeException(e);
-//            }
-//
-//            Image dimg = img.getScaledInstance(60, 60,
-//                    Image.SCALE_SMOOTH);
-//            ImageIcon imageIcon = new ImageIcon(dimg);
-
-
-            // Setto i Listener del ChoosePlayerPanel
-
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             // GENDER BUTTON
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -75,7 +60,7 @@ public class Menu extends JFrame {
             // IMMAGINE ICONA Pokeball --> ChoosePlayerPanel
             Image imgPokeball = null;
             try {
-                imgPokeball = ImageIO.read(new File("src/Img/maleTrainer.png"));
+                imgPokeball = ImageIO.read(new File("src/Img/pokeball.png"));
             } catch (IOException er) {
                 throw new RuntimeException(er);
             }
@@ -90,23 +75,23 @@ public class Menu extends JFrame {
                 public void actionPerformed(ActionEvent e) {
 
                     String name = JOptionPane.showInputDialog("Inserisci nome: ");
-                    player = new Player(name,0,0,"Male");
+                    if(name != null && !name.trim().isEmpty()) {
+                        // IMMAGINE ICONA MASCHILE --> ChoosePlayerPanel
+                        Image img = null;
+                        try {
+                            img = ImageIO.read(new File("src/Img/maleTrainer.png"));
+                        } catch (IOException er) {
+                            throw new RuntimeException(er);
+                        }
+                        Image dimg = img.getScaledInstance(60, 60,
+                                Image.SCALE_SMOOTH);
+                        ImageIcon imageIcon = new ImageIcon(dimg);
 
-                    // IMMAGINE ICONA MASCHILE --> ChoosePlayerPanel
-                    Image img = null;
-                    try {
-                        img = ImageIO.read(new File("src/Img/maleTrainer.png"));
-                    } catch (IOException er) {
-                        throw new RuntimeException(er);
+                        player = new Player(name, 0, 0, "Male");
+                        player.setImage(imageIcon);
+                        chooseTeam = new ChooseTeam(player);
+                        setVisible(false);
                     }
-
-                    Image dimg = img.getScaledInstance(60, 60,
-                            Image.SCALE_SMOOTH);
-                    ImageIcon imageIcon = new ImageIcon(dimg);
-
-                    player.setImage(imageIcon);
-                    chooseTeam=new ChooseTeam( player);
-                    setVisible(false);
                 }
             });
 
@@ -116,23 +101,25 @@ public class Menu extends JFrame {
                 public void actionPerformed(ActionEvent e) {
 
                     String name = JOptionPane.showInputDialog(null,"Scegli il Nome: ", "Choose Name", JOptionPane.PLAIN_MESSAGE);
-                    player = new Player(name,0,0,"Female");
 
-                    // IMMAGINE ICONA FEMMINILE --> ChoosePlayerPanel
-                    Image img = null;
-                    try {
-                        img = ImageIO.read(new File("src/Img/maleTrainer.png"));
-                    } catch (IOException er) {
-                        throw new RuntimeException(er);
+                    if(name != null && !name.trim().isEmpty()) {
+                        // IMMAGINE ICONA FEMMINILE --> ChoosePlayerPanel
+                        Image img = null;
+                        try {
+                            img = ImageIO.read(new File("src/Img/maleTrainer.png"));
+                        } catch (IOException er) {
+                            throw new RuntimeException(er);
+                        }
+                        Image dimg = img.getScaledInstance(60, 60,
+                                Image.SCALE_SMOOTH);
+                        ImageIcon imageIcon = new ImageIcon(dimg);
+
+                        player = new Player(name, 0, 0, "Female");
+                        player.setImage(imageIcon);
+                        chooseTeam = new ChooseTeam(player);
+                        setVisible(false);
                     }
-
-                    Image dimg = img.getScaledInstance(60, 60,
-                            Image.SCALE_SMOOTH);
-                    ImageIcon imageIcon = new ImageIcon(dimg);
-
-                    player.setImage(imageIcon);
-                    chooseTeam=new ChooseTeam( player);
-                    setVisible(false);               }
+                }
             });
 
 

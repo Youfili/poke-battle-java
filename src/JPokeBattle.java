@@ -33,7 +33,7 @@ public class JPokeBattle {
             throw new RuntimeException(e);
         }
 
-        Image dimg = img.getScaledInstance(70, 70,
+        Image dimg = img.getScaledInstance(60, 60,
                 Image.SCALE_SMOOTH);
         ImageIcon imageIcon = new ImageIcon(dimg);
 
@@ -48,8 +48,8 @@ public class JPokeBattle {
         //hash.addPokemon(evolution);
         System.out.println(hash);*/
 
-        new BackgroundImageJFrame();
-       // new ChooseTeam(hash);
+//        new BackgroundImageJFrame();
+        new ChooseTeam(hash);
 
 
 
