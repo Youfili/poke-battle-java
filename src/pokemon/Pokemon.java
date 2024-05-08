@@ -15,7 +15,7 @@ import java.util.List;
 /**
  *
  */
-public abstract class Pokemon {
+public  class Pokemon {
 
      private String name;
      private String gender;
@@ -23,12 +23,18 @@ public abstract class Pokemon {
 
      private int level;
      private int ps;
-     private int exp;
+     private int expBase;
+     private int currentExp;
+     private int maxExp;
+
      private int attack;
      private int defense;
      private int speed;
+     private int health; //livello attuale di salute
+     private int evolutionLevel;
 
      private Boolean isAlive;
+     private Pokemon evolution;
 
      private List<Move> moves=new ArrayList<>();
      private List<DefaultMoves> defaultMoves=new ArrayList<>(); // questo va inizializzato con le mosse base
@@ -48,9 +54,13 @@ public abstract class Pokemon {
         this.speed = speed;
         this.isAlive = true;
 
+
     }
     //Constructor with image
-    public Pokemon(String name, int level, int ps, String gender, int attack, int defense, int speed,String imgPath) {
+    public Pokemon(String name, int level, int ps, String gender,
+                   Type type,int attack, int defense,
+                   int speed,int expBase, String imgPath, int evolutionLevel
+                    , Pokemon evolution) {
         this.name = name;
         this.level = level;
         this.ps = ps;
@@ -59,6 +69,13 @@ public abstract class Pokemon {
         this.defense = defense;
         this.speed = speed;
         this.isAlive = true;
+        this.expBase = expBase;
+        this.evolutionLevel = evolutionLevel;
+        this.evolution = evolution;
+
+        this.health=ps;
+
+        //this.maxExp= level*ps; DA IMPLEMENTARE
 
         //assegna l'immagine
         BufferedImage img = null;
@@ -93,6 +110,11 @@ public abstract class Pokemon {
 
     }
 
+    public void updateLevel(){
+        setLevel(level+1);
+        //Aggiungere modifiche ai valori hp ecc
+    }
+
 
 
     @Override
@@ -107,6 +129,8 @@ public abstract class Pokemon {
                 "Speed= " + speed +'\n' +
                 "Moves= " + moves +'\n';
     }
+
+
 
 
 
@@ -194,13 +218,7 @@ public abstract class Pokemon {
         return moves;
     }
 
-    public int getExp() {
-        return exp;
-    }
 
-    public void setExp(int exp) {
-        this.exp = exp;
-    }
 
     public String getType() {
         return type;
@@ -209,4 +227,66 @@ public abstract class Pokemon {
     public void setType(String type) {
         this.type = type;
     }
+
+    public int getExpBase() {
+        return expBase;
+    }
+
+    public void setExpBase(int expBase) {
+        this.expBase = expBase;
+    }
+
+    public int getCurrentExp() {
+        return currentExp;
+    }
+
+    public void setCurrentExp(int currentExp) {
+        this.currentExp = currentExp;
+    }
+
+    public int getMaxExp() {
+        return maxExp;
+    }
+
+    public void setMaxExp(int maxExp) {
+        this.maxExp = maxExp;
+    }
+
+    public void setMoves(List<Move> moves) {
+        this.moves = moves;
+    }
+
+    public List<DefaultMoves> getDefaultMoves() {
+        return defaultMoves;
+    }
+
+    public void setDefaultMoves(List<DefaultMoves> defaultMoves) {
+        this.defaultMoves = defaultMoves;
+    }
+
+    public int getHealth() {
+        return health;
+    }
+
+    public void setHealth(int health) {
+        this.health = health;
+    }
+
+    public int getEvolutionLevel() {
+        return evolutionLevel;
+    }
+
+    public void setEvolutionLevel(int evolutionLevel) {
+        this.evolutionLevel = evolutionLevel;
+    }
+
+    public Pokemon getEvolution() {
+        return evolution;
+    }
+
+    public void setEvolution(Pokemon evplution) {
+        this.evolution = evplution;
+    }
 }
+
+

@@ -62,6 +62,16 @@ public class Player {
             (teamIsEmpty()?"L'allenatore non ha pokemon":"team: " + pokemonStringList() )+'\n';
     }
 
+    //TO STRING SENZA POKEMON
+    public String playerInfo(){
+
+        return
+                "name= " + name + '\n' +
+                        "gender= " + gender + '\n' +
+                        "winMatch= " + winMatch + '\n' +
+                        "lossMatch= " + lossMatch ;
+    }
+
     //matodo per aggiungere pokemon alla squadra durante la creazione
     public void addPokemon(Pokemon pokemon) {
         for(int i=0;i<team.size();i++){
@@ -74,10 +84,19 @@ public class Player {
 
     }
 
+    public void replacePokemon(Pokemon pokemon,Pokemon newPokemon){
+        for(int i=0;i<team.size();i++){
+            if(team.get(i)==pokemon){
+                team.set(i,newPokemon);
+
+            }
+        }
+    }
+
     public void removePokemon(Pokemon pokemon) {
         for(int i=0;i<team.size();i++){
             if(team.get(i)==pokemon){
-                team.remove(i);
+                team.set(i,null);
             }
         }
     }

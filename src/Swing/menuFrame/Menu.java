@@ -114,7 +114,8 @@ public class Menu extends JFrame {
             JButton femaleButton = choosePlayerPanel.getFemaleButton();
             femaleButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    String name = JOptionPane.showInputDialog(null,"Scegli il Nome: ", "Choose Name", JOptionPane.PLAIN_MESSAGE, imageIconPokeball);
+
+                    String name = JOptionPane.showInputDialog(null,"Scegli il Nome: ", "Choose Name", JOptionPane.PLAIN_MESSAGE);
                     player = new Player(name,0,0,"Female");
 
                     // IMMAGINE ICONA FEMMINILE --> ChoosePlayerPanel
