@@ -53,6 +53,7 @@ public  class Pokemon {
         this.defense = defense;
         this.speed = speed;
         this.isAlive = true;
+        this.health = 100;
 
 
     }
@@ -137,7 +138,8 @@ public  class Pokemon {
 
     //Getter and Setter
 
-    public Boolean getAlive() {
+
+    public Boolean isAlive() {
         return isAlive;
     }
 

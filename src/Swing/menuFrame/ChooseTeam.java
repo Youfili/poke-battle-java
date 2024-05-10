@@ -39,27 +39,20 @@ public class ChooseTeam extends JFrame {
         // Nel costruttore va aggiunto un altro Player che si interfacci con la propria squadra, cosi da farli entrare in battaglia
 
         this.player=player;
-        setSize(600,650);//400 width and 500 height
+        setSize(600,650);//400 width and 500 height --> Dimensione dei ChooseTeam JFrame
         setLayout(null);//using no layout managers
         setLocationRelativeTo(null);//centro dello schermo
-        setResizable(false);
+        setResizable(false);        // size della finestra non modificabile di dimensione
 
 
         //lista pokemon .. magari prendere da una classe Pokedex
 
         pokedex= new Pokedex();
 
-        //pannelli da aggiungere al frame : L'idea sarebbe creare tre pannelli
-        // (scelta pokemon |
-        // info pokemon selezionato |
-        // info allenatore con visualizzazione  della squadra che si aggiorna man mano che selzioniamo o meno pokemon
-        //pokeInfoPanel=new JPanel();
-        playerInfo=new JTextArea();
+//        playerInfo=new JTextArea();
         playerIcon=new JLabel();
         pokeInfoTextArea=new JTextArea();
         playerInfoPanel=new JPanel(new BorderLayout());
-
-
 
 
         //PLAYER INFO
@@ -67,12 +60,11 @@ public class ChooseTeam extends JFrame {
         playerInfo.setBorder(BorderFactory.createLineBorder(Color.GRAY));
         playerInfo.setFont(new Font("Arial", Font.BOLD,13));
 
-
         //PLAYER ICON
         playerIcon.setIcon(player.getImage());
 
-
-        //PLAYER PANEL
+        //Aggiungo PlayerInfo e PlayerIcon a PlayerInfoPanel (Il pannello che contiene questi due componenti)
+        //PLAYER INFO PANEL
         playerInfoPanel.setBounds(5,500,190,100);
         playerInfoPanel.setBorder(new TitledBorder("PLAYER INFO"));
         playerInfoPanel.add(playerInfo,BorderLayout.CENTER);
@@ -84,8 +76,8 @@ public class ChooseTeam extends JFrame {
 
         //POKEMON INFO AREA---------------------------
 
-        JScrollPane sp = new JScrollPane(pokeInfoTextArea);
-        JPanel wrapper = new JPanel(new BorderLayout());
+        JScrollPane sp = new JScrollPane(pokeInfoTextArea);     // Area di testo dove apparirà il Pokemon quando selezionato (e si vedranno le informazioni)
+        JPanel wrapper = new JPanel(new BorderLayout());        // Pannello della PokemonInfoArea --> wrapper
         wrapper.setBorder(new TitledBorder("POKEMON INFO"));
         wrapper.add(sp, BorderLayout.CENTER);
         wrapper.setBounds(325,20,250,400);
@@ -151,7 +143,7 @@ public class ChooseTeam extends JFrame {
 
 
         // SELECT PLAYER TEAM BUTTON /////////////////////////////////////////////////////////////////7
-        JPanel selectPlayerTeamPanel = new JPanel(new GridLayout(2,1));
+        JPanel selectPlayerTeamPanel = new JPanel(new GridLayout(2,1));         // due righe e 1 colonna (devo mettere due pulsanti in orizzontale)
         selectPlayerTeamPanel.setBorder(new TitledBorder("Player"));
 
 //        // Immagine Icon del Bottone Select Team Battaglia
@@ -183,7 +175,7 @@ public class ChooseTeam extends JFrame {
         //TEAM PANEL-----------------------------------------------
         /*JTextArea partyPokeTxt = new JTextArea(player.pokemonStringList());
         JScrollPane tm = new JScrollPane(partyPokeTxt);*/
-        JPanel teamPanel = new JPanel(new GridLayout(1,6));
+        JPanel teamPanel = new JPanel(new GridLayout(1,6));         // Pannello del team con una riga e 6 colonne (ogni colonna è un bottone del pokemon selezionato)
         teamPanel.setBorder(new TitledBorder("PARTY POKEMON"));
         //teamPanel.add(tm);
         teamPanel.setBounds(200,500,380,100);
