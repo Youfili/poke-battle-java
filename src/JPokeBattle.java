@@ -48,8 +48,8 @@ public class JPokeBattle {
         //hash.addPokemon(evolution);
         System.out.println(hash);*/
 
-        //new BackgroundImageJFrame();
-        new ChooseTeam(hash);
+        new BackgroundImageJFrame();
+//        new ChooseTeam(hash);
 
 
 

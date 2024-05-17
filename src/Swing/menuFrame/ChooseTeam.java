@@ -23,6 +23,8 @@ public class ChooseTeam extends JFrame {
 
     //private List<Pokemon> pokemon=new ArrayList<Pokemon>();
     private Player player;
+    private Player player1;
+    private Player player2;
     private JPanel pokeInfoPanel;
     private JTextArea pokeInfoTextArea;
     private Pokedex pokedex;
@@ -35,18 +37,19 @@ public class ChooseTeam extends JFrame {
     private Pokemon selectedPokemon;
     private  Pokemon selectedPartyPokemon;
 
-    public ChooseTeam(Player player) {
+    public ChooseTeam(Player player1, Player player2) {
         // Nel costruttore va aggiunto un altro Player che si interfacci con la propria squadra, cosi da farli entrare in battaglia
 
-        this.player=player;
+        this.player1=player1;
+        this.player2=player2;
         setSize(600,650);//400 width and 500 height --> Dimensione dei ChooseTeam JFrame
         setLayout(null);//using no layout managers
         setLocationRelativeTo(null);//centro dello schermo
         setResizable(false);        // size della finestra non modificabile di dimensione
 
+        player = player1;           // di base metto che il player con qui si pre la scelta team è il primo
 
         //lista pokemon .. magari prendere da una classe Pokedex
-
         pokedex= new Pokedex();
 
 //        playerInfo=new JTextArea();
@@ -88,24 +91,6 @@ public class ChooseTeam extends JFrame {
         JLabel pokeIcon = new JLabel();
         wrapper.add(pokeIcon, BorderLayout.PAGE_START);
 
-//        //TEST PROGRESSBAR-------------------------
-//        JProgressBar progressBar = new JProgressBar(0,100);
-//        progressBar.setBounds(325,450,250,20);
-//        progressBar.setValue(50);
-//        progressBar.setString("exp");
-//        progressBar.setStringPainted(true);
-//        add(progressBar);
-//
-//        JButton progressButton = new JButton("Progress");
-//        progressButton.setBounds(325,480,40,20);
-//        progressButton.addActionListener(new ActionListener() {
-//            public void actionPerformed(ActionEvent e) {
-//                progressBar.setValue(progressBar.getValue()+20);
-//            }
-//        });
-//
-//        add(progressButton);
-//        //------------------------
 
 
         // BATTLE BUTTON /////////////////////////////////////////////////////////////////7
@@ -144,22 +129,31 @@ public class ChooseTeam extends JFrame {
 
         // SELECT PLAYER TEAM BUTTON /////////////////////////////////////////////////////////////////7
         JPanel selectPlayerTeamPanel = new JPanel(new GridLayout(2,1));         // due righe e 1 colonna (devo mettere due pulsanti in orizzontale)
-        selectPlayerTeamPanel.setBorder(new TitledBorder("Player"));
 
-//        // Immagine Icon del Bottone Select Team Battaglia
-//        BufferedImage immBattleSelectTeam =null ;
-//        try {
-//            immBattleSelectTeam = ImageIO.read(new File("src/Img/batlle_Icon_Button.jpg"));
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
-//        Image immBattleSelectTeamButton = immBattleSelectTeam.getScaledInstance(115, 50,
-//                Image.SCALE_SMOOTH);
-//        ImageIcon immBattleSelectTeamButtonIcon = new ImageIcon(immBattleSelectTeamButton);
 
         // Creo il pulsante SelectTeam
         JButton selectPlayerTeamButton1 = new JButton("Player 1");
         JButton selectPlayerTeamButton2 = new JButton("Player 2");
+
+        // Do il Listener ai pulsanti
+        // Listener Bottone Player1
+        selectPlayerTeamButton1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                player = player1;   // imposto come player che è in fase di scelta, quello premuto dal bottone
+                ChooseTeam.super.repaint();          // faccio il repaint cosi si aggiorna
+            }
+        });
+
+        // Listener Bottone Player2
+        selectPlayerTeamButton2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                player = player2;
+                ChooseTeam.super.repaint();
+            }
+        });
+
 //        selectPlayerTeamButton.setIcon(immBattleSelectTeamButton);
         selectPlayerTeamPanel.add(selectPlayerTeamButton1, BorderLayout.CENTER);           // Imposto il pulsante al centro del pannello
         selectPlayerTeamPanel.add(selectPlayerTeamButton2, BorderLayout.CENTER);
