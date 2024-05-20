@@ -1,7 +1,8 @@
 package pokemon;
 
 import moves.Move;
-import moves.base.DefaultMoves;
+import moves.base.*;
+import moves.base.Action;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -86,6 +87,12 @@ public  class Pokemon {
             throw new RuntimeException(ex);
         }
         this.setImage(img);
+
+        //*****AGGIUNGO MOSSE DEFAULT PER PROVA BATTAGLIA ********
+        addMove(new Action());
+        addMove(new Frustration());
+        addMove(new GigaImpact());
+        addMove(new BodySlam());
 
     }
 

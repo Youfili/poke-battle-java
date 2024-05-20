@@ -1,5 +1,6 @@
 package Swing.menuFrame.battle;
 
+import Swing.menuFrame.ChooseTeam;
 import moves.base.Action;
 import moves.base.BodySlam;
 import moves.base.Frustration;
@@ -61,7 +62,7 @@ public class Battle extends JFrame {
 
 
         // Carico i Pokemon dei rispettivi giocatori (all'inzio sono quelli in posizione 0)
-        pokemonInGame1=player1.getTeam().get(1);
+        pokemonInGame1=player1.getTeam().get(0);
         pokemonInGame2=player2.getTeam().get(0);
 
         // IMMAGINE POKEMON 1
@@ -99,7 +100,7 @@ public class Battle extends JFrame {
         battleTextArea.setFont(fontBattleTextArea);                                 // Imposto un Font per la TextArea
         battleTextArea.setBounds(10,500,250,100);
         battleTextArea.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createRaisedBevelBorder(), BorderFactory.createLoweredBevelBorder()));
-        battleTextArea.setEditable(false);
+
 
         // All'inizio tutte due i giocatori partono con il pokemon della squadra in prima posizione
         // Impostazioni di prova --> pokemon1InGame Attacca e pokemon2InGame Difende
@@ -149,12 +150,12 @@ public class Battle extends JFrame {
                             // NOTA IMPORTANTE ---------------------------------------------------------------------------------------------
                             // Questo tipo di controllo è meglio farli nel Ciclo della battaglia stesso, che va a controllare tutti i parametri in gioco!
                             currentDefensePokemonInGame.setAlive(false);        // metto che è stato sconfitto e non è più vivo
-                            Battle.super.remove(pokemon2Image);        // rimuovo l'immagine del secondo pokemon (che SOLO IN QUESTO ESEMPIO è Pokemon2Image
-                            Battle.super.repaint();                  // aggiorno il frame Battle
                             int IncrementValueExpBar = 15;
                             currentAttackPokemonInGame.setExpBase(IncrementValueExpBar);           // incremento di 3 punti vita pokemon
                             poke1InfoPanel.getExperienceBar().setValue(poke2InfoPanel.getExperienceBar().getValue() + IncrementValueExpBar);    // setto il valore della barraEXP
                             poke1InfoPanel.getExperienceBar().repaint();
+                            Battle.super.remove(pokemon2Image);        // rimuovo l'immagine del secondo pokemon (che SOLO IN QUESTO ESEMPIO è Pokemon2Image
+                            Battle.super.repaint();                  // aggiorno il frame Battle
                             // Stampo il messaggio che il pokemon non è più in grado di combattere
                             battleTextArea.setText("" + currentDefensePokemonInGame.getName() + " is exhausted. :(");
                             battleTextArea.repaint();
@@ -165,8 +166,6 @@ public class Battle extends JFrame {
                     } else {     // se la vita è minore di 0 imposto tutto a 0
                         poke2InfoPanel.getHpBar().setValue(0);
                         currentDefensePokemonInGame.setAlive(false);        // metto che è stato sconfitto e non è più vivo
-                        Battle.super.remove(pokemon2Image);        // rimuovo l'immagine del secondo pokemon (che SOLO IN QUESTO ESEMPIO è Pokemon2Image
-                        Battle.super.repaint();                  // aggiorno il frame Battle
                     }
                     // Aggiorno il Pannello e la barra
                     poke2InfoPanel.getHpBar().repaint();
@@ -201,12 +200,12 @@ public class Battle extends JFrame {
                             // NOTA IMPORTANTE ---------------------------------------------------------------------------------------------
                             // Questo tipo di controllo è meglio farli nel Ciclo della battaglia stesso, che va a controllare tutti i parametri in gioco!
                             currentDefensePokemonInGame.setAlive(false);        // metto che è stato sconfitto e non è più vivo
-                            Battle.super.remove(pokemon2Image);        // rimuovo l'immagine del secondo pokemon (che SOLO IN QUESTO ESEMPIO è Pokemon2Image
-                            Battle.super.repaint();                  // aggiorno il frame Battle
                             int IncrementValueExpBar = 15;
                             currentAttackPokemonInGame.setExpBase(IncrementValueExpBar);           // incremento di 3 punti vita pokemon
                             poke1InfoPanel.getExperienceBar().setValue(poke2InfoPanel.getExperienceBar().getValue() + IncrementValueExpBar);    // setto il valore della barraEXP
                             poke1InfoPanel.getExperienceBar().repaint();
+                            Battle.super.remove(pokemon2Image);        // rimuovo l'immagine del secondo pokemon (che SOLO IN QUESTO ESEMPIO è Pokemon2Image
+                            Battle.super.repaint();                  // aggiorno il frame Battle
                             // Stampo il messaggio che il pokemon non è più in grado di combattere
                             battleTextArea.setText("" + currentDefensePokemonInGame.getName() + " is exhausted. :(");
                             battleTextArea.repaint();
@@ -217,8 +216,6 @@ public class Battle extends JFrame {
                     } else {     // se la vita è minore di 0 imposto tutto a 0
                         poke2InfoPanel.getHpBar().setValue(0);
                         currentDefensePokemonInGame.setAlive(false);        // metto che è stato sconfitto e non è più vivo
-                        Battle.super.remove(pokemon2Image);        // rimuovo l'immagine del secondo pokemon (che SOLO IN QUESTO ESEMPIO è Pokemon2Image
-                        Battle.super.repaint();                  // aggiorno il frame Battle
                     }
                     // Aggiorno il Pannello e la barra
                     poke2InfoPanel.getHpBar().repaint();
@@ -246,18 +243,18 @@ public class Battle extends JFrame {
                         currentDefensePokemonInGame.setHealth(currentDefensePokemonInGame.getHealth() - currentAttackPokemonInGame.getMoves().get(2).getDamage());    // modifico la vita del pokemon
                         poke2InfoPanel.getHpBar().setValue(currentDefensePokemonInGame.getHealth() - currentAttackPokemonInGame.getMoves().get(2).getDamage());       // Aggiorno la barra
                         // Se con l'attacco vado oltre lo zero in negativo, la imposto automaticamente a 0
-                        if (currentDefensePokemonInGame.getHealth() <=0) {
+                        if (currentDefensePokemonInGame.getHealth() <= 0) {
                             currentDefensePokemonInGame.setHealth(0);
                             //----------------------------------------------------------------------------------------------------------------//
                             // NOTA IMPORTANTE ---------------------------------------------------------------------------------------------
                             // Questo tipo di controllo è meglio farli nel Ciclo della battaglia stesso, che va a controllare tutti i parametri in gioco!
                             currentDefensePokemonInGame.setAlive(false);        // metto che è stato sconfitto e non è più vivo
-                            Battle.super.remove(pokemon2Image);        // rimuovo l'immagine del secondo pokemon (che SOLO IN QUESTO ESEMPIO è Pokemon2Image
-                            Battle.super.repaint();                  // aggiorno il frame Battle
                             int IncrementValueExpBar = 15;
                             currentAttackPokemonInGame.setExpBase(IncrementValueExpBar);           // incremento di 3 punti vita pokemon
                             poke1InfoPanel.getExperienceBar().setValue(poke2InfoPanel.getExperienceBar().getValue() + IncrementValueExpBar);    // setto il valore della barraEXP
                             poke1InfoPanel.getExperienceBar().repaint();
+                            Battle.super.remove(pokemon2Image);        // rimuovo l'immagine del secondo pokemon (che SOLO IN QUESTO ESEMPIO è Pokemon2Image
+                            Battle.super.repaint();                  // aggiorno il frame Battle
                             // Stampo il messaggio che il pokemon non è più in grado di combattere
                             battleTextArea.setText("" + currentDefensePokemonInGame.getName() + " is exhausted. :(");
                             battleTextArea.repaint();
@@ -268,8 +265,6 @@ public class Battle extends JFrame {
                     } else {     // se la vita è minore di 0 imposto tutto a 0
                         poke2InfoPanel.getHpBar().setValue(0);
                         currentDefensePokemonInGame.setAlive(false);        // metto che è stato sconfitto e non è più vivo
-                        Battle.super.remove(pokemon2Image);        // rimuovo l'immagine del secondo pokemon (che SOLO IN QUESTO ESEMPIO è Pokemon2Image
-                        Battle.super.repaint();                  // aggiorno il frame Battle
                     }
                     // Aggiorno il Pannello e la barra
                     poke2InfoPanel.getHpBar().repaint();
@@ -303,32 +298,26 @@ public class Battle extends JFrame {
                             // NOTA IMPORTANTE ---------------------------------------------------------------------------------------------
                             // Questo tipo di controllo è meglio farli nel Ciclo della battaglia stesso, che va a controllare tutti i parametri in gioco!
                             currentDefensePokemonInGame.setAlive(false);        // metto che è stato sconfitto e non è più vivo
-                            Battle.super.remove(pokemon2Image);        // rimuovo l'immagine del secondo pokemon (che SOLO IN QUESTO ESEMPIO è Pokemon2Image
-                            Battle.super.repaint();                  // aggiorno il frame Battle
                             int IncrementValueExpBar = 15;
                             currentAttackPokemonInGame.setExpBase(IncrementValueExpBar);           // incremento di 3 punti vita pokemon
                             poke1InfoPanel.getExperienceBar().setValue(poke2InfoPanel.getExperienceBar().getValue() + IncrementValueExpBar);    // setto il valore della barraEXP
                             poke1InfoPanel.getExperienceBar().repaint();
+                            Battle.super.remove(pokemon2Image);        // rimuovo l'immagine del secondo pokemon (che SOLO IN QUESTO ESEMPIO è Pokemon2Image
+                            Battle.super.repaint();                  // aggiorno il frame Battle
                             // Stampo il messaggio che il pokemon non è più in grado di combattere
                             battleTextArea.setText("" + currentDefensePokemonInGame.getName() + " is exhausted. :(");
                             battleTextArea.repaint();
 
-
                         } // Fine if per settare il pokemon morto
 
 
-                    }
-                    else {     // se la vita è minore di 0 imposto tutto a 0
+                    } else {     // se la vita è minore di 0 imposto tutto a 0
                         poke2InfoPanel.getHpBar().setValue(0);
                         currentDefensePokemonInGame.setAlive(false);        // metto che è stato sconfitto e non è più vivo
-                        Battle.super.remove(pokemon2Image);        // rimuovo l'immagine del secondo pokemon (che SOLO IN QUESTO ESEMPIO è Pokemon2Image
-                        Battle.super.repaint();                  // aggiorno il frame Battle
-                        Battle.super.repaint();
                     }
                     // Aggiorno il Pannello e la barra
                     poke2InfoPanel.getHpBar().repaint();
-//                    poke2InfoPanel.repaint();
-                    System.out.println(currentDefensePokemonInGame.getHealth());
+                    // poke2InfoPanel.repaint();
                 }
             }   // IN QUESTO MODO POSSO PREMERE IL BOTTONE SOLO SE IL POKEMON AVVERSARIO E' ANCORA VIVO
         });
@@ -395,6 +384,6 @@ public class Battle extends JFrame {
             red.addPokemon(pokem);
         }
 
-        new Battle(hash,red);
+        new ChooseTeam(hash,red);
     }
 }

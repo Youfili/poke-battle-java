@@ -3,6 +3,7 @@
 
 import Swing.BackgroundImageJFrame;
 import Swing.menuFrame.ChooseTeam;
+import Swing.menuFrame.battle.Battle;
 import players.Player;
 //import pokemon.Bulbasaur;
 import pokemon.Pokedex;
@@ -49,7 +50,6 @@ public class JPokeBattle {
         System.out.println(hash);*/
 
         new BackgroundImageJFrame();
-//        new ChooseTeam(hash);
 
 
 

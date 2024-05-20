@@ -1,6 +1,7 @@
 package Swing.menuFrame;
 
 import Swing.menuFrame.battle.Battle;
+import Swing.menuFrame.battle.PartyPokemonPanel;
 import players.Player;
 import pokemon.Pokedex;
 import pokemon.Pokemon;
@@ -15,6 +16,9 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+
+import static java.lang.System.exit;
+
 /*
 IMPLEMENTARE VARIE CLASSI PANNELLI OGNUNA CON RELATIVE INFORMAZIONI E PULSANTI
 METTERLE POI IN COLLEGAMENTO IN QUESTO FRAME
@@ -34,6 +38,8 @@ public class ChooseTeam extends JFrame {
     private JButton addTeam;
     private JPanel playerInfoPanel;
 
+    private PartyPokemonPanel teamPanel;
+
     private Pokemon selectedPokemon;
     private  Pokemon selectedPartyPokemon;
 
@@ -45,9 +51,12 @@ public class ChooseTeam extends JFrame {
         setSize(600,650);//400 width and 500 height --> Dimensione dei ChooseTeam JFrame
         setLayout(null);//using no layout managers
         setLocationRelativeTo(null);//centro dello schermo
-        setResizable(false);        // size della finestra non modificabile di dimensione
+        setResizable(false);// size della finestra non modificabile di dimensione
 
-        player = player1;           // di base metto che il player con qui si pre la scelta team è il primo
+
+            player = player1;
+
+        // di base metto che il player con qui si pre la scelta team è il primo
 
         //lista pokemon .. magari prendere da una classe Pokedex
         pokedex= new Pokedex();
@@ -74,6 +83,16 @@ public class ChooseTeam extends JFrame {
         playerInfoPanel.add(playerIcon,BorderLayout.WEST);
         playerInfoPanel.setVisible(true);
         add(playerInfoPanel);
+
+        //PARTY POKE PANEL
+        teamPanel=new PartyPokemonPanel(player);
+        JButton pokemon1 = teamPanel.getPokemon1();
+        JButton pokemon2 = teamPanel.getPokemon2();
+        JButton pokemon3 = teamPanel.getPokemon3();
+        JButton pokemon4 = teamPanel.getPokemon4();
+        JButton pokemon5 = teamPanel.getPokemon5();
+        JButton pokemon6 = teamPanel.getPokemon6();
+
 
 
 
@@ -113,17 +132,17 @@ public class ChooseTeam extends JFrame {
         battleButton.setIcon(immBattleButtonIcon);
         battleButtonPanel.add(battleButton, BorderLayout.CENTER);           // Imposto il pulsante al centro del pannello
         battleButtonPanel.setBounds(440,420,135,85);     // posiziono il pannello nello spazio
-        add(battleButtonPanel);             // Aggiungo il pannello al frame ChooseTeam
 
         // ActionListener del Battle_Button
         battleButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-//                JOptionPane.setRootFrame(new Battle(player1, player2));
-                JOptionPane.setRootFrame(new Battle(player,null));
+                JOptionPane.setRootFrame(new Battle(player1, player2));
+               // JOptionPane.setRootFrame(new Battle(player,null));
                 setVisible(false);
             }
         });
+        add(battleButtonPanel);             // Aggiungo il pannello al frame ChooseTeam
 
 
 
@@ -142,6 +161,11 @@ public class ChooseTeam extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 player = player1;   // imposto come player che è in fase di scelta, quello premuto dal bottone
                 ChooseTeam.super.repaint();          // faccio il repaint cosi si aggiorna
+                pokeInfoTextArea.setText(player.playerInfo()+player.pokemonStringList());
+                teamPanel.repaint();
+
+
+
             }
         });
 
@@ -151,6 +175,9 @@ public class ChooseTeam extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 player = player2;
                 ChooseTeam.super.repaint();
+                pokeInfoTextArea.setText(player.playerInfo()+player.pokemonStringList());
+                teamPanel.repaint();
+
             }
         });
 
@@ -166,9 +193,9 @@ public class ChooseTeam extends JFrame {
 
 
 
-        //TEAM PANEL-----------------------------------------------
-        /*JTextArea partyPokeTxt = new JTextArea(player.pokemonStringList());
-        JScrollPane tm = new JScrollPane(partyPokeTxt);*/
+        /*//TEAM PANEL-----------------------------------------------
+        *//*JTextArea partyPokeTxt = new JTextArea(player.pokemonStringList());
+        JScrollPane tm = new JScrollPane(partyPokeTxt);*//*
         JPanel teamPanel = new JPanel(new GridLayout(1,6));         // Pannello del team con una riga e 6 colonne (ogni colonna è un bottone del pokemon selezionato)
         teamPanel.setBorder(new TitledBorder("PARTY POKEMON"));
         //teamPanel.add(tm);
@@ -189,7 +216,6 @@ public class ChooseTeam extends JFrame {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        //ImageIcon img =new ImageIcon( "/Users/leonardo/Desktop/wallpaper.jpg");
 
         Image imPoke = imgPoke.getScaledInstance(20, 20,
                 Image.SCALE_SMOOTH);
@@ -197,13 +223,33 @@ public class ChooseTeam extends JFrame {
         ImageIcon imgPokeball = new ImageIcon(imPoke);
 
         // Setto le immagini di default del pannello delle pokeball
-        pokemon1.setIcon(imgPokeball);
+        if(player.getTeam().get(0)==null)
+            pokemon1.setIcon(imgPokeball);
+        else{
+            selectedPartyPokemon=player.getTeam().get(0);
+            Image immPokemon = selectedPartyPokemon.getImage().getScaledInstance(120, 120, Image.SCALE_SMOOTH);
+            ImageIcon selectPartyPokeImage = new ImageIcon(immPokemon);
+            pokemon1.setIcon(selectPartyPokeImage);
+        }
+
         pokemon2.setIcon(imgPokeball);
         pokemon3.setIcon(imgPokeball);
         pokemon4.setIcon(imgPokeball);
         pokemon5.setIcon(imgPokeball);
         pokemon6.setIcon(imgPokeball);
+*/
 
+        BufferedImage imgPoke =null ;
+        try {
+            imgPoke = ImageIO.read(new File("src/Img/pokeball.png"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        Image imPoke = imgPoke.getScaledInstance(20, 20,
+                Image.SCALE_SMOOTH);
+
+        ImageIcon imgPokeball = new ImageIcon(imPoke);
 
         /*
         ACTION LISTENER DEI TASTI CON I POKEMON GIA' SELEZIONATI IN SQUADRA (LI RIMUOVO DALLA SQUADRA)
@@ -312,12 +358,7 @@ public class ChooseTeam extends JFrame {
 
 
 
-        teamPanel.add(pokemon1);
-        teamPanel.add(pokemon2);
-        teamPanel.add(pokemon3);
-        teamPanel.add(pokemon4);
-        teamPanel.add(pokemon5);
-        teamPanel.add(pokemon6);
+
 
         add(teamPanel);
 

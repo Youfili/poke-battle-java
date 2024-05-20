@@ -157,8 +157,9 @@ public class Menu extends JFrame {
                 public void actionPerformed(ActionEvent e) {
                     if(playerCreated.get(0)!= null && playerCreated.get(1)!= null) {
                         // Se i due giocatori non sono null, quindi sono stati modificati
-                        new ChooseTeam(playerCreated.get(0), playerCreated.get(1));
                                         // player1             // player2
+                        JOptionPane.setRootFrame( new ChooseTeam(playerCreated.get(0), playerCreated.get(1)));
+                        setVisible(false);
                     }
                 }
             });
