@@ -346,8 +346,31 @@ public class Battle extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);     // in questo modo, quando premo x chiuderò anche la pagina
 
         setVisible(true);
+
     } // Fine costruttore
 
+    private void iniziaTurno() {
+        // Cambia il messaggio della TextArea per indicare il turno del giocatore corrente
+        JTextArea battleTextArea = new JTextArea();
+        battleTextArea.setText("Turno di " + currentPlayer.getName() + ". Scegli un'azione.");
+        // Aggiungi altre impostazioni del battleTextArea se necessario...
+
+        // Aggiorna l'interfaccia grafica
+        this.add(battleTextArea);
+        // Aggiungi altri componenti grafici se necessario...
+
+        // Aggiorna l'interfaccia grafica
+        revalidate();
+        repaint();
+    }
+
+    // Metodo per passare al turno successivo
+    private void passaAlProssimoTurno() {
+        // Passa al giocatore successivo
+        currentPlayer = (currentPlayer == player1) ? player2 : player1;
+        // Avvia il turno del nuovo giocatore
+        iniziaTurno();
+    }
 
 
     //MAIN DI TEST
@@ -384,6 +407,6 @@ public class Battle extends JFrame {
             red.addPokemon(pokem);
         }
 
-        new ChooseTeam(hash,red);
+        new Battle(hash,red);
     }
 }
