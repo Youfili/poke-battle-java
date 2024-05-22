@@ -259,7 +259,7 @@ public class ChooseTeam extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 if(pokemon1.getIcon()!=imgPokeball){
                     selectedPartyPokemon=player.getTeam().get(0);
-                    Image immPokemon = selectedPartyPokemon.getImage().getScaledInstance(120, 120, Image.SCALE_SMOOTH);
+                    Image immPokemon = selectedPartyPokemon.getImage().getScaledInstance(30,30,Image.SCALE_SMOOTH);
                     ImageIcon selectPartyPokeImage = new ImageIcon(immPokemon);
                    int input= JOptionPane.showConfirmDialog(new JButton("Elimina"),"Vuoi rimuovere "+ player.getTeam().get(0).getName()+ " dalla squadra?","remove?",2,1,selectPartyPokeImage);
                    if(input==0){
@@ -277,7 +277,7 @@ public class ChooseTeam extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 if(pokemon2.getIcon()!=imgPokeball){
                     selectedPartyPokemon=player.getTeam().get(1);
-                    Image immPokemon = selectedPartyPokemon.getImage().getScaledInstance(120, 120, Image.SCALE_SMOOTH);
+                    Image immPokemon = selectedPartyPokemon.getImage().getScaledInstance(30,30, Image.SCALE_SMOOTH);
                     ImageIcon selectPartyPokeImage = new ImageIcon(immPokemon);
                     int input= JOptionPane.showConfirmDialog(new JButton("elimina"),"Vuoi rimuovere "+ selectedPartyPokemon.getName()+ " dalla squadra?","remove?",2,1,selectPartyPokeImage);
                     if(input==0){
@@ -294,7 +294,7 @@ public class ChooseTeam extends JFrame {
                 if(pokemon3.getIcon()!=imgPokeball){
                     selectedPartyPokemon=player.getTeam().get(2);
 
-                    Image immPokemon = selectedPartyPokemon.getImage().getScaledInstance(120, 120, Image.SCALE_SMOOTH);
+                    Image immPokemon = selectedPartyPokemon.getImage().getScaledInstance(30,30, Image.SCALE_SMOOTH);
                     ImageIcon selectPartyPokeImage = new ImageIcon(immPokemon);
                     int input= JOptionPane.showConfirmDialog(new JButton("elimina"),"Vuoi rimuovere "+ selectedPartyPokemon.getName()+ " dalla squadra?","remove?",2,1,selectPartyPokeImage);
                     if(input==0){
@@ -311,7 +311,7 @@ public class ChooseTeam extends JFrame {
                 if(pokemon4.getIcon()!=imgPokeball){
                     selectedPartyPokemon=player.getTeam().get(3);
 
-                    Image immPokemon = selectedPartyPokemon.getImage().getScaledInstance(120, 120, Image.SCALE_SMOOTH);
+                    Image immPokemon = selectedPartyPokemon.getImage().getScaledInstance(30,30, Image.SCALE_SMOOTH);
                     ImageIcon selectPartyPokeImage = new ImageIcon(immPokemon);
                     int input= JOptionPane.showConfirmDialog(new JButton("elimina"),"Vuoi rimuovere "+ selectedPartyPokemon.getName()+ " dalla squadra?","remove?",2,1,selectPartyPokeImage);
                     if(input==0){
@@ -327,7 +327,7 @@ public class ChooseTeam extends JFrame {
                 if(pokemon5.getIcon()!=imgPokeball){
                     selectedPartyPokemon=player.getTeam().get(4);
 
-                    Image immPokemon = selectedPartyPokemon.getImage().getScaledInstance(120, 120, Image.SCALE_SMOOTH);
+                    Image immPokemon = selectedPartyPokemon.getImage().getScaledInstance(30,30, Image.SCALE_SMOOTH);
                     ImageIcon selectPartyPokeImage = new ImageIcon(immPokemon);
                     int input= JOptionPane.showConfirmDialog(new JButton("elimina"),"Vuoi rimuovere "+ selectedPartyPokemon.getName()+ " dalla squadra?","remove?",2,1,selectPartyPokeImage);
                     if(input==0){
@@ -343,7 +343,7 @@ public class ChooseTeam extends JFrame {
                 if(pokemon6.getIcon()!=imgPokeball){
                     selectedPartyPokemon=player.getTeam().get(5);
 
-                    Image immPokemon = selectedPartyPokemon.getImage().getScaledInstance(120, 120, Image.SCALE_SMOOTH);
+                    Image immPokemon = selectedPartyPokemon.getImage().getScaledInstance(30,30,Image.SCALE_SMOOTH);
                     ImageIcon selectPartyPokeImage = new ImageIcon(immPokemon);
                     int input= JOptionPane.showConfirmDialog(new JButton("elimina"),"Vuoi rimuovere "+ selectedPartyPokemon.getName()+ " dalla squadra?","remove?",2,1,selectPartyPokeImage);
                     if(input==0){

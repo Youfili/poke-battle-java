@@ -16,6 +16,7 @@ public class Player {
     private int lossMatch;
 
     private ImageIcon image;
+    private Pokemon pokemonAttivo;
 
     private List<Pokemon> team = new ArrayList<>(6);
 
@@ -162,6 +163,14 @@ public class Player {
 
     public List<Pokemon> getTeam() {
         return team;
+    }
+
+    public Pokemon getPokemonAttivo() {
+        return pokemonAttivo;
+    }
+
+    public void setPokemonAttivo(Pokemon pokemonAttivo) {
+        this.pokemonAttivo = pokemonAttivo;
     }
 
     public void setTeam(List<Pokemon> team) {

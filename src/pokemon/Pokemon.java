@@ -5,7 +5,6 @@ import moves.base.*;
 import moves.base.Action;
 
 import javax.imageio.ImageIO;
-import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -54,18 +53,18 @@ public  class Pokemon {
         this.defense = defense;
         this.speed = speed;
         this.isAlive = true;
-        this.health = 100;
+
 
 
     }
     //Constructor with image
-    public Pokemon(String name, int level, int ps, String gender,
+    public Pokemon(String name, int level, int maxPs, String gender,
                    Type type,int attack, int defense,
                    int speed,int expBase, String imgPath, int evolutionLevel
                     , Pokemon evolution) {
         this.name = name;
         this.level = level;
-        this.ps = ps;
+        this.ps = maxPs;
         this.gender = gender;//da implementare casuale
         this.attack = attack;
         this.defense = defense;
@@ -75,7 +74,7 @@ public  class Pokemon {
         this.evolutionLevel = evolutionLevel;
         this.evolution = evolution;
 
-        this.health=ps;
+        this.health=maxPs;
 
         //this.maxExp= level*ps; DA IMPLEMENTARE
 
@@ -222,13 +221,6 @@ public  class Pokemon {
         this.speed = speed;
     }
 
-
-    public List<Move> getMoves() {
-        return moves;
-    }
-
-
-
     public String getType() {
         return type;
     }
@@ -265,8 +257,12 @@ public  class Pokemon {
         this.moves = moves;
     }
 
-    public List<DefaultMoves> getDefaultMoves() {
-        return defaultMoves;
+    public Boolean isDead() {
+        return   health <= 0;
+    }
+
+    public List<Move> getMoves() {
+        return moves;
     }
 
     public void setDefaultMoves(List<DefaultMoves> defaultMoves) {
@@ -296,6 +292,7 @@ public  class Pokemon {
     public void setEvolution(Pokemon evplution) {
         this.evolution = evplution;
     }
+
 }
 
 
