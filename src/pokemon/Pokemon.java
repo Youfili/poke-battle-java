@@ -103,6 +103,8 @@ public  class Pokemon {
         */
     }
 
+
+
     public void addMove(Move move){
         if (moves.size()<4){
             moves.add(move);
@@ -146,7 +148,8 @@ public  class Pokemon {
 
 
     public Boolean isAlive() {
-        return isAlive;
+
+        return !isDead();
     }
 
     public void setAlive(Boolean alive) {

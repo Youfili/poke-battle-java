@@ -140,6 +140,9 @@ public class BattagliaGUI extends JFrame implements ActionListener, Serializable
             public void actionPerformed(ActionEvent e) {
                 pannelloAzioni.removeAll();
                 pannelloAzioni.add(creaPannelloCambioPokemon(giocatore1.getTeam(), 1));
+                statoBattaglia.setText("Scegli un nuovo Pokemon ");
+
+
                 revalidate();
                 repaint();
             }
@@ -176,6 +179,7 @@ public class BattagliaGUI extends JFrame implements ActionListener, Serializable
             public void actionPerformed(ActionEvent e) {
                 pannelloAzioni.removeAll();
                 pannelloAzioni.add(creaPannelloCambioPokemon(giocatoreDiTurno == 1 ? giocatore1.getTeam() : giocatore2.getTeam(), giocatoreDiTurno));
+                statoBattaglia.setText("Scegli un nuovo Pokemon ");
 
                 revalidate();
                 repaint();
@@ -247,34 +251,45 @@ public class BattagliaGUI extends JFrame implements ActionListener, Serializable
         JPanel pannelloCambio = new JPanel();
         pannelloCambio.setLayout(new GridLayout(1,6,2,2));
         for (Pokemon pokemon : squadra) {
-
+            if(pokemon!=null) {
                 JButton button = new JButton();
-               Image pokeImg= pokemon.getImage().getScaledInstance(40,40,Image.SCALE_SMOOTH);
-               ImageIcon pokeIm = new ImageIcon(pokeImg);
+
+                Image pokeImg = pokemon.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+                ImageIcon pokeIm = new ImageIcon(pokeImg);
                 button.setIcon(pokeIm);
+
                 button.setOpaque(false);
 
-            button.addActionListener(new ActionListener() {
+                button.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        if (giocatore == 1) {
-                            giocatore1.setPokemonAttivo(pokemon);
-                            aggiornaBottoniMosse(1,true);
-                            aggiornaImgPokemon(pokemon,1);
-                            aggiornaPokeInfoPanel(pokemon,1);
-                        } else {
-                            giocatore2.setPokemonAttivo(pokemon);
-                            aggiornaBottoniMosse(2,true);
-                            aggiornaImgPokemon(pokemon,2);
-                            aggiornaPokeInfoPanel(pokemon,2);
+                        if (pokemon.isAlive()) {
 
+
+                            if (giocatore == 1) {
+                                giocatore1.setPokemonAttivo(pokemon);
+                                aggiornaBottoniMosse(1, true);
+                                aggiornaImgPokemon(pokemon, 1);
+                                aggiornaPokeInfoPanel(pokemon, 1);
+                            } else {
+                                giocatore2.setPokemonAttivo(pokemon);
+                                aggiornaBottoniMosse(2, true);
+                                aggiornaImgPokemon(pokemon, 2);
+                                aggiornaPokeInfoPanel(pokemon, 2);
+
+                            }
+                            revalidate();
+                            repaint();
+                            statoBattaglia.setText("Scegli un'azione per  " + pokemon.getName());
                         }
-                        revalidate();
-                        repaint();
-                        statoBattaglia.setText("Scegli un'azione per  "+ pokemon.getName());
+                        JOptionPane.showMessageDialog(new JButton("ok"),pokemon.getName()+" é esausto non può entrare in campo");
+
+
                     }
                 });
+
                 pannelloCambio.add(button);
+            }
 
         }
         return pannelloCambio;
@@ -300,6 +315,7 @@ public class BattagliaGUI extends JFrame implements ActionListener, Serializable
             for (Component componente : pannelloAzioni.getComponents()) {
                 componente.setEnabled(abilitati);
             }
+            
         }
     }
     public void aggiornaImgPokemon(Pokemon pokemon,int giocatore) {
@@ -308,12 +324,14 @@ public class BattagliaGUI extends JFrame implements ActionListener, Serializable
         ImageIcon pokeIm = new ImageIcon(pokeImg);
         if (giocatore == 1) {
             pokemon1Image.setIcon(pokeIm);
+            pokemon1Image.setVisible(true);
             revalidate();
             repaint();
 
         }
         else{
             pokemon2Image.setIcon(pokeIm);
+            pokemon2Image.setVisible(true);
             revalidate();
             repaint();
         }
@@ -353,6 +371,8 @@ public class BattagliaGUI extends JFrame implements ActionListener, Serializable
                     eseguiMossa(giocatore1, giocatore2, mossaSelezionata1);
                 }
             } else { // Se i Pokémon hanno la stessa velocità, l'attacco avviene casualmente
+                //IMPLEMENTARE VELCITà RELATIVA ALLA MOSSA
+                System.out.println(giocatore1.getPokemonAttivo().equals(giocatore2.getPokemonAttivo()));
                 double random = Math.random();
                 if (random < 0.5) {
                     eseguiMossa(giocatore1, giocatore2, mossaSelezionata1);
@@ -367,6 +387,9 @@ public class BattagliaGUI extends JFrame implements ActionListener, Serializable
                 }
             }
 
+
+
+
             // Resetta le mosse selezionate
             mossaSelezionata1 = null;
             mossaSelezionata2 = null;
@@ -375,15 +398,18 @@ public class BattagliaGUI extends JFrame implements ActionListener, Serializable
             poke1InfoPanel.getHpBar().setValue(giocatore1.getPokemonAttivo().getHealth());
             poke2InfoPanel.getHpBar().setValue(giocatore2.getPokemonAttivo().getHealth());
 
-            // Controlla se uno dei Pokémon è stato sconfitto
+            // Controlla se uno dei Pokémon è stato sconfitto AGGIUNGI OBLIGO DI CAMBIO POKEMON
+            // //SETTA IMMAGINE NON VISIBILE E POKEMON NON UTILIZZABILE
             if (giocatore1.getPokemonAttivo().isDead()) {
                 statoBattaglia.setText(giocatore1.getPokemonAttivo().getName() + " è stato sconfitto!");
+                pokemon1Image.setVisible(false);
                 // Disabilita i bottoni delle mosse per il giocatore 1
                 aggiornaBottoniMosse(1, false);
             }
 
             if (giocatore2.getPokemonAttivo().isDead()) {
                 statoBattaglia.setText(giocatore2.getPokemonAttivo().getName() + " è stato sconfitto!");
+                pokemon2Image.setVisible(false);
                 // Disabilita i bottoni delle mosse per il giocatore 2
                 aggiornaBottoniMosse(2, false);
             }
@@ -462,6 +488,7 @@ public class BattagliaGUI extends JFrame implements ActionListener, Serializable
 
     public static void main(String[] args) {
         Pokedex pokedex = new Pokedex();
+        Pokedex pokedex2 = new Pokedex();
         Player hash = new Player("Hash",0,0,"Male");
         Player red = new Player("Red",0,0,"Male");
 
@@ -489,16 +516,14 @@ public class BattagliaGUI extends JFrame implements ActionListener, Serializable
 
 
             hash.addPokemon(pokem);
-            red.addPokemon(pokem);
         }
-        for(Pokemon pokem : pokedex.getPokedex()){
+        for(Pokemon pokem : pokedex2.getPokedex()){
             pokem.addMove(new Action());
             pokem.addMove(new Frustration());
             pokem.addMove(new GigaImpact());
             pokem.addMove(new BodySlam());
 
 
-            hash.addPokemon(pokem);
             red.addPokemon(pokem);
         }
 

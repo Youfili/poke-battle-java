@@ -31,7 +31,7 @@ public class PokeBattleInfoPanel extends JPanel {
         hpBar = new JProgressBar(0,100);
         hpBar.setString("hp");
         hpBar.setStringPainted(true);
-        hpBar.setValue(this.pokemon.getPs());
+        hpBar.setValue(this.pokemon.getHealth());
         add(hpBar,BorderLayout.CENTER);
 
 
@@ -78,7 +78,7 @@ public class PokeBattleInfoPanel extends JPanel {
     public void setPokemon(Pokemon pokemon) {
         this.pokemon = pokemon;
         pokeInfo.setText(pokemon.getName()+"                  LV. "+pokemon.getLevel());
-        hpBar.setValue(this.pokemon.getPs());
+        hpBar.setValue(this.pokemon.getHealth());
         experienceBar.setValue(this.pokemon.getExpBase());
 
     }
