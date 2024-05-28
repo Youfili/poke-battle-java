@@ -40,7 +40,6 @@ public class ChooseTeam extends JFrame {
 
     private PartyPokemonPanel teamPanel;
     private PartyPokemonPanel teamPanel2;
-    private PartyPokemonPanel teamPanelAppoggio;
 
     private Pokemon selectedPokemon;
     private  Pokemon selectedPartyPokemon;
@@ -93,8 +92,6 @@ public class ChooseTeam extends JFrame {
         JButton pokemon4 = teamPanel.getPokemon4();
         JButton pokemon5 = teamPanel.getPokemon5();
         JButton pokemon6 = teamPanel.getPokemon6();
-
-        teamPanelAppoggio = new PartyPokemonPanel(player1);
 
         teamPanel2 = new PartyPokemonPanel(player2);
         JButton pokemon1_2 = teamPanel2.getPokemon1();
@@ -173,6 +170,7 @@ public class ChooseTeam extends JFrame {
                 ChooseTeam.super.repaint();          // faccio il repaint cosi si aggiorna
 //                pokeInfoTextArea.setText(player.playerInfo()+player.pokemonStringList());
                 teamPanel.repaint();
+//                teamPanel2.repaint();
                 teamPanel.setVisible(true);
                 teamPanel2.setVisible(false);
                 playerInfo.setText(player1.playerInfo());
@@ -189,6 +187,7 @@ public class ChooseTeam extends JFrame {
                 player = player2;
                 ChooseTeam.super.repaint();
 //                pokeInfoTextArea.setText(player.playerInfo()+player.pokemonStringList());
+//                teamPanel.repaint();
                 teamPanel2.repaint();
                 teamPanel2.setVisible(true);
                 teamPanel.setVisible(false);
@@ -237,7 +236,7 @@ public class ChooseTeam extends JFrame {
                        System.out.println(player.pokemonStringList());
                        pokemon1.setIcon(imgPokeball);
                        teamPanel.repaint();
-                       teamPanel2.repaint();
+//                       teamPanel2.repaint();
                    }
                 }
             }
@@ -255,7 +254,7 @@ public class ChooseTeam extends JFrame {
 
                         pokemon2.setIcon(imgPokeball);
                         teamPanel.repaint();
-                        teamPanel2.repaint();
+//                        teamPanel2.repaint();
                 }
             }
         }});
@@ -272,7 +271,7 @@ public class ChooseTeam extends JFrame {
                         player.getTeam().set(2,null);
                         pokemon3.setIcon(imgPokeball);
                         teamPanel.repaint();
-                        teamPanel2.repaint();
+//                        teamPanel2.repaint();
                     }
                 }
             }});
@@ -290,7 +289,7 @@ public class ChooseTeam extends JFrame {
                         player.getTeam().set(3,null);
                         pokemon4.setIcon(imgPokeball);
                         teamPanel.repaint();
-                        teamPanel2.repaint();
+//                        teamPanel2.repaint();
                     }
                 }
             }});
@@ -307,7 +306,7 @@ public class ChooseTeam extends JFrame {
                         player.getTeam().set(4,null);
                         pokemon5.setIcon(imgPokeball);
                         teamPanel.repaint();
-                        teamPanel2.repaint();
+//                        teamPanel2.repaint();
                     }
                 }
             }});
@@ -324,10 +323,125 @@ public class ChooseTeam extends JFrame {
                         player.getTeam().set(6,null);
                         pokemon6.setIcon(imgPokeball);
                         teamPanel.repaint();
+//                        teamPanel2.repaint();
+                    }
+                }
+            }});
+
+
+        //  --------------- TASTI POKEMON PANNELO PLAYER 2  ----------------- ////
+        // Action Listener del tasto Pokemon1
+        pokemon1_2.addActionListener( new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if(pokemon1_2.getIcon()!=imgPokeball){
+                    selectedPartyPokemon=player2.getTeam().get(0);
+                    Image immPokemon = selectedPartyPokemon.getImage().getScaledInstance(30,30,Image.SCALE_SMOOTH);
+                    ImageIcon selectPartyPokeImage = new ImageIcon(immPokemon);
+                    int input= JOptionPane.showConfirmDialog(new JButton("Elimina"),"Vuoi rimuovere "+ player.getTeam().get(0).getName()+ " dalla squadra?","remove?",2,1,selectPartyPokeImage);
+                    if(input==0){
+                        player2.replacePokemon(selectedPartyPokemon,null);
+
+                        System.out.println(player2.pokemonStringList());
+                        pokemon1_2.setIcon(imgPokeball);
+//                        teamPanel.repaint();
+                        teamPanel2.repaint();
+                    }
+                }
+            }
+        });
+        // Action Listener del tasto Pokemon2
+        pokemon2_2.addActionListener( new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if(pokemon2_2.getIcon()!=imgPokeball){
+                    selectedPartyPokemon=player2.getTeam().get(1);
+                    Image immPokemon = selectedPartyPokemon.getImage().getScaledInstance(30,30, Image.SCALE_SMOOTH);
+                    ImageIcon selectPartyPokeImage = new ImageIcon(immPokemon);
+                    int input= JOptionPane.showConfirmDialog(new JButton("elimina"),"Vuoi rimuovere "+ selectedPartyPokemon.getName()+ " dalla squadra?","remove?",2,1,selectPartyPokeImage);
+                    if(input==0){
+                        player2.getTeam().set(1,null);
+
+                        pokemon2_2.setIcon(imgPokeball);
+//                        teamPanel.repaint();
                         teamPanel2.repaint();
                     }
                 }
             }});
+        // Action Listener del tasto Pokemon3
+        pokemon3_2.addActionListener( new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if(pokemon3_2.getIcon()!=imgPokeball){
+                    selectedPartyPokemon=player2.getTeam().get(2);
+
+                    Image immPokemon = selectedPartyPokemon.getImage().getScaledInstance(30,30, Image.SCALE_SMOOTH);
+                    ImageIcon selectPartyPokeImage = new ImageIcon(immPokemon);
+                    int input= JOptionPane.showConfirmDialog(new JButton("elimina"),"Vuoi rimuovere "+ selectedPartyPokemon.getName()+ " dalla squadra?","remove?",2,1,selectPartyPokeImage);
+                    if(input==0){
+                        player2.getTeam().set(2,null);
+                        pokemon3_2.setIcon(imgPokeball);
+//                        teamPanel.repaint();
+                        teamPanel2.repaint();
+                    }
+                }
+            }});
+
+        // Action Listener del tasto Pokemon4
+        pokemon4_2.addActionListener( new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if(pokemon4_2.getIcon()!=imgPokeball){
+                    selectedPartyPokemon=player2.getTeam().get(3);
+
+                    Image immPokemon = selectedPartyPokemon.getImage().getScaledInstance(30,30, Image.SCALE_SMOOTH);
+                    ImageIcon selectPartyPokeImage = new ImageIcon(immPokemon);
+                    int input= JOptionPane.showConfirmDialog(new JButton("elimina"),"Vuoi rimuovere "+ selectedPartyPokemon.getName()+ " dalla squadra?","remove?",2,1,selectPartyPokeImage);
+                    if(input==0){
+                        player2.getTeam().set(3,null);
+                        pokemon4_2.setIcon(imgPokeball);
+//                        teamPanel.repaint();
+                        teamPanel2.repaint();
+                    }
+                }
+            }});
+        // Action Listener del tasto Pokemon5
+        pokemon5_2.addActionListener( new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if(pokemon5_2.getIcon()!=imgPokeball){
+                    selectedPartyPokemon=player2.getTeam().get(4);
+
+                    Image immPokemon = selectedPartyPokemon.getImage().getScaledInstance(30,30, Image.SCALE_SMOOTH);
+                    ImageIcon selectPartyPokeImage = new ImageIcon(immPokemon);
+                    int input= JOptionPane.showConfirmDialog(new JButton("elimina"),"Vuoi rimuovere "+ selectedPartyPokemon.getName()+ " dalla squadra?","remove?",2,1,selectPartyPokeImage);
+                    if(input==0){
+                        player2.getTeam().set(4,null);
+                        pokemon5_2.setIcon(imgPokeball);
+//                        teamPanel.repaint();
+                        teamPanel2.repaint();
+                    }
+                }
+            }});
+        // Action Listener del tasto Pokemon6
+        pokemon6_2.addActionListener( new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if(pokemon6_2.getIcon()!=imgPokeball){
+                    selectedPartyPokemon=player2.getTeam().get(5);
+
+                    Image immPokemon = selectedPartyPokemon.getImage().getScaledInstance(30,30,Image.SCALE_SMOOTH);
+                    ImageIcon selectPartyPokeImage = new ImageIcon(immPokemon);
+                    int input= JOptionPane.showConfirmDialog(new JButton("elimina"),"Vuoi rimuovere "+ selectedPartyPokemon.getName()+ " dalla squadra?","remove?",2,1,selectPartyPokeImage);
+                    if(input==0){       // Rimuovo il pokemon dalla squadra
+                        player2.getTeam().set(6,null);
+                        pokemon6_2.setIcon(imgPokeball);
+//                        teamPanel.repaint();
+                        teamPanel2.repaint();
+                    }
+                }
+            }});
+
+
+
+
+
+
+
 
 
         // Aggiungo i due teamPanel
@@ -358,10 +472,10 @@ public class ChooseTeam extends JFrame {
                     for(int i=0; i<newTeam.size(); i++) {
                         if (newTeam.get(i) == null) {
                             newTeam.set(i, selectedPokemon);
-                            player.setTeam(newTeam);
+                            player1.setTeam(newTeam);
                             index = i;
-                            System.out.println(player.playerInfo());
-                            System.out.println(player.getTeam());       // stampo in concsole il team del player per debuggare
+                            System.out.println(player1.playerInfo());
+                            System.out.println(player1.pokemonStringList());       // stampo in concsole il team del player per debuggare
                             break;
                         }
                     }
@@ -369,10 +483,10 @@ public class ChooseTeam extends JFrame {
                     for(int i=0; i<newTeam2.size(); i++) {
                         if (newTeam2.get(i) == null) {
                             newTeam2.set(i, selectedPokemon);
-                            player.setTeam(newTeam2);
+                            player2.setTeam(newTeam2);
                             index = i;
-                            System.out.println(player.playerInfo());
-                            System.out.println(player.getTeam());       // stampo in concsole il team del player per debuggare
+                            System.out.println(player2.playerInfo());
+                            System.out.println(player2.pokemonStringList());      // stampo in concsole il team del player per debuggare
                             break;
                         }
                     }
@@ -391,15 +505,28 @@ public class ChooseTeam extends JFrame {
                 ImageIcon selectPokeImage = new ImageIcon(immNewPokemon);
 
 
+                // IMPOSTO L'IMMAGINE DEL BOTTONE
                 // Metodo sostitutivo agli if sotto .... che eleganza !!
-                switch(index){
-                    case 0:  pokemon1.setIcon(selectPokeImage); break;
-                    case 1:  pokemon2.setIcon(selectPokeImage); break;
-                    case 2:  pokemon3.setIcon(selectPokeImage); break;
-                    case 3:  pokemon4.setIcon(selectPokeImage); break;
-                    case 4:  pokemon5.setIcon(selectPokeImage); break;
-                    case 5:  pokemon6.setIcon(selectPokeImage); break;
-                    default: break;
+                if(player == player1) {
+                    switch (index) {
+                        case 0: pokemon1.setIcon(selectPokeImage); break;
+                        case 1: pokemon2.setIcon(selectPokeImage); break;
+                        case 2: pokemon3.setIcon(selectPokeImage); break;
+                        case 3: pokemon4.setIcon(selectPokeImage); break;
+                        case 4: pokemon5.setIcon(selectPokeImage); break;
+                        case 5: pokemon6.setIcon(selectPokeImage);break;
+                        default: break;
+                    }
+                } else if (player == player2){
+                    switch(index){
+                        case 0:  pokemon1_2.setIcon(selectPokeImage); break;
+                        case 1:  pokemon2_2.setIcon(selectPokeImage); break;
+                        case 2:  pokemon3_2.setIcon(selectPokeImage); break;
+                        case 3:  pokemon4_2.setIcon(selectPokeImage); break;
+                        case 4:  pokemon5_2.setIcon(selectPokeImage); break;
+                        case 5:  pokemon6_2.setIcon(selectPokeImage); break;
+                        default: break;
+                    }
                 }
 //
 //
