@@ -39,6 +39,8 @@ public class ChooseTeam extends JFrame {
     private JPanel playerInfoPanel;
 
     private PartyPokemonPanel teamPanel;
+    private PartyPokemonPanel teamPanel2;
+    private PartyPokemonPanel teamPanelAppoggio;
 
     private Pokemon selectedPokemon;
     private  Pokemon selectedPartyPokemon;
@@ -53,8 +55,7 @@ public class ChooseTeam extends JFrame {
         setLocationRelativeTo(null);//centro dello schermo
         setResizable(false);// size della finestra non modificabile di dimensione
 
-
-            player = player1;
+        player = player1;
 
         // di base metto che il player con qui si pre la scelta team è il primo
 
@@ -67,7 +68,7 @@ public class ChooseTeam extends JFrame {
         playerInfoPanel=new JPanel(new BorderLayout());
 
 
-        //PLAYER INFO
+        //PLAYER INFO --> Info del giocatore
         playerInfo=new JTextArea(player.playerInfo());
         playerInfo.setBorder(BorderFactory.createLineBorder(Color.GRAY));
         playerInfo.setFont(new Font("Arial", Font.BOLD,13));
@@ -85,13 +86,23 @@ public class ChooseTeam extends JFrame {
         add(playerInfoPanel);
 
         //PARTY POKE PANEL
-        teamPanel=new PartyPokemonPanel(player);
+        teamPanel=new PartyPokemonPanel(player1);
         JButton pokemon1 = teamPanel.getPokemon1();
         JButton pokemon2 = teamPanel.getPokemon2();
         JButton pokemon3 = teamPanel.getPokemon3();
         JButton pokemon4 = teamPanel.getPokemon4();
         JButton pokemon5 = teamPanel.getPokemon5();
         JButton pokemon6 = teamPanel.getPokemon6();
+
+        teamPanelAppoggio = new PartyPokemonPanel(player1);
+
+        teamPanel2 = new PartyPokemonPanel(player2);
+        JButton pokemon1_2 = teamPanel2.getPokemon1();
+        JButton pokemon2_2 = teamPanel2.getPokemon2();
+        JButton pokemon3_2 = teamPanel2.getPokemon3();
+        JButton pokemon4_2 = teamPanel2.getPokemon4();
+        JButton pokemon5_2 = teamPanel2.getPokemon5();
+        JButton pokemon6_2 = teamPanel2.getPokemon6();
 
 
 
@@ -109,7 +120,6 @@ public class ChooseTeam extends JFrame {
 
         JLabel pokeIcon = new JLabel();
         wrapper.add(pokeIcon, BorderLayout.PAGE_START);
-
 
 
         // BATTLE BUTTON /////////////////////////////////////////////////////////////////7
@@ -161,9 +171,12 @@ public class ChooseTeam extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 player = player1;   // imposto come player che è in fase di scelta, quello premuto dal bottone
                 ChooseTeam.super.repaint();          // faccio il repaint cosi si aggiorna
-                pokeInfoTextArea.setText(player.playerInfo()+player.pokemonStringList());
+//                pokeInfoTextArea.setText(player.playerInfo()+player.pokemonStringList());
                 teamPanel.repaint();
-
+                teamPanel.setVisible(true);
+                teamPanel2.setVisible(false);
+                playerInfo.setText(player1.playerInfo());
+                playerIcon.setIcon(player1.getImage());
 
 
             }
@@ -175,8 +188,12 @@ public class ChooseTeam extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 player = player2;
                 ChooseTeam.super.repaint();
-                pokeInfoTextArea.setText(player.playerInfo()+player.pokemonStringList());
-                teamPanel.repaint();
+//                pokeInfoTextArea.setText(player.playerInfo()+player.pokemonStringList());
+                teamPanel2.repaint();
+                teamPanel2.setVisible(true);
+                teamPanel.setVisible(false);
+                playerInfo.setText(player2.playerInfo());
+                playerIcon.setIcon(player2.getImage());
 
             }
         });
@@ -190,54 +207,6 @@ public class ChooseTeam extends JFrame {
 
 
 
-
-
-
-        /*//TEAM PANEL-----------------------------------------------
-        *//*JTextArea partyPokeTxt = new JTextArea(player.pokemonStringList());
-        JScrollPane tm = new JScrollPane(partyPokeTxt);*//*
-        JPanel teamPanel = new JPanel(new GridLayout(1,6));         // Pannello del team con una riga e 6 colonne (ogni colonna è un bottone del pokemon selezionato)
-        teamPanel.setBorder(new TitledBorder("PARTY POKEMON"));
-        //teamPanel.add(tm);
-        teamPanel.setBounds(200,500,380,100);
-        teamPanel.setVisible(true);
-
-        JButton pokemon1 = new JButton("1");
-        JButton pokemon2 = new JButton("2");
-        JButton pokemon3 = new JButton("3");
-        JButton pokemon4 = new JButton("4");
-        JButton pokemon5 = new JButton("5");
-        JButton pokemon6 = new JButton("6");
-
-        //IMPOSTIAMO IMMAGINE DI DEFAULT PILSANTI TEAM ---> POKEBALL
-        BufferedImage imgPoke =null ;
-        try {
-            imgPoke = ImageIO.read(new File("src/Img/pokeball.png"));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-        Image imPoke = imgPoke.getScaledInstance(20, 20,
-                Image.SCALE_SMOOTH);
-
-        ImageIcon imgPokeball = new ImageIcon(imPoke);
-
-        // Setto le immagini di default del pannello delle pokeball
-        if(player.getTeam().get(0)==null)
-            pokemon1.setIcon(imgPokeball);
-        else{
-            selectedPartyPokemon=player.getTeam().get(0);
-            Image immPokemon = selectedPartyPokemon.getImage().getScaledInstance(120, 120, Image.SCALE_SMOOTH);
-            ImageIcon selectPartyPokeImage = new ImageIcon(immPokemon);
-            pokemon1.setIcon(selectPartyPokeImage);
-        }
-
-        pokemon2.setIcon(imgPokeball);
-        pokemon3.setIcon(imgPokeball);
-        pokemon4.setIcon(imgPokeball);
-        pokemon5.setIcon(imgPokeball);
-        pokemon6.setIcon(imgPokeball);
-*/
 
         BufferedImage imgPoke =null ;
         try {
@@ -268,6 +237,7 @@ public class ChooseTeam extends JFrame {
                        System.out.println(player.pokemonStringList());
                        pokemon1.setIcon(imgPokeball);
                        teamPanel.repaint();
+                       teamPanel2.repaint();
                    }
                 }
             }
@@ -285,6 +255,7 @@ public class ChooseTeam extends JFrame {
 
                         pokemon2.setIcon(imgPokeball);
                         teamPanel.repaint();
+                        teamPanel2.repaint();
                 }
             }
         }});
@@ -301,6 +272,7 @@ public class ChooseTeam extends JFrame {
                         player.getTeam().set(2,null);
                         pokemon3.setIcon(imgPokeball);
                         teamPanel.repaint();
+                        teamPanel2.repaint();
                     }
                 }
             }});
@@ -318,6 +290,7 @@ public class ChooseTeam extends JFrame {
                         player.getTeam().set(3,null);
                         pokemon4.setIcon(imgPokeball);
                         teamPanel.repaint();
+                        teamPanel2.repaint();
                     }
                 }
             }});
@@ -334,6 +307,7 @@ public class ChooseTeam extends JFrame {
                         player.getTeam().set(4,null);
                         pokemon5.setIcon(imgPokeball);
                         teamPanel.repaint();
+                        teamPanel2.repaint();
                     }
                 }
             }});
@@ -346,28 +320,26 @@ public class ChooseTeam extends JFrame {
                     Image immPokemon = selectedPartyPokemon.getImage().getScaledInstance(30,30,Image.SCALE_SMOOTH);
                     ImageIcon selectPartyPokeImage = new ImageIcon(immPokemon);
                     int input= JOptionPane.showConfirmDialog(new JButton("elimina"),"Vuoi rimuovere "+ selectedPartyPokemon.getName()+ " dalla squadra?","remove?",2,1,selectPartyPokeImage);
-                    if(input==0){
+                    if(input==0){       // Rimuovo il pokemon dalla squadra
                         player.getTeam().set(6,null);
                         pokemon6.setIcon(imgPokeball);
                         teamPanel.repaint();
+                        teamPanel2.repaint();
                     }
                 }
             }});
 
 
-
-
-
-
-
+        // Aggiungo i due teamPanel
         add(teamPanel);
+        add(teamPanel2);
 
 
         //-----------------------------------------------
 
         //--PULSANTE AGGINGI POKEMON SELEZIONATO ALLA SQUADRA &  CAMBIA IMMAGINE RELATIVA AL PULSANTE DEL POKEMON NEL TEAM
 
-        addTeam=new JButton("add");
+        addTeam=new JButton("Add");
         //addTeam.setBounds(330,100, 50, 50);
         addTeam.addActionListener( new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -378,16 +350,43 @@ public class ChooseTeam extends JFrame {
                  *//*playerInfo.setText(player.toString());
                 playerInfo.repaint();*/
                 List<Pokemon> newTeam=player.getTeam();
+                List<Pokemon> newTeam2=player2.getTeam();
+
                 int index =-1;
 
-                for(int i=0; i<newTeam.size(); i++) {
-                    if (newTeam.get(i) == null) {
-                        newTeam.set(i, selectedPokemon);
-                        player.setTeam(newTeam);
-                         index = i;
-                        break;
+                if (player == player1){
+                    for(int i=0; i<newTeam.size(); i++) {
+                        if (newTeam.get(i) == null) {
+                            newTeam.set(i, selectedPokemon);
+                            player.setTeam(newTeam);
+                            index = i;
+                            System.out.println(player.playerInfo());
+                            System.out.println(player.getTeam());       // stampo in concsole il team del player per debuggare
+                            break;
+                        }
+                    }
+                }else if (player == player2){
+                    for(int i=0; i<newTeam2.size(); i++) {
+                        if (newTeam2.get(i) == null) {
+                            newTeam2.set(i, selectedPokemon);
+                            player.setTeam(newTeam2);
+                            index = i;
+                            System.out.println(player.playerInfo());
+                            System.out.println(player.getTeam());       // stampo in concsole il team del player per debuggare
+                            break;
+                        }
                     }
                 }
+
+                // CODICE CORRETTO QUESTO SOTTO, --> Copiato nell'if sopra
+//                for(int i=0; i<newTeam.size(); i++) {
+//                    if (newTeam.get(i) == null) {
+//                        newTeam.set(i, selectedPokemon);
+//                        player.setTeam(newTeam);
+//                         index = i;
+//                        break;
+//                    }
+//                }
                 Image immNewPokemon = selectedPokemon.getImage().getScaledInstance(80, 80, Image.SCALE_SMOOTH);
                 ImageIcon selectPokeImage = new ImageIcon(immNewPokemon);
 
@@ -412,6 +411,7 @@ public class ChooseTeam extends JFrame {
                 partyPokeTxt.repaint();*/
 
                 teamPanel.repaint();
+                teamPanel2.repaint();
 
             }});
 
@@ -464,12 +464,7 @@ public class ChooseTeam extends JFrame {
 
             pokeButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-
-
-
                     //JOptionPane.showMessageDialog((Component) null, poke.toString(), null, JOptionPane.INFORMATION_MESSAGE, imageIcon);
-
-
 
                     //MOSTRO LE INFO DEL POKEMON SELEZIONATO
                     selectedPokemon=poke;
@@ -514,9 +509,6 @@ public class ChooseTeam extends JFrame {
 
         add(evolution);
 */
-
-
-
 
 
 
