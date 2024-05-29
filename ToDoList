@@ -1,0 +1,43 @@
+
+-Unicità Pokemon pokedex : copy? Pokédex per ogni player? 
+
+
+-hasMap livelli —> mosse
+
+-Pannello inserisci nome giocatore con immagine
+
+ -Foto pagine iniziali
+
+
+
+CHOOSE TEAM
+
+	-bug pulsanti
+
+	-cambio pannello in base al giocatore
+	
+	-crea aggiorna i pannelli in base al player (tipo come fai nella battaglia)
+
+	-bug quando aggiungi un Pokemon null o clicchi su un Pokemon 	null
+
+	-sfondo
+
+BATTLE
+	-Battaglia al meglio delle 3
+
+	-Pannello battle che segna il punteggio 
+
+	-Algoritmo calcolo danno in base al tipo ecc. vedi allo officiale
+
+	 -Calcolo Exp guadagnata 
+
+
+FINEPARTITA:
+	-exp pokemon
+
+	-aumento di livello 
+
+	-giocatore vincitore
+
+	-chiedi se si vuole salvare i dati —> salva dati giocatori e torna alla 	
+	home
