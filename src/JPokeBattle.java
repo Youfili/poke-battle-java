@@ -2,20 +2,15 @@
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 
 import Swing.BackgroundImageJFrame;
-import Swing.menuFrame.ChooseTeam;
-import Swing.menuFrame.battle.Battle;
 import players.Player;
 //import pokemon.Bulbasaur;
 import pokemon.Pokedex;
-import pokemon.Pokemon;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 //TEST
 

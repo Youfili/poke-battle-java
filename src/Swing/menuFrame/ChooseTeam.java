@@ -1,6 +1,6 @@
 package Swing.menuFrame;
 
-import Swing.menuFrame.battle.Battle;
+import Swing.menuFrame.battle.BattagliaGUI;
 import Swing.menuFrame.battle.PartyPokemonPanel;
 import players.Player;
 import pokemon.Pokedex;
@@ -16,8 +16,6 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
-
-import static java.lang.System.exit;
 
 /*
 IMPLEMENTARE VARIE CLASSI PANNELLI OGNUNA CON RELATIVE INFORMAZIONI E PULSANTI
@@ -55,7 +53,6 @@ public class ChooseTeam extends JFrame {
         setResizable(false);// size della finestra non modificabile di dimensione
 
         player = player1;
-
         // di base metto che il player con qui si pre la scelta team è il primo
 
         //lista pokemon .. magari prendere da una classe Pokedex
@@ -92,6 +89,8 @@ public class ChooseTeam extends JFrame {
         JButton pokemon4 = teamPanel.getPokemon4();
         JButton pokemon5 = teamPanel.getPokemon5();
         JButton pokemon6 = teamPanel.getPokemon6();
+        teamPanel.setVisible(true);                 // parto con il teamPanel del giocatore1
+
 
         teamPanel2 = new PartyPokemonPanel(player2);
         JButton pokemon1_2 = teamPanel2.getPokemon1();
@@ -100,6 +99,8 @@ public class ChooseTeam extends JFrame {
         JButton pokemon4_2 = teamPanel2.getPokemon4();
         JButton pokemon5_2 = teamPanel2.getPokemon5();
         JButton pokemon6_2 = teamPanel2.getPokemon6();
+        teamPanel2.setVisible(false);                 // parto con il teamPanel del giocatore2 non visibile
+
 
 
 
@@ -144,7 +145,7 @@ public class ChooseTeam extends JFrame {
         battleButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.setRootFrame(new Battle(player1, player2));
+                JOptionPane.setRootFrame(new BattagliaGUI(player1, player2));
                // JOptionPane.setRootFrame(new Battle(player,null));
                 setVisible(false);
             }
@@ -251,7 +252,6 @@ public class ChooseTeam extends JFrame {
                     int input= JOptionPane.showConfirmDialog(new JButton("elimina"),"Vuoi rimuovere "+ selectedPartyPokemon.getName()+ " dalla squadra?","remove?",2,1,selectPartyPokeImage);
                     if(input==0){
                         player.getTeam().set(1,null);
-
                         pokemon2.setIcon(imgPokeball);
                         teamPanel.repaint();
 //                        teamPanel2.repaint();

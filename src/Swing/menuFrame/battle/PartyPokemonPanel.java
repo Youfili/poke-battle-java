@@ -19,10 +19,10 @@ public class PartyPokemonPanel extends JPanel {
       private JButton pokemon5 ;
       private JButton pokemon6 ;
 
-        private Pokemon selectedPartyPokemon;
+      private Pokemon selectedPartyPokemon;
 
     public PartyPokemonPanel(Player player) {
-        new GridLayout(1,6);         // Pannello del team con una riga e 6 colonne (ogni colonna è un bottone del pokemon selezionato)
+        setLayout(new GridLayout(1,6));// Pannello del team con una riga e 6 colonne (ogni colonna è un bottone del pokemon selezionato)
         setBorder(new TitledBorder("PARTY POKEMON"));
         //teamPanel.add(tm);
        setBounds(200,500,380,100);
@@ -35,6 +35,7 @@ public class PartyPokemonPanel extends JPanel {
          pokemon5 = new JButton("5");
          pokemon6 = new JButton("6");
 
+
         //IMPOSTIAMO IMMAGINE DI DEFAULT PILSANTI TEAM ---> POKEBALL
         BufferedImage imgPoke =null ;
         try {
@@ -42,7 +43,7 @@ public class PartyPokemonPanel extends JPanel {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        //ImageIcon img =new ImageIcon( "/Users/leonardo/Desktop/wallpaper.jpg");
+
 
         Image imPoke = imgPoke.getScaledInstance(20, 20,
                 Image.SCALE_SMOOTH);
@@ -107,8 +108,6 @@ public class PartyPokemonPanel extends JPanel {
         add(pokemon4);
         add(pokemon5);
         add(pokemon6);
-
-
     }
 
     public JButton getPokemon1() {
