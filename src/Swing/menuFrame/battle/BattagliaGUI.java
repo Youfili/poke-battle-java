@@ -40,6 +40,7 @@ public class BattagliaGUI extends JFrame implements ActionListener, Serializable
     private PokeBattleInfoPanel poke2InfoPanel;
     private PokeImgLabel pokemon1Image;
     private PokeImgLabel pokemon2Image;
+    private ScoreOfBattles scorePanel;
 
 
     public BattagliaGUI(Player player1, Player player2) {
@@ -48,7 +49,7 @@ public class BattagliaGUI extends JFrame implements ActionListener, Serializable
         giocatore2 = player2;
 
 
-        setSize(600,650);//400 width and 500 height
+        setSize(600,650);//600 width and 650 height
         setLayout(null);//using no layout managers
         setLocationRelativeTo(null);//centro dello schermo
         setResizable(false);
@@ -149,12 +150,23 @@ public class BattagliaGUI extends JFrame implements ActionListener, Serializable
         });
         pannelloAzioni.add(cambioButton);
 
+
+        // Inizializzo e posiziono il Pannello del Punteggio
+        scorePanel = new ScoreOfBattles(giocatore1, giocatore2);
+        scorePanel.setBounds(375,35,200,30);                // Posizionato nel frame BattagliaGUI
+        add(scorePanel);                                                        // lo aggiungo alla BattagliaGUI
+
+
+
         add(wallpaper);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);     // in questo modo, quando premo x chiuderò anche la pagina
 
         setVisible(true);
 
-    }
+    }  // FINE COSTRUTTORE
+
+
+
     private JPanel creaPannelloAzioni() {
         JPanel pannelloAzioni = new JPanel();
         pannelloAzioni.setLayout(new GridLayout(2, 2,2,2));
@@ -532,4 +544,5 @@ public class BattagliaGUI extends JFrame implements ActionListener, Serializable
 
             System.out.println(red.pokemonStringList());
     }
+
 }
