@@ -1,7 +1,7 @@
 package Swing.menuFrame;
 
 import Swing.menuFrame.battle.BattagliaGUI;
-import Swing.menuFrame.battle.PartyPokemonPanel;
+import Swing.menuPanel.PartyPokemonPanel;
 import players.Player;
 import pokemon.Pokedex;
 import pokemon.Pokemon;
@@ -492,15 +492,7 @@ public class ChooseTeam extends JFrame {
                     }
                 }
 
-                // CODICE CORRETTO QUESTO SOTTO, --> Copiato nell'if sopra
-//                for(int i=0; i<newTeam.size(); i++) {
-//                    if (newTeam.get(i) == null) {
-//                        newTeam.set(i, selectedPokemon);
-//                        player.setTeam(newTeam);
-//                         index = i;
-//                        break;
-//                    }
-//                }
+
                 Image immNewPokemon = selectedPokemon.getImage().getScaledInstance(80, 80, Image.SCALE_SMOOTH);
                 ImageIcon selectPokeImage = new ImageIcon(immNewPokemon);
 
@@ -532,11 +524,6 @@ public class ChooseTeam extends JFrame {
 //
                 //player.addPokemon(selectedPokemon);
 
-                //scrivi i party pokemon nell textarea
-                /*partyPokeTxt.setText("");
-                partyPokeTxt.append(player.pokemonStringList());
-                partyPokeTxt.repaint();*/
-
                 teamPanel.repaint();
                 teamPanel2.repaint();
 
@@ -549,7 +536,7 @@ public class ChooseTeam extends JFrame {
 
 
 
-
+        // PANNELLO POKEDEX ------------------------------------------------//
         JPanel pokedexPanel = new JPanel();
         pokedexPanel.setLayout(null);
         pokedexPanel.setBorder(new TitledBorder(BorderFactory.createCompoundBorder(BorderFactory.createBevelBorder(0),BorderFactory.createBevelBorder(3)),"POKEDEX",0,0,Font.getFont("Arail"),Color.BLACK));
@@ -613,36 +600,14 @@ public class ChooseTeam extends JFrame {
 
 
         }
-        pokedexPanel.add(back);
-        pokedexPanel.setVisible(true);
-        add(pokedexPanel);
+        pokedexPanel.add(back);                         // aggiungo il back al pokedeb Panel
+        pokedexPanel.setVisible(true);                  // metto il pannello visibile
+        add(pokedexPanel);                              // aggiungo il pannello Pokedex al ChooseTeam Frame
 
 
-        //PULSANTE DI TEST PER EVOLUZIONI
-       /* evolution=new JButton("Evolution");
-        evolution.setBounds(50,400, 50, 50);
-        evolution.addActionListener( new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                Pokemon inGame=player.getTeam().get(0);
-                Pokemon evolution = player.getTeam().get(0).getEvolution();
-
-                player.replacePokemon(inGame,evolution);
-                playerInfo.setText(player.toString());
-                playerInfo.repaint();
-
-
-            }
-        });
-
-        add(evolution);
-*/
-
-
-
+        // Alla chiusura di X si chiude tutto il frame
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);     // in questo modo, quando premo x chiuderò anche la pagina
-
         setVisible(true);
-
 
     }
 

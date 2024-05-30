@@ -1,4 +1,4 @@
-package Swing.menuFrame.battle;
+package Swing.menuPanel;
 
 import players.Player;
 import pokemon.Pokemon;

@@ -44,8 +44,8 @@ public class BackgroundImageJFrame extends JFrame {
         startButton.setBounds(240,500,100,40);//x axis, y axis, width, height
         startButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.setRootFrame(new Menu());
-                setVisible(false);
+                JOptionPane.setRootFrame(new Menu());               // apro un nuovo frame Menu, in futuro va sostituito con dei pannelli
+                setVisible(false);                                  // visto che creo un nuovo frame, metto invisibile quest'altro
             }
         });
 

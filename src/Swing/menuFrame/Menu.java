@@ -1,5 +1,6 @@
 package Swing.menuFrame;
 
+import Swing.BackgroundImageJFrame;
 import Swing.menuPanel.ChoosePlayerPanel;
 import Swing.menuPanel.GameSelectPanel;
 import players.Player;
@@ -22,7 +23,7 @@ public class Menu extends JFrame {
         private ChoosePlayerPanel choosePlayerPanel;
 //        private ChooseTeam chooseTeam;
         private Player player;
-        private JButton maleButton, femaleButton, continueToChooseTeamButton;
+        private JButton maleButton, femaleButton, continueToChooseTeamButton, backToChoiceGame;
 //        private JComboBox choosePlayerBox;
         private ArrayList<Player> playerCreated;   // creo un ArrayList di giocatori (dovranno essere minimo due)
 //        private static int playerChoosen = 0;  // variabile statica che indica il numero di giocatori totali scelti
@@ -84,6 +85,8 @@ public class Menu extends JFrame {
                 public void actionPerformed(ActionEvent e) {
 
                     String name = JOptionPane.showInputDialog("Inserisci nome: ");
+
+
                     if(name != null && !name.trim().isEmpty()) {
                         // IMMAGINE ICONA MASCHILE --> ChoosePlayerPanel
                         Image img = null;
@@ -163,6 +166,26 @@ public class Menu extends JFrame {
                     }
                 }
             });
+
+            // Pulsante per tornare indietro alla scelta della partita
+            backToChoiceGame = choosePlayerPanel.getBackToGameSelect();
+            backToChoiceGame.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+
+                    ImageIcon returnBackCustomIcon = new ImageIcon("src/Img/backToMenu.png");           // Carico l'icona personalizzata da inserire nel ConfirmDialog
+
+                    int response = JOptionPane.showConfirmDialog(null, "Are you sure you want to go back?", "Confirm to go Back", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, returnBackCustomIcon);
+                    if (response == JOptionPane.YES_OPTION) {           // se conferma il bottone premuto, torno indietro al menu
+                        new BackgroundImageJFrame();                    // torno al Menu Principale
+                        Menu.super.setVisible(false);
+                        System.out.println("Torno indietro...");
+                    } else {
+                        System.out.println("Debug su console annulla Operazione di tornare indietro");              // Azione se l'utente sceglie "No"
+                    }
+                }
+            });
+
 
 
 
