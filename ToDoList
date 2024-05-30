@@ -41,3 +41,7 @@ FINEPARTITA:
 
 	-chiedi se si vuole salvare i dati —> salva dati giocatori e torna alla 	
 	home
+
+
+GENDER:
+	- mettere il Gender di un personaggio come Enum e non come String (Coding Error)
