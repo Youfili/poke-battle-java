@@ -1,12 +1,16 @@
+COSA PRINCIPALE:
 
--Unicità Pokemon pokedex : copy? Pokédex per ogni player? 
+- Unicità Pokemon pokedex : copy? Pokédex per ogni player?  -->  new Bulbasaur() ..> creo una nuova istanza di questo pokeomon Pokedex al Player ogni volta creato
+- Salvataggio
+- Ripristino
+- MVC --> in tutto il progetto utilizzare questo Design Pattern
 
 
--hasMap livelli —> mosse
+-hasMap livelli —> mosse       --> Apprendimento di una mossa a un determinato livello --> Key : Livello , Valore --> Mossa, in cui si sceglie quale modificare
 
--Pannello inserisci nome giocatore con immagine
+-Pannello inserisci nome giocatore con immagine		--> TextField che raccoglie la stringa ..> il Text Field 										
 
- -Foto pagine iniziali
+ -Foto pagine iniziali					---> Cambiare la foto in una partita
 
 
 
@@ -14,9 +18,9 @@ CHOOSE TEAM
 
 	(RISOLTO)-bug pulsanti PokeomnTeam 
 
-	-cambio pannello in base al giocatore
+	-(RISOLTO) cambio pannello in base al giocatore
 	
-	-crea aggiorna i pannelli in base al player (tipo come fai nella battaglia)
+	-(RISOLTO) crea aggiorna i pannelli in base al player (tipo come fai nella battaglia)
 
 	-bug quando aggiungi un Pokemon null o clicchi su un Pokemon 	null
 
@@ -25,23 +29,24 @@ CHOOSE TEAM
 BATTLE
 	-Battaglia al meglio delle 3
 
-	-Pannello battle che segna il punteggio 
+	- ( RISOLTO MA VA AGGIORNATO ALLE VITTORIE )Pannello battle che segna il punteggio 
 
-	-Algoritmo calcolo danno in base al tipo ecc. vedi allo officiale
+	- Algoritmo calcolo danno in base al tipo ecc. vedi allo officiale --> formula già esistente --> implementare la formula come calcolo del danno
 
-	 -Calcolo Exp guadagnata 
+	 - Calcolo Exp guadagnata	--> Calcolo già esistente, va aggiunto --> sistemare quando uno dei due pokemon è morto modifichi il valore della barra
+										   esperienza del pokemon singolo che sconfigge l'altro pokemon
+
+	- aumento di livello --> Durante la battaglia con l'esperienza
 
 
 FINEPARTITA:
-	-exp pokemon
 
-	-aumento di livello 
+	-giocatore vincitore --> Aggiornamento delle stats del giocato vincitore (win) e perdente (lost)
 
-	-giocatore vincitore
-
-	-chiedi se si vuole salvare i dati —> salva dati giocatori e torna alla 	
-	home
+	-chiedi se si vuole salvare i dati —> salva dati giocatori e torna alla home --> Si sovrascrivono i dati nel file testuale
 
 
 GENDER:
 	- mettere il Gender di un personaggio come Enum e non come String (Coding Error)
+
+
