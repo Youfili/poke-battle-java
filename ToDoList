@@ -2,7 +2,7 @@ COSA PRINCIPALE:
 
 - Unicità Pokemon pokedex : copy? Pokédex per ogni player?  -->  new Bulbasaur() ..> creo una nuova istanza di questo pokeomon Pokedex al Player ogni volta creato
 - Salvataggio
-- Ripristino
+- Ripristino / Caricamento quando si sceglie il giocatore
 - MVC --> in tutto il progetto utilizzare questo Design Pattern
 
 
