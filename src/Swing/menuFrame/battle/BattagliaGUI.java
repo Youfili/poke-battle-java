@@ -29,12 +29,6 @@ public class BattagliaGUI extends JFrame implements ActionListener, Serializable
     private Move mossaSelezionata2;
     private JPanel pannelloAzioni;
     private JLabel statoBattaglia;
-    private JButton[] bottoniMosse1;
-    private JButton[] bottoniMosse2;
-    private JButton[] bottoniSquadra1;
-    private JButton[] bottoniSquadra2;
-    private JProgressBar barraVita1;
-    private JProgressBar barraVita2;
     private int giocatoreDiTurno = 1;
     private PokeBattleInfoPanel poke1InfoPanel;
     private PokeBattleInfoPanel poke2InfoPanel;
@@ -82,7 +76,8 @@ public class BattagliaGUI extends JFrame implements ActionListener, Serializable
 
 
         // Pannello per le azioni del giocatore
-        pannelloAzioni = new JPanel();
+//        pannelloAzioni = new JPanel();
+        pannelloAzioni = new JPanel(new GridLayout(2,2,2,2));
         pannelloAzioni.setBounds(245,500,345,100);
         pannelloAzioni.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createRaisedBevelBorder(), BorderFactory.createLoweredBevelBorder()));
 
@@ -168,8 +163,9 @@ public class BattagliaGUI extends JFrame implements ActionListener, Serializable
 
 
     private JPanel creaPannelloAzioni() {
-        JPanel pannelloAzioni = new JPanel();
-        pannelloAzioni.setLayout(new GridLayout(2, 2,2,2));
+        JPanel pannelloAzioni = new JPanel(new GridLayout(2, 2,2,2));
+//        JPanel pannelloAzioni = new JPanel();
+//        pannelloAzioni.setLayout(new GridLayout(2, 2,2,2));
 
         // Bottone "Attacca"
         JButton attaccaButton = new JButton("Attacca");

@@ -27,10 +27,8 @@ public class ChooseTeam extends JFrame {
     private Player player;
     private Player player1;
     private Player player2;
-    private JPanel pokeInfoPanel;
     private JTextArea pokeInfoTextArea;
     private Pokedex pokedex;
-    private JButton evolution;
     private JLabel playerIcon;
     private JTextArea playerInfo;
     private JButton addTeam;
@@ -145,9 +143,21 @@ public class ChooseTeam extends JFrame {
         battleButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.setRootFrame(new BattagliaGUI(player1, player2));
-               // JOptionPane.setRootFrame(new Battle(player,null));
-                setVisible(false);
+                boolean okInBattaglia = true;
+
+                // Controllo se c'è almeno un valore null quando il giocatore lo seleziona
+                for(int i=0; i < player.getTeam().size(); i ++){
+                    // controllo effettuato su entrambi i giocatori, basta che solo uno dei pokemon tra i due player è null e non si entra in battaglia
+                    if(player1.getTeam().get(i) == null || player2. getTeam().get(i) == null)
+                        okInBattaglia = false;
+                }
+                if(okInBattaglia != false) {
+                    //Solo se il team di entrambi i giocatori è al completo vado in battaglia Vado in battaglia
+                    JOptionPane.setRootFrame(new BattagliaGUI(player1, player2));
+                    setVisible(false);              // rendo questo frame non più visibile
+                }else{
+                    System.out.println("Il Team deve essere Completo!");
+                }
             }
         });
         add(battleButtonPanel);             // Aggiungo il pannello al frame ChooseTeam

@@ -20,7 +20,7 @@ import java.io.IOException;
 public class JPokeBattle {
     public static void main(String[] arg) {
         Pokedex pokedex = new Pokedex();
-        Player hash = new Player("Hash",0,0,"Male");
+        Player hash = new Player("Hash",0,0, "Male");
 
         Image img = null;
         try {

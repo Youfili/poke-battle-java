@@ -18,7 +18,7 @@ public class Player {
     private ImageIcon image;
     private Pokemon pokemonAttivo;
 
-    private List<Pokemon> team = new ArrayList<>(6);
+    private List<Pokemon> team = new ArrayList<>();
 
 
     //Constructor
@@ -29,7 +29,7 @@ public class Player {
         this.gender = gender;
         for(int i=0;i<6;i++){
             team.add(null);
-        }
+    }
 
     }
 
@@ -155,10 +155,6 @@ public class Player {
 
     public String getGender() {
         return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
     }
 
     public List<Pokemon> getTeam() {
