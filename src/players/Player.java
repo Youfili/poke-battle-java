@@ -4,10 +4,12 @@ import pokemon.Pokemon;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Player {
+// Estendo la classe Serializable cosi poter salvare su file il Player
+public class Player implements Serializable {
 
     private String name;
     private String gender;

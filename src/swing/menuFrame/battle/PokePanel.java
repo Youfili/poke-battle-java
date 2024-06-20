@@ -1,13 +1,9 @@
-package Swing.menuFrame.battle;
+package swing.menuFrame.battle;
 
-import moves.Move;
 import pokemon.Pokemon;
 
 import javax.swing.*;
-import javax.swing.border.TitledBorder;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class PokePanel extends JPanel {
     private Pokemon pokemon;

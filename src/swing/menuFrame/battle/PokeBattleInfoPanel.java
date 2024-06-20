@@ -1,11 +1,8 @@
-package Swing.menuFrame.battle;
+package swing.menuFrame.battle;
 
-import moves.Move;
 import pokemon.Pokemon;
 
 import javax.swing.*;
-import javax.swing.plaf.PanelUI;
-import javax.swing.plaf.basic.BasicProgressBarUI;
 import java.awt.*;
 
 public class PokeBattleInfoPanel extends JPanel {

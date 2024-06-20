@@ -1,8 +1,8 @@
-package Swing.menuFrame;
+package swing.menuFrame;
 
-import Swing.BackgroundImageJFrame;
-import Swing.menuPanel.ChoosePlayerPanel;
-import Swing.menuPanel.GameSelectPanel;
+import swing.BackgroundImageJFrame;
+import swing.menuPanel.ChoosePlayerPanel;
+import swing.menuPanel.GameSelectPanel;
 import players.Player;
 
 import javax.imageio.ImageIO;
@@ -10,7 +10,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -21,13 +20,11 @@ public class Menu extends JFrame {
 
         private GameSelectPanel gameSelect;
         private ChoosePlayerPanel choosePlayerPanel;
-//        private ChooseTeam chooseTeam;
-        private Player player;
         private JButton maleButton, femaleButton, continueToChooseTeamButton, backToChoiceGame;
-//        private JComboBox choosePlayerBox;
         private ArrayList<Player> playerCreated;   // creo un ArrayList di giocatori (dovranno essere minimo due)
-//        private static int playerChoosen = 0;  // variabile statica che indica il numero di giocatori totali scelti
 
+
+        // Costruttore Menu
         public Menu() {
             //creating instance of JFrame
             setSize(600,650);//400 width and 500 height
@@ -39,7 +36,6 @@ public class Menu extends JFrame {
             playerCreated = new ArrayList<Player>();
             playerCreated.add(null);
             playerCreated.add(null);
-
 
 
             // creo l'istanza di GameSelectPanel
@@ -200,11 +196,11 @@ public class Menu extends JFrame {
             });
 
             JButton continueButton = gameSelect.getContinueButton();
-//            continueButton.setBounds(115,250,350,85);//x axis, y axis, width, height
             // Aggiungo il listener al mio StartButton
             continueButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    // Implementare
+                    // Implementare un pannello dove vengono salvati i giocatori, e dove verranno scelti per giocare
+                    // Il pannello ripreso da un file in cui andiamo a salvare tutti i giocatori all'interno di questo TextField
                 }
             });
 

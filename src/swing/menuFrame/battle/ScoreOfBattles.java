@@ -1,4 +1,4 @@
-package Swing.menuFrame.battle;
+package swing.menuFrame.battle;
 
 import players.Player;
 

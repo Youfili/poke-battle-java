@@ -1,4 +1,4 @@
-package Swing.menuPanel;
+package swing.menuPanel;
 
 import players.Player;
 import pokemon.Pokemon;
