@@ -9,11 +9,13 @@ import java.util.List;
 
 public class Database {
 
-    private List<Player> playerSalvati = new ArrayList<>();         // List dei player salvati su file
+    // Lo metto statico cosi viene inteso come variabile della classe e non di istanza
+    private static List<Player> playerSalvati = new ArrayList<>();         // List dei player salvati su file
 
     public Database (){
 
     }
+
 
     public void salvaSuFile(File fileDaSalvare) throws IOException {
         FileOutputStream fos = new FileOutputStream(fileDaSalvare);
@@ -55,7 +57,18 @@ public class Database {
         fis.close();
     }
 
+    // Aggiungere giocatore alla lista dei playerSalvati
+    public static void addListPlayer(Player playerDaAggiungere){
+        playerSalvati.add(playerDaAggiungere);
+    }
 
+    // per ottenere la lista quando dovrò operare su di essa (il campo è privato, quindi devo inserire questo)
+    public static List<Player> getPlayerSalvati() {
+        return playerSalvati;
+    }
 
-
+    // Per modifica la lista quando deve essere aggiornata
+    public static void setPlayerSalvati(List<Player> playerSalvati) {
+        Database.playerSalvati = playerSalvati;
+    }
 }

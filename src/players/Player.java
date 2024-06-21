@@ -31,7 +31,7 @@ public class Player implements Serializable {
         this.gender = gender;
         for(int i=0;i<6;i++){
             team.add(null);
-    }
+        }
 
     }
 
@@ -163,6 +163,7 @@ public class Player implements Serializable {
         return team;
     }
 
+    // Questi metodi sono incongru
     public Pokemon getPokemonAttivo() {
         return pokemonAttivo;
     }

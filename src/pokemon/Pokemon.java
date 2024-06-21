@@ -40,6 +40,7 @@ public  class Pokemon {
      private List<DefaultMoves> defaultMoves=new ArrayList<>(); // questo va inizializzato con le mosse base
 
      private Image image;
+     private String imagePath;
      //aggiungere GIF per la battaglia
 
 
@@ -73,6 +74,7 @@ public  class Pokemon {
         this.expBase = expBase;
         this.evolutionLevel = evolutionLevel;
         this.evolution = evolution;
+        this.imagePath = imgPath;
 
         this.health=maxPs;
 
@@ -123,7 +125,6 @@ public  class Pokemon {
         setLevel(level+1);
         //Aggiungere modifiche ai valori hp ecc
     }
-
 
 
     @Override
@@ -294,6 +295,10 @@ public  class Pokemon {
 
     public void setEvolution(Pokemon evplution) {
         this.evolution = evplution;
+    }
+
+    public String getImagePath(){
+        return this.imagePath;
     }
 
 }

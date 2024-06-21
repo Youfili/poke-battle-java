@@ -1,7 +1,12 @@
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 
+import database.Database;
+import players.Player;
 import swing.BackgroundImageJFrame;
+
+import java.io.File;
+import java.io.IOException;
 //import pokemon.Bulbasaur;
 
 
@@ -12,9 +17,10 @@ import swing.BackgroundImageJFrame;
 //Test
 public class JPokeBattle {
     public static void main(String[] arg) {
-//        Pokedex pokedex = new Pokedex();
-        new BackgroundImageJFrame();
 
+        // Avvio il programma
+        new BackgroundImageJFrame();
+        
 
     }
 }
