@@ -15,6 +15,8 @@ import swing.menuframe.battle.ScoreOfBattles;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -24,8 +26,6 @@ public class BattleView extends JFrame implements Serializable {
 
     private Player giocatore1;
     private Player giocatore2;
-    private Move mossaSelezionata1;
-    private Move mossaSelezionata2;
     private JLabel statoBattaglia;
     private int giocatoreDiTurno = 1;
     private PokeBattleInfoPanel poke1InfoPanel;
@@ -52,8 +52,10 @@ public class BattleView extends JFrame implements Serializable {
     private PannelloMosse pannelloMosse2;
     private PannelloCambioPokemon pannelloCambio2;
 
-    private JButton attaccoButton;
-    private JButton cambioButton;
+    private JButton attaccoButton1;
+    private JButton attaccoButton2;
+    private JButton cambioButton1;
+    private JButton cambioButton2;
 
     private Pokemon pokemon1InCampo;
     private Pokemon pokemon2InCampo;
@@ -93,21 +95,65 @@ public class BattleView extends JFrame implements Serializable {
         pannelloAzioni1.setBounds(245,500,345,100);
         pannelloAzioni1.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createRaisedBevelBorder(), BorderFactory.createLoweredBevelBorder()));
         // Bottoni del pannello azioni
-        attaccoButton = new JButton("Attacca");
-        cambioButton = new JButton("Cambia Pokémon");
-        pannelloAzioni1.add(attaccoButton);
-        pannelloAzioni1.add(cambioButton);
+        attaccoButton1 = new JButton("Attacca");
+        cambioButton1 = new JButton("Cambia Pokémon");
 
         // Pannello per le azioni del giocatore
         pannelloAzioni2 = new JPanel(new GridLayout(2,2,2,2));
         pannelloAzioni2.setBounds(245,500,345,100);
-        pannelloAzioni2.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createRaisedBevelBorder(), BorderFactory.createLoweredBevelBorder()));          // Inizializzo il pokemon attivo con il primo della squadra, quando cambio il pokemon,
-        // Bottoni del pannello azioni                                                                                                                            // cambia con il metodo setPokemon1InCampo e setPokemon2InCampo
-        attaccoButton = new JButton("Attacca");                                                                                                                   pokemon1InCampo = giocatore1.getTeam().get(0);
-        cambioButton = new JButton("Cambia Pokémon");                                                                                                             pokemon2InCampo = giocatore2.getTeam().get(0);
-        pannelloAzioni2.add(attaccoButton);
-        pannelloAzioni2.add(cambioButton);                                                                                                                         // IMMAGINE POKEMON 1  --> Di Default uso quella del primo pokemon in squadra del giocatore1
-                                                                                                                                                                  pokemon1Image = new PokeImgLabel(pokemon1InCampo);
+        pannelloAzioni2.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createRaisedBevelBorder(), BorderFactory.createLoweredBevelBorder()));
+        // Bottoni del pannello azioni
+        attaccoButton2 = new JButton("Attacca");
+        cambioButton2 = new JButton("Cambia Pokémon");
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /*      PARTE AFFIDATA POI AL CONTROLLER QUANDO SI RICEVE IL LISTENER      */
+
+        // Pannello1   ////
+        attaccoButton1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cambiaPannello(panPrincAzi1, "Mosse1");
+            }
+        });
+        // Pannello1
+        cambioButton1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cambiaPannello(panPrincAzi1, "Cambio1");
+            }
+        });
+
+        // Pannello2        ////
+        attaccoButton2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cambiaPannello(panPrincAzi1, "Mosse1");
+            }
+        });
+        // Pannello2
+        cambioButton2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cambiaPannello(panPrincAzi1, "Cambio1");
+            }
+        });
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+        // Aggiungo i bottoni al pannello Azioni
+        pannelloAzioni1.add(attaccoButton1);
+        pannelloAzioni1.add(cambioButton1);
+        pannelloAzioni2.add(attaccoButton2);
+        pannelloAzioni2.add(cambioButton2);
+
+        // Inizializzo i pokemon in campo delle due squadre (sono i due pokemon starter
+        pokemon1InCampo = giocatore1.getTeam().get(0);
+        pokemon2InCampo = giocatore2.getTeam().get(0);
+
+        // IMMAGINE POKEMON 1  --> Di Default uso quella del primo pokemon in squadra del giocatore1
+        pokemon1Image = new PokeImgLabel(pokemon1InCampo);
         pokemon1Image.setBounds(10,250,300,300);
         this.add(pokemon1Image);
 
@@ -149,7 +195,8 @@ public class BattleView extends JFrame implements Serializable {
         scorePanel.setBounds(375,35,200,30);                // Posizionato nel frame BattagliaGUI
         add(scorePanel);                                                        // lo aggiungo alla BattagliaGUI
 
-        
+
+
         // CardLayout per muovermi.
         cardLayout1 = new CardLayout();
         panPrincAzi1.setLayout(cardLayout1);
@@ -157,6 +204,7 @@ public class BattleView extends JFrame implements Serializable {
         panPrincAzi2.setLayout(cardLayout2);
         
         // Aggiungo i sotto pannelli
+        // Sistemo il CardLayout e aggiungo i pannelli
         // Sistemo il CardLayout e aggiungo i pannelli
         panPrincAzi1.setBounds(245,500,345,100);
         panPrincAzi1.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createRaisedBevelBorder(), BorderFactory.createLoweredBevelBorder()));
@@ -173,19 +221,16 @@ public class BattleView extends JFrame implements Serializable {
         panPrincAzi2.add(pannelloMosse2, "Mosse2");
         panPrincAzi2.add(pannelloCambio2, "Cambio2");
 
-        // All'inizio viene visualizzato quello del player1
-        panPrincAzi1.setVisible(true);
-        panPrincAzi2.setVisible(false);
-
-        // Metto di default che si vede il pannello delle azioni
-        resettaPannello1();
-        resettaPannello2();
 
         // Aggiungo tutto ciò che è necessario al frame principale
         add(pannelloStato);
-        add(panPrincAzi1);
         add(panPrincAzi2);
+        add(panPrincAzi1);
         add(wallpaper);
+
+        // All'inizio viene visualizzato quello del player1
+        panPrincAzi1.setVisible(true);
+        panPrincAzi2.setVisible(false);
 
         /*
         ESEMPIO DI COME CAMBIARE I PANNELLI
@@ -195,12 +240,11 @@ public class BattleView extends JFrame implements Serializable {
 
             // Cambia al pannello "Cambio2" nel panPrincAzi2
             cambiaPannello(panPrincAzi2, "Cambio2");
-            
         */
+
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);     // in questo modo, quando premo x chiuderò anche la pagina      
         setVisible(true);
-
 
 
     }  // FINE COSTRUTTORE
@@ -247,6 +291,15 @@ public class BattleView extends JFrame implements Serializable {
     public void setPokemon2Image(PokeImgLabel pokemon2Image) {
         this.pokemon2Image = pokemon2Image;
     }
+
+
+
+
+
+
+
+
+
 
 
 
