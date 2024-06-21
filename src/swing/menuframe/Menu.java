@@ -1,8 +1,8 @@
-package swing.menuFrame;
+package swing.menuframe;
 
 import swing.BackgroundImageJFrame;
-import swing.menuPanel.ChoosePlayerPanel;
-import swing.menuPanel.GameSelectPanel;
+import swing.menupanel.ChoosePlayerPanel;
+import swing.menupanel.GameSelectPanel;
 import players.Player;
 
 import javax.imageio.ImageIO;

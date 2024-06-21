@@ -1,4 +1,4 @@
-package swing.menuFrame.battle;
+package swing.menuframe.battle.battleview;
 
 import moves.Move;
 import moves.base.Action;
@@ -8,8 +8,9 @@ import moves.base.GigaImpact;
 import players.Player;
 import pokemon.Pokedex;
 import pokemon.Pokemon;
-import swing.menuFrame.battle.pannelloGioco.PannelloCambioPokemon;
-import swing.menuFrame.battle.pannelloGioco.PannelloMosse;
+import swing.menuframe.battle.PokeBattleInfoPanel;
+import swing.menuframe.battle.PokeImgLabel;
+import swing.menuframe.battle.ScoreOfBattles;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;

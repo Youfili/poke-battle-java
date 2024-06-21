@@ -1,7 +1,7 @@
-package swing.menuFrame;
+package swing.menuframe;
 
-import swing.menuFrame.battle.BattagliaGUI;
-import swing.menuPanel.PartyPokemonPanel;
+import swing.menuframe.battle.BattagliaGUI;
+import swing.menupanel.PartyPokemonPanel;
 import players.Player;
 import pokemon.Pokedex;
 import pokemon.Pokemon;

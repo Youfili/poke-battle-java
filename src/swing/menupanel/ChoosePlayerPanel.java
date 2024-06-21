@@ -1,4 +1,4 @@
-package swing.menuPanel;
+package swing.menupanel;
 
 /*
  Creo una classe apparte per il pannello
