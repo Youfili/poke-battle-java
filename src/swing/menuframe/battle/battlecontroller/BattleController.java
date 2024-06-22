@@ -37,13 +37,8 @@ public class BattleController {
 
     public void eseguiMoveBotton(JButton selectedMove, Pokemon pokemonInCampoAttacco, Pokemon pokemonInCampoDifensore){
         modelBattaglia.eseguiMossa(selectedMove, pokemonInCampoAttacco, pokemonInCampoDifensore);
-    }
-
-    // Metodo che segue Model -> Controller -> View
-    public void aggiornaBarraHp(int vitaPokemonAggiornata){
-        // Setto la barra della vita di un pokemon in base alla sua vita attuale
-        // Nota: la vita è stata modificata dopo l'attacco eseguito
-        graficaBattaglia.getPoke2InfoPanel().getHpBar().setValue(vitaPokemonAggiornata);
+        // Aggiorno la barraHp del pokemon difensore
+        graficaBattaglia.getPoke2InfoPanel().getHpBar().setValue(pokemonInCampoDifensore.getHealth());
     }
 
 

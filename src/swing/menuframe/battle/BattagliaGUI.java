@@ -8,6 +8,8 @@ import moves.base.GigaImpact;
 import players.Player;
 import pokemon.Pokedex;
 import pokemon.Pokemon;
+import swing.menuframe.battle.battleview.PokeBattleInfoPanel;
+import swing.menuframe.battle.battleview.PokeImgLabel;
 import swing.menuframe.battle.battleview.ScoreOfBattles;
 
 

@@ -8,8 +8,6 @@ import moves.base.GigaImpact;
 import players.Player;
 import pokemon.Pokedex;
 import pokemon.Pokemon;
-import swing.menuframe.battle.PokeBattleInfoPanel;
-import swing.menuframe.battle.PokeImgLabel;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -38,8 +36,8 @@ public class BattleView extends JFrame implements Serializable {
 
 
     // Pannelli della scelta del tipo di azioni da far fare al pokemon
-    CardLayout cardLayout1;
-    CardLayout cardLayout2;
+    private CardLayout cardLayout1;
+    private CardLayout cardLayout2;
     //Pannelli da associare al CardLayout
     private JPanel panPrincAzi1 = new JPanel();
     private JPanel panPrincAzi2 = new JPanel();
@@ -74,7 +72,7 @@ public class BattleView extends JFrame implements Serializable {
         setLocationRelativeTo(null);//centro dello schermo
         setResizable(false);
 
-        // Controller Battaglia
+        //Controller Battaglia
         controllerBattaglia = new BattleController(giocatore1, giocatore2);
 
 

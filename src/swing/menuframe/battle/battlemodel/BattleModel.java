@@ -4,6 +4,7 @@ import swing.menuframe.battle.battlecontroller.BattleController;
 import moves.Move;
 import players.Player;
 import pokemon.Pokemon;
+import swing.menuframe.battle.battleview.BattleView;
 
 import javax.swing.*;
 
@@ -11,10 +12,10 @@ public class BattleModel {
 
     private Player player1;
     private Player player2;
-    private BattleController controller = new BattleController(player1, player2);
     private BattleController controllerBattaglia = new BattleController(player1, player2);
     private Pokemon pokeInCampo1;
     private Pokemon pokeInCampo2;
+
 
 
 
@@ -40,17 +41,8 @@ public class BattleModel {
         else
             pokemonInCampoDifensore.setHealth(0);
 
-        // Aggiorno la barraHP
-        aggiornaBarraHp(pokemonInCampoDifensore.getHealth());
-
-
-
     }
 
-    public void aggiornaBarraHp(int vitaAggiornata){
-        // Implementare la logica in cui si va a modificare la barra
-        controller.aggiornaBarraHp(vitaAggiornata);
-    }
 
 
 
