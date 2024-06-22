@@ -22,7 +22,7 @@ public class PannelloMosse extends JPanel {
         this.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createRaisedBevelBorder(), BorderFactory.createLoweredBevelBorder()));
 
         // Imposto il layout del pannello
-        this.setLayout(new GridLayout(2, 2,1,1));
+        this.setLayout(new GridLayout(2, 2,5,5));
 
         this.pokemonInCampo = pokemonInCampo;
 

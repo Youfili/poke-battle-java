@@ -8,6 +8,7 @@ import moves.base.GigaImpact;
 import players.Player;
 import pokemon.Pokedex;
 import pokemon.Pokemon;
+import swing.menuframe.battle.battleview.ScoreOfBattles;
 
 
 import javax.imageio.ImageIO;

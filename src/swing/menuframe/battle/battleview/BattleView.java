@@ -1,6 +1,6 @@
 package swing.menuframe.battle.battleview;
 
-import moves.Move;
+import controller.BattleController;
 import moves.base.Action;
 import moves.base.BodySlam;
 import moves.base.Frustration;
@@ -10,7 +10,6 @@ import pokemon.Pokedex;
 import pokemon.Pokemon;
 import swing.menuframe.battle.PokeBattleInfoPanel;
 import swing.menuframe.battle.PokeImgLabel;
-import swing.menuframe.battle.ScoreOfBattles;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -23,6 +22,9 @@ import java.io.IOException;
 import java.io.Serializable;
 
 public class BattleView extends JFrame implements Serializable {
+
+    // Controller della battaglia, collega la BattleView con la BattleModel
+    private BattleController controllerBattaglia;
 
     private Player giocatore1;
     private Player giocatore2;
@@ -65,11 +67,16 @@ public class BattleView extends JFrame implements Serializable {
         // Creazione dei giocatori
         giocatore1 = player1;
         giocatore2 = player2;
+
         // Dimensioni Frame Battaglia
         setSize(600,650);//600 width and 650 height
         setLayout(null);//using no layout managers
         setLocationRelativeTo(null);//centro dello schermo
         setResizable(false);
+
+        // Controller Battaglia
+        controllerBattaglia = new BattleController(giocatore1, giocatore2);
+
 
 
         // Carico l'IMMAGINE DELLO SFONDO DEL COMBATTIMENTO
@@ -91,7 +98,7 @@ public class BattleView extends JFrame implements Serializable {
         setTitle("Battaglia Pokémon");
 
         // Pannello per le azioni del giocatore
-        pannelloAzioni1 = new JPanel(new GridLayout(2,2,2,2));
+        pannelloAzioni1 = new JPanel(new GridLayout(2,2,3,3));
         pannelloAzioni1.setBounds(245,500,345,100);
         pannelloAzioni1.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createRaisedBevelBorder(), BorderFactory.createLoweredBevelBorder()));
         // Bottoni del pannello azioni
@@ -108,7 +115,7 @@ public class BattleView extends JFrame implements Serializable {
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        /*      PARTE AFFIDATA POI AL CONTROLLER QUANDO SI RICEVE IL LISTENER      */
+        /*      Action Listener legati alla grafica      */
 
         // Pannello1   ////
         attaccoButton1.addActionListener(new ActionListener() {
@@ -292,16 +299,21 @@ public class BattleView extends JFrame implements Serializable {
         this.pokemon2Image = pokemon2Image;
     }
 
+    public PokeBattleInfoPanel getPoke1InfoPanel() {
+        return poke1InfoPanel;
+    }
 
+    public PokeBattleInfoPanel getPoke2InfoPanel() {
+        return poke2InfoPanel;
+    }
 
+    public PokeImgLabel getPokemon1Image() {
+        return pokemon1Image;
+    }
 
-
-
-
-
-
-
-
+    public PokeImgLabel getPokemon2Image() {
+        return pokemon2Image;
+    }
 
 
     // MAIN PROVA
