@@ -6,6 +6,7 @@ import swing.menuframe.battle.battlemodel.BattleModel;
 import swing.menuframe.battle.battleview.BattleView;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class BattleController {
 
@@ -24,12 +25,13 @@ public class BattleController {
     }
 
 
-    public void attivazioneBottoneAttacca(){
+    public void attivazioneBottoneAttacca(JButton selectedMove, Pokemon pokemonInCampoAttaccante, Pokemon pokemonInCampoDifensore){
         /*
         All'interno di questo metodo vado a richiamare un metodo presente le Model che va a influire sulla logica della battaglia
         una molta modificata la logica, viene inviato un comando di aggiornamento alla "parte grafica" ad esempio un "repaint" per aggiornare i valori "disegnati"
         a schermo, ad esempio: vitaPokemon, expPOkemon, IconaPokemonSePokemonMorto.... etc
         */
+        modelBattaglia.eseguiMossa(selectedMove, pokemonInCampoAttaccante, pokemonInCampoDifensore);
     }
 
     /*  Metodi che facciano comunicare la parte grafica con la parte del Model  */
