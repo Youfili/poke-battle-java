@@ -28,8 +28,10 @@ public class BattleView extends JFrame implements Serializable {
     private Player giocatore1;
     private Player giocatore2;
 
-    private BattleController controllerBattaglia;
-    private BattleModel modelBattaglia = new BattleModel(giocatore1, giocatore2);
+    // Creo l'istanza del controller all'interno della BattleView
+    private BattleController controllerBattaglia = new BattleController(new BattleModel(giocatore1, giocatore2, this),this);;
+
+
 
     private JLabel statoBattaglia;
     private int giocatoreDiTurno = 1;
@@ -78,8 +80,9 @@ public class BattleView extends JFrame implements Serializable {
         setResizable(false);
 
 
-        // Carico il controller
-        controllerBattaglia = new BattleController(modelBattaglia,this);
+//        // Carico il controller
+//        modelBattaglia = new BattleModel(giocatore1, giocatore2);
+//        controllerBattaglia = new BattleController(modelBattaglia,this);
 
 
         // Carico l'IMMAGINE DELLO SFONDO DEL COMBATTIMENTO
@@ -190,7 +193,7 @@ public class BattleView extends JFrame implements Serializable {
         pannelloStato.add(statoBattaglia);
 
 
-        
+
         /*    SottoPannelli del pannelloAzioni   */
         // SottoPannelli Giocatore 1
         this.pannelloMosse1 = new PannelloMosse(pokemon1InCampo);
@@ -246,7 +249,7 @@ public class BattleView extends JFrame implements Serializable {
         panPrincAzi1.setLayout(cardLayout1);
         cardLayout2 = new CardLayout();
         panPrincAzi2.setLayout(cardLayout2);
-        
+
         // Aggiungo i sotto pannelli
         // Sistemo il CardLayout e aggiungo i pannelli
         // Sistemo il CardLayout e aggiungo i pannelli
@@ -256,7 +259,7 @@ public class BattleView extends JFrame implements Serializable {
         panPrincAzi1.add(pannelloAzioni1, "Azioni1");
         panPrincAzi1.add(pannelloMosse1, "Mosse1");
         panPrincAzi1.add(pannelloCambio1, "Cambio1");
-                                                                                                                
+
         // Sistemo il CardLayout e aggiungo i pannelli
         panPrincAzi2.setBounds(245,500,345,100);
         panPrincAzi2.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createRaisedBevelBorder(), BorderFactory.createLoweredBevelBorder()));
@@ -287,7 +290,7 @@ public class BattleView extends JFrame implements Serializable {
         */
 
 
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);     // in questo modo, quando premo x chiuderò anche la pagina      
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);     // in questo modo, quando premo x chiuderò anche la pagina
         setVisible(true);
 
 
@@ -357,6 +360,7 @@ public class BattleView extends JFrame implements Serializable {
         // Implementare i CAMBIAMENTI VISIVI che comporta avere un pokemon esausto
         // ad esempio la "cancellazione" dell'immagine del pokemon dal campo di battaglia
         // ....
+        System.out.println("Metodo ancora da implementare");
     }
 
 

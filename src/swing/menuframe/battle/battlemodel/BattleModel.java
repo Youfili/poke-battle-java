@@ -17,20 +17,18 @@ public class BattleModel {
     private Pokemon pokeInCampo2;
     private BattleView viewBattaglia;
 
-
+    // inizializzo
     private BattleController controllerBattaglia;
 
 
 
     // Costruttore
-    public BattleModel(Player player1, Player player2){
+    public BattleModel(Player player1, Player player2, BattleView viewBattaglia){
         // Collego il controller al BattleModel
         controllerBattaglia = new BattleController(this, viewBattaglia);
         /* Model della Battaglia (Logica) */
 
     } // Fine Costruttore
-
-
 
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -41,10 +39,6 @@ public class BattleModel {
         // Implementare la logica di questo metodo che permetta di eseguire la mossa
         // In questa logica vado a diminuire a livello logico la vita del pokemon
         // quindi mi basta andare a settare la BarraHp in base alla vita del pokemon stesso
-
-        /* Trovare un modo per il quale dal bottone si risale alla mossa effettiva del pokemon */
-        // la mossa scelta ricavata dal bottone (in questo caso "mossa scelta")
-
 
         Move mossaScelta = selectedMove.getMove();
         int vitaPostAttacco = pokemonInCampoDifensore.getHealth() - mossaScelta.getDamage();
@@ -62,6 +56,8 @@ public class BattleModel {
         // Implementare la logica di cambiamento del pokemon esausto
         // Dopo aver implementato a livello logico la "morte" del pokemon notifico al controller il cambiamento della view
         controllerBattaglia.aggiornaPokemonEsausto(pokeEsausto);
+        System.out.println("Sono nel BattleModel");
+
     }
 
 
