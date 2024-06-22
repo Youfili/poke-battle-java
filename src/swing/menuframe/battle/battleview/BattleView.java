@@ -8,6 +8,7 @@ import moves.base.GigaImpact;
 import players.Player;
 import pokemon.Pokedex;
 import pokemon.Pokemon;
+import swing.menuframe.battle.battlemodel.BattleModel;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -22,10 +23,14 @@ import java.io.Serializable;
 public class BattleView extends JFrame implements Serializable {
 
     // Controller della battaglia, collega la BattleView con la BattleModel
-    private BattleController controllerBattaglia;
+
 
     private Player giocatore1;
     private Player giocatore2;
+
+    private BattleController controllerBattaglia;
+    private BattleModel modelBattaglia = new BattleModel(giocatore1, giocatore2);
+
     private JLabel statoBattaglia;
     private int giocatoreDiTurno = 1;
     private PokeBattleInfoPanel poke1InfoPanel;
@@ -61,10 +66,10 @@ public class BattleView extends JFrame implements Serializable {
     private Pokemon pokemon2InCampo;
 
 
-    public BattleView(Player player1, Player player2) {
+    public BattleView(Player giocatore1, Player giocatore2) {
         // Creazione dei giocatori
-        giocatore1 = player1;
-        giocatore2 = player2;
+        this.giocatore1 = giocatore1;
+        this.giocatore2 = giocatore2;
 
         // Dimensioni Frame Battaglia
         setSize(600,650);//600 width and 650 height
@@ -72,9 +77,9 @@ public class BattleView extends JFrame implements Serializable {
         setLocationRelativeTo(null);//centro dello schermo
         setResizable(false);
 
-        //Controller Battaglia
-        controllerBattaglia = new BattleController(giocatore1, giocatore2);
 
+        // Carico il controller
+        controllerBattaglia = new BattleController(modelBattaglia,this);
 
 
         // Carico l'IMMAGINE DELLO SFONDO DEL COMBATTIMENTO
@@ -194,6 +199,40 @@ public class BattleView extends JFrame implements Serializable {
         this.pannelloMosse2 = new PannelloMosse(pokemon2InCampo);
         this.pannelloCambio2 = new PannelloCambioPokemon(giocatore2);
 
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /*   Aggiungo gli ActionListener dei bottoni delle mosse e dei cambio pokemon  */
+        for(Component bottone : pannelloMosse1.getComponents()){
+            // Faccio il casting del bottone che è un Component in MoveButton
+            MoveButton bottoneMossa = (MoveButton) bottone;
+            // Aggiungo l'ActionListener al bottoneMossa
+            bottoneMossa.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    // In questo caso Pokemon1InCampo è il Pokemon che ATTACCA, pokemon2InCampo è il Pokemon che DIFENDE
+                    controllerBattaglia.eseguiMoveBotton(bottoneMossa, pokemon1InCampo, pokemon2InCampo);
+                }
+            });
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         // Inizializzo e posiziono il Pannello del Punteggio
         scorePanel = new ScoreOfBattles(giocatore1, giocatore2);
@@ -312,6 +351,24 @@ public class BattleView extends JFrame implements Serializable {
     public PokeImgLabel getPokemon2Image() {
         return pokemon2Image;
     }
+
+
+    public void aggiornaPokemonEsausto(Pokemon pokeEsausto){
+        // Implementare i CAMBIAMENTI VISIVI che comporta avere un pokemon esausto
+        // ad esempio la "cancellazione" dell'immagine del pokemon dal campo di battaglia
+        // ....
+    }
+
+
+
+
+
+
+
+
+
+
+
 
 
     // MAIN PROVA

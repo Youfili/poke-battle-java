@@ -10,10 +10,10 @@ public class PannelloMosse extends JPanel {
     private Pokemon pokemonInCampo;
 
     // Dichiaro i seguenti valori
-    private JButton bottoneMossa1;
-    private JButton bottoneMossa2;
-    private JButton bottoneMossa3;
-    private JButton bottoneMossa4;
+    private MoveButton bottoneMossa1;
+    private MoveButton bottoneMossa2;
+    private MoveButton bottoneMossa3;
+    private MoveButton bottoneMossa4;
 
     // Costruttore
     public PannelloMosse(Pokemon pokemonInCampo){
@@ -27,10 +27,10 @@ public class PannelloMosse extends JPanel {
         this.pokemonInCampo = pokemonInCampo;
 
         // Bottoni del pannello mossa
-        this.bottoneMossa1 = new JButton("" + pokemonInCampo.getMoves().get(0));
-        this.bottoneMossa2 = new JButton("" + pokemonInCampo.getMoves().get(1));
-        this.bottoneMossa3 = new JButton("" + pokemonInCampo.getMoves().get(2));
-        this.bottoneMossa4 = new JButton("" + pokemonInCampo.getMoves().get(3));
+        this.bottoneMossa1 = new MoveButton(pokemonInCampo.getMoves().get(0));
+        this.bottoneMossa2 = new MoveButton(pokemonInCampo.getMoves().get(1));
+        this.bottoneMossa3 = new MoveButton(pokemonInCampo.getMoves().get(2));
+        this.bottoneMossa4 = new MoveButton(pokemonInCampo.getMoves().get(3));
 
         //Aggiungo i bottoni al pannello delle mosse
         this.add(bottoneMossa1);
@@ -42,10 +42,10 @@ public class PannelloMosse extends JPanel {
 
 
     public void aggiornaMosse(){
-        this.bottoneMossa1.setText("" + pokemonInCampo.getMoves().get(0));
-        this.bottoneMossa2.setText("" + pokemonInCampo.getMoves().get(1));
-        this.bottoneMossa3.setText("" + pokemonInCampo.getMoves().get(2));
-        this.bottoneMossa4.setText("" + pokemonInCampo.getMoves().get(3));
+        this.bottoneMossa1.setMove(pokemonInCampo.getMoves().get(0));
+        this.bottoneMossa2.setMove(pokemonInCampo.getMoves().get(1));
+        this.bottoneMossa3.setMove(pokemonInCampo.getMoves().get(2));
+        this.bottoneMossa4.setMove(pokemonInCampo.getMoves().get(3));
     }
 
     // SetPokemon in campo per cambiare il pokemon che è in campo
