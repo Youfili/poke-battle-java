@@ -1,9 +1,8 @@
-package controller;
+package swing.menuframe.battle.battlecontroller;
 
 import players.Player;
 import pokemon.Pokemon;
-import swing.menuframe.battle.BattleModel;
-import swing.menuframe.battle.PokeBattleInfoPanel;
+import swing.menuframe.battle.battlemodel.BattleModel;
 import swing.menuframe.battle.battleview.BattleView;
 
 import javax.swing.*;

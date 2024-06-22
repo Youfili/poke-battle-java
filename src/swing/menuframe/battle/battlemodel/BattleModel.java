@@ -1,6 +1,6 @@
-package swing.menuframe.battle;
+package swing.menuframe.battle.battlemodel;
 
-import controller.BattleController;
+import swing.menuframe.battle.battlecontroller.BattleController;
 import moves.Move;
 import players.Player;
 import pokemon.Pokemon;

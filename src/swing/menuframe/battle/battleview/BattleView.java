@@ -1,6 +1,6 @@
 package swing.menuframe.battle.battleview;
 
-import controller.BattleController;
+import swing.menuframe.battle.battlecontroller.BattleController;
 import moves.base.Action;
 import moves.base.BodySlam;
 import moves.base.Frustration;
