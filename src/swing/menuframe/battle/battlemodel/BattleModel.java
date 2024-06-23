@@ -30,6 +30,27 @@ public class BattleModel {
     } // Fine Costruttore
 
 
+    /* Inserire in questo campo la Logica di Turnazione dei giocatori, in cui il giocatore in Attacco è il player1, mentre il giocatore in difesa è il player2
+        All'interno delle turnazioni si vanno a richiamare metodi già creati ed altri da creare in base a come svoglerò la logica di attacco.
+
+         Calcolare il FINE_BATTAGLIA --> ossia quando tutti i pokemon di un Team sono "esausti" --> isAlive() == false , e in quel caso aggiornare il punteggio
+         della barra di calcolo punteggio.
+         A Ogni fine Battaglia, si fa un controllo se uno dei due è arrivato a 3, in quel caso si ripristina la vita dei Pokemon cosi da Risanare tutta la squadra,
+         si aggiornarno le Vittorie/Sconfitte e le partite giocate dei giocatori. E dopo averli salvati si ritorna al Menu principale!
+
+     */
+
+    /*
+    Nel costruttore della BattleModel posso mettere un metodo iniziaPartita() -->
+    che richiama un metodo  nuovaBattaglia(player1, player2)  in cui si inizia la battaglia dopo aver ripristinato la vita dei
+    pokemon di entrambi i giocatori e controllato il numero di battaglie vinte da ogni giocatore
+    ( se >= 3, la partita finisce , richiamando il metodo salvaDati(player1, player2)  )
+    Se ancora non si è arrivati al punto di 3 vittorie da parte di un giocatore -->
+    Inizia un ciclo while che prosegue fin quando tutti i pokemon dell'avversario non sono Esausti in cui si alternarno le turnazioni di Azioni svolte
+    quando si raggiunge questa situazione (vittoria di una battaglia), a quel punto si richiama il metodo nuovaBattaglia()
+
+     */
+
 
 
 
