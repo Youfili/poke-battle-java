@@ -5,6 +5,7 @@ import pokemon.Pokemon;
 import swing.menuframe.battle.battlemodel.BattleModel;
 import swing.menuframe.battle.battleview.BattleView;
 import swing.menuframe.battle.battleview.MoveButton;
+import swing.menuframe.battle.battleview.PokeButton;
 
 import javax.swing.*;
 import java.awt.*;
@@ -44,13 +45,9 @@ public class BattleController {
         viewBattaglia.aggiornaPokemonEsausto(pokeEsausto);
     }
 
-    private BattleView returnViewBattaglia(BattleView viewAggiornata){
-        return viewAggiornata;
-    }
-
-    // In questo modo ritorno la view dopo che è stata aggiornata
-    public BattleView getViewBattaglia(){
-        return returnViewBattaglia(viewBattaglia);
+    public void cambioPokemon(Pokemon pokemon1InCampo) {
+        modelBattaglia.cambioPokemon(pokemon1InCampo);
+        System.out.println("cambioPokemon() nel controller");
     }
 
 

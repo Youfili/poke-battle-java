@@ -19,6 +19,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
+import java.sql.SQLOutput;
 
 public class BattleView extends JFrame implements Serializable {
 
@@ -204,6 +205,9 @@ public class BattleView extends JFrame implements Serializable {
 
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////
         /*   Aggiungo gli ActionListener dei bottoni delle mosse e dei cambio pokemon  */
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        /*  ACTIONLISTENER BOTTONI MOSSE */
         for(Component bottone : pannelloMosse1.getComponents()){
             // Faccio il casting del bottone che è un Component in MoveButton
             MoveButton bottoneMossa = (MoveButton) bottone;
@@ -217,6 +221,21 @@ public class BattleView extends JFrame implements Serializable {
             });
         }
 
+        /*  ACTIONLISTENER BOTTNI CAMBIOPOKEMON   */
+        for(Component bottone : pannelloCambio1.getComponents()){
+            // Casting del Component in PokeButton
+            PokeButton bottoneCambio = (PokeButton) bottone;
+            // Aggiungo ActionListener al bottoneCambio
+            bottoneCambio.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    // cambio con il pokemon del bottone
+                    controllerBattaglia.cambioPokemon(bottoneCambio.getPokemonDelBottone());
+                    // Metodo nel view che va a switchare l'immagine del pokmeon in campo
+                    cambioPokemonGrafica(bottoneCambio.getPokemonDelBottone());
+                }
+            });
+        }
 
 
 
@@ -312,47 +331,32 @@ public class BattleView extends JFrame implements Serializable {
             cardLayout2.show(panPrincAzi2, "Azioni2");
     }
 
-    // GETTERS E SETTERS DEI POKEMON IN CAMPO
-    public Pokemon getPokemon1InCampo() {
-        return pokemon1InCampo;
-    }
-    public void setPokemon1InCampo(Pokemon pokemon1InCampo) {
-        this.pokemon1InCampo = pokemon1InCampo;
-    }
-    public Pokemon getPokemon2InCampo() {
-        return pokemon2InCampo;
-    }
-    public void setPokemon2InCampo(Pokemon pokemon2InCampo) {
-        this.pokemon2InCampo = pokemon2InCampo;
-    }
-     // SETTERS DELL'IMMAGINE DEL POKEMON E DELL'INFOPANEL DEL POKEMON ATTIVO IN BATTAGLIA
-    public void setPoke1InfoPanel(PokeBattleInfoPanel poke1InfoPanel) {
-        this.poke1InfoPanel = poke1InfoPanel;
-    }
-    public void setPoke2InfoPanel(PokeBattleInfoPanel poke2InfoPanel) {
-        this.poke2InfoPanel = poke2InfoPanel;
-    }
-    public void setPokemon1Image(PokeImgLabel pokemon1Image) {
-        this.pokemon1Image = pokemon1Image;
-    }
-    public void setPokemon2Image(PokeImgLabel pokemon2Image) {
-        this.pokemon2Image = pokemon2Image;
-    }
+    public void cambioPokemonGrafica(Pokemon nuovoPokemon1InCampo) {
+        // Debug stampa
+        System.out.println("Ho cambiato pokemon e inserito: " + nuovoPokemon1InCampo.getName());
 
-    public PokeBattleInfoPanel getPoke1InfoPanel() {
-        return poke1InfoPanel;
-    }
 
-    public PokeBattleInfoPanel getPoke2InfoPanel() {
-        return poke2InfoPanel;
-    }
+        // Rimposta l'immagine del pokemon in campo
+        this.remove(pokemon1Image); // lo rimuove dal BattleView
+        pokemon1Image = new PokeImgLabel(nuovoPokemon1InCampo); // lo aggiorna
+        pokemon1Image.setBounds(10, 250, 300, 300);
+        this.add(pokemon1Image);
 
-    public PokeImgLabel getPokemon1Image() {
-        return pokemon1Image;
-    }
+        // Rimposta l'infoPanel del pokemon in campo
+        this.remove(poke1InfoPanel); // lo rimuove dal BattleView
+        poke1InfoPanel = new PokeBattleInfoPanel(nuovoPokemon1InCampo); // lo aggiorna
+        poke1InfoPanel.setBounds(350, 380, 200, 100);
+        this.add(poke1InfoPanel);
 
-    public PokeImgLabel getPokemon2Image() {
-        return pokemon2Image;
+        // Cambia il pokemon in attacco
+        this.pokemon1InCampo = nuovoPokemon1InCampo;
+
+        // Reset del pannello (se necessario)
+        resettaPannello1();
+
+        // Forza il rilayout e il ridisegno del frame
+        this.revalidate();
+        this.repaint();
     }
 
 
@@ -360,8 +364,25 @@ public class BattleView extends JFrame implements Serializable {
         // Implementare i CAMBIAMENTI VISIVI che comporta avere un pokemon esausto
         // ad esempio la "cancellazione" dell'immagine del pokemon dal campo di battaglia
         // ....
-        System.out.println("Metodo ancora da implementare");
+        // Il pokemon è stato impostato a isAlive = false (è Esausto)
+
+        //
+        System.out.println("Metodo aggiornaPokemonEsausto ancora da implementare");
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -422,5 +443,9 @@ public class BattleView extends JFrame implements Serializable {
             battle.setVisible(true);
 
             System.out.println(red.pokemonStringList());
+    }
+
+    public PokeBattleInfoPanel getPoke2InfoPanel() {
+        return poke2InfoPanel;
     }
 }

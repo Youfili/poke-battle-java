@@ -1,4 +1,4 @@
-package swing.menuframe.battle.battleview;
+package swing.menuframe.vecchiaBattaglia;
 
 import pokemon.Pokemon;
 

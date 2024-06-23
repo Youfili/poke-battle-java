@@ -1,4 +1,4 @@
-package swing.menuframe.battle;
+package swing.menuframe.vecchiaBattaglia;
 
 import moves.Move;
 import moves.base.Action;
