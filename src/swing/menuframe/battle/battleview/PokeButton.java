@@ -11,6 +11,8 @@ public class PokeButton extends JButton {
 
     public PokeButton(Pokemon pokeSceltoDelBottone){
         this.pokemonDelBottone = pokeSceltoDelBottone;
+        // Setto a ogni istanza di pokemon il bottone a cui viene associato
+        pokemonDelBottone.setPokeButton(this);
 
         /*  Inserisco l'icona del Bottone (con l'immagine del Pokemon)  */
         // Carico l'immagine come un oggetto ImageIcon

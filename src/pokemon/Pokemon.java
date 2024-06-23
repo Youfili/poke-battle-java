@@ -3,6 +3,7 @@ package pokemon;
 import moves.Move;
 import moves.base.*;
 import moves.base.Action;
+import swing.menuframe.battle.battleview.PokeButton;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -41,7 +42,8 @@ public  class Pokemon {
 
      private Image image;
      private String imagePath;
-     //aggiungere GIF per la battaglia
+
+     private PokeButton buttonAssociato;
 
 
     //Constructor
@@ -295,6 +297,14 @@ public  class Pokemon {
 
     public void setEvolution(Pokemon evplution) {
         this.evolution = evplution;
+    }
+
+    public void setPokeButton(PokeButton bottoneAssociatoAlPokemon){
+        this.buttonAssociato = bottoneAssociatoAlPokemon;
+    }
+
+    public PokeButton getPokeButton(){
+        return buttonAssociato;
     }
 
     public String getImagePath(){

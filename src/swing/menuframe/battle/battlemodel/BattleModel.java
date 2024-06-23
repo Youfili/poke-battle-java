@@ -14,14 +14,11 @@ public class BattleModel {
 
     private Player player1;
     private Player player2;
-    private Pokemon pokeInCampo1;
-    private Pokemon pokeInCampo2;
     private BattleView viewBattaglia;
     private Pokemon pokemonInAttacco;
 
     // inizializzo
     private BattleController controllerBattaglia;
-
 
 
     // Costruttore
@@ -31,6 +28,10 @@ public class BattleModel {
         /* Model della Battaglia (Logica) */
 
     } // Fine Costruttore
+
+
+
+
 
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////

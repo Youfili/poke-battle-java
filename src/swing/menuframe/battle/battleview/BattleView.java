@@ -217,6 +217,9 @@ public class BattleView extends JFrame implements Serializable {
                 public void actionPerformed(ActionEvent e) {
                     // In questo caso Pokemon1InCampo è il Pokemon che ATTACCA, pokemon2InCampo è il Pokemon che DIFENDE
                     controllerBattaglia.eseguiMoveBotton(bottoneMossa, pokemon1InCampo, pokemon2InCampo);
+                    // dopo aver eseguito la mossa torno alla possibilità di scegliere se attaccare o cambiare pokemon
+                    // anche se poi passa al pokemon avversario l'attacco
+                    resettaPannello1();
                 }
             });
         }
@@ -331,21 +334,23 @@ public class BattleView extends JFrame implements Serializable {
             cardLayout2.show(panPrincAzi2, "Azioni2");
     }
 
+
+
     public void cambioPokemonGrafica(Pokemon nuovoPokemon1InCampo) {
         // Debug stampa
         System.out.println("Ho cambiato pokemon e inserito: " + nuovoPokemon1InCampo.getName());
 
         // Rimposta l'immagine del pokemon in campo
-        this.remove(pokemon1Image); // lo rimuove dal BattleView
-        pokemon1Image = new PokeImgLabel(nuovoPokemon1InCampo); // lo aggiorna
-        pokemon1Image.setBounds(10, 250, 300, 300);
-        this.add(pokemon1Image);
+        Image pokeImg= nuovoPokemon1InCampo.getImage().getScaledInstance(300, 300,Image.SCALE_SMOOTH);
+        ImageIcon pokeIm = new ImageIcon(pokeImg);
+        pokemon1Image.setIcon(pokeIm);
+        pokemon1Image.setVisible(true);
+        revalidate();
+        repaint();
 
         // Rimposta l'infoPanel del pokemon in campo
-        this.remove(poke1InfoPanel); // lo rimuove dal BattleView
-        poke1InfoPanel = new PokeBattleInfoPanel(nuovoPokemon1InCampo); // lo aggiorna
-        poke1InfoPanel.setBounds(350, 380, 200, 100);
-        this.add(poke1InfoPanel);
+        poke1InfoPanel.setPokemon(nuovoPokemon1InCampo);
+        poke1InfoPanel.repaint();
 
         // Cambia il pokemon in attacco
         this.pokemon1InCampo = nuovoPokemon1InCampo;
@@ -353,21 +358,29 @@ public class BattleView extends JFrame implements Serializable {
         resettaPannello1();
 
         // Forza il rilayout e il ridisegno del frame
-        this.revalidate();
-        this.repaint();
+//        this.revalidate();
+//        this.repaint();
     }
 
 
     public void aggiornaPokemonEsausto(Pokemon pokeEsausto){
-        // Implementare i CAMBIAMENTI VISIVI che comporta avere un pokemon esausto
-        // ad esempio la "cancellazione" dell'immagine del pokemon dal campo di battaglia
-        // ....
-        // Il pokemon è stato impostato a isAlive = false (è Esausto)
 
-        System.out.println("Metodo aggiornaPokemonEsausto ancora da implementare");
-        /*   NOTA : in questo caso va forzato il player a cambiare pokemon, aggiornando il tasto del pokemon esausto mettendolo Opaco o comunque non selezionabile
-                    del pokemon esausto
-         */
+        // rendo l'immagine del pokemon esausto invisibile --> NOTA: quando lo andrò a sostituire con quello nuovo
+        // aggiornerò il riferimento dell'immagine del pokemonInCampo e setto la Visibilità a TRUE
+        pokemon2Image.setVisible(false);
+        // stesso ragionamento vale per il pokeInfoPanel
+        poke2InfoPanel.setVisible(false);
+        repaint();
+
+        // Aggiorno il bottone del pokemon renderlo opaco e non cliccabile
+        pokeEsausto.getPokeButton().setOpaque(true);
+        pokeEsausto.getPokeButton().setEnabled(false);
+
+        // Forzo il cambio Pokemon e quindi metto il pannello Azioni sulla scelta del cambio del pokemon
+        // metto pan..2 e Cam..2  perché quando c'è la desinenza "2" si indica il pokemon in difesa (implementare lo switch
+        // di reference quando si implementa la turnazione
+        cambiaPannello(panPrincAzi2, "Cambio2");
+
     }
 
 
