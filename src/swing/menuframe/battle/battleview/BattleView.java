@@ -129,6 +129,7 @@ public class BattleView extends JFrame implements Serializable {
             @Override
             public void actionPerformed(ActionEvent e) {
                 cambiaPannello(panPrincAzi1, "Mosse1");
+                statoBattaglia.setText("Scegli un Attacco!");
             }
         });
         // Pannello1
@@ -136,6 +137,7 @@ public class BattleView extends JFrame implements Serializable {
             @Override
             public void actionPerformed(ActionEvent e) {
                 cambiaPannello(panPrincAzi1, "Cambio1");
+                statoBattaglia.setText("Cambia il Pokemon in campo");
             }
         });
 
@@ -187,7 +189,7 @@ public class BattleView extends JFrame implements Serializable {
         this.add(poke2InfoPanel);
 
         // Pannello per lo stato della battaglia
-        statoBattaglia = new JLabel("Scegli un'azione per " + (giocatoreDiTurno==1?pokemon1InCampo.getName():pokemon2InCampo.getName()));
+        statoBattaglia = new JLabel("Scegli cosa fare:");
         JPanel pannelloStato = new JPanel(new BorderLayout());
         pannelloStato.setBounds(10,500,230,100);
         pannelloStato.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createRaisedBevelBorder(), BorderFactory.createLoweredBevelBorder()));
@@ -328,6 +330,7 @@ public class BattleView extends JFrame implements Serializable {
 
     private void resettaPannello1() {
         cardLayout1.show(panPrincAzi1, "Azioni1");
+        statoBattaglia.setText("Scegli cosa fare: ");
     }
 
     public void resettaPannello2() {
@@ -345,8 +348,6 @@ public class BattleView extends JFrame implements Serializable {
         ImageIcon pokeIm = new ImageIcon(pokeImg);
         pokemon1Image.setIcon(pokeIm);
         pokemon1Image.setVisible(true);
-        revalidate();
-        repaint();
 
         // Rimposta l'infoPanel del pokemon in campo
         poke1InfoPanel.setPokemon(nuovoPokemon1InCampo);
@@ -354,32 +355,33 @@ public class BattleView extends JFrame implements Serializable {
 
         // Cambia il pokemon in attacco
         this.pokemon1InCampo = nuovoPokemon1InCampo;
+        statoBattaglia.setText("Scegli un'azione per " + pokemon1InCampo.getName());
         // Reset del pannello (se necessario)
         resettaPannello1();
 
         // Forza il rilayout e il ridisegno del frame
-//        this.revalidate();
-//        this.repaint();
+        this.revalidate();
+        this.repaint();
     }
 
 
     public void aggiornaPokemonEsausto(Pokemon pokeEsausto){
-
         // rendo l'immagine del pokemon esausto invisibile --> NOTA: quando lo andrò a sostituire con quello nuovo
         // aggiornerò il riferimento dell'immagine del pokemonInCampo e setto la Visibilità a TRUE
         pokemon2Image.setVisible(false);
         // stesso ragionamento vale per il pokeInfoPanel
         poke2InfoPanel.setVisible(false);
-        repaint();
-
         // Aggiorno il bottone del pokemon renderlo opaco e non cliccabile
         pokeEsausto.getPokeButton().setOpaque(true);
         pokeEsausto.getPokeButton().setEnabled(false);
 
+        // OSS:
         // Forzo il cambio Pokemon e quindi metto il pannello Azioni sulla scelta del cambio del pokemon
         // metto pan..2 e Cam..2  perché quando c'è la desinenza "2" si indica il pokemon in difesa (implementare lo switch
         // di reference quando si implementa la turnazione
         cambiaPannello(panPrincAzi2, "Cambio2");
+
+        repaint();
 
     }
 
