@@ -335,7 +335,6 @@ public class BattleView extends JFrame implements Serializable {
         // Debug stampa
         System.out.println("Ho cambiato pokemon e inserito: " + nuovoPokemon1InCampo.getName());
 
-
         // Rimposta l'immagine del pokemon in campo
         this.remove(pokemon1Image); // lo rimuove dal BattleView
         pokemon1Image = new PokeImgLabel(nuovoPokemon1InCampo); // lo aggiorna
@@ -350,7 +349,6 @@ public class BattleView extends JFrame implements Serializable {
 
         // Cambia il pokemon in attacco
         this.pokemon1InCampo = nuovoPokemon1InCampo;
-
         // Reset del pannello (se necessario)
         resettaPannello1();
 
@@ -366,8 +364,10 @@ public class BattleView extends JFrame implements Serializable {
         // ....
         // Il pokemon è stato impostato a isAlive = false (è Esausto)
 
-        //
         System.out.println("Metodo aggiornaPokemonEsausto ancora da implementare");
+        /*   NOTA : in questo caso va forzato il player a cambiare pokemon, aggiornando il tasto del pokemon esausto mettendolo Opaco o comunque non selezionabile
+                    del pokemon esausto
+         */
     }
 
 

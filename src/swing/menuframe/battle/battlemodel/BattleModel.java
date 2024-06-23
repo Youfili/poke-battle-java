@@ -50,12 +50,12 @@ public class BattleModel {
             // Altrimenti il pokemon è Esausto!
             pokemonInCampoDifensore.setHealth(0);       // imposto la vita a 0 del pokemon
             pokemonInCampoDifensore.setAlive(false);    // imposto che il pokemon non è più vivo
-            pokemonEsausto(pokemonInCampoDifensore);    // uso il metodo pokemonEsausto
+            aggiornaPokemonEsausto(pokemonInCampoDifensore);    // uso il metodo pokemonEsausto
         }
     }
 
 
-    public void pokemonEsausto(Pokemon pokeEsausto){
+    public void aggiornaPokemonEsausto(Pokemon pokeEsausto){
         // Implementare la logica di cambiamento del pokemon esausto
         // Dopo aver implementato a livello logico la "morte" del pokemon notifico al controller il cambiamento della view
         controllerBattaglia.aggiornaPokemonEsausto(pokeEsausto);
