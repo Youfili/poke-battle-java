@@ -14,7 +14,6 @@ public class BattleModel {
 
     private Player player1;
     private Player player2;
-    private BattleView viewBattaglia;
     private Pokemon pokemonInAttacco;
     private Pokemon pokemonInDIfesa;
 
