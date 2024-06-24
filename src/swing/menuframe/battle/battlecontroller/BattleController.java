@@ -36,6 +36,7 @@ public class BattleController {
     public void eseguiMoveBotton(MoveButton selectedMove, Pokemon pokemonInCampoAttacco, Pokemon pokemonInCampoDifensore){
         modelBattaglia.eseguiMossa(selectedMove, pokemonInCampoAttacco, pokemonInCampoDifensore);
         // Aggiorno la barraHp del pokemon difensore
+        // NOTA: getPokeInfoPanel va generalizzato come pannello della difesa (per decrementare vita). --> e quello di attacco va generalizzato come PokeInfoPanelAttacco (serve a aumentare exp)
         viewBattaglia.getPoke2InfoPanel().getHpBar().setValue(pokemonInCampoDifensore.getHealth());
         // Aggiungere anche l'aggiornamento dell'area di testo quando il pokemon di attacco sferra l'attacco.
         // es: Bulbasaur usa "Azione"
@@ -57,4 +58,10 @@ public class BattleController {
     public void aggiornaScorerPunteggio2(Player playerAggiornaScorer) {
         viewBattaglia.aggiornaScorerPunteggio2(playerAggiornaScorer);
     }
+
+    // Aggiornamento delle turnazioni tra il pokemon in attacco e quello in difesa
+    public void aggiornaTurnazioni(Player playerAttaccante, Player playerDifensore){
+        viewBattaglia.aggiornaTurnazioni(playerAttaccante, playerDifensore);
+    }
+
 }

@@ -28,12 +28,12 @@ public class BattleView extends JFrame implements Serializable {
 
     private Player giocatore1;
     private Player giocatore2;
+    private Player playerInAttacco;
+    private Player playerInDifesa;
 
     // Creo l'istanza del controller all'interno della BattleView
     private BattleModel modelBattaglia;
     private BattleController controllerBattaglia;
-
-
 
 
     private JLabel statoBattaglia;
@@ -47,6 +47,9 @@ public class BattleView extends JFrame implements Serializable {
     // Pannelli della scelta del tipo di azioni da far fare al pokemon
     private CardLayout cardLayout1;
     private CardLayout cardLayout2;
+
+
+
     //Pannelli da associare al CardLayout
     private JPanel panPrincAzi1 = new JPanel();
     private JPanel panPrincAzi2 = new JPanel();
@@ -68,12 +71,17 @@ public class BattleView extends JFrame implements Serializable {
 
     private Pokemon pokemon1InCampo;
     private Pokemon pokemon2InCampo;
+    private PokeBattleInfoPanel pokeAttInfoPanel;
+    private PokeBattleInfoPanel pokeDefInfoPanel;
 
 
     public BattleView(Player giocatore1, Player giocatore2) {
         // Creazione dei giocatori
         this.giocatore1 = giocatore1;
         this.giocatore2 = giocatore2;
+
+        playerInAttacco = giocatore1;       // inizalizzo in attacco il giocatore1
+        playerInDifesa = giocatore2;        // inizializzo in difesa il giocatore2
 
         // Dimensioni Frame Battaglia
         setSize(600,650);//600 width and 650 height
@@ -126,7 +134,7 @@ public class BattleView extends JFrame implements Serializable {
             @Override
             public void actionPerformed(ActionEvent e) {
                 cambiaPannello(panPrincAzi1, "Mosse1");
-                statoBattaglia.setText("Scegli un Attacco!");
+                statoBattaglia.setText(giocatore1.getName() + " Scegli un Attacco!");
             }
         });
         // Pannello1
@@ -134,7 +142,7 @@ public class BattleView extends JFrame implements Serializable {
             @Override
             public void actionPerformed(ActionEvent e) {
                 cambiaPannello(panPrincAzi1, "Cambio1");
-                statoBattaglia.setText("Cambia il Pokemon in campo");
+                statoBattaglia.setText(giocatore1.getName() + " Cambia il Pokemon in campo");
             }
         });
 
@@ -142,14 +150,16 @@ public class BattleView extends JFrame implements Serializable {
         attaccoButton2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                cambiaPannello(panPrincAzi1, "Mosse1");
+                cambiaPannello(panPrincAzi2, "Mosse2");
+                statoBattaglia.setText(giocatore2.getName() + " Scegli un Attacco!");
             }
         });
         // Pannello2
         cambioButton2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                cambiaPannello(panPrincAzi1, "Cambio1");
+                cambiaPannello(panPrincAzi2, "Cambio2");
+                statoBattaglia.setText(giocatore2.getName() + " Cambia il Pokemon in campo");
             }
         });
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -206,6 +216,7 @@ public class BattleView extends JFrame implements Serializable {
         /*   Aggiungo gli ActionListener dei bottoni delle mosse e dei cambio pokemon  */
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+        // PANELLO GIOCATORE  1
         /*  ACTIONLISTENER BOTTONI MOSSE */
         for(Component bottone : pannelloMosse1.getComponents()){
             // Faccio il casting del bottone che è un Component in MoveButton
@@ -235,6 +246,7 @@ public class BattleView extends JFrame implements Serializable {
                     controllerBattaglia.cambioPokemon(bottoneCambio.getPokemonDelBottone());
                     // Metodo nel view che va a switchare l'immagine del pokmeon in campo
                     cambioPokemonGrafica(bottoneCambio.getPokemonDelBottone());
+                    resettaPannello1();
                 }
             });
         }
@@ -242,15 +254,40 @@ public class BattleView extends JFrame implements Serializable {
 
 
 
+        // PANELLO GIOCATORE  2
+        /*  ACTIONLISTENER BOTTONI MOSSE */
+        for(Component bottone : pannelloMosse2.getComponents()){
+            // Faccio il casting del bottone che è un Component in MoveButton
+            MoveButton bottoneMossa = (MoveButton) bottone;
+            // Aggiungo l'ActionListener al bottoneMossa
+            bottoneMossa.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    // In questo caso Pokemon2InCampo è il Pokemon che ATTACCA, pokemon1InCampo è il Pokemon che DIFENDE
+                    controllerBattaglia.eseguiMoveBotton(bottoneMossa, pokemon2InCampo, pokemon1InCampo);
+                    // dopo aver eseguito la mossa torno alla possibilità di scegliere se attaccare o cambiare pokemon
+                    // anche se poi passa al pokemon avversario l'attacco
+                    resettaPannello2();
+                }
+            });
+        }
 
-
-
-
-
-
-
-
-
+        /*  ACTIONLISTENER BOTTNI CAMBIOPOKEMON   */
+        for(Component bottone : pannelloCambio2.getComponents()){
+            // Casting del Component in PokeButton
+            PokeButton bottoneCambio = (PokeButton) bottone;
+            // Aggiungo ActionListener al bottoneCambio
+            bottoneCambio.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    // cambio con il pokemon del bottone
+                    controllerBattaglia.cambioPokemon(bottoneCambio.getPokemonDelBottone());
+                    // Metodo nel view che va a switchare l'immagine del pokmeon in campo
+                    cambioPokemonGrafica(bottoneCambio.getPokemonDelBottone());
+                    resettaPannello2();
+                }
+            });
+        }
 
 
 
@@ -309,7 +346,6 @@ public class BattleView extends JFrame implements Serializable {
             // Cambia al pannello "Cambio2" nel panPrincAzi2
             cambiaPannello(panPrincAzi2, "Cambio2");
         */
-
 
 
         // Carico il controller e il model
@@ -388,28 +424,44 @@ public class BattleView extends JFrame implements Serializable {
 
     }
 
-    public void aggiornaView(Pokemon pokemonInAttacco, Pokemon pokemonInDifesa) {
 
-        // Aggiornamento del pokemon che è in attacco e quello che è in difesa
-//        pokemon1InCampo = pokemonInAttacco;
-//        pokemon2InCampo = pokemonInDifesa;
-
-        // Aggiorno lo stato della battaglia
-        if (modelBattaglia.isTurnoGiocatore1()) {
-            // È il turno del giocatore 1
-            statoBattaglia.setText("Turno del " + giocatore1.getName());
-            panPrincAzi1.setVisible(true);
-            panPrincAzi2.setVisible(false);
-        } else {
-            // È il turno del giocatore 2
-            statoBattaglia.setText("Turno del " + giocatore2.getName());
-            panPrincAzi1.setVisible(false);
-            panPrincAzi2.setVisible(true);
-        }
-
-        // Resetto il pannello delle azioni
-        resettaPannello1();
-    }
+    // Da implementare bene, cosi mi da errore dicendo che il pokemon in difesa è null
+//    public void aggiornaView(Pokemon nuovoPokemonInAttacco, Pokemon nuovoPokemonInDifesa) {
+//
+//        // Aggiornamento del pokemon che è in attacco e quello che è in difesa
+////        pokemon1InCampo = pokemonInAttacco;
+////        pokemon2InCampo = pokemonInDifesa;
+//
+//        // Aggiorno lo stato della battaglia
+//        if (modelBattaglia.isTurnoGiocatore1()) {
+//            // È il turno del giocatore 1
+//            statoBattaglia.setText("Turno del " + giocatore1.getName());
+//            // modifico il pokemon1 e il pokemon2 assumono il ruolo di attaccante o difensore
+//            pokemon1InCampo = nuovoPokemonInAttacco;
+//            pokemon2InCampo = nuovoPokemonInDifesa;
+//            // setto il pannello che verrà associato all'attacco o alla difesa
+//            pokeAttInfoPanel = poke1InfoPanel;
+//            pokeDefInfoPanel = poke2InfoPanel;
+//            // setto il pannello visibile a seconda del player in attacco
+//            panPrincAzi1.setVisible(true);
+//            panPrincAzi2.setVisible(false);
+//        } else {
+//            // È il turno del giocatore 2
+//            statoBattaglia.setText("Turno del " + giocatore2.getName());
+//            // modifico il pokemon1 e il pokemon2 assumono il ruolo di attaccante o difensore
+//            pokemon2InCampo = nuovoPokemonInAttacco;
+//            pokemon1InCampo = nuovoPokemonInDifesa;
+//            // setto il pannello che verrà associato all'attacco o alla difesa
+//            pokeAttInfoPanel = poke2InfoPanel;
+//            pokeDefInfoPanel = poke1InfoPanel;
+//            // setto il pannello visibile a seconda del player in attacco
+//            panPrincAzi1.setVisible(false);
+//            panPrincAzi2.setVisible(true);
+//        }
+//
+//        // Resetto il pannello delle azioni
+//        resettaPannello1();
+//    }
 
     public PokeBattleInfoPanel getPoke2InfoPanel() {
         return poke2InfoPanel;
@@ -420,6 +472,24 @@ public class BattleView extends JFrame implements Serializable {
     }
     public void aggiornaScorerPunteggio2(Player playerAggiornaScorer) {
         scorePanel.addScorerPlayer2(playerAggiornaScorer);
+    }
+
+    public void setPanAzioniCorrente(){
+        if(this.playerInAttacco == giocatore1) {
+            resettaPannello1();
+            panPrincAzi1.setVisible(true);
+            panPrincAzi2.setVisible(false);
+        }else{
+            resettaPannello2();
+            panPrincAzi1.setVisible(false);
+            panPrincAzi2.setVisible(true);
+        }
+    }
+
+    public void aggiornaTurnazioni(Player playerAttaccante, Player playerDifensore) {
+        // Modifico il player che è in attacco con quello che è in difesa
+        this.playerInAttacco = playerAttaccante;
+        this.playerInDifesa = playerDifensore;
     }
 
 

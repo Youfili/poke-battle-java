@@ -16,11 +16,15 @@ public class BattleModel {
     private Player player2;
     private Pokemon pokemonInAttacco;
     private Pokemon pokemonInDifesa;
+    private Player playerInAttacco;
+    private Player playerInDifesa;
 
     // inizializzo
     private BattleController controllerBattaglia;
     private BattleView viewBattaglia;
     private boolean turnoGiocatore1;
+    private Pokemon pokemon1;
+    private Pokemon pokemon2;
 
 
     // Costruttore
@@ -87,9 +91,11 @@ public class BattleModel {
             if (turnoGiocatore1) {
                 // Player 1 esegue il turno
                 eseguiTurno(player1, player2);
+
             } else {
                 // Player 2 esegue il turno
                 eseguiTurno(player2, player1);
+
             }
             // turnoGiocatore1 = !turnoGiocatore1; --> gestito dopo l'attacco nel metodo eseguiMossa()
         }else {
@@ -120,8 +126,56 @@ public class BattleModel {
         // oppure
         // cambioPokemon(nuovoPokemon);
 
-        viewBattaglia.resettaPannello1();
+        viewBattaglia.setPanAzioniCorrente();
     }
+
+
+    /* Metodi che influiscono sulla logica della battaglia     */
+    public void eseguiMossa(MoveButton selectedMove, Pokemon pokemonInCampoAttaccante, Pokemon pokemonInCampoDifensore){
+        // Implementare la logica di questo metodo che permetta di eseguire la mossa
+        // In questa logica vado a diminuire a livello logico la vita del pokemon
+        // quindi mi basta andare a settare la BarraHp in base alla vita del pokemon stesso
+
+        Move mossaScelta = selectedMove.getMove();
+        int vitaPostAttacco = pokemonInCampoDifensore.getHealth() - mossaScelta.getDamage();
+        if(vitaPostAttacco > 0) {
+            pokemonInCampoDifensore.setHealth(vitaPostAttacco);
+        }else {
+            // Altrimenti il pokemon è Esausto!
+            pokemonInCampoDifensore.setHealth(0);       // imposto la vita a 0 del pokemon
+            pokemonInCampoDifensore.setAlive(false);    // imposto che il pokemon non è più vivo
+            aggiornaPokemonEsausto(pokemonInCampoDifensore);    // uso il metodo pokemonEsausto
+        }
+
+        // Dopo aver eseguito l'attacco, cambia il turno
+        turnoGiocatore1 = !turnoGiocatore1;             // inverto il valore del turno
+
+        // Aggiorno il pokemon in Attacco e aggiorno il pokemon in difesa
+        eseguiTurno(player1, player2);
+//        viewBattaglia.aggiornaView(pokemon2, pokemon1);
+
+    }
+
+
+    private void aggiornaTurnazioniPokemon(Pokemon nuovoPokemonAttacco, Pokemon nuovoPokemonDifesa) {
+        this.pokemonInAttacco = nuovoPokemonAttacco;
+        this.pokemonInDifesa = nuovoPokemonDifesa;
+    }
+
+
+    public void aggiornaPokemonEsausto(Pokemon pokeEsausto){
+        // Implementare la logica di cambiamento del pokemon esausto
+        // Dopo aver implementato a livello logico la "morte" del pokemon notifico al controller il cambiamento della view
+        controllerBattaglia.aggiornaPokemonEsausto(pokeEsausto);
+        System.out.println("Sono nel BattleModel in pokemonEsausto");
+
+    }
+
+    public void cambioPokemon(Pokemon pokemonInCampo){
+        System.out.println("cambioPokemon nel Model");
+        this.pokemonInAttacco = pokemonInCampo;
+    }
+
 
     private boolean squadraEsausta(Player player) {
         for (Pokemon pokemon : player.getTeam()) {
@@ -163,57 +217,6 @@ public class BattleModel {
     private void salvaDati(Player player1, Player player2) {
         // Logica per salvare i dati dei giocatori
     }
-
-
-
-    /* Metodi che influiscono sulla logica della battaglia     */
-    public void eseguiMossa(MoveButton selectedMove, Pokemon pokemonInCampoAttaccante, Pokemon pokemonInCampoDifensore){
-        // Implementare la logica di questo metodo che permetta di eseguire la mossa
-        // In questa logica vado a diminuire a livello logico la vita del pokemon
-        // quindi mi basta andare a settare la BarraHp in base alla vita del pokemon stesso
-
-        Move mossaScelta = selectedMove.getMove();
-        int vitaPostAttacco = pokemonInCampoDifensore.getHealth() - mossaScelta.getDamage();
-        if(vitaPostAttacco > 0) {
-            pokemonInCampoDifensore.setHealth(vitaPostAttacco);
-        }else {
-            // Altrimenti il pokemon è Esausto!
-            pokemonInCampoDifensore.setHealth(0);       // imposto la vita a 0 del pokemon
-            pokemonInCampoDifensore.setAlive(false);    // imposto che il pokemon non è più vivo
-            aggiornaPokemonEsausto(pokemonInCampoDifensore);    // uso il metodo pokemonEsausto
-        }
-
-        // Dopo aver eseguito l'attacco, cambia il turno
-        turnoGiocatore1 = !turnoGiocatore1;
-
-        // Aggiorna la view per il nuovo turno
-        Pokemon nuovoPokemonAttacco = turnoGiocatore1 ? pokemonInAttacco : pokemonInDifesa;
-        Pokemon nuovoPokemonDifesa = turnoGiocatore1 ? pokemonInDifesa : pokemonInAttacco;
-        // Aggiorno il pokemon in Attacco e aggiorno il pokemon in difesa
-        aggiornaTurnazioniPokemon(nuovoPokemonAttacco, nuovoPokemonDifesa);
-        viewBattaglia.aggiornaView(nuovoPokemonAttacco, nuovoPokemonDifesa);
-
-    }
-
-    private void aggiornaTurnazioniPokemon(Pokemon nuovoPokemonAttacco, Pokemon nuovoPokemonDifesa) {
-        this.pokemonInAttacco = nuovoPokemonAttacco;
-        this.pokemonInDifesa = nuovoPokemonDifesa;
-    }
-
-
-    public void aggiornaPokemonEsausto(Pokemon pokeEsausto){
-        // Implementare la logica di cambiamento del pokemon esausto
-        // Dopo aver implementato a livello logico la "morte" del pokemon notifico al controller il cambiamento della view
-        controllerBattaglia.aggiornaPokemonEsausto(pokeEsausto);
-        System.out.println("Sono nel BattleModel in pokemonEsausto");
-
-    }
-
-    public void cambioPokemon(Pokemon pokemon1InCampo){
-        System.out.println("cambioPokemon nel Model");
-        this.pokemonInAttacco = pokemon1InCampo;
-    }
-
 
 
 
