@@ -30,7 +30,9 @@ public class BattleView extends JFrame implements Serializable {
     private Player giocatore2;
 
     // Creo l'istanza del controller all'interno della BattleView
-    private BattleController controllerBattaglia = new BattleController(new BattleModel(giocatore1, giocatore2, this),this);;
+    private BattleModel modelBattaglia;
+    private BattleController controllerBattaglia;
+
 
 
 
@@ -80,10 +82,9 @@ public class BattleView extends JFrame implements Serializable {
         setLocationRelativeTo(null);//centro dello schermo
         setResizable(false);
 
-
-//        // Carico il controller
-//        modelBattaglia = new BattleModel(giocatore1, giocatore2);
-//        controllerBattaglia = new BattleController(modelBattaglia,this);
+        // Carico il controller
+        modelBattaglia = new BattleModel(giocatore1, giocatore2, this);
+        controllerBattaglia = new BattleController(modelBattaglia,this);
 
 
         // Carico l'IMMAGINE DELLO SFONDO DEL COMBATTIMENTO

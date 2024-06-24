@@ -1,5 +1,6 @@
 package swing.menuframe;
 
+import swing.menuframe.battle.battleview.BattleView;
 import swing.menuframe.vecchiaBattaglia.BattagliaGUI;
 import swing.menupanel.PartyPokemonPanel;
 import players.Player;
@@ -153,7 +154,7 @@ public class ChooseTeam extends JFrame {
                 }
                 if(okInBattaglia != false) {
                     //Solo se il team di entrambi i giocatori è al completo vado in battaglia Vado in battaglia
-                    JOptionPane.setRootFrame(new BattagliaGUI(player1, player2));
+                    JOptionPane.setRootFrame(new BattleView(player1, player2));
                     setVisible(false);              // rendo questo frame non più visibile
                 }else{
                     System.out.println("Il Team deve essere Completo!");
