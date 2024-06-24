@@ -9,13 +9,14 @@ import swing.menuframe.battle.battleview.MoveButton;
 import swing.menuframe.battle.battleview.PokeButton;
 
 import javax.swing.*;
-
+/* Model della Battaglia (Logica) */
 public class BattleModel {
 
     private Player player1;
     private Player player2;
     private BattleView viewBattaglia;
     private Pokemon pokemonInAttacco;
+    private Pokemon pokemonInDIfesa;
 
     // inizializzo
     private BattleController controllerBattaglia;
@@ -25,7 +26,15 @@ public class BattleModel {
     public BattleModel(Player player1, Player player2, BattleView viewBattaglia){
         // Collego il controller al BattleModel
         controllerBattaglia = new BattleController(this, viewBattaglia);
-        /* Model della Battaglia (Logica) */
+        this.player1 = player1;
+        this.player2 = player2;
+        // Setto inizialmente questo
+        this.pokemonInAttacco = player1.getTeam().get(0);   // inizializzo come pokemon in attacco il primo pokemon del team del giocatore in attacco (player1)
+        this.pokemonInDIfesa = player2.getTeam().get(0);   // inizializzo come pokemon in attacco il primo pokemon del team del giocatore in difesa (player2)
+
+        // NOTA: il "playerInTurno" è il playerInAttacco chiaramente. --> il player in Attacco è il player1 per iniziare, poi si switchano
+
+
 
     } // Fine Costruttore
 
