@@ -14,12 +14,10 @@ terminano le Battaglie, si salvano i progressi e poi si decide se svolgere altri
  */
 public class ScoreOfBattles extends JPanel {
 
-    Player player1, player2;
-    int score1 = 0, score2 = 0;
-    JButton scoreButton1, scoreButton2, vsButton;
+    private Player player1, player2;
+    private JButton scoreButton1, scoreButton2, vsButton;
     // Costruttore
     public ScoreOfBattles(Player player1, Player player2){
-        super();                        // richiamo il costruttore di JPanel
         this.player1 = player1;
         this.player2 = player2;
 
@@ -27,8 +25,8 @@ public class ScoreOfBattles extends JPanel {
         setLayout(new GridLayout(1,3));                 // una riga e due colonne
 
         // Imposto i Bottoni dello Score
-        scoreButton1 = new JButton("" + score1);
-        scoreButton2 = new JButton("" + score2);
+        scoreButton1 = new JButton("0");
+        scoreButton2 = new JButton("0");
         vsButton = new JButton();
 
         // Disabilito i pulsanti (non cliccabili)
@@ -75,28 +73,12 @@ public class ScoreOfBattles extends JPanel {
 
     }   // FINE COSTRUTTORE
 
-    // Getters e Setters dei Metodi
-    public int getScore1() {
-        return score1;
+    public void addScorerPlayer1(Player playerIncrementoPunteggio){
+        scoreButton1.setText("" + playerIncrementoPunteggio.getVittorieTemporanee());
+    }
+    public void addScorerPlayer2(Player playerIncrementoPunteggio){
+        scoreButton2.setText("" + playerIncrementoPunteggio.getVittorieTemporanee());
     }
 
-    public int getScore2() {
-        return score2;
-    }
 
-    public JButton getScoreButton1() {
-        return scoreButton1;
-    }
-
-    public JButton getScoreButton2() {
-        return scoreButton2;
-    }
-
-    public void setScore1(int score1) {
-        this.score1 = score1;
-    }
-
-    public void setScore2(int score2) {
-        this.score2 = score2;
-    }
 }

@@ -15,10 +15,12 @@ public class BattleModel {
     private Player player1;
     private Player player2;
     private Pokemon pokemonInAttacco;
-    private Pokemon pokemonInDIfesa;
+    private Pokemon pokemonInDifesa;
 
     // inizializzo
     private BattleController controllerBattaglia;
+    private BattleView viewBattaglia;
+    private boolean turnoGiocatore1;
 
 
     // Costruttore
@@ -27,12 +29,10 @@ public class BattleModel {
         controllerBattaglia = new BattleController(this, viewBattaglia);
         this.player1 = player1;
         this.player2 = player2;
-        // Setto inizialmente questo
-        this.pokemonInAttacco = player1.getTeam().get(0);   // inizializzo come pokemon in attacco il primo pokemon del team del giocatore in attacco (player1)
-        this.pokemonInDIfesa = player2.getTeam().get(0);   // inizializzo come pokemon in attacco il primo pokemon del team del giocatore in difesa (player2)
+        this.viewBattaglia = viewBattaglia;
 
         // NOTA: il "playerInTurno" è il playerInAttacco chiaramente. --> il player in Attacco è il player1 per iniziare, poi si switchano
-
+        iniziaPartita();            // avvio l'inizio della partita
 
 
     } // Fine Costruttore
@@ -59,13 +59,112 @@ public class BattleModel {
 
      */
 
+    private void iniziaPartita() {
+        nuovaBattaglia();
+    }
+
+    private void nuovaBattaglia() {
+
+        if (player1.getVittorieTemporanee() >= 3 || player2.getVittorieTemporanee() >= 3) {
+            terminaPartita();
+        }
+        // ALTRIMENTI
+
+        ripristinaVitaPokemon(player1);
+        ripristinaVitaPokemon(player2);
+        turnoGiocatore1 = true;
+        pokemonInAttacco = player1.getTeam().get(0);
+        pokemonInDifesa = player2.getTeam().get(0);
+        // Capire come aggiornare la view da campo
+//        viewBattaglia.aggiornaView(pokemonInAttacco, pokemonInDifesa);
+        viewBattaglia.revalidate();
+        viewBattaglia.repaint();
+        cicloBattaglia();
+    }
+
+    private void cicloBattaglia() {
+        if (!squadraEsausta(player1) && !squadraEsausta(player2)) {
+            if (turnoGiocatore1) {
+                // Player 1 esegue il turno
+                eseguiTurno(player1, player2);
+            } else {
+                // Player 2 esegue il turno
+                eseguiTurno(player2, player1);
+            }
+            // turnoGiocatore1 = !turnoGiocatore1; --> gestito dopo l'attacco nel metodo eseguiMossa()
+        }else {
+            // Una volta che il ciclo è terminato (una squadra è esausta), incremento le vittorie temporanee
+            if (squadraEsausta(player1)) {
+                player2.incrementaVittorieTemporanee();
+                // Aggiorno lo Scorer in alto
+                controllerBattaglia.aggiornaScorerPunteggio1(player2);
+            } else {
+                player1.incrementaVittorieTemporanee();
+                // aggiorno lo scorer in alto
+                controllerBattaglia.aggiornaScorerPunteggio2(player2);
+            }
+//        // dopo aver incrementato le vittorie temporanee, inizio una nuova Battaglia
+        nuovaBattaglia();
+        }
+
+    }
 
 
+    private void eseguiTurno(Player attaccante, Player difensore) {
+        Pokemon pokemonAttaccante = turnoGiocatore1 ? pokemonInAttacco : pokemonInDifesa;
+        Pokemon pokemonDifensore = turnoGiocatore1 ? pokemonInDifesa : pokemonInAttacco;
+
+        // Logica per eseguire la mossa o cambiare Pokémon
+        // Ad esempio:
+        // eseguiMossa(selectedMove, pokemonAttaccante, pokemonDifensore);
+        // oppure
+        // cambioPokemon(nuovoPokemon);
+
+        viewBattaglia.resettaPannello1();
+    }
+
+    private boolean squadraEsausta(Player player) {
+        for (Pokemon pokemon : player.getTeam()) {
+            if (pokemon.isAlive()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private void ripristinaVitaPokemon(Player player) {
+        for (Pokemon pokemon : player.getTeam()) {
+            pokemon.setHealth(100);
+            pokemon.setAlive(true);
+        }
+    }
+
+    private void terminaPartita() {
+        // Logica per salvare i dati e terminare la partita
+        System.out.println("Partita terminata!");
+        // Vado a modificare le stats dei giocatori (aumentato vittorie/sconfitte totali)
+        if(player1.getVittorieTemporanee() == 3){
+            player1.addWinMatch();
+            player2.addLostMatch();
+        }else if(player2.getVittorieTemporanee() == 3){
+            player1.addWinMatch();
+            player2.addLostMatch();
+        }
+
+        // a questo punto resetto le vittorie Temporanee
+        player1.setVittorieTemporanee(0);
+        player2.setVittorieTemporanee(0);
+
+        // Salvo i dati dei due giocatori (e li salvo nel "Database" che contiene tutti i player)
+        salvaDati(player1, player2);
+        // Tornare al menu principale
+    }
+
+    private void salvaDati(Player player1, Player player2) {
+        // Logica per salvare i dati dei giocatori
+    }
 
 
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        ///              METODI              ///
 
     /* Metodi che influiscono sulla logica della battaglia     */
     public void eseguiMossa(MoveButton selectedMove, Pokemon pokemonInCampoAttaccante, Pokemon pokemonInCampoDifensore){
@@ -83,6 +182,22 @@ public class BattleModel {
             pokemonInCampoDifensore.setAlive(false);    // imposto che il pokemon non è più vivo
             aggiornaPokemonEsausto(pokemonInCampoDifensore);    // uso il metodo pokemonEsausto
         }
+
+        // Dopo aver eseguito l'attacco, cambia il turno
+        turnoGiocatore1 = !turnoGiocatore1;
+
+        // Aggiorna la view per il nuovo turno
+        Pokemon nuovoPokemonAttacco = turnoGiocatore1 ? pokemonInAttacco : pokemonInDifesa;
+        Pokemon nuovoPokemonDifesa = turnoGiocatore1 ? pokemonInDifesa : pokemonInAttacco;
+        // Aggiorno il pokemon in Attacco e aggiorno il pokemon in difesa
+        aggiornaTurnazioniPokemon(nuovoPokemonAttacco, nuovoPokemonDifesa);
+        viewBattaglia.aggiornaView(nuovoPokemonAttacco, nuovoPokemonDifesa);
+
+    }
+
+    private void aggiornaTurnazioniPokemon(Pokemon nuovoPokemonAttacco, Pokemon nuovoPokemonDifesa) {
+        this.pokemonInAttacco = nuovoPokemonAttacco;
+        this.pokemonInDifesa = nuovoPokemonDifesa;
     }
 
 
@@ -111,5 +226,9 @@ public class BattleModel {
     }
     public void setPokemonInAttacco(Pokemon pokemonInAttacco) {
         this.pokemonInAttacco = pokemonInAttacco;
+    }
+
+    public boolean isTurnoGiocatore1() {
+        return turnoGiocatore1;
     }
 }

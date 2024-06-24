@@ -37,7 +37,6 @@ public class BattleView extends JFrame implements Serializable {
 
 
     private JLabel statoBattaglia;
-    private int giocatoreDiTurno = 1;
     private PokeBattleInfoPanel poke1InfoPanel;
     private PokeBattleInfoPanel poke2InfoPanel;
     private PokeImgLabel pokemon1Image;
@@ -82,9 +81,6 @@ public class BattleView extends JFrame implements Serializable {
         setLocationRelativeTo(null);//centro dello schermo
         setResizable(false);
 
-        // Carico il controller
-        modelBattaglia = new BattleModel(giocatore1, giocatore2, this);
-        controllerBattaglia = new BattleController(modelBattaglia,this);
 
 
         // Carico l'IMMAGINE DELLO SFONDO DEL COMBATTIMENTO
@@ -315,6 +311,12 @@ public class BattleView extends JFrame implements Serializable {
         */
 
 
+
+        // Carico il controller e il model
+        modelBattaglia = new BattleModel(giocatore1, giocatore2, this);
+        controllerBattaglia = new BattleController(modelBattaglia,this);
+
+
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);     // in questo modo, quando premo x chiuderò anche la pagina
         setVisible(true);
 
@@ -329,7 +331,7 @@ public class BattleView extends JFrame implements Serializable {
         cl.show(cardPanel, nomePannello);
     }
 
-    private void resettaPannello1() {
+    public void resettaPannello1() {
         cardLayout1.show(panPrincAzi1, "Azioni1");
         statoBattaglia.setText("Scegli cosa fare: ");
     }
@@ -386,6 +388,39 @@ public class BattleView extends JFrame implements Serializable {
 
     }
 
+    public void aggiornaView(Pokemon pokemonInAttacco, Pokemon pokemonInDifesa) {
+
+        // Aggiornamento del pokemon che è in attacco e quello che è in difesa
+//        pokemon1InCampo = pokemonInAttacco;
+//        pokemon2InCampo = pokemonInDifesa;
+
+        // Aggiorno lo stato della battaglia
+        if (modelBattaglia.isTurnoGiocatore1()) {
+            // È il turno del giocatore 1
+            statoBattaglia.setText("Turno del " + giocatore1.getName());
+            panPrincAzi1.setVisible(true);
+            panPrincAzi2.setVisible(false);
+        } else {
+            // È il turno del giocatore 2
+            statoBattaglia.setText("Turno del " + giocatore2.getName());
+            panPrincAzi1.setVisible(false);
+            panPrincAzi2.setVisible(true);
+        }
+
+        // Resetto il pannello delle azioni
+        resettaPannello1();
+    }
+
+    public PokeBattleInfoPanel getPoke2InfoPanel() {
+        return poke2InfoPanel;
+    }
+
+    public void aggiornaScorerPunteggio1(Player playerAggiornaScorer) {
+        scorePanel.addScorerPlayer1(playerAggiornaScorer);
+    }
+    public void aggiornaScorerPunteggio2(Player playerAggiornaScorer) {
+        scorePanel.addScorerPlayer2(playerAggiornaScorer);
+    }
 
 
 
@@ -461,7 +496,5 @@ public class BattleView extends JFrame implements Serializable {
             System.out.println(red.pokemonStringList());
     }
 
-    public PokeBattleInfoPanel getPoke2InfoPanel() {
-        return poke2InfoPanel;
-    }
+
 }

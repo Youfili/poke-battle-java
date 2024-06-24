@@ -51,22 +51,10 @@ public class BattleController {
     }
 
 
-//    private void initController() {
-//        // Aggiungo ActionListener al bottone
-//        view.getButton().addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                onButtonClick();
-//            }
-//        });
-//    }
-//
-//    private void onButtonClick() {
-//        // Logica che avviene al click del bottone
-//        String text = view.getTextField().getText();
-//        JOptionPane.showMessageDialog(view, "You entered: " + text);
-//    }
-//}
-
-
+    public void aggiornaScorerPunteggio1(Player playerAggiornaScorer) {
+        viewBattaglia.aggiornaScorerPunteggio1(playerAggiornaScorer);
+    }
+    public void aggiornaScorerPunteggio2(Player playerAggiornaScorer) {
+        viewBattaglia.aggiornaScorerPunteggio2(playerAggiornaScorer);
+    }
 }

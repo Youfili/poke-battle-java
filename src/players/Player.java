@@ -15,19 +15,20 @@ public class Player implements Serializable {
     private String gender;
 
     private int winMatch;
-    private int lossMatch;
+    private int lostMatch;
 
     private ImageIcon image;
     private Pokemon pokemonAttivo;
 
     private List<Pokemon> team = new ArrayList<>();
+    private int vittorieTemporanee;
 
 
     //Constructor
     public Player(String name, int winMatch, int lossMatch, String gender) {
         this.name = name;
         this.winMatch = winMatch;
-        this.lossMatch = lossMatch;
+        this.lostMatch = lossMatch;
         this.gender = gender;
         for(int i=0;i<6;i++){
             team.add(null);
@@ -60,7 +61,7 @@ public class Player implements Serializable {
                 "Name = " + name + '\n' +
                 "Gender = " + gender + '\n' +
                 "Won Match= " + winMatch + '\n' +
-                "Lost Match= " + lossMatch + '\n'+
+                "Lost Match= " + lostMatch + '\n'+
 
             (teamIsEmpty()?"L'allenatore non ha pokemon":"team: " + pokemonStringList() )+'\n';
     }
@@ -72,7 +73,7 @@ public class Player implements Serializable {
                 "name= " + name + '\n' +
                         "gender= " + gender + '\n' +
                         "winMatch= " + winMatch + '\n' +
-                        "lossMatch= " + lossMatch ;
+                        "lossMatch= " + lostMatch ;
     }
 
     //matodo per aggiungere pokemon alla squadra durante la creazione
@@ -148,11 +149,11 @@ public class Player implements Serializable {
     }
 
     public int getLossMatch() {
-        return lossMatch;
+        return lostMatch;
     }
 
     public void setLossMatch(int lossMatch) {
-        this.lossMatch = lossMatch;
+        this.lostMatch = lossMatch;
     }
 
     public String getGender() {
@@ -181,6 +182,26 @@ public class Player implements Serializable {
     public void setImage(ImageIcon image) {
         this.image = image;
 
+    }
+
+
+    public void incrementaVittorieTemporanee(){
+        this.vittorieTemporanee ++;
+    }
+
+    public int getVittorieTemporanee() {
+        return vittorieTemporanee;
+    }
+
+    public void setVittorieTemporanee(int vittoreTemporanee) {
+        this.vittorieTemporanee = vittoreTemporanee;
+    }
+
+    public void addWinMatch(){
+        this.winMatch ++;
+    }
+    public void addLostMatch(){
+        this.lostMatch ++;
     }
 }
 
