@@ -15,9 +15,7 @@ public class BattleModel {
     private Player player1;
     private Player player2;
 
-
     // inizializzo
-    private BattleController controllerBattaglia;
     private BattleView viewBattaglia;
     private boolean turnoGiocatore1 = true;
     private Pokemon pokemonInAttacco;
@@ -27,7 +25,6 @@ public class BattleModel {
     // Costruttore
     public BattleModel(Player player1, Player player2, BattleView viewBattaglia){
         // Collego il controller al BattleModel
-        controllerBattaglia = new BattleController(this, viewBattaglia);
         this.player1 = player1;
         this.player2 = player2;
         this.viewBattaglia = viewBattaglia;
@@ -35,51 +32,25 @@ public class BattleModel {
         // NOTA: il "playerInTurno" è il playerInAttacco chiaramente. --> il player in Attacco è il player1 per iniziare, poi si switchano
         iniziaPartita();            // avvio l'inizio della partita
 
-
     } // Fine Costruttore
-
-
-    /* Inserire in questo campo la Logica di Turnazione dei giocatori, in cui il giocatore in Attacco è il player1, mentre il giocatore in difesa è il player2
-        All'interno delle turnazioni si vanno a richiamare metodi già creati ed altri da creare in base a come svoglerò la logica di attacco.
-
-         Calcolare il FINE_BATTAGLIA --> ossia quando tutti i pokemon di un Team sono "esausti" --> isAlive() == false , e in quel caso aggiornare il punteggio
-         della barra di calcolo punteggio.
-         A Ogni fine Battaglia, si fa un controllo se uno dei due è arrivato a 3, in quel caso si ripristina la vita dei Pokemon cosi da Risanare tutta la squadra,
-         si aggiornarno le Vittorie/Sconfitte e le partite giocate dei giocatori. E dopo averli salvati si ritorna al Menu principale!
-
-     */
-
-    /*
-    Nel costruttore della BattleModel posso mettere un metodo iniziaPartita() -->
-    che richiama un metodo  nuovaBattaglia(player1, player2)  in cui si inizia la battaglia dopo aver ripristinato la vita dei
-    pokemon di entrambi i giocatori e controllato il numero di battaglie vinte da ogni giocatore
-    ( se >= 3, la partita finisce , richiamando il metodo salvaDati(player1, player2)  )
-    Se ancora non si è arrivati al punto di 3 vittorie da parte di un giocatore -->
-    Inizia un ciclo while che prosegue fin quando tutti i pokemon dell'avversario non sono Esausti in cui si alternarno le turnazioni di Azioni svolte
-    quando si raggiunge questa situazione (vittoria di una battaglia), a quel punto si richiama il metodo nuovaBattaglia()
-
-     */
 
     private void iniziaPartita() {
         nuovaBattaglia();
     }
 
     private void nuovaBattaglia() {
-
         if (player1.getVittorieTemporanee() >= 3 || player2.getVittorieTemporanee() >= 3) {
             terminaPartita();
         }
         // ALTRIMENTI
-
         ripristinaVitaPokemon(player1);
         ripristinaVitaPokemon(player2);
+        // Impsto i turni e i Pokemon Iniziali
         turnoGiocatore1 = true;
         pokemonInAttacco = player1.getTeam().get(0);
         pokemonInDifesa = player2.getTeam().get(0);
-        // Capire come aggiornare la view da campo
-//        viewBattaglia.aggiornaView(pokemonInAttacco, pokemonInDifesa);
-        viewBattaglia.revalidate();
-        viewBattaglia.repaint();
+//        viewBattaglia.revalidate();
+//        viewBattaglia.repaint();
         cicloBattaglia();
     }
 
@@ -88,30 +59,25 @@ public class BattleModel {
             if (turnoGiocatore1) {
                 // Player 1 esegue il turno
                 eseguiTurno(player1, player2);
-
             } else {
                 // Player 2 esegue il turno
                 eseguiTurno(player2, player1);
-
             }
-            // turnoGiocatore1 = !turnoGiocatore1; --> gestito dopo l'attacco nel metodo eseguiMossa()
         }else {
             // Una volta che il ciclo è terminato (una squadra è esausta), incremento le vittorie temporanee
             if (squadraEsausta(player1)) {
                 player2.incrementaVittorieTemporanee();
                 // Aggiorno lo Scorer in alto
-                controllerBattaglia.aggiornaScorerPunteggio1(player2);
+                viewBattaglia.aggiornaScorerPunteggio1(player2);
             } else {
                 player1.incrementaVittorieTemporanee();
                 // aggiorno lo scorer in alto
-                controllerBattaglia.aggiornaScorerPunteggio2(player2);
+                viewBattaglia.aggiornaScorerPunteggio2(player2);
             }
 //        // dopo aver incrementato le vittorie temporanee, inizio una nuova Battaglia
         nuovaBattaglia();
         }
-
     }
-
 
     private void eseguiTurno(Player playerInAttacco, Player playerInDifesa) {
 
@@ -121,54 +87,53 @@ public class BattleModel {
         // eseguiMossa(selectedMove, pokemonAttaccante, pokemonDifensore);
         // oppure
         // cambioPokemon(nuovoPokemon);
-
         // Scambio le Turnazioni nella View
-//        controllerBattaglia.scambiaTurnazioni();
-
+        viewBattaglia.scambiaTurnazioniView();
     }
-
 
     /* Metodi che influiscono sulla logica della battaglia     */
     public void eseguiMossa(MoveButton selectedMove, Pokemon pokemonInCampoAttaccante, Pokemon pokemonInCampoDifensore){
-        // Implementare la logica di questo metodo che permetta di eseguire la mossa
-        // In questa logica vado a diminuire a livello logico la vita del pokemon
-        // quindi mi basta andare a settare la BarraHp in base alla vita del pokemon stesso
+        this.pokemonInAttacco = pokemonInCampoAttaccante;
+        this.pokemonInDifesa = pokemonInCampoDifensore;
+
 
         Move mossaScelta = selectedMove.getMove();
-        int vitaPostAttacco = pokemonInCampoDifensore.getHealth() - mossaScelta.getDamage();
+        int vitaPostAttacco = pokemonInDifesa.getHealth() - mossaScelta.getDamage();
         if(vitaPostAttacco > 0) {
-            pokemonInCampoDifensore.setHealth(vitaPostAttacco);
+            pokemonInDifesa.setHealth(vitaPostAttacco);
+            // Debug in terminale
+            System.out.println("Vita Pokemon difensore: " + pokemonInDifesa.getName() +" è : " + pokemonInDifesa.getHealth());
+
         }else {
             // Altrimenti il pokemon è Esausto!
-            pokemonInCampoDifensore.setHealth(0);       // imposto la vita a 0 del pokemon
-            pokemonInCampoDifensore.setAlive(false);    // imposto che il pokemon non è più vivo
-            aggiornaPokemonEsausto(pokemonInCampoDifensore);    // uso il metodo pokemonEsausto
+            pokemonInDifesa.setHealth(0);       // imposto la vita a 0 del pokemon
+            pokemonInDifesa.setAlive(false);    // imposto che il pokemon non è più vivo
+            aggiornaPokemonEsausto(pokemonInDifesa);    // uso il metodo pokemonEsausto
         }
-
         // Dopo aver eseguito l'attacco, cambia il turno
         turnoGiocatore1 = !turnoGiocatore1;             // inverto il valore del turno
-
-        controllerBattaglia.scambiaTurnazioni();
+        // scambio le turnazioni a livello visivo
+        viewBattaglia.scambiaTurnazioniView();
         // ripeto il cicloBattaglia();
         cicloBattaglia();
-
     }
 
 
     public void aggiornaPokemonEsausto(Pokemon pokeEsausto){
         // Implementare la logica di cambiamento del pokemon esausto
         // Dopo aver implementato a livello logico la "morte" del pokemon notifico al controller il cambiamento della view
-        controllerBattaglia.aggiornaPokemonEsausto(pokeEsausto);
+        viewBattaglia.aggiornaPokemonEsausto(pokeEsausto);
         System.out.println("Sono nel BattleModel in pokemonEsausto");
+        // Devo inserire la logica che mi permetta di aggiornare un pokemon
 
     }
 
-    public void cambioPokemon(Pokemon pokemonInCampo){
+    public void cambioPokemon(Pokemon pokemonInCampoScelto){
         System.out.println("cambioPokemon nel Model");
-        this.pokemonInAttacco = pokemonInCampo;
+        this.pokemonInAttacco = pokemonInCampoScelto;
+        // continuo il ciclo battaglia
         cicloBattaglia();
     }
-
 
     private boolean squadraEsausta(Player player) {
         for (Pokemon pokemon : player.getTeam()) {
@@ -197,11 +162,9 @@ public class BattleModel {
             player1.addWinMatch();
             player2.addLostMatch();
         }
-
         // a questo punto resetto le vittorie Temporanee
         player1.setVittorieTemporanee(0);
         player2.setVittorieTemporanee(0);
-
         // Salvo i dati dei due giocatori (e li salvo nel "Database" che contiene tutti i player)
         salvaDati(player1, player2);
         // Tornare al menu principale
@@ -212,22 +175,15 @@ public class BattleModel {
     }
 
 
-
-
-
     /*   Getters & Setters  */
-
     public Pokemon getPokemonInAttacco() {
         return pokemonInAttacco;
     }
     public void setPokemonInAttacco(Pokemon pokemonInAttacco) {
         this.pokemonInAttacco = pokemonInAttacco;
     }
-
     public boolean isTurnoGiocatore1() {
         return turnoGiocatore1;
     }
 
-
-
-}
+}       // FINE CLASSE

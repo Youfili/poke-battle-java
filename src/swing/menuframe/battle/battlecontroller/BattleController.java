@@ -22,8 +22,8 @@ public class BattleController {
 
     // COSTRUTTORE UNICO PER IL MODEL E LA VIEW
     public BattleController(BattleModel modelloBattaglia, BattleView frameDellaView) {
-        this.modelBattaglia = modelloBattaglia;
         this.viewBattaglia = frameDellaView;
+        this.modelBattaglia = modelloBattaglia;
 
         // Vedere nel dettaglio questo comando init che li collega
         // initController();
@@ -34,35 +34,22 @@ public class BattleController {
     /*  Metodi che facciano comunicare la parte grafica con la parte del Model  */
 
     public void eseguiMoveBotton(MoveButton selectedMove, Pokemon pokemonInCampoAttacco, Pokemon pokemonInCampoDifensore){
-        modelBattaglia.eseguiMossa(selectedMove, pokemonInCampoAttacco, pokemonInCampoDifensore);
+        this.modelBattaglia.eseguiMossa(selectedMove, pokemonInCampoAttacco, pokemonInCampoDifensore);
         // Aggiorno la barraHp del pokemon difensore
         // NOTA: getPokeInfoPanel va generalizzato come pannello della difesa (per decrementare vita). --> e quello di attacco va generalizzato come PokeInfoPanelAttacco (serve a aumentare exp)
-        viewBattaglia.getPokeDefPanel().getHpBar().setValue(pokemonInCampoDifensore.getHealth());
+        this.viewBattaglia.getPokeDefPanel().getHpBar().setValue(pokemonInCampoDifensore.getHealth());
         // Aggiungere anche l'aggiornamento dell'area di testo quando il pokemon di attacco sferra l'attacco.
         // es: Bulbasaur usa "Azione"
     }
 
-    public void aggiornaPokemonEsausto(Pokemon pokeEsausto){
-        viewBattaglia.aggiornaPokemonEsausto(pokeEsausto);
-    }
 
     public void cambioPokemon(Pokemon pokemon1InCampo) {
-        modelBattaglia.cambioPokemon(pokemon1InCampo);
+        this.modelBattaglia.cambioPokemon(pokemon1InCampo);
         System.out.println("cambioPokemon() nel controller");
     }
 
 
-    public void aggiornaScorerPunteggio1(Player playerAggiornaScorer) {
-        viewBattaglia.aggiornaScorerPunteggio1(playerAggiornaScorer);
+    public boolean isTurnoGiocatore1() {
+        return modelBattaglia.isTurnoGiocatore1();
     }
-    public void aggiornaScorerPunteggio2(Player playerAggiornaScorer) {
-        viewBattaglia.aggiornaScorerPunteggio2(playerAggiornaScorer);
-    }
-
-    // Aggiornamento delle turnazioni tra il giocatore in attacco e quello in difesa
-    public void scambiaTurnazioni(){
-        viewBattaglia.scambiaTurnazioniView();
-    }
-
-
 }

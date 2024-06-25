@@ -264,6 +264,8 @@ public class BattleView extends JFrame implements Serializable {
                 public void actionPerformed(ActionEvent e) {
                     // cambio con il pokemon del bottone
                     controllerBattaglia.cambioPokemon(bottoneCambio.getPokemonDelBottone());
+                    // debug
+                    System.out.println("Il pokemon del bottone è: " + bottoneCambio.getPokemonDelBottone().getName());
                     // Metodo nel view che va a switchare l'immagine del pokmeon in campo
                     cambioPokemonGrafica(bottoneCambio.getPokemonDelBottone());
                     resettaPannello(giocatore1);
@@ -373,8 +375,10 @@ public class BattleView extends JFrame implements Serializable {
 
 
         // Carico il controller e il model
-        modelBattaglia = new BattleModel(this.giocatore1, this.giocatore2, this);
-        controllerBattaglia = new BattleController(modelBattaglia,this);
+        this.modelBattaglia = new BattleModel(this.giocatore1, this.giocatore2, this);
+        // Debug
+        System.out.println("modelBattaglia è null?: " + (this.modelBattaglia == null));
+        this.controllerBattaglia = new BattleController(this.modelBattaglia,this);
 
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);     // in questo modo, quando premo x chiuderò anche la pagina
@@ -492,7 +496,10 @@ public class BattleView extends JFrame implements Serializable {
 
 
     public void scambiaTurnazioniView(){
-        boolean turnazioni = modelBattaglia.isTurnoGiocatore1();
+        // Mi dice che questo ritornato è null... non capisco il motivo
+//        boolean turnazioni = controllerBattaglia.isTurnoGiocatore1();
+
+
 
         if(turnazioni){     // se turnazioni == true
             // Caso in cui in ATTACCO c'è il GIOCATORE1
