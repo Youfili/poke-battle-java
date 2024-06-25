@@ -14,17 +14,14 @@ public class BattleModel {
 
     private Player player1;
     private Player player2;
-    private Pokemon pokemonInAttacco;
-    private Pokemon pokemonInDifesa;
-    private Player playerInAttacco;
-    private Player playerInDifesa;
+
 
     // inizializzo
     private BattleController controllerBattaglia;
     private BattleView viewBattaglia;
-    private boolean turnoGiocatore1;
-    private Pokemon pokemon1;
-    private Pokemon pokemon2;
+    private boolean turnoGiocatore1 = true;
+    private Pokemon pokemonInAttacco;
+    private Pokemon pokemonInDifesa;
 
 
     // Costruttore
@@ -116,17 +113,18 @@ public class BattleModel {
     }
 
 
-    private void eseguiTurno(Player attaccante, Player difensore) {
-        Pokemon pokemonAttaccante = turnoGiocatore1 ? pokemonInAttacco : pokemonInDifesa;
-        Pokemon pokemonDifensore = turnoGiocatore1 ? pokemonInDifesa : pokemonInAttacco;
+    private void eseguiTurno(Player playerInAttacco, Player playerInDifesa) {
 
+        // SCELTA DEI BOTTONI DA PREMERE LATO UTENTE
         // Logica per eseguire la mossa o cambiare Pokémon
         // Ad esempio:
         // eseguiMossa(selectedMove, pokemonAttaccante, pokemonDifensore);
         // oppure
         // cambioPokemon(nuovoPokemon);
 
-        viewBattaglia.setPanAzioniCorrente();
+        // Scambio le Turnazioni nella View
+//        controllerBattaglia.scambiaTurnazioni();
+
     }
 
 
@@ -150,16 +148,10 @@ public class BattleModel {
         // Dopo aver eseguito l'attacco, cambia il turno
         turnoGiocatore1 = !turnoGiocatore1;             // inverto il valore del turno
 
-        // Aggiorno il pokemon in Attacco e aggiorno il pokemon in difesa
-        eseguiTurno(player1, player2);
-//        viewBattaglia.aggiornaView(pokemon2, pokemon1);
+        controllerBattaglia.scambiaTurnazioni();
+        // ripeto il cicloBattaglia();
+        cicloBattaglia();
 
-    }
-
-
-    private void aggiornaTurnazioniPokemon(Pokemon nuovoPokemonAttacco, Pokemon nuovoPokemonDifesa) {
-        this.pokemonInAttacco = nuovoPokemonAttacco;
-        this.pokemonInDifesa = nuovoPokemonDifesa;
     }
 
 
@@ -174,6 +166,7 @@ public class BattleModel {
     public void cambioPokemon(Pokemon pokemonInCampo){
         System.out.println("cambioPokemon nel Model");
         this.pokemonInAttacco = pokemonInCampo;
+        cicloBattaglia();
     }
 
 
@@ -234,4 +227,7 @@ public class BattleModel {
     public boolean isTurnoGiocatore1() {
         return turnoGiocatore1;
     }
+
+
+
 }
