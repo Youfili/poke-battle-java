@@ -56,12 +56,10 @@ public class BattleModel {
 
     private void cicloBattaglia() {
         if (!squadraEsausta(player1) && !squadraEsausta(player2)) {
-            if (turnoGiocatore1) {
+
+            if (!pokemonInAttacco.isAlive()) {
                 // Player 1 esegue il turno
-                eseguiTurno(player1, player2);
-            } else {
-                // Player 2 esegue il turno
-                eseguiTurno(player2, player1);
+                aggiornaPokemonEsausto(pokemonInAttacco);
             }
         }else {
             // Una volta che il ciclo è terminato (una squadra è esausta), incremento le vittorie temporanee
@@ -79,24 +77,13 @@ public class BattleModel {
         }
     }
 
-    private void eseguiTurno(Player playerInAttacco, Player playerInDifesa) {
-
-        // SCELTA DEI BOTTONI DA PREMERE LATO UTENTE
-        // Logica per eseguire la mossa o cambiare Pokémon
-        // Ad esempio:
-        // eseguiMossa(selectedMove, pokemonAttaccante, pokemonDifensore);
-        // oppure
-        // cambioPokemon(nuovoPokemon);
-        // Scambio le Turnazioni nella View
-        viewBattaglia.scambiaTurnazioniView();
-    }
 
     /* Metodi che influiscono sulla logica della battaglia     */
     public void eseguiMossa(MoveButton selectedMove, Pokemon pokemonInCampoAttaccante, Pokemon pokemonInCampoDifensore){
         this.pokemonInAttacco = pokemonInCampoAttaccante;
         this.pokemonInDifesa = pokemonInCampoDifensore;
 
-
+        // Faccio eseguire la Mossa
         Move mossaScelta = selectedMove.getMove();
         int vitaPostAttacco = pokemonInDifesa.getHealth() - mossaScelta.getDamage();
         if(vitaPostAttacco > 0) {
@@ -108,10 +95,14 @@ public class BattleModel {
             // Altrimenti il pokemon è Esausto!
             pokemonInDifesa.setHealth(0);       // imposto la vita a 0 del pokemon
             pokemonInDifesa.setAlive(false);    // imposto che il pokemon non è più vivo
-            aggiornaPokemonEsausto(pokemonInDifesa);    // uso il metodo pokemonEsausto
+
         }
         // Dopo aver eseguito l'attacco, cambia il turno
         turnoGiocatore1 = !turnoGiocatore1;             // inverto il valore del turno
+
+        // Scambio le turnazioni a livello logico del Pokemon
+        scambiaTurnazioniModel(pokemonInAttacco, pokemonInDifesa);
+
         // scambio le turnazioni a livello visivo
         viewBattaglia.scambiaTurnazioniView();
         // ripeto il cicloBattaglia();
@@ -119,18 +110,26 @@ public class BattleModel {
     }
 
 
+    private void scambiaTurnazioniModel(Pokemon vecchioPokemonInCampoAttaccante, Pokemon vecchioPokemonInCampoDifensore) {
+        // Scambio i ruoli dei pokemon in campo
+        setPokemonInAttacco(vecchioPokemonInCampoDifensore);
+        setPokemonInDifesa(vecchioPokemonInCampoAttaccante);
+    }
+
     public void aggiornaPokemonEsausto(Pokemon pokeEsausto){
         // Implementare la logica di cambiamento del pokemon esausto
         // Dopo aver implementato a livello logico la "morte" del pokemon notifico al controller il cambiamento della view
         viewBattaglia.aggiornaPokemonEsausto(pokeEsausto);
-        System.out.println("Sono nel BattleModel in pokemonEsausto");
+        System.out.println("Sono nel BattleModel in aggiornaPokemonEsausto");
         // Devo inserire la logica che mi permetta di aggiornare un pokemon
 
     }
 
     public void cambioPokemon(Pokemon pokemonInCampoScelto){
         System.out.println("cambioPokemon nel Model");
-        this.pokemonInAttacco = pokemonInCampoScelto;
+        Pokemon pokeNuovo = pokemonInCampoScelto;
+        this.pokemonInAttacco = pokeNuovo;
+        viewBattaglia.cambioPokemonGrafica();
         // continuo il ciclo battaglia
         cicloBattaglia();
     }
@@ -182,8 +181,13 @@ public class BattleModel {
     public void setPokemonInAttacco(Pokemon pokemonInAttacco) {
         this.pokemonInAttacco = pokemonInAttacco;
     }
+    public void setPokemonInDifesa(Pokemon pokemonInDifesa) {
+        this.pokemonInDifesa = pokemonInDifesa;
+    }
     public boolean isTurnoGiocatore1() {
         return turnoGiocatore1;
     }
+
+
 
 }       // FINE CLASSE

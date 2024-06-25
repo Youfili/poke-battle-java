@@ -37,19 +37,22 @@ public class BattleController {
         this.modelBattaglia.eseguiMossa(selectedMove, pokemonInCampoAttacco, pokemonInCampoDifensore);
         // Aggiorno la barraHp del pokemon difensore
         // NOTA: getPokeInfoPanel va generalizzato come pannello della difesa (per decrementare vita). --> e quello di attacco va generalizzato come PokeInfoPanelAttacco (serve a aumentare exp)
-        this.viewBattaglia.getPokeDefPanel().getHpBar().setValue(pokemonInCampoDifensore.getHealth());
+        this.viewBattaglia.getPokeAttPanel().getHpBar().setValue(pokemonInCampoDifensore.getHealth());
         // Aggiungere anche l'aggiornamento dell'area di testo quando il pokemon di attacco sferra l'attacco.
         // es: Bulbasaur usa "Azione"
     }
 
 
-    public void cambioPokemon(Pokemon pokemon1InCampo) {
-        this.modelBattaglia.cambioPokemon(pokemon1InCampo);
+    public boolean isTurnoGiocatore1() {
+        return modelBattaglia.isTurnoGiocatore1();
+    }
+
+    public void cambioPokemon(Pokemon pokeInAttacco) {
+        this.modelBattaglia.cambioPokemon(pokeInAttacco);
         System.out.println("cambioPokemon() nel controller");
     }
 
-
-    public boolean isTurnoGiocatore1() {
-        return modelBattaglia.isTurnoGiocatore1();
+    public Pokemon getPokemonInAttacco() {
+        return modelBattaglia.getPokemonInAttacco();
     }
 }

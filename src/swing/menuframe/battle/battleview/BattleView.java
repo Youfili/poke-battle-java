@@ -29,7 +29,7 @@ public class BattleView extends JFrame implements Serializable {
     private Player giocatore1;
     private Player giocatore2;
 
-    private boolean turnazioni = true;
+    private boolean turnazioni;
     private Player playerInAttacco;
     private Player playerInDifesa;
     private Pokemon pokeInAttacco;
@@ -232,90 +232,6 @@ public class BattleView extends JFrame implements Serializable {
         this.pannelloMosse2 = new PannelloMosse(pokemon2InCampo);
         this.pannelloCambio2 = new PannelloCambioPokemon(giocatore2);
 
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        /*   Aggiungo gli ActionListener dei bottoni delle mosse e dei cambio pokemon  */
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-        // PANELLO GIOCATORE  1
-        /*  ACTIONLISTENER BOTTONI MOSSE */
-        for(Component bottone : pannelloMosse1.getComponents()){
-            // Faccio il casting del bottone che è un Component in MoveButton
-            MoveButton bottoneMossa = (MoveButton) bottone;
-            // Aggiungo l'ActionListener al bottoneMossa
-            bottoneMossa.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    // In questo caso Pokemon1InCampo è il Pokemon che ATTACCA, pokemon2InCampo è il Pokemon che DIFENDE
-                    controllerBattaglia.eseguiMoveBotton(bottoneMossa, pokeInAttacco, pokeInDifesa);
-                    // dopo aver eseguito la mossa torno alla possibilità di scegliere se attaccare o cambiare pokemon
-                    // anche se poi passa al pokemon avversario l'attacco
-                    resettaPannello(giocatore1);
-                }
-            });
-        }
-
-        /*  ACTIONLISTENER BOTTNI CAMBIOPOKEMON   */
-        for(Component bottone : pannelloCambio1.getComponents()){
-            // Casting del Component in PokeButton
-            PokeButton bottoneCambio = (PokeButton) bottone;
-            // Aggiungo ActionListener al bottoneCambio
-            bottoneCambio.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    // cambio con il pokemon del bottone
-                    controllerBattaglia.cambioPokemon(bottoneCambio.getPokemonDelBottone());
-                    // debug
-                    System.out.println("Il pokemon del bottone è: " + bottoneCambio.getPokemonDelBottone().getName());
-                    // Metodo nel view che va a switchare l'immagine del pokmeon in campo
-                    cambioPokemonGrafica(bottoneCambio.getPokemonDelBottone());
-                    resettaPannello(giocatore1);
-                }
-            });
-        }
-
-
-
-
-        // PANELLO GIOCATORE  2
-        /*  ACTIONLISTENER BOTTONI MOSSE */
-        for(Component bottone : pannelloMosse2.getComponents()){
-            // Faccio il casting del bottone che è un Component in MoveButton
-            MoveButton bottoneMossa = (MoveButton) bottone;
-            // Aggiungo l'ActionListener al bottoneMossa
-            bottoneMossa.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    // In questo caso Pokemon2InCampo è il Pokemon che ATTACCA, pokemon1InCampo è il Pokemon che DIFENDE
-                    controllerBattaglia.eseguiMoveBotton(bottoneMossa, pokeInAttacco, pokeInDifesa);
-                    // dopo aver eseguito la mossa torno alla possibilità di scegliere se attaccare o cambiare pokemon
-                    // anche se poi passa al pokemon avversario l'attacco
-                    resettaPannello(giocatore2);
-                }
-            });
-        }
-
-        /*  ACTIONLISTENER BOTTNI CAMBIOPOKEMON   */
-        for(Component bottone : pannelloCambio2.getComponents()){
-            // Casting del Component in PokeButton
-            PokeButton bottoneCambio = (PokeButton) bottone;
-            // Aggiungo ActionListener al bottoneCambio
-            bottoneCambio.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    // cambio con il pokemon del bottone
-                    controllerBattaglia.cambioPokemon(bottoneCambio.getPokemonDelBottone());
-                    // Metodo nel view che va a switchare l'immagine del pokmeon in campo
-                    cambioPokemonGrafica(bottoneCambio.getPokemonDelBottone());
-                    resettaPannello(giocatore2);
-                }
-            });
-        }
-
-
-
-
-
-
 
         // Inizializzo e posiziono il Pannello del Punteggio
         scorePanel = new ScoreOfBattles(giocatore1, giocatore2);
@@ -381,6 +297,95 @@ public class BattleView extends JFrame implements Serializable {
         this.controllerBattaglia = new BattleController(this.modelBattaglia,this);
 
 
+
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /*   Aggiungo gli ActionListener dei bottoni delle mosse e dei cambio pokemon  */
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        // PANELLO GIOCATORE  1
+        /*  ACTIONLISTENER BOTTONI MOSSE */
+        for(Component bottone : pannelloMosse1.getComponents()){
+            // Faccio il casting del bottone che è un Component in MoveButton
+            MoveButton bottoneMossa = (MoveButton) bottone;
+            // Aggiungo l'ActionListener al bottoneMossa
+            bottoneMossa.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    // In questo caso Pokemon1InCampo è il Pokemon che ATTACCA, pokemon2InCampo è il Pokemon che DIFENDE
+                    controllerBattaglia.eseguiMoveBotton(bottoneMossa, pokeInAttacco, pokeInDifesa);
+                    // dopo aver eseguito la mossa torno alla possibilità di scegliere se attaccare o cambiare pokemon
+                    // anche se poi passa al pokemon avversario l'attacco
+//                    resettaPannello(giocatore1);
+                }
+            });
+        }
+
+        /*  ACTIONLISTENER BOTTNI CAMBIOPOKEMON   */
+        for(Component bottone : pannelloCambio1.getComponents()){
+            // Casting del Component in PokeButton
+            PokeButton bottoneCambio = (PokeButton) bottone;
+            // Aggiungo ActionListener al bottoneCambio
+            bottoneCambio.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    // cambio con il pokemon del bottone --> a livello Logico
+                    controllerBattaglia.cambioPokemon(bottoneCambio.getPokemonDelBottone());
+                    // debug
+                    System.out.println("Il pokemon del bottone è: " + bottoneCambio.getPokemonDelBottone().getName());
+//                    // Metodo nel view che va a switchare l'immagine del pokmeon in campo
+//                    cambioPokemonGrafica(bottoneCambio.getPokemonDelBottone());
+//                    resettaPannello(giocatore1);
+                }
+            });
+        }
+
+
+
+
+        // PANELLO GIOCATORE  2
+        /*  ACTIONLISTENER BOTTONI MOSSE */
+        for(Component bottone : pannelloMosse2.getComponents()){
+            // Faccio il casting del bottone che è un Component in MoveButton
+            MoveButton bottoneMossa = (MoveButton) bottone;
+            // Aggiungo l'ActionListener al bottoneMossa
+            bottoneMossa.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    // In questo caso Pokemon2InCampo è il Pokemon che ATTACCA, pokemon1InCampo è il Pokemon che DIFENDE
+                    controllerBattaglia.eseguiMoveBotton(bottoneMossa, pokeInAttacco, pokeInDifesa);
+                    // dopo aver eseguito la mossa torno alla possibilità di scegliere se attaccare o cambiare pokemon
+                    // anche se poi passa al pokemon avversario l'attacco
+//                    resettaPannello(giocatore2);
+                }
+            });
+        }
+
+        /*  ACTIONLISTENER BOTTNI CAMBIOPOKEMON   */
+        for(Component bottone : pannelloCambio2.getComponents()){
+            // Casting del Component in PokeButton
+            PokeButton bottoneCambio = (PokeButton) bottone;
+            // Aggiungo ActionListener al bottoneCambio
+            bottoneCambio.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    // cambio con il pokemon del bottone
+                    controllerBattaglia.cambioPokemon(bottoneCambio.getPokemonDelBottone());
+                    // Metodo nel view che va a switchare l'immagine del pokmeon in campo
+//                    cambioPokemonGrafica(bottoneCambio.getPokemonDelBottone());
+//                    resettaPannello(giocatore2);
+                }
+            });
+        }
+
+
+
+
+
+
+
+
+
+
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);     // in questo modo, quando premo x chiuderò anche la pagina
         setVisible(true);
 
@@ -411,47 +416,56 @@ public class BattleView extends JFrame implements Serializable {
         if(playerInAttacco == giocatore1) {
             cardLayout1.show(panPrincAzi1, "Cambio1");
             statoBattaglia.setText(playerInAttacco.getName() + " Pokemon Esauto :(" +"\n" + "Effettua lo scambio");
+            // Forzo il giocatore ad avere davanti i tasti per cambiare pokemon
         }else if(playerInAttacco == giocatore2){
             cardLayout2.show(panPrincAzi2, "Cambio2");
             statoBattaglia.setText(playerInAttacco.getName() + " Pokemon Esauto :(" +"\n" + "Effettua lo scambio");
+            // Forzo il giocatore ad avere davanti i tasti per cambiare pokemon
         }
     }
 
 
-    public void cambioPokemonGrafica(Pokemon nuovoPokemonAttInCampo) {
+    public void cambioPokemonGrafica() {
         // Debug stampa
-        System.out.println("Ho cambiato pokemon e inserito: " + nuovoPokemonAttInCampo.getName());
+
+        this.pokeInAttacco = controllerBattaglia.getPokemonInAttacco();
+//        this.pokeInAttacco = nuovoPokemonAttInCampo;
+
+        System.out.println("Ho cambiato pokemon e inserito: " + pokeInAttacco.getName());
 
         // Rimposta l'immagine del pokemon in campo
-        Image pokeImg= nuovoPokemonAttInCampo.getImage().getScaledInstance(300, 300,Image.SCALE_SMOOTH);
+        Image pokeImg= pokeInAttacco.getImage().getScaledInstance(300, 300,Image.SCALE_SMOOTH);
         ImageIcon pokeIm = new ImageIcon(pokeImg);
         pokeImgAttacco.setIcon(pokeIm);
         pokeImgAttacco.setVisible(true);
         pokeImgAttacco.repaint();
 
         // Rimposta l'infoPanel del pokemon in campo
-        panelAttacco.setPokemon(nuovoPokemonAttInCampo);
+        panelAttacco.setPokemon(pokeInAttacco);
+        panelAttacco.setHpBar(pokeInAttacco.getHealth());
+        panelAttacco.setExperienceBar(pokeInAttacco.getExpBase());
         panelAttacco.setVisible(true);
         panelAttacco.repaint();
 
         // Cambia il pokemon in attacco
-        this.pokeInAttacco = nuovoPokemonAttInCampo;
         statoBattaglia.setText("Scegli un'azione per " + pokeInAttacco.getName());
-        // Reset del pannello (se necessario)
+        // Reset del pannello altrimenti resta sulla schermata cambio pokemon
         resettaPannello(playerInAttacco);
 
         // Forza il rilayout e il ridisegno del frame
         this.revalidate();
         this.repaint();
+
+//        controllerBattaglia.cambioPokemon(pokeInAttacco);
     }
 
 
     public void aggiornaPokemonEsausto(Pokemon pokeEsausto){
         // rendo l'immagine del pokemon esausto invisibile --> NOTA: quando lo andrò a sostituire con quello nuovo
         // aggiornerò il riferimento dell'immagine del pokemonInCampo e setto la Visibilità a TRUE
-        pokeImgDifesa.setVisible(false);
+        pokeImgAttacco.setVisible(false);
         // stesso ragionamento vale per il pokeInfoPanel
-        panelDifesa.setVisible(false);
+        panelAttacco.setVisible(false);
 
         // NOTA:: FUNZIONA SEMPRE CON IL PRIMO POKEMON DI SQUADRA, NON CON QUELLO ESAUSTO, VA RISOLTO
         // Aggiorno il bottone del pokemon renderlo opaco e non cliccabile
@@ -462,8 +476,8 @@ public class BattleView extends JFrame implements Serializable {
         // Forzo il cambio Pokemon e quindi metto il pannello Azioni sulla scelta del cambio del pokemon
         // metto pan..2 e Cam..2  perché quando c'è la desinenza "2" si indica il pokemon in difesa (implementare lo switch
         // di reference quando si implementa la turnazione
-        forzaPannelloCambio();          // forzo il cambio del pokemon in campo quando si verifica un pokemon esausto
         this.repaint();
+        forzaPannelloCambio();          // forzo il cambio del pokemon in campo quando si verifica un pokemon esausto
 
     }
 
@@ -499,8 +513,6 @@ public class BattleView extends JFrame implements Serializable {
         // Mi dice che questo ritornato è null... non capisco il motivo
 //        boolean turnazioni = controllerBattaglia.isTurnoGiocatore1();
 
-
-
         if(turnazioni){     // se turnazioni == true
             // Caso in cui in ATTACCO c'è il GIOCATORE1
             playerInAttacco = giocatore1;
@@ -513,8 +525,6 @@ public class BattleView extends JFrame implements Serializable {
             pokeImgDifesa = pokemon2Image;
             panPrincAziAtt = panPrincAzi1;
             panPrincAziDif = panPrincAzi2;
-
-            turnazioni = false;                 // aggiorno le turnazioni
         }else{
             // Caso in cui in ATTACCO c'è il GIOCATORE2
             playerInAttacco = giocatore2;
@@ -527,10 +537,10 @@ public class BattleView extends JFrame implements Serializable {
             pokeImgDifesa = pokemon1Image;
             panPrincAziAtt = panPrincAzi2;
             panPrincAziDif = panPrincAzi1;
-
-            turnazioni = true;                 // aggiorno le turnazioni
         }
-        // aggiorno il pannello delle azioni corrente
+        // Aggiorno la turnazione
+        turnazioni = !turnazioni;
+        // Imposto il pannello delle azioni corrente
         setPanAzioniCorrente();
     }
 

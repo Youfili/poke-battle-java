@@ -52,12 +52,12 @@ public class PokeBattleInfoPanel extends JPanel {
         this.pokeInfo = pokeInfo;
     }
 
-    public void setHpBar(JProgressBar hpBar) {
-        this.hpBar = hpBar;
+    public void setHpBar(int valoreVita) {
+        this.hpBar.setValue(valoreVita);
     }
 
-    public void setExperienceBar(JProgressBar experienceBar) {
-        this.experienceBar = experienceBar;
+    public void setExperienceBar(int valoreEsperienza) {
+        this.experienceBar.setValue(valoreEsperienza);
     }
 
     public Pokemon getPokemon() {
