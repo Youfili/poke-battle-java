@@ -55,14 +55,9 @@ public class BattleModel {
     }
 
     private void cicloBattaglia() {
-        if (!squadraEsausta(player1) && !squadraEsausta(player2)) {
+        if (squadraEsausta(player1) || squadraEsausta(player2)) {
 
-            if (!pokemonInAttacco.isAlive()) {
-                // Player 1 esegue il turno
-                aggiornaPokemonEsausto(pokemonInAttacco);
-            }
-        }else {
-            // Una volta che il ciclo è terminato (una squadra è esausta), incremento le vittorie temporanee
+            // Quando una delle due squadre è esausta, incremento le vittorie temporanee e stoppo il cicloBattaglia
             if (squadraEsausta(player1)) {
                 player2.incrementaVittorieTemporanee();
                 // Aggiorno lo Scorer in alto
@@ -72,8 +67,16 @@ public class BattleModel {
                 // aggiorno lo scorer in alto
                 viewBattaglia.aggiornaScorerPunteggio2(player2);
             }
-//        // dopo aver incrementato le vittorie temporanee, inizio una nuova Battaglia
-        nuovaBattaglia();
+            // Inizio una nuova battaglia
+            nuovaBattaglia();
+
+        }else {
+
+            if (!pokemonInAttacco.isAlive()) {
+                // se il pokemon appena switchato in attacco è esausto, allora
+                aggiornaPokemonEsausto(pokemonInAttacco);
+            }
+
         }
     }
 
@@ -127,8 +130,10 @@ public class BattleModel {
 
     public void cambioPokemon(Pokemon pokemonInCampoScelto){
         System.out.println("cambioPokemon nel Model");
-        Pokemon pokeNuovo = pokemonInCampoScelto;
-        this.pokemonInAttacco = pokeNuovo;
+        this.pokemonInAttacco = pokemonInCampoScelto;
+        // Debug per vedere se il riferimento del pokemon è aggiornato
+        System.out.println("Pokemon in attacco nel modello: " + this.pokemonInAttacco.getName());
+
         viewBattaglia.cambioPokemonGrafica();
         // continuo il ciclo battaglia
         cicloBattaglia();

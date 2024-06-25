@@ -313,9 +313,6 @@ public class BattleView extends JFrame implements Serializable {
                 public void actionPerformed(ActionEvent e) {
                     // In questo caso Pokemon1InCampo è il Pokemon che ATTACCA, pokemon2InCampo è il Pokemon che DIFENDE
                     controllerBattaglia.eseguiMoveBotton(bottoneMossa, pokeInAttacco, pokeInDifesa);
-                    // dopo aver eseguito la mossa torno alla possibilità di scegliere se attaccare o cambiare pokemon
-                    // anche se poi passa al pokemon avversario l'attacco
-//                    resettaPannello(giocatore1);
                 }
             });
         }
@@ -332,9 +329,8 @@ public class BattleView extends JFrame implements Serializable {
                     controllerBattaglia.cambioPokemon(bottoneCambio.getPokemonDelBottone());
                     // debug
                     System.out.println("Il pokemon del bottone è: " + bottoneCambio.getPokemonDelBottone().getName());
-//                    // Metodo nel view che va a switchare l'immagine del pokmeon in campo
-//                    cambioPokemonGrafica(bottoneCambio.getPokemonDelBottone());
-//                    resettaPannello(giocatore1);
+
+
                 }
             });
         }
@@ -353,9 +349,6 @@ public class BattleView extends JFrame implements Serializable {
                 public void actionPerformed(ActionEvent e) {
                     // In questo caso Pokemon2InCampo è il Pokemon che ATTACCA, pokemon1InCampo è il Pokemon che DIFENDE
                     controllerBattaglia.eseguiMoveBotton(bottoneMossa, pokeInAttacco, pokeInDifesa);
-                    // dopo aver eseguito la mossa torno alla possibilità di scegliere se attaccare o cambiare pokemon
-                    // anche se poi passa al pokemon avversario l'attacco
-//                    resettaPannello(giocatore2);
                 }
             });
         }
@@ -370,9 +363,6 @@ public class BattleView extends JFrame implements Serializable {
                 public void actionPerformed(ActionEvent e) {
                     // cambio con il pokemon del bottone
                     controllerBattaglia.cambioPokemon(bottoneCambio.getPokemonDelBottone());
-                    // Metodo nel view che va a switchare l'immagine del pokmeon in campo
-//                    cambioPokemonGrafica(bottoneCambio.getPokemonDelBottone());
-//                    resettaPannello(giocatore2);
                 }
             });
         }
@@ -431,7 +421,7 @@ public class BattleView extends JFrame implements Serializable {
         this.pokeInAttacco = controllerBattaglia.getPokemonInAttacco();
 //        this.pokeInAttacco = nuovoPokemonAttInCampo;
 
-        System.out.println("Ho cambiato pokemon e inserito: " + pokeInAttacco.getName());
+        System.out.println("Ho cambiato pokemon e inserito nella View: " + pokeInAttacco.getName());
 
         // Rimposta l'immagine del pokemon in campo
         Image pokeImg= pokeInAttacco.getImage().getScaledInstance(300, 300,Image.SCALE_SMOOTH);
