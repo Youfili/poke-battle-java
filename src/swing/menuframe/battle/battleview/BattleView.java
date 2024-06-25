@@ -79,8 +79,6 @@ public class BattleView extends JFrame implements Serializable {
     private JButton cambioButton1;
     private JButton cambioButton2;
 
-    private Pokemon pokemon1InCampo;
-    private Pokemon pokemon2InCampo;
     private PokeBattleInfoPanel pokeAttInfoPanel;
     private PokeBattleInfoPanel pokeDefInfoPanel;
 
@@ -187,32 +185,32 @@ public class BattleView extends JFrame implements Serializable {
         pannelloAzioni2.add(attaccoButton2);
         pannelloAzioni2.add(cambioButton2);
 
+
         // Inizializzo i pokemon in campo delle due squadre (sono i due pokemon starter
-        pokemon1InCampo = giocatore1.getTeam().get(0);
-        this.pokeInAttacco = pokemon1InCampo;           // inizializzo come pokemon in ATTACCO il Pokemon1InCampo
-        pokemon2InCampo = giocatore2.getTeam().get(0);
-        this.pokeInDifesa = pokemon2InCampo;            // inizializzo come pokemon in DIFES il Pokemon2InCampo
+        this.pokeInAttacco = giocatore1.getTeam().get(0);             // inizializzo come pokemon in ATTACCO il Pokemon1InCampo
+        this.pokeInDifesa = giocatore2.getTeam().get(0);;            // inizializzo come pokemon in DIFESA il Pokemon2InCampo
+
 
         // IMMAGINE POKEMON 1  --> Di Default uso quella del primo pokemon in squadra del giocatore1
-        pokemon1Image = new PokeImgLabel(pokemon1InCampo);
+        pokemon1Image = new PokeImgLabel(pokeInAttacco);
         pokemon1Image.setBounds(10,250,300,300);
         pokeImgAttacco = pokemon1Image;        // setto di default che l'immagine del Poke1 è quella dell'immagine di attacco
         this.add(pokemon1Image);
 
         // IMMAGINE POKEMON 2  --> Di Default uso quella del primo pokemon in squadra del giocatore2
-        pokemon2Image = new PokeImgLabel(pokemon2InCampo);
+        pokemon2Image = new PokeImgLabel(pokeInDifesa);
         pokemon2Image.setBounds(300,100,300,300);
         this.pokeImgDifesa = pokemon2Image;     // setto di default che l'immagine del Poke1 è quella dell'immagine di difesa
         this.add(pokemon2Image);
 
         //PANNELLO INFO POKEMON 1
-        poke1InfoPanel=new PokeBattleInfoPanel(pokemon1InCampo);
+        poke1InfoPanel=new PokeBattleInfoPanel(pokeInAttacco);
         poke1InfoPanel.setBounds(350,380,200,100);
         this.panelAttacco = poke1InfoPanel;                   // inizializzo il panel di attacco come quello del poke1InCampo
         this.add(poke1InfoPanel);
 
         //PANNELLO INFO POKEMON 2
-        poke2InfoPanel=new PokeBattleInfoPanel(pokemon2InCampo);
+        poke2InfoPanel=new PokeBattleInfoPanel(pokeInDifesa);
         poke2InfoPanel.setBounds(50,80,200,100);
         this.panelDifesa = poke2InfoPanel;                   // inizializzo il panel di attacco come quello del poke1InCampo
         this.add(poke2InfoPanel);
@@ -228,10 +226,10 @@ public class BattleView extends JFrame implements Serializable {
 
         /*    SottoPannelli del pannelloAzioni   */
         // SottoPannelli Giocatore 1
-        this.pannelloMosse1 = new PannelloMosse(pokemon1InCampo);
+        this.pannelloMosse1 = new PannelloMosse(pokeInAttacco);
         this.pannelloCambio1 = new PannelloCambioPokemon(giocatore1);
         // SottoPannelli Giocatore 2
-        this.pannelloMosse2 = new PannelloMosse(pokemon2InCampo);
+        this.pannelloMosse2 = new PannelloMosse(pokeInDifesa);
         this.pannelloCambio2 = new PannelloCambioPokemon(giocatore2);
 
 
@@ -280,16 +278,6 @@ public class BattleView extends JFrame implements Serializable {
         // All'inizio viene visualizzato quello del player1
         panPrincAzi1.setVisible(true);
         panPrincAzi2.setVisible(false);
-
-        /*
-        ESEMPIO DI COME CAMBIARE I PANNELLI
-
-            // Cambia al pannello "Mosse1" nel panPrincAzi1
-            cambiaPannello(panPrincAzi1, "Mosse1");
-
-            // Cambia al pannello "Cambio2" nel panPrincAzi2
-            cambiaPannello(panPrincAzi2, "Cambio2");
-        */
 
 
         // Carico il controller e il model
@@ -407,11 +395,11 @@ public class BattleView extends JFrame implements Serializable {
     public void forzaPannelloCambio(){
         if(playerInAttacco == giocatore1) {
             cardLayout1.show(panPrincAzi1, "Cambio1");
-            statoBattaglia.setText(playerInAttacco.getName() + " Pokemon Esauto :(" +"\n" + "Effettua lo scambio");
+            statoBattaglia.setText(playerInAttacco.getName() + " Pokemon Esauto :( "+"Effettua lo scambio");
             // Forzo il giocatore ad avere davanti i tasti per cambiare pokemon
         }else if(playerInAttacco == giocatore2){
             cardLayout2.show(panPrincAzi2, "Cambio2");
-            statoBattaglia.setText(playerInAttacco.getName() + " Pokemon Esauto :(" +"\n" + "Effettua lo scambio");
+            statoBattaglia.setText(playerInAttacco.getName() + " Pokemon Esauto :( "+"Effettua lo scambio");
             // Forzo il giocatore ad avere davanti i tasti per cambiare pokemon
         }
     }
@@ -539,6 +527,114 @@ public class BattleView extends JFrame implements Serializable {
     }
 
 
+    public void setpokeAttPanel(int vitaPostAttacco) {
+        this.panelAttacco.setHpBar(vitaPostAttacco);
+    }
+
+    public void scambiaTurnazioni(Pokemon vecchioPokemonInAttacco, Pokemon vecchioPokemonInDifesa) {
+        this.pokeInAttacco = vecchioPokemonInAttacco;
+        this.pokeInDifesa = vecchioPokemonInDifesa;
+
+    }
+
+
+    public void inizializzaView(Player giocatore1, Player giocatore2) {
+
+        playerInAttacco = giocatore1;       // inizializzo in attacco il giocatore1
+        playerInDifesa = giocatore2;        // inizializzo in difesa il giocatore2
+
+        // Inizializzo i pokemon in campo delle due squadre (sono i due pokemon starter)
+        this.pokeInAttacco = giocatore1.getTeam().get(0);             // inizializzo come pokemon in ATTACCO il Pokemon1InCampo
+        this.pokeInDifesa = giocatore2.getTeam().get(0);;            // inizializzo come pokemon in DIFESA il Pokemon2InCampo
+
+        // Rimuovo prima i componenti visivi esistenti
+        if (pokemon1Image != null) this.remove(pokemon1Image);
+        if (pokemon2Image != null) this.remove(pokemon2Image);
+        if (poke1InfoPanel != null) this.remove(poke1InfoPanel);
+        if (poke2InfoPanel != null) this.remove(poke2InfoPanel);
+        if (panPrincAzi1 != null) this.remove(panPrincAzi1);
+        if (panPrincAzi2 != null) this.remove(panPrincAzi2);
+
+        // Riaggiungo i componenti visivi aggiornati
+
+        // IMMAGINE POKEMON 1  --> Di Default uso quella del primo pokemon in squadra del giocatore1
+        pokemon1Image = new PokeImgLabel(pokeInAttacco);
+        pokemon1Image.setBounds(10,250,300,300);
+        pokeImgAttacco = pokemon1Image;        // setto di default che l'immagine del Poke1 è quella dell'immagine di attacco
+        this.add(pokemon1Image);
+
+        // IMMAGINE POKEMON 2  --> Di Default uso quella del primo pokemon in squadra del giocatore2
+        pokemon2Image = new PokeImgLabel(pokeInDifesa);
+        pokemon2Image.setBounds(300,100,300,300);
+        this.pokeImgDifesa = pokemon2Image;     // setto di default che l'immagine del Poke1 è quella dell'immagine di difesa
+        this.add(pokemon2Image);
+
+        //PANNELLO INFO POKEMON 1
+        poke1InfoPanel = new PokeBattleInfoPanel(pokeInAttacco);
+        poke1InfoPanel.setBounds(350,380,200,100);
+        this.panelAttacco = poke1InfoPanel;                   // inizializzo il panel di attacco come quello del poke1InCampo
+        this.add(poke1InfoPanel);
+
+        //PANNELLO INFO POKEMON 2
+        poke2InfoPanel = new PokeBattleInfoPanel(pokeInDifesa);
+        poke2InfoPanel.setBounds(50,80,200,100);
+        this.panelDifesa = poke2InfoPanel;                   // inizializzo il panel di attacco come quello del poke1InCampo
+        this.add(poke2InfoPanel);
+
+        // Pannello per lo stato della battaglia
+        statoBattaglia.setText(playerInAttacco.getName() + " Scegli cosa fare:");
+
+        // Aggiorno i Bottoni dei pokemon selezionabili e che possono entrare in battaglia
+        // BOTTONI PANNELLO CAMBIO POKEMON 1
+        for (Component bottone1 : pannelloCambio1.getComponents()) {
+            // Casting del Component in PokeButton
+            PokeButton bottoneCambio1 = (PokeButton) bottone1;
+            bottoneCambio1.setEnabled(true);
+            bottoneCambio1.setOpaque(false);
+        }
+        // BOTTONI PANNELLO CAMBIO POKEMON 1
+        for (Component bottone2 : pannelloCambio2.getComponents()) {
+            // Casting del Component in PokeButton
+            PokeButton bottoneCambio2 = (PokeButton) bottone2;
+            bottoneCambio2.setEnabled(true);
+            bottoneCambio2.setOpaque(false);
+        }
+
+        // Ricreo il CardLayout
+        cardLayout1 = new CardLayout();
+        panPrincAzi1.setLayout(cardLayout1);
+        cardLayout2 = new CardLayout();
+        panPrincAzi2.setLayout(cardLayout2);
+
+        // Sistemo il CardLayout e aggiungo i pannelli
+        panPrincAzi1.setBounds(245, 500, 345, 100);
+        panPrincAzi1.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createRaisedBevelBorder(), BorderFactory.createLoweredBevelBorder()));
+        panPrincAzi1.add(pannelloAzioni1, "Azioni1");
+        panPrincAzi1.add(pannelloMosse1, "Mosse1");
+        panPrincAzi1.add(pannelloCambio1, "Cambio1");
+
+        panPrincAzi2.setBounds(245, 500, 345, 100);
+        panPrincAzi2.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createRaisedBevelBorder(), BorderFactory.createLoweredBevelBorder()));
+        panPrincAzi2.add(pannelloAzioni2, "Azioni2");
+        panPrincAzi2.add(pannelloMosse2, "Mosse2");
+        panPrincAzi2.add(pannelloCambio2, "Cambio2");
+
+        // Creo i riferimenti iniziali di default
+        this.panPrincAziAtt = panPrincAzi1;
+        this.panPrincAziDif = panPrincAzi2;
+
+        // All'inizio viene visualizzato quello del player1
+        panPrincAzi1.setVisible(true);
+        panPrincAzi2.setVisible(false);
+
+        // Aggiorno i componenti della vista
+        this.revalidate();
+        this.repaint();
+    }
+
+
+
+
 
 
 
@@ -615,13 +711,5 @@ public class BattleView extends JFrame implements Serializable {
     }
 
 
-    public void setpokeAttPanel(int vitaPostAttacco) {
-        this.panelAttacco.setHpBar(vitaPostAttacco);
-    }
 
-    public void scambiaTurnazioni(Pokemon vecchioPokemonInAttacco, Pokemon vecchioPokemonInDifesa) {
-        this.pokeInAttacco = vecchioPokemonInAttacco;
-        this.pokeInDifesa = vecchioPokemonInDifesa;
-
-    }
 }

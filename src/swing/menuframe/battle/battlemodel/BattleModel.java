@@ -29,6 +29,7 @@ public class BattleModel {
         this.player2 = player2;
         this.viewBattaglia = viewBattaglia;
 
+
         // NOTA: il "playerInTurno" è il playerInAttacco chiaramente. --> il player in Attacco è il player1 per iniziare, poi si switchano
         iniziaPartita();            // avvio l'inizio della partita
 
@@ -40,24 +41,28 @@ public class BattleModel {
     }
 
     private void nuovaBattaglia() {
+
         if (player1.getVittorieTemporanee() >= 3 || player2.getVittorieTemporanee() >= 3) {
             terminaPartita();
         }
         // ALTRIMENTI
         ripristinaVitaPokemon(player1);
         ripristinaVitaPokemon(player2);
+        ripristinaView(player1, player2);
+
         // Impsto i turni e i Pokemon Iniziali
         turnoGiocatore1 = true;
         pokemonInAttacco = player1.getTeam().get(0);
         pokemonInDifesa = player2.getTeam().get(0);
-//        viewBattaglia.revalidate();
-//        viewBattaglia.repaint();
+
         cicloBattaglia();
     }
 
-    private void cicloBattaglia() {
+    private void ripristinaView(Player player1, Player player2) {
+//        viewBattaglia.inizializzaView(player1, player2);
+    }
 
-        System.out.println("Dopo Ciclo pokemon in attacco: " + this.pokemonInAttacco.getName());
+    private void cicloBattaglia() {
 
         if (squadraEsausta(player1) || squadraEsausta(player2)) {
             // Quando una delle due squadre è esausta, incremento le vittorie temporanee e stoppo il cicloBattaglia
@@ -65,10 +70,15 @@ public class BattleModel {
                 player2.incrementaVittorieTemporanee();
                 // Aggiorno lo Scorer in alto
                 viewBattaglia.aggiornaScorerPunteggio1(player2);
+                viewBattaglia.repaint();
+                JOptionPane.showMessageDialog(new JButton("Nuova Partita"),player2.getName() + " Ha vinto, ora si trova a " + player2.getVittorieTemporanee() + " Vittorie!");
+
             } else {
                 player1.incrementaVittorieTemporanee();
                 // aggiorno lo scorer in alto
-                viewBattaglia.aggiornaScorerPunteggio2(player2);
+                viewBattaglia.aggiornaScorerPunteggio2(player1);
+                viewBattaglia.repaint();
+                JOptionPane.showMessageDialog(new JButton("Nuova Partita"),player1.getName() + " Ha vinto, ora si trova a " + player1.getVittorieTemporanee() + " Vittorie!");
             }
             // Inizio una nuova battaglia
             nuovaBattaglia();
@@ -119,6 +129,7 @@ public class BattleModel {
         viewBattaglia.scambiaTurnazioni(this.pokemonInDifesa, this.pokemonInAttacco);
 
 
+        System.out.println("Posizioni nel prossimo Turno: ");
         System.out.println("Pokemon in attacco nel MODEL : " + pokemonInAttacco.getName());
         System.out.println("Pokemon in difesa nel MODEL : " + pokemonInDifesa.getName());
     }
@@ -156,7 +167,9 @@ public class BattleModel {
         for (Pokemon pokemon : player.getTeam()) {
             pokemon.setHealth(100);
             pokemon.setAlive(true);
+            System.out.println(pokemon);
         }
+
     }
 
     private void terminaPartita() {
