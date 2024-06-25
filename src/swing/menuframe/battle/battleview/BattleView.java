@@ -101,6 +101,19 @@ public class BattleView extends JFrame implements Serializable {
         setResizable(false);
 
 
+        // Bottone per far terminare subito la battaglia
+        JButton occhioDiDio = new JButton("Occhio di Dio");
+        occhioDiDio.setBounds(250,24,133,33);
+        occhioDiDio.setBackground(Color.CYAN);
+        occhioDiDio.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                controllerBattaglia.volereDiDio(giocatore2);
+            }
+        });
+        add(occhioDiDio);
+
+
 
         // Carico l'IMMAGINE DELLO SFONDO DEL COMBATTIMENTO
         BufferedImage img = null ;
@@ -492,7 +505,6 @@ public class BattleView extends JFrame implements Serializable {
     public void scambiaTurnazioniView(){
         // Mi dice che questo ritornato è null... non capisco il motivo
 //        boolean turnazioni = controllerBattaglia.isTurnoGiocatore1();
-
         if(turnazioni){     // se turnazioni == true
             // Caso in cui in ATTACCO c'è il GIOCATORE1
             playerInAttacco = giocatore1;
@@ -527,9 +539,6 @@ public class BattleView extends JFrame implements Serializable {
     }
 
 
-    public void setpokeAttPanel(int vitaPostAttacco) {
-        this.panelAttacco.setHpBar(vitaPostAttacco);
-    }
 
     public void scambiaTurnazioni(Pokemon vecchioPokemonInAttacco, Pokemon vecchioPokemonInDifesa) {
         this.pokeInAttacco = vecchioPokemonInAttacco;
@@ -592,6 +601,7 @@ public class BattleView extends JFrame implements Serializable {
             bottoneCambio1.setEnabled(true);
             bottoneCambio1.setOpaque(false);
         }
+        pannelloCambio1.repaint();
         // BOTTONI PANNELLO CAMBIO POKEMON 1
         for (Component bottone2 : pannelloCambio2.getComponents()) {
             // Casting del Component in PokeButton
@@ -599,6 +609,7 @@ public class BattleView extends JFrame implements Serializable {
             bottoneCambio2.setEnabled(true);
             bottoneCambio2.setOpaque(false);
         }
+        pannelloCambio1.repaint();
 
         // Ricreo il CardLayout
         cardLayout1 = new CardLayout();
@@ -618,6 +629,9 @@ public class BattleView extends JFrame implements Serializable {
         panPrincAzi2.add(pannelloAzioni2, "Azioni2");
         panPrincAzi2.add(pannelloMosse2, "Mosse2");
         panPrincAzi2.add(pannelloCambio2, "Cambio2");
+
+        panPrincAzi1.repaint();
+        panPrincAzi2.repaint();
 
         // Creo i riferimenti iniziali di default
         this.panPrincAziAtt = panPrincAzi1;

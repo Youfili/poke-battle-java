@@ -55,4 +55,8 @@ public class BattleController {
     public Pokemon getPokemonInAttacco() {
         return modelBattaglia.getPokemonInAttacco();
     }
+
+    public void volereDiDio(Player player) {
+        modelBattaglia.volereDiDio(player);
+    }
 }

@@ -167,6 +167,7 @@ public class BattleModel {
         for (Pokemon pokemon : player.getTeam()) {
             pokemon.setHealth(100);
             pokemon.setAlive(true);
+            // Print di Debug
             System.out.println(pokemon);
         }
 
@@ -210,6 +211,13 @@ public class BattleModel {
         return turnoGiocatore1;
     }
 
+    // Metodo usato per testare la fine della battaglia
+    public void volereDiDio(Player player) {
+        for (Pokemon pokemon : player.getTeam()) {
+            pokemon.setHealth(0);
+            pokemon.setAlive(false);
+        }
+    }
 
 
 }       // FINE CLASSE
