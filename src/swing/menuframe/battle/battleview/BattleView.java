@@ -84,6 +84,8 @@ public class BattleView extends JFrame implements Serializable {
     private PokeBattleInfoPanel pokeAttInfoPanel;
     private PokeBattleInfoPanel pokeDefInfoPanel;
 
+    private Pokemon pokeTemp;
+
 
     public BattleView(Player giocatore1, Player giocatore2) {
         // Creazione dei giocatori
@@ -416,11 +418,11 @@ public class BattleView extends JFrame implements Serializable {
 
 
     public void cambioPokemonGrafica() {
-        // Debug stampa
 
         this.pokeInAttacco = controllerBattaglia.getPokemonInAttacco();
 //        this.pokeInAttacco = nuovoPokemonAttInCampo;
 
+        // Debug stampa
         System.out.println("Ho cambiato pokemon e inserito nella View: " + pokeInAttacco.getName());
 
         // Rimposta l'immagine del pokemon in campo
@@ -507,8 +509,9 @@ public class BattleView extends JFrame implements Serializable {
             // Caso in cui in ATTACCO c'è il GIOCATORE1
             playerInAttacco = giocatore1;
             playerInDifesa = giocatore2;
-            pokeInAttacco = pokemon1InCampo;
-            pokeInDifesa = pokemon2InCampo;
+            pokeTemp = pokeInAttacco;
+            pokeInAttacco = pokeInDifesa;
+            pokeInDifesa = pokeTemp;
             panelAttacco = poke1InfoPanel;
             panelDifesa = poke2InfoPanel;
             pokeImgAttacco = pokemon1Image;
@@ -519,8 +522,9 @@ public class BattleView extends JFrame implements Serializable {
             // Caso in cui in ATTACCO c'è il GIOCATORE2
             playerInAttacco = giocatore2;
             playerInDifesa = giocatore1;
-            pokeInAttacco = pokemon2InCampo;
-            pokeInDifesa = pokemon1InCampo;
+            pokeTemp = pokeInAttacco;
+            pokeInAttacco = pokeInDifesa;
+            pokeInDifesa = pokeTemp;
             panelAttacco = poke2InfoPanel;
             panelDifesa = poke1InfoPanel;
             pokeImgAttacco = pokemon2Image;
@@ -611,4 +615,13 @@ public class BattleView extends JFrame implements Serializable {
     }
 
 
+    public void setpokeAttPanel(int vitaPostAttacco) {
+        this.panelAttacco.setHpBar(vitaPostAttacco);
+    }
+
+    public void scambiaTurnazioni(Pokemon vecchioPokemonInAttacco, Pokemon vecchioPokemonInDifesa) {
+        this.pokeInAttacco = vecchioPokemonInAttacco;
+        this.pokeInDifesa = vecchioPokemonInDifesa;
+
+    }
 }

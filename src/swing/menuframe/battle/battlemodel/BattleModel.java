@@ -34,6 +34,7 @@ public class BattleModel {
 
     } // Fine Costruttore
 
+
     private void iniziaPartita() {
         nuovaBattaglia();
     }
@@ -55,8 +56,10 @@ public class BattleModel {
     }
 
     private void cicloBattaglia() {
-        if (squadraEsausta(player1) || squadraEsausta(player2)) {
 
+        System.out.println("Dopo Ciclo pokemon in attacco: " + this.pokemonInAttacco.getName());
+
+        if (squadraEsausta(player1) || squadraEsausta(player2)) {
             // Quando una delle due squadre è esausta, incremento le vittorie temporanee e stoppo il cicloBattaglia
             if (squadraEsausta(player1)) {
                 player2.incrementaVittorieTemporanee();
@@ -76,15 +79,12 @@ public class BattleModel {
                 // se il pokemon appena switchato in attacco è esausto, allora
                 aggiornaPokemonEsausto(pokemonInAttacco);
             }
-
         }
     }
 
 
     /* Metodi che influiscono sulla logica della battaglia     */
     public void eseguiMossa(MoveButton selectedMove, Pokemon pokemonInCampoAttaccante, Pokemon pokemonInCampoDifensore){
-        this.pokemonInAttacco = pokemonInCampoAttaccante;
-        this.pokemonInDifesa = pokemonInCampoDifensore;
 
         // Faccio eseguire la Mossa
         Move mossaScelta = selectedMove.getMove();
@@ -98,7 +98,6 @@ public class BattleModel {
             // Altrimenti il pokemon è Esausto!
             pokemonInDifesa.setHealth(0);       // imposto la vita a 0 del pokemon
             pokemonInDifesa.setAlive(false);    // imposto che il pokemon non è più vivo
-
         }
         // Dopo aver eseguito l'attacco, cambia il turno
         turnoGiocatore1 = !turnoGiocatore1;             // inverto il valore del turno
@@ -117,6 +116,11 @@ public class BattleModel {
         // Scambio i ruoli dei pokemon in campo
         setPokemonInAttacco(vecchioPokemonInCampoDifensore);
         setPokemonInDifesa(vecchioPokemonInCampoAttaccante);
+        viewBattaglia.scambiaTurnazioni(this.pokemonInDifesa, this.pokemonInAttacco);
+
+
+        System.out.println("Pokemon in attacco nel MODEL : " + pokemonInAttacco.getName());
+        System.out.println("Pokemon in difesa nel MODEL : " + pokemonInDifesa.getName());
     }
 
     public void aggiornaPokemonEsausto(Pokemon pokeEsausto){
@@ -132,9 +136,9 @@ public class BattleModel {
         System.out.println("cambioPokemon nel Model");
         this.pokemonInAttacco = pokemonInCampoScelto;
         // Debug per vedere se il riferimento del pokemon è aggiornato
-        System.out.println("Pokemon in attacco nel modello: " + this.pokemonInAttacco.getName());
-
         viewBattaglia.cambioPokemonGrafica();
+
+        System.out.println("Pokemon in attacco nel modello: " + this.pokemonInAttacco.getName());
         // continuo il ciclo battaglia
         cicloBattaglia();
     }

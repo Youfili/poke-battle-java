@@ -35,6 +35,8 @@ public class BattleController {
 
     public void eseguiMoveBotton(MoveButton selectedMove, Pokemon pokemonInCampoAttacco, Pokemon pokemonInCampoDifensore){
         this.modelBattaglia.eseguiMossa(selectedMove, pokemonInCampoAttacco, pokemonInCampoDifensore);
+        System.out.println("Pokemon in Attacco: " + pokemonInCampoAttacco.getName());
+        System.out.println("Pokemon in Difesa: " + pokemonInCampoDifensore.getName());
         // Aggiorno la barraHp del pokemon difensore
         // NOTA: getPokeInfoPanel va generalizzato come pannello della difesa (per decrementare vita). --> e quello di attacco va generalizzato come PokeInfoPanelAttacco (serve a aumentare exp)
         this.viewBattaglia.getPokeAttPanel().getHpBar().setValue(pokemonInCampoDifensore.getHealth());
