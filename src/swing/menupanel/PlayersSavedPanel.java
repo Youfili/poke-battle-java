@@ -21,6 +21,9 @@ public class PlayersSavedPanel extends JPanel {
     private Player player;
     private Player player1;
     private Player player2;
+    private JButton bottoneConferma = new JButton();
+    private JButton selectPlayerButton1 = new JButton("Player 1");
+    private JButton selectPlayerButton2 = new JButton("Player 2");
 
     public PlayersSavedPanel(List<Player> players) {
         this.listaGiocatoriSalvati = players;
@@ -60,9 +63,9 @@ public class PlayersSavedPanel extends JPanel {
         bottoniPlayer.setBounds(465, 380, 115, 80);
 
         // Bottoni per switchare tra la scelta del player
-        JButton selectPlayerButton1 = new JButton("Player 1");
+        selectPlayerButton1.setText("Player 1");
         selectPlayerButton1.setBounds(0,0,55,35);
-        JButton selectPlayerButton2 = new JButton("Player 2");
+        selectPlayerButton2.setText("Player 2");
         selectPlayerButton2.setBounds(0,0,55,35);
 
         // Inserisco i bottoni nel pannello
@@ -76,7 +79,7 @@ public class PlayersSavedPanel extends JPanel {
         // Creo il pannello che conterrà i bottoni
 
         // Bottoni per switchare tra la scelta del player
-        JButton bottoneConferma = new JButton("Conferma");
+        bottoneConferma.setText("Conferma");
         bottoneConferma.setBounds(465, 500, 115, 70);
 
 
@@ -167,31 +170,44 @@ public class PlayersSavedPanel extends JPanel {
             return player;
         }
     }
-    public Player getPlayer2(){
-        return player2;
+
+    // GETTERS E SETTERS
+
+
+    public JButton getBottoneConferma() {
+        return bottoneConferma;
     }
-    public Player getPlayer1(){
-        return player1;
+    public JButton getSelectPlayerButton1() {
+        return selectPlayerButton1;
+    }
+    public JButton getSelectPlayerButton2() {
+        return selectPlayerButton2;
+    }
+    public void setPlayerInfoTextArea(JTextArea playerInfoTextArea) {
+        this.playerInfoTextArea = playerInfoTextArea;
     }
 
-    public static void main(String[] args) {
-         Database databaseDatiPlayer = new Database();
-        SwingUtilities.invokeLater(() -> {
-            JFrame frame = new JFrame("Players Saved Panel Test");
-            frame.setSize(600, 650);
-            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-            // Creazione del pannello PlayersSavedPanel con dei giocatori di esempio
-            try {
-                databaseDatiPlayer.caricaDaFile(databaseDatiPlayer.getPathFileDatabase());
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-
-            PlayersSavedPanel panel = new PlayersSavedPanel(databaseDatiPlayer.getPlayerSalvati());
-            frame.add(panel);
-
-            frame.setVisible(true);
-        });
-    }
+//
+//    // MAIN PROVA
+//    public static void main(String[] args) {
+//         Database databaseDatiPlayer = new Database();
+//        SwingUtilities.invokeLater(() -> {
+//            JFrame frame = new JFrame("Players Saved Panel Test");
+//            frame.setSize(600, 650);
+//            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//
+//            // Creazione del pannello PlayersSavedPanel con dei giocatori di esempio
+//            try {
+//                databaseDatiPlayer.caricaDaFile(databaseDatiPlayer.getPathFileDatabase());
+//            } catch (IOException e) {
+//                throw new RuntimeException(e);
+//            }
+//
+//            PlayersSavedPanel panel = new PlayersSavedPanel(databaseDatiPlayer.getPlayerSalvati());
+//            frame.add(panel);
+//
+//            frame.setVisible(true);
+//        });
+//    }
 }

@@ -1,10 +1,11 @@
 package swing.menuframe;
 
+import database.Database;
 import swing.BackgroundImageJFrame;
-import swing.menuframe.battle.battleview.BattleView;
 import swing.menupanel.ChoosePlayerPanel;
 import swing.menupanel.GameSelectPanel;
 import players.Player;
+import swing.menupanel.PlayersSavedPanel;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -14,6 +15,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import static java.awt.BorderLayout.*;
 
@@ -22,8 +24,11 @@ public class Menu extends JFrame {
         private GameSelectPanel gameSelect;
         private ChoosePlayerPanel choosePlayerPanel;
         private JButton maleButton, femaleButton, continueToChooseTeamButton, backToChoiceGame;
-        private ArrayList<Player> playerCreated;   // creo un ArrayList di giocatori (dovranno essere minimo due)
-
+        private List<Player> giocatoriSalvati = new ArrayList<>();   // creo un ArrayList di giocatori (dovranno essere minimo due)
+        private PlayersSavedPanel pannelloContinuaPartita;
+        private JButton bottoneConferma;
+        private JButton selectPlayerButton1;
+        private JButton selectPlayerButton2;
 
         // Costruttore Menu
         public Menu() {
@@ -33,23 +38,23 @@ public class Menu extends JFrame {
             setResizable(false);
             setLayout(new BorderLayout());      // Layout del Menu
 
-            // Inizializzo l'arrayList PLAYER CREATI con i due elementi a null
-            playerCreated = new ArrayList<Player>();
-            playerCreated.add(null);
-            playerCreated.add(null);
-
 
             // creo l'istanza di GameSelectPanel
             gameSelect = new GameSelectPanel(new GridLayout(2,1));      // Grid Layout con 3 colonne
             // Creo l'istanza di ChoosePlayerPanel
-            choosePlayerPanel = new ChoosePlayerPanel(new BorderLayout()); // GridLayout con 2 righe e 1 colonna
+            choosePlayerPanel = new ChoosePlayerPanel(new BorderLayout());
 
+            // Devo caricare gli elementi all'interno del fileDataBase
+            Database db = new Database();
+            giocatoriSalvati = db.getPlayerSalvati();
+            pannelloContinuaPartita = new PlayersSavedPanel(giocatoriSalvati);
 
 
             // Creo un panels di Cards, cosi posso muovermi nella cards
             JPanel panels = new JPanel(new CardLayout());
-            panels.add(gameSelect, "Panel 1");
-            panels.add(choosePlayerPanel, "Panel 2");
+            panels.add(gameSelect, "Panel GameSelect");
+            panels.add(choosePlayerPanel, "Panel NuovaPartita");
+            panels.add(pannelloContinuaPartita, "Panel ContinuaPartita");
 
 
             // Aggiungo i Panelli (composti dalle carte) all'interno di un Conteiner
@@ -97,15 +102,15 @@ public class Menu extends JFrame {
                         ImageIcon imageIcon = new ImageIcon(dimg);
 
                         // SOSTITUIBILE CON UNO SWITCH CASE --> DA FARE
-                        if (playerCreated.size() >= 2) {
-                                playerCreated.remove(0);    // prima rimuovo l'ultimo ad essere stato aggiunto
+                        if (Menu.this.giocatoriSalvati.size() >= 2) {
+                                Menu.this.giocatoriSalvati.remove(0);    // prima rimuovo l'ultimo ad essere stato aggiunto
                                 // Poi aggiungo il player
-                                playerCreated.add(new Player(name, 0, 0, "Male"));
-                                playerCreated.get(playerCreated.size()-1).setImage(imageIcon); // Setto l'immagine del player creato (ultimo ad essere stato aggiunto)
+                                Menu.this.giocatoriSalvati.add(new Player(name, 0, 0, "Male"));
+                                Menu.this.giocatoriSalvati.get(Menu.this.giocatoriSalvati.size()-1).setImage(imageIcon); // Setto l'immagine del player creato (ultimo ad essere stato aggiunto)
 //                        playerChoosen++;            // incremento il numero di giocatori creati
                         } else {
-                            playerCreated.add(new Player(name, 0, 0, "Male"));
-                            playerCreated.get(playerCreated.size()-1).setImage(imageIcon); // Setto l'immagine del player creato (ultimo ad essere stato aggiunto)
+                            Menu.this.giocatoriSalvati.add(new Player(name, 0, 0, "Male"));
+                            Menu.this.giocatoriSalvati.get(Menu.this.giocatoriSalvati.size()-1).setImage(imageIcon); // Setto l'immagine del player creato (ultimo ad essere stato aggiunto)
 //                        playerChoosen++;            // incremento il numero di giocatori creati
 
                         }
@@ -133,15 +138,15 @@ public class Menu extends JFrame {
                         ImageIcon imageIcon = new ImageIcon(dimg);
 
                         // SOSTITUIBILE CON UNO SWITCH CASE --> DA FARE
-                        if (playerCreated.size() >= 2) {
-                            playerCreated.remove(0);    // prima rimuovo l'ultimo ad essere stato aggiunto
+                        if (Menu.this.giocatoriSalvati.size() >= 2) {
+                            Menu.this.giocatoriSalvati.remove(0);    // prima rimuovo l'ultimo ad essere stato aggiunto
                             // Poi aggiungo il player
-                            playerCreated.add(new Player(name, 0, 0, "Female"));
-                            playerCreated.get(playerCreated.size()-1).setImage(imageIcon); // Setto l'immagine del player creato (ultimo ad essere stato aggiunto)
+                            Menu.this.giocatoriSalvati.add(new Player(name, 0, 0, "Female"));
+                            Menu.this.giocatoriSalvati.get(Menu.this.giocatoriSalvati.size()-1).setImage(imageIcon); // Setto l'immagine del player creato (ultimo ad essere stato aggiunto)
 //                        playerChoosen++;            // incremento il numero di giocatori creati
                         } else {
-                            playerCreated.add(new Player(name, 0, 0, "Female"));
-                            playerCreated.get(playerCreated.size()-1).setImage(imageIcon); // Setto l'immagine del player creato (ultimo ad essere stato aggiunto)
+                            Menu.this.giocatoriSalvati.add(new Player(name, 0, 0, "Female"));
+                            Menu.this.giocatoriSalvati.get(Menu.this.giocatoriSalvati.size()-1).setImage(imageIcon); // Setto l'immagine del player creato (ultimo ad essere stato aggiunto)
 //                        playerChoosen++;            // incremento il numero di giocatori creati
 
                         }
@@ -155,10 +160,10 @@ public class Menu extends JFrame {
             continueToChooseTeamButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    if(playerCreated.get(0)!= null && playerCreated.get(1)!= null) {
+                    if(Menu.this.giocatoriSalvati.get(0)!= null && Menu.this.giocatoriSalvati.get(1)!= null) {
                         // Se i due giocatori non sono null, quindi sono stati modificati
                                         // player1             // player2
-                        JOptionPane.setRootFrame( new ChooseTeam(playerCreated.get(0), playerCreated.get(1)));
+                        JOptionPane.setRootFrame( new ChooseTeam(Menu.this.giocatoriSalvati.get(0), Menu.this.giocatoriSalvati.get(1)));
                         setVisible(false);
                     }
                 }
@@ -188,11 +193,13 @@ public class Menu extends JFrame {
 
 //            // PANNELLO " gameSelect "  --> Bottoni vecchia e nuova Partita
             JButton startButton = gameSelect.getStartButton();
-//            startButton.setBounds(115,350,350,85);//x axis, y axis, width, height
+//
             // Aggiungo il listener al mio StartButton
+            // StartButton mi inizia una NUOVA PARTITA
             startButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    cl.next(panels);
+                    // Mi sposto nel pannello della NuovaPartita (quindi quello della creazione del personaggio)
+                    cl.show(panels, "Panel NuovaPartita");
                 }
             });
 
@@ -200,9 +207,8 @@ public class Menu extends JFrame {
             // Aggiungo il listener al mio StartButton
             continueButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    // Implementare un pannello dove vengono salvati i giocatori, e dove verranno scelti per giocare
-                    // Il pannello ripreso da un file in cui andiamo a salvare tutti i giocatori all'interno di questo TextField
-
+                    // Mi sposto nel pannello del Continua Partita, quello con i playerSalvati.
+                    cl.show(panels, "Panel ContinuaPartita");
                 }
             });
 

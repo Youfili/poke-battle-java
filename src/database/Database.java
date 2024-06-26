@@ -71,6 +71,11 @@ public class Database implements Serializable{
     }
 
     public List<Player> getPlayerSalvati() {
+        try {
+            caricaDaFile(getPathFileDatabase());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         return playerSalvati;
     }
 

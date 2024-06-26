@@ -1,8 +1,6 @@
 package swing.menuframe.battle.battleview;
 
 import swing.BackgroundImageJFrame;
-import swing.menuframe.ChooseTeam;
-import swing.menuframe.Menu;
 import swing.menuframe.battle.battlecontroller.BattleController;
 import moves.base.Action;
 import moves.base.BodySlam;
@@ -12,7 +10,6 @@ import players.Player;
 import pokemon.Pokedex;
 import pokemon.Pokemon;
 import swing.menuframe.battle.battlemodel.BattleModel;
-import swing.menuframe.battle.battlemodel.FrameProvaVictPanel;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -23,7 +20,6 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
-import java.sql.SQLOutput;
 
 public class BattleView extends JFrame implements Serializable {
 
