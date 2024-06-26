@@ -2,10 +2,16 @@ package players;
 
 import pokemon.Pokemon;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 
 // Estendo la classe Serializable cosi poter salvare su file il Player
@@ -24,6 +30,7 @@ public class Player implements Serializable {
     private int vittorieTemporanee;
 
     private int id;
+    private String imageBase64; // For storing the serialized image
 
 
     //Constructor
@@ -39,8 +46,46 @@ public class Player implements Serializable {
 
     }
 
-    public Player(){
+    // Getter and Setter for image with conversion
+    public ImageIcon getImage() {
+        if (image == null && imageBase64 != null) {
+            try {
+                byte[] imageBytes = Base64.getDecoder().decode(imageBase64);
+                ByteArrayInputStream bais = new ByteArrayInputStream(imageBytes);
+                BufferedImage bufferedImage = ImageIO.read(bais);
+                image = new ImageIcon(bufferedImage);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return image;
+    }
 
+    public void setImage(ImageIcon image) {
+        this.image = image;
+        try {
+            BufferedImage bufferedImage = new BufferedImage(image.getIconWidth(), image.getIconHeight(), BufferedImage.TYPE_INT_ARGB);
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            ImageIO.write(bufferedImage, "png", baos);
+            byte[] imageBytes = baos.toByteArray();
+            this.imageBase64 = Base64.getEncoder().encodeToString(imageBytes);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void writeObject(java.io.ObjectOutputStream out) throws IOException {
+        out.defaultWriteObject();
+    }
+
+    private void readObject(java.io.ObjectInputStream in) throws IOException, ClassNotFoundException {
+        in.defaultReadObject();
+        if (imageBase64 != null) {
+            byte[] imageBytes = Base64.getDecoder().decode(imageBase64);
+            ByteArrayInputStream bais = new ByteArrayInputStream(imageBytes);
+            BufferedImage bufferedImage = ImageIO.read(bais);
+            image = new ImageIcon(bufferedImage);
+        }
     }
 
     //Stampa i nomi dei pokemon nella squadra
@@ -181,13 +226,13 @@ public class Player implements Serializable {
     public void setTeam(List<Pokemon> team) {
         this.team = team;
     }
-    public ImageIcon getImage() {
-        return image;
-    }
-    public void setImage(ImageIcon image) {
-        this.image = image;
-
-    }
+//    public ImageIcon getImage() {
+//        return image;
+//    }
+//    public void setImage(ImageIcon image) {
+//        this.image = image;
+//
+//    }
 
 
     public void incrementaVittorieTemporanee(){

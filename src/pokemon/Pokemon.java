@@ -8,10 +8,9 @@ import swing.menuframe.battle.battleview.PokeButton;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.io.Serializable;
+import java.io.*;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 
 /**
@@ -39,12 +38,12 @@ public  class Pokemon implements Serializable {
      private Pokemon evolution;
 
      private List<Move> moves=new ArrayList<>();
-     private List<DefaultMoves> defaultMoves=new ArrayList<>(); // questo va inizializzato con le mosse base
+     private List<DefaultMoves> defaultMoves= new ArrayList<>(); // questo va inizializzato con le mosse base
 
-     private Image image;
-     private String imagePath;
-
-     private PokeButton buttonAssociato;
+    private transient Image image; // Transient to avoid serialization issues
+    private String imageBase64; // For storing the serialized image
+    private String imagePath;
+    private PokeButton buttonAssociato;
 
 
     //Constructor
@@ -78,21 +77,20 @@ public  class Pokemon implements Serializable {
         this.evolutionLevel = evolutionLevel;
         this.evolution = evolution;
         this.imagePath = imgPath;
-
         this.health=maxPs;
 
         //this.maxExp= level*ps; DA IMPLEMENTARE
 
         //assegna l'immagine
 
-                                                                    // per serializzarla
-        BufferedImage img = new BufferedImage(100,100, BufferedImage.TYPE_INT_ARGB);
+
         try {
-            img = ImageIO.read(new File(imgPath));
+            BufferedImage bufferedImage = ImageIO.read(new File(imgPath));
+            setImage(bufferedImage);
         } catch (IOException ex) {
             throw new RuntimeException(ex);
         }
-        this.setImage(img);
+
 
         //*****AGGIUNGO MOSSE DEFAULT PER PROVA BATTAGLIA ********
         addMove(new Action());
@@ -103,12 +101,47 @@ public  class Pokemon implements Serializable {
     }
 
 
-
-    public void setDefaultMoves(){
-        /*itera su un arrayList di mosse default e ne assegna
-          casualmente 2 alla lista mosse del pokemon
-        */
+    // Metodi per Immagine e Serializzazione
+    // Getter and Setter for image with conversion
+    public Image getImage() {
+        if (image == null && imageBase64 != null) {
+            try {
+                byte[] imageBytes = Base64.getDecoder().decode(imageBase64);
+                ByteArrayInputStream bais = new ByteArrayInputStream(imageBytes);
+                image = ImageIO.read(bais);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return image;
     }
+
+    public void setImage(Image image) {
+        this.image = image;
+        try {
+            BufferedImage bufferedImage = new BufferedImage(image.getWidth(null), image.getHeight(null), BufferedImage.TYPE_INT_ARGB);
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            ImageIO.write(bufferedImage, "png", baos);
+            byte[] imageBytes = baos.toByteArray();
+            this.imageBase64 = Base64.getEncoder().encodeToString(imageBytes);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void writeObject(java.io.ObjectOutputStream out) throws IOException {
+        out.defaultWriteObject();
+    }
+
+    private void readObject(java.io.ObjectInputStream in) throws IOException, ClassNotFoundException {
+        in.defaultReadObject();
+        if (imageBase64 != null) {
+            byte[] imageBytes = Base64.getDecoder().decode(imageBase64);
+            ByteArrayInputStream bais = new ByteArrayInputStream(imageBytes);
+            image = ImageIO.read(bais);
+        }
+    }
+
 
 
 
@@ -166,24 +199,8 @@ public  class Pokemon implements Serializable {
         isAlive = alive;
     }
 
-    public Image getImage() {
-        return image;
-    }
-
-    public void setImage(Image image) {
-        this.image = image;
-    }
-
-
-
-
-
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public int getLevel() {
