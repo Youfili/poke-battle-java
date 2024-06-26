@@ -21,7 +21,7 @@ public  class Pokemon implements Serializable {
 
      private String name;
      private String gender;
-     private String type;
+     private Type type;
 
      private int level;
      private int ps;
@@ -135,14 +135,18 @@ public  class Pokemon implements Serializable {
     @Override
     public String toString() {
         return
-                "Name= " + name + '\n' +
-                "Level= " + level + '\n'+
-                "Ps= " + ps + '\n'+
-                "Gender= " + gender + '\n' +
-                "Attack= " + attack + '\n' +
-                "Defense= " + defense +'\n' +
-                "Speed= " + speed +'\n' +
-                "Moves= " + moves +'\n';
+                " Type = " + type + "\n" +
+                " Name = " + name + '\n' +
+                " Level = " + level + '\n'+
+                " Ps = " + ps + '\n'+
+                " Gender = " + gender + '\n' +
+                " Attack = " + attack + '\n' +
+                " Defense = " + defense +'\n' +
+                " Speed = " + speed +'\n' +
+                " Moves = " + moves +'\n';
+
+
+
     }
 
 
@@ -230,13 +234,10 @@ public  class Pokemon implements Serializable {
         this.speed = speed;
     }
 
-    public String getType() {
+    public Type getType() {
         return type;
     }
 
-    public void setType(String type) {
-        this.type = type;
-    }
 
     public int getExpBase() {
         return expBase;

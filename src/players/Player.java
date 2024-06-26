@@ -61,12 +61,12 @@ public class Player implements Serializable {
     @Override
     public String toString() {
         return
-                "Name = " + name + '\n' +
-                "Gender = " + gender + '\n' +
-                "Won Match= " + winMatch + '\n' +
-                "Lost Match= " + lostMatch + '\n'+
+                " Name = " + name + '\n' +
+                " Gender = " + gender + '\n' +
+                " Won Match = " + winMatch + '\n' +
+                " Lost Match = " + lostMatch + '\n'+
 
-            (teamIsEmpty()?"L'allenatore non ha pokemon":"team: " + pokemonStringList() )+'\n';
+            (teamIsEmpty()?"L'allenatore non ha pokemon":" Team: " + pokemonStringList() )+'\n';
     }
 
     //TO STRING SENZA POKEMON

@@ -689,8 +689,18 @@ public class BattleView extends JFrame implements Serializable {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     // Creo un nuovo Frame che mi riporta al menu principale e da li posso scegliere cosa fare
-                    JOptionPane.setRootFrame(new BackgroundImageJFrame());
-                    setVisible(false);
+                    // Metto l'immagine del showConfirmDialog
+                    ImageIcon returnBackCustomIcon = new ImageIcon("src/Img/backToMenu.png");
+
+                    int risposta = JOptionPane.showConfirmDialog(null, "Sei sicuro di voler tornare al Menù?", "Conferma", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, returnBackCustomIcon);
+                    if (risposta == JOptionPane.YES_OPTION) {           // se conferma il bottone premuto, torno indietro al menu
+                        JOptionPane.setRootFrame(new BackgroundImageJFrame());      // torno al menu principale
+                        setVisible(false);
+                        System.out.println("Torno indietro...");
+                    } else {
+                        System.out.println("Debug su console --> resto ancora nella schermata di vittoria");              // Azione se l'utente sceglie "No"
+                    }
+
                 }
             });
 
