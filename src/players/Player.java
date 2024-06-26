@@ -15,7 +15,7 @@ import java.util.Base64;
 import java.util.List;
 
 // Estendo la classe Serializable cosi poter salvare su file il Player
-public class Player implements Serializable {
+public class Player implements Serializable{
 
     private String name;
     private String gender;

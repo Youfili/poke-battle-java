@@ -274,6 +274,7 @@ public class BattleModel {
         return turnoGiocatore1;
     }
 
-
-
+    public Database getDatabaseDatiPlayer() {
+        return databaseDatiPlayer;
+    }
 }       // FINE CLASSE
