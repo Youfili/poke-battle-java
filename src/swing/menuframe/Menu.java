@@ -1,6 +1,7 @@
 package swing.menuframe;
 
 import swing.BackgroundImageJFrame;
+import swing.menuframe.battle.battleview.BattleView;
 import swing.menupanel.ChoosePlayerPanel;
 import swing.menupanel.GameSelectPanel;
 import players.Player;
@@ -201,6 +202,7 @@ public class Menu extends JFrame {
                 public void actionPerformed(ActionEvent e) {
                     // Implementare un pannello dove vengono salvati i giocatori, e dove verranno scelti per giocare
                     // Il pannello ripreso da un file in cui andiamo a salvare tutti i giocatori all'interno di questo TextField
+
                 }
             });
 

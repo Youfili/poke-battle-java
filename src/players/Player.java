@@ -6,10 +6,7 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.Serializable;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
@@ -63,23 +60,44 @@ public class Player implements Serializable{
 
     public void setImage(ImageIcon image) {
         this.image = image;
-        try {
-            BufferedImage bufferedImage = new BufferedImage(image.getIconWidth(), image.getIconHeight(), BufferedImage.TYPE_INT_ARGB);
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            ImageIO.write(bufferedImage, "png", baos);
-            byte[] imageBytes = baos.toByteArray();
-            this.imageBase64 = Base64.getEncoder().encodeToString(imageBytes);
-        } catch (IOException e) {
-            e.printStackTrace();
+        if (image != null) {
+            try {
+                BufferedImage bufferedImage = new BufferedImage(image.getIconWidth(), image.getIconHeight(), BufferedImage.TYPE_INT_ARGB);
+                Graphics g = bufferedImage.createGraphics();
+                image.paintIcon(null, g, 0, 0);
+                g.dispose();
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                ImageIO.write(bufferedImage, "png", baos);
+                byte[] imageBytes = baos.toByteArray();
+                this.imageBase64 = Base64.getEncoder().encodeToString(imageBytes);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            this.imageBase64 = null;
         }
     }
 
-    private void writeObject(java.io.ObjectOutputStream out) throws IOException {
+    private void writeObject(ObjectOutputStream out) throws IOException {
         out.defaultWriteObject();
+        if (image != null) {
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            BufferedImage bufferedImage = new BufferedImage(image.getIconWidth(), image.getIconHeight(), BufferedImage.TYPE_INT_ARGB);
+            Graphics g = bufferedImage.createGraphics();
+            image.paintIcon(null, g, 0, 0);
+            g.dispose();
+            ImageIO.write(bufferedImage, "png", baos);
+            byte[] imageBytes = baos.toByteArray();
+            String imageBase64 = Base64.getEncoder().encodeToString(imageBytes);
+            out.writeObject(imageBase64);
+        } else {
+            out.writeObject(null);
+        }
     }
 
-    private void readObject(java.io.ObjectInputStream in) throws IOException, ClassNotFoundException {
+    private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
         in.defaultReadObject();
+        String imageBase64 = (String) in.readObject();
         if (imageBase64 != null) {
             byte[] imageBytes = Base64.getDecoder().decode(imageBase64);
             ByteArrayInputStream bais = new ByteArrayInputStream(imageBytes);

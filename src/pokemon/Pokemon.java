@@ -129,14 +129,25 @@ public  class Pokemon implements Serializable {
         }
     }
 
-    private void writeObject(java.io.ObjectOutputStream out) throws IOException {
+    private void writeObject(ObjectOutputStream out) throws IOException {
         out.defaultWriteObject();
+        if (image != null) {
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            ImageIO.write((BufferedImage) image, "png", baos);
+            byte[] imageBytes = baos.toByteArray();
+            out.writeInt(imageBytes.length);
+            out.write(imageBytes);
+        } else {
+            out.writeInt(0);
+        }
     }
 
-    private void readObject(java.io.ObjectInputStream in) throws IOException, ClassNotFoundException {
+    private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
         in.defaultReadObject();
-        if (imageBase64 != null) {
-            byte[] imageBytes = Base64.getDecoder().decode(imageBase64);
+        int length = in.readInt();
+        if (length > 0) {
+            byte[] imageBytes = new byte[length];
+            in.readFully(imageBytes);
             ByteArrayInputStream bais = new ByteArrayInputStream(imageBytes);
             image = ImageIO.read(bais);
         }

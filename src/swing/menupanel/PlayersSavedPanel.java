@@ -1,13 +1,16 @@
 package swing.menupanel;
 
+import database.Database;
 import players.Player;
 import swing.menuframe.ChooseTeam;
+import swing.menuframe.battle.battleview.BattleView;
 
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.List;
 
 public class PlayersSavedPanel extends JPanel {
@@ -22,6 +25,7 @@ public class PlayersSavedPanel extends JPanel {
     public PlayersSavedPanel(List<Player> players) {
         this.listaGiocatoriSalvati = players;
 
+        System.out.println(listaGiocatoriSalvati);
 
         setLayout(null); // Disabilita il layout manager di default
         setBounds(0, 0, 600, 650); // Imposta le dimensioni e la posizione del pannello
@@ -75,6 +79,7 @@ public class PlayersSavedPanel extends JPanel {
         JButton bottoneConferma = new JButton("Conferma");
         bottoneConferma.setBounds(465, 500, 115, 70);
 
+
         /*
                 INSERIRE ACTION lISTENER CHE CLICCANDO SUL BOTTONE CONFERMA PASSO DIRETTAMENTE AL ChooseTeam e quindi la scelta
                 del team dei rispettivi giocatori
@@ -90,7 +95,7 @@ public class PlayersSavedPanel extends JPanel {
         selectPlayerButton1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                player = player1;   // imposto come player che è in fase di scelta, quello premuto dal bottone
+                player1=player ; // imposto come player che è in fase di scelta, quello premuto dal bottone
                 playerInfoTextArea.setText(player1.playerInfo());
 
                 // cambiare l'immagine del pannello in base al player1 in questo caso
@@ -101,7 +106,7 @@ public class PlayersSavedPanel extends JPanel {
         selectPlayerButton2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                player = player2;
+                player2=player;
                 playerInfoTextArea.setText(player2.playerInfo());
                 // cambiare l'immagine del pannello in base al player2 in questo caso
 
@@ -114,7 +119,7 @@ public class PlayersSavedPanel extends JPanel {
 
 
         // Aggiungi i giocatori alla lista
-        addPlayers(players);
+        addPlayers(listaGiocatoriSalvati);
     }
 
     // Metodo per aggiungere giocatori al pannello
@@ -123,6 +128,16 @@ public class PlayersSavedPanel extends JPanel {
         for (Player player : players) {
             PlayerButton button = new PlayerButton(player);
             button.setBounds(7, y, 415, 45); // Modifica la posizione x qui
+            button.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+
+                    playerInfoTextArea.setText(player.playerInfo());
+                    setPlayer(player);
+                    // cambiare l'immagine del pannello in base al player2 in questo caso
+
+                }
+            });
             playerButtonsPanel.add(button);
             y += 50; // Spazio tra i bottoni
         }
@@ -131,6 +146,9 @@ public class PlayersSavedPanel extends JPanel {
     // Metodo per impostare le informazioni del giocatore nella JTextArea
     public void setPlayerInfo(Player player) {
         playerInfoTextArea.setText(player.playerInfo());
+    }
+    public void setPlayer(Player player){
+        this.player=player;
     }
 
     // Classe PlayerButton di esempio (da adattare alla tua implementazione)
@@ -149,19 +167,28 @@ public class PlayersSavedPanel extends JPanel {
             return player;
         }
     }
+    public Player getPlayer2(){
+        return player2;
+    }
+    public Player getPlayer1(){
+        return player1;
+    }
 
     public static void main(String[] args) {
+         Database databaseDatiPlayer = new Database();
         SwingUtilities.invokeLater(() -> {
             JFrame frame = new JFrame("Players Saved Panel Test");
             frame.setSize(600, 650);
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
             // Creazione del pannello PlayersSavedPanel con dei giocatori di esempio
-            PlayersSavedPanel panel = new PlayersSavedPanel(List.of(
-                    new Player("Player 1", 5, 3, "Male"),
-                    new Player("Player 2", 7, 1, "Female"),
-                    new Player("Player 3", 10, 2, "Male")
-            ));
+            try {
+                databaseDatiPlayer.caricaDaFile(databaseDatiPlayer.getPathFileDatabase());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+
+            PlayersSavedPanel panel = new PlayersSavedPanel(databaseDatiPlayer.getPlayerSalvati());
             frame.add(panel);
 
             frame.setVisible(true);
