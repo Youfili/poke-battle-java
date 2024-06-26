@@ -73,10 +73,12 @@ public class Player implements Serializable {
     public String playerInfo(){
 
         return
-                "name= " + name + '\n' +
-                        "gender= " + gender + '\n' +
-                        "winMatch= " + winMatch + '\n' +
-                        "lossMatch= " + lostMatch ;
+                " Name = " + name + '\n' +
+                        " Gender = " + gender + '\n' +
+                        " Won Match = " + winMatch + '\n' +
+                        " Lost Match = " + lostMatch + '\n'+
+
+                        (teamIsEmpty()?"L'allenatore non ha pokemon":" Team: " + pokemonStringList() )+'\n';
     }
 
     //matodo per aggiungere pokemon alla squadra durante la creazione

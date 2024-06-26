@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class Database {
+public class Database implements Serializable{
 
     private List<Player> playerSalvati = new ArrayList<>(); // Lista dei player salvati su file
     private File pathFileDatabase = new File("src/database/databasePlayers.txt");
