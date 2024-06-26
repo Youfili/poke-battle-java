@@ -58,8 +58,6 @@ public class BattleView extends JFrame implements Serializable {
     private CardLayout cardLayout1;
     private CardLayout cardLayout2;
 
-
-
     //Pannelli da associare al CardLayout
     private JPanel panPrincAzi1 = new JPanel();
     private JPanel panPrincAzi2 = new JPanel();
@@ -83,6 +81,12 @@ public class BattleView extends JFrame implements Serializable {
     private PokeBattleInfoPanel pokeDefInfoPanel;
 
     private Pokemon pokeTemp;
+    private VictoryPanel pannelloVittoria;
+
+
+
+
+
 
 
     public BattleView(Player giocatore1, Player giocatore2) {
@@ -678,6 +682,31 @@ public class BattleView extends JFrame implements Serializable {
     public void setScorePanel(ScoreOfBattles scorePanel) {
         this.scorePanel = scorePanel;
     }
+
+    public void settaPannelloVittoriaView(Player playerVincitore) {
+        SwingUtilities.invokeLater(() -> {
+            // Rimuovi tutti gli elementi dalla view corrente
+            this.getContentPane().removeAll();
+
+            // Crea e aggiungi il nuovo pannello della vittoria
+            pannelloVittoria = new VictoryPanel(playerVincitore);
+            this.getContentPane().add(pannelloVittoria);
+//            this.getContentPane().add(pannelloVittoria, BorderLayout.CENTER);
+
+
+            // Ricalcola e ridisegna la GUI
+            revalidate();
+            repaint();
+        });
+    }
+
+
+
+
+
+
+
+
 
 
     // MAIN PROVA

@@ -8,7 +8,9 @@ import pokemon.Pokemon;
 import swing.menuframe.battle.battleview.BattleView;
 import swing.menuframe.battle.battleview.MoveButton;
 import swing.menuframe.battle.battleview.PokeButton;
+import swing.menuframe.battle.battleview.VictoryPanel;
 
+import javax.sound.midi.MidiDeviceTransmitter;
 import javax.swing.*;
 import java.io.File;
 import java.io.FileReader;
@@ -28,6 +30,8 @@ public class BattleModel {
     private Pokemon pokemonInAttacco;
     private Pokemon pokemonInDifesa;
     private int battaglieGiocate = 0;
+    private Player winnerPlayer;
+    private int battaglieMax = 1;           // numero di battaglie totali da giocare
 
 
     // Costruttore
@@ -49,10 +53,6 @@ public class BattleModel {
     }
 
     private void nuovaBattaglia() {
-
-        if (battaglieGiocate == 1) {
-            terminaPartita();
-        }
 
         // ALTRIMENTI
         ripristinaVitaPokemon(player1);
@@ -88,8 +88,14 @@ public class BattleModel {
 
             }
             battaglieGiocate ++;
-            // Inizio una nuova battaglia
-            nuovaBattaglia();
+
+            // Faccio un controllo per vedere a quante partite giocate stanno
+            if(battaglieGiocate == battaglieMax) {
+                terminaPartita();           // termino la partita
+            }else {
+                // Inizio una nuova battaglia
+                nuovaBattaglia();
+            }
 
         }else {
 
@@ -189,10 +195,16 @@ public class BattleModel {
         // Logica per salvare i dati e terminare la partita
         System.out.println("Partita terminata!");
         // Vado a modificare le stats dei giocatori (aumentato vittorie/sconfitte totali)
-        if (player1.getVittorieTemporanee() == 3) {
+        if (player1.getVittorieTemporanee() > player2.getVittorieTemporanee()) {
+            // Imposto il giocatore vincitore
+            winnerPlayer = player1;
             player1.addWinMatch();
             player2.addLostMatch();
-        } else if (player2.getVittorieTemporanee() == 3) {
+
+            // Questo else If è INUTILE, può essere sostituito con else
+        } else if (player2.getVittorieTemporanee() > player1.getVittorieTemporanee()) {
+            // Imposto il giocatore vincitore
+            winnerPlayer = player2;
             player2.addWinMatch();
             player1.addLostMatch();
         }
@@ -221,7 +233,7 @@ public class BattleModel {
         }
 
         // Tornare al menu principale
-        schermataVittoria();
+        settaPannelloVittoriaView(winnerPlayer);
     }
 
 
@@ -242,8 +254,9 @@ public class BattleModel {
     }
 
 
-    private void schermataVittoria() {
-
+    private void settaPannelloVittoriaView(Player playerVincitore) {
+        // Richiamo il metodo nella view che imposta a visuale il pannello della vittoria del giocatore vincitore
+        viewBattaglia.settaPannelloVittoriaView(playerVincitore);
     }
 
 
