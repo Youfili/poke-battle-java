@@ -45,10 +45,11 @@ public class BattleModel {
         if (player1.getVittorieTemporanee() >= 3 || player2.getVittorieTemporanee() >= 3) {
             terminaPartita();
         }
+
         // ALTRIMENTI
         ripristinaVitaPokemon(player1);
         ripristinaVitaPokemon(player2);
-        ripristinaView(player1, player2);
+        viewBattaglia.inizializzaView(player1, player2, viewBattaglia.getScorePanel());
 
         // Impsto i turni e i Pokemon Iniziali
         turnoGiocatore1 = true;
@@ -58,9 +59,6 @@ public class BattleModel {
         cicloBattaglia();
     }
 
-    private void ripristinaView(Player player1, Player player2) {
-//        viewBattaglia.inizializzaView(player1, player2);
-    }
 
     private void cicloBattaglia() {
 
@@ -79,6 +77,7 @@ public class BattleModel {
                 viewBattaglia.aggiornaScorerPunteggio2(player1);
                 viewBattaglia.repaint();
                 JOptionPane.showMessageDialog(new JButton("Nuova Partita"),player1.getName() + " Ha vinto, ora si trova a " + player1.getVittorieTemporanee() + " Vittorie!");
+
             }
             // Inizio una nuova battaglia
             nuovaBattaglia();

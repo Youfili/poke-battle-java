@@ -547,69 +547,104 @@ public class BattleView extends JFrame implements Serializable {
     }
 
 
-    public void inizializzaView(Player giocatore1, Player giocatore2) {
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////777
+    /*  ----------------------- RIPRISTINO VIEW BATTAGLIA ---------------------------------------*/
 
-        playerInAttacco = giocatore1;       // inizializzo in attacco il giocatore1
-        playerInDifesa = giocatore2;        // inizializzo in difesa il giocatore2
+    public void inizializzaView(Player giocatore1, Player giocatore2, ScoreOfBattles pannelloScore) {
+        SwingUtilities.invokeLater(() -> {
+            // Initialize players and Pokémon
+            this.giocatore1 = giocatore1;
+            this.giocatore2 = giocatore2;
+            this.playerInAttacco = giocatore1;
+            this.playerInDifesa = giocatore2;
+            this.pokeInAttacco = giocatore1.getTeam().get(0);
+            this.pokeInDifesa = giocatore2.getTeam().get(0);
 
-        // Inizializzo i pokemon in campo delle due squadre (sono i due pokemon starter)
-        this.pokeInAttacco = giocatore1.getTeam().get(0);             // inizializzo come pokemon in ATTACCO il Pokemon1InCampo
-        this.pokeInDifesa = giocatore2.getTeam().get(0);;            // inizializzo come pokemon in DIFESA il Pokemon2InCampo
+            // Rimuove tutte le componenti esistenti
+            this.getContentPane().removeAll();
 
-        // Rimuovo prima i componenti visivi esistenti
-        if (pokemon1Image != null) this.remove(pokemon1Image);
-        if (pokemon2Image != null) this.remove(pokemon2Image);
-        if (poke1InfoPanel != null) this.remove(poke1InfoPanel);
-        if (poke2InfoPanel != null) this.remove(poke2InfoPanel);
-        if (panPrincAzi1 != null) this.remove(panPrincAzi1);
-        if (panPrincAzi2 != null) this.remove(panPrincAzi2);
+            // Crea un JLayeredPane per gestire i livelli
+            JLayeredPane layeredPane = new JLayeredPane();
+            layeredPane.setPreferredSize(new Dimension(600, 650));
+            setContentPane(layeredPane);
+            layeredPane.setLayout(null);  // Set layout manager for layeredPane
 
-        // Riaggiungo i componenti visivi aggiornati
+            // Carico l'IMMAGINE DELLO SFONDO DEL COMBATTIMENTO
+            BufferedImage img = null;
+            try {
+                img = ImageIO.read(new File("src/Img/battleBack1.jpeg"));
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            Image dimg = img.getScaledInstance(600, 650, Image.SCALE_SMOOTH);
+            ImageIcon imageIcon = new ImageIcon(dimg);
+            JLabel wallpaper = new JLabel("", imageIcon, JLabel.CENTER);
+            wallpaper.setBounds(0, 0, 600, 650);
+            layeredPane.add(wallpaper, JLayeredPane.DEFAULT_LAYER);
 
-        // IMMAGINE POKEMON 1  --> Di Default uso quella del primo pokemon in squadra del giocatore1
-        pokemon1Image = new PokeImgLabel(pokeInAttacco);
-        pokemon1Image.setBounds(10,250,300,300);
-        pokeImgAttacco = pokemon1Image;        // setto di default che l'immagine del Poke1 è quella dell'immagine di attacco
-        this.add(pokemon1Image);
+            // Impostazione della finestra
+            setTitle("Battaglia Pokémon");
 
-        // IMMAGINE POKEMON 2  --> Di Default uso quella del primo pokemon in squadra del giocatore2
-        pokemon2Image = new PokeImgLabel(pokeInDifesa);
-        pokemon2Image.setBounds(300,100,300,300);
-        this.pokeImgDifesa = pokemon2Image;     // setto di default che l'immagine del Poke1 è quella dell'immagine di difesa
-        this.add(pokemon2Image);
+            // inserisco lo Score della Battaglia
+            this.scorePanel = pannelloScore;
+            scorePanel.setBounds(375, 35, 200, 30);  // Posizionato nel frame BattagliaGUI
+            layeredPane.add(this.scorePanel, JLayeredPane.PALETTE_LAYER);
 
-        //PANNELLO INFO POKEMON 1
-        poke1InfoPanel = new PokeBattleInfoPanel(pokeInAttacco);
-        poke1InfoPanel.setBounds(350,380,200,100);
-        this.panelAttacco = poke1InfoPanel;                   // inizializzo il panel di attacco come quello del poke1InCampo
-        this.add(poke1InfoPanel);
+            // Aggiungo le immagini pokemon
+            pokemon1Image = new PokeImgLabel(pokeInAttacco);
+            pokemon1Image.setBounds(10, 250, 300, 300);
+            this.pokeImgAttacco = pokemon1Image;
+            layeredPane.add(pokemon1Image, JLayeredPane.PALETTE_LAYER);
 
-        //PANNELLO INFO POKEMON 2
-        poke2InfoPanel = new PokeBattleInfoPanel(pokeInDifesa);
-        poke2InfoPanel.setBounds(50,80,200,100);
-        this.panelDifesa = poke2InfoPanel;                   // inizializzo il panel di attacco come quello del poke1InCampo
-        this.add(poke2InfoPanel);
+            pokemon2Image = new PokeImgLabel(pokeInDifesa);
+            pokemon2Image.setBounds(300, 100, 300, 300);
+            this.pokeImgDifesa = pokemon2Image;
+            layeredPane.add(pokemon2Image, JLayeredPane.PALETTE_LAYER);
 
-        // Pannello per lo stato della battaglia
-        statoBattaglia.setText(playerInAttacco.getName() + " Scegli cosa fare:");
+            // Aggiungo tutti gli InfoPanel dei pokemon
+            poke1InfoPanel = new PokeBattleInfoPanel(pokeInAttacco);
+            poke1InfoPanel.setBounds(350, 380, 200, 100);
+            this.panelAttacco = poke1InfoPanel;
+            layeredPane.add(poke1InfoPanel, JLayeredPane.PALETTE_LAYER);
 
-        // Aggiorno i Bottoni dei pokemon selezionabili e che possono entrare in battaglia
-        // BOTTONI PANNELLO CAMBIO POKEMON 1
+            poke2InfoPanel = new PokeBattleInfoPanel(pokeInDifesa);
+            poke2InfoPanel.setBounds(50, 80, 200, 100);
+            this.panelDifesa = poke2InfoPanel;
+            layeredPane.add(poke2InfoPanel, JLayeredPane.PALETTE_LAYER);
+
+            // faccio un Update dello stato battaglia
+            statoBattaglia = new JLabel(playerInAttacco.getName() + " Scegli cosa fare:");
+            JPanel pannelloStato = new JPanel(new BorderLayout());
+            pannelloStato.setBounds(10, 500, 230, 100);
+            pannelloStato.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createRaisedBevelBorder(), BorderFactory.createLoweredBevelBorder()));
+            pannelloStato.add(statoBattaglia);
+            layeredPane.add(pannelloStato, JLayeredPane.PALETTE_LAYER);
+
+            // Rinizializzo i bottoni dei pokemon nel pannello cambio pokemon
+            rinizializzaBottoniPokemon(layeredPane);
+
+            // Revalidate and repaint to update the view
+            this.revalidate();
+            this.repaint();
+        });
+    }
+
+    private void rinizializzaBottoniPokemon(JLayeredPane layeredPane) {
+        // player 1
         for (Component bottone1 : pannelloCambio1.getComponents()) {
-            // Casting del Component in PokeButton
             PokeButton bottoneCambio1 = (PokeButton) bottone1;
             bottoneCambio1.setEnabled(true);
             bottoneCambio1.setOpaque(false);
         }
         pannelloCambio1.repaint();
-        // BOTTONI PANNELLO CAMBIO POKEMON 1
+
+        // player 2
         for (Component bottone2 : pannelloCambio2.getComponents()) {
-            // Casting del Component in PokeButton
             PokeButton bottoneCambio2 = (PokeButton) bottone2;
             bottoneCambio2.setEnabled(true);
             bottoneCambio2.setOpaque(false);
         }
-        pannelloCambio1.repaint();
+        pannelloCambio2.repaint();
 
         // Ricreo il CardLayout
         cardLayout1 = new CardLayout();
@@ -617,62 +652,46 @@ public class BattleView extends JFrame implements Serializable {
         cardLayout2 = new CardLayout();
         panPrincAzi2.setLayout(cardLayout2);
 
-        // Sistemo il CardLayout e aggiungo i pannelli
-        panPrincAzi1.setBounds(245, 500, 345, 100);
-        panPrincAzi1.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createRaisedBevelBorder(), BorderFactory.createLoweredBevelBorder()));
-        panPrincAzi1.add(pannelloAzioni1, "Azioni1");
-        panPrincAzi1.add(pannelloMosse1, "Mosse1");
-        panPrincAzi1.add(pannelloCambio1, "Cambio1");
+        // Risetto
+        setupCardPanel1(panPrincAzi1, pannelloAzioni1, pannelloMosse1, pannelloCambio1);
+        setupCardPanel2(panPrincAzi2, pannelloAzioni2, pannelloMosse2, pannelloCambio2);
 
-        panPrincAzi2.setBounds(245, 500, 345, 100);
-        panPrincAzi2.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createRaisedBevelBorder(), BorderFactory.createLoweredBevelBorder()));
-        panPrincAzi2.add(pannelloAzioni2, "Azioni2");
-        panPrincAzi2.add(pannelloMosse2, "Mosse2");
-        panPrincAzi2.add(pannelloCambio2, "Cambio2");
+        // Riaggiungo al pannello
+        layeredPane.add(panPrincAzi1, JLayeredPane.PALETTE_LAYER);
+        layeredPane.add(panPrincAzi2, JLayeredPane.PALETTE_LAYER);
 
-        panPrincAzi1.repaint();
-        panPrincAzi2.repaint();
-
-        // Creo i riferimenti iniziali di default
-        this.panPrincAziAtt = panPrincAzi1;
-        this.panPrincAziDif = panPrincAzi2;
-
-        // All'inizio viene visualizzato quello del player1
+        // Imposto la visibilità iniziale
         panPrincAzi1.setVisible(true);
         panPrincAzi2.setVisible(false);
+    }
 
-        // Aggiorno i componenti della vista
-        this.revalidate();
-        this.repaint();
+    private void setupCardPanel1(JPanel panel, JPanel azioni, JPanel mosse, JPanel cambio) {
+        panel.setBounds(245, 500, 345, 100);
+        panel.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createRaisedBevelBorder(), BorderFactory.createLoweredBevelBorder()));
+        panel.add(azioni, "Azioni1");
+        panel.add(mosse, "Mosse1");
+        panel.add(cambio, "Cambio1");
+    }
+
+    private void setupCardPanel2(JPanel panel, JPanel azioni, JPanel mosse, JPanel cambio) {
+        panel.setBounds(245, 500, 345, 100);
+        panel.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createRaisedBevelBorder(), BorderFactory.createLoweredBevelBorder()));
+        panel.add(azioni, "Azioni2");
+        panel.add(mosse, "Mosse2");
+        panel.add(cambio, "Cambio2");
     }
 
 
+    /*  ----------------------- FINE RIPRISTINO VIEW BATTAGLIA ---------------------------------------*/
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////777
 
+    public ScoreOfBattles getScorePanel() {
+        return scorePanel;
+    }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    public void setScorePanel(ScoreOfBattles scorePanel) {
+        this.scorePanel = scorePanel;
+    }
 
 
     // MAIN PROVA
