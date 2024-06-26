@@ -1,7 +1,6 @@
 package swing.menuframe;
 
 import swing.menuframe.battle.battleview.BattleView;
-import swing.menuframe.vecchiaBattaglia.BattagliaGUI;
 import swing.menupanel.PartyPokemonPanel;
 import players.Player;
 import pokemon.Pokedex;
@@ -589,7 +588,6 @@ public class ChooseTeam extends JFrame {
 
             pokeButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    //JOptionPane.showMessageDialog((Component) null, poke.toString(), null, JOptionPane.INFORMATION_MESSAGE, imageIcon);
 
                     //MOSTRO LE INFO DEL POKEMON SELEZIONATO
                     selectedPokemon=poke;
