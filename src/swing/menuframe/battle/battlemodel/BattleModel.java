@@ -1,5 +1,6 @@
 package swing.menuframe.battle.battlemodel;
 
+import database.Database;
 import swing.menuframe.battle.battlecontroller.BattleController;
 import moves.Move;
 import players.Player;
@@ -9,6 +10,11 @@ import swing.menuframe.battle.battleview.MoveButton;
 import swing.menuframe.battle.battleview.PokeButton;
 
 import javax.swing.*;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.List;
+
 /* Model della Battaglia (Logica) */
 public class BattleModel {
 
@@ -16,10 +22,12 @@ public class BattleModel {
     private Player player2;
 
     // inizializzo
+    private Database databaseDatiPlayer = new Database();
     private BattleView viewBattaglia;
     private boolean turnoGiocatore1 = true;
     private Pokemon pokemonInAttacco;
     private Pokemon pokemonInDifesa;
+    private int battaglieGiocate = 0;
 
 
     // Costruttore
@@ -42,7 +50,7 @@ public class BattleModel {
 
     private void nuovaBattaglia() {
 
-        if (player1.getVittorieTemporanee() >= 3 || player2.getVittorieTemporanee() >= 3) {
+        if (battaglieGiocate == 1) {
             terminaPartita();
         }
 
@@ -79,6 +87,7 @@ public class BattleModel {
                 JOptionPane.showMessageDialog(new JButton("Nuova Partita"),player1.getName() + " Ha vinto, ora si trova a " + player1.getVittorieTemporanee() + " Vittorie!");
 
             }
+            battaglieGiocate ++;
             // Inizio una nuova battaglia
             nuovaBattaglia();
 
@@ -173,26 +182,67 @@ public class BattleModel {
     }
 
     private void terminaPartita() {
+        // Ripristino la vita dei pokemon
+        ripristinaVitaPokemon(player1);
+        ripristinaVitaPokemon(player2);
+
         // Logica per salvare i dati e terminare la partita
         System.out.println("Partita terminata!");
         // Vado a modificare le stats dei giocatori (aumentato vittorie/sconfitte totali)
         if(player1.getVittorieTemporanee() == 3){
-            player1.addWinMatch();
-            player2.addLostMatch();
+            player1.addWinMatch();                  // aggiungo la vittoria al player vincitore
+            player2.addLostMatch();                 // aggiungo la vittoria al player sconfitto
         }else if(player2.getVittorieTemporanee() == 3){
-            player1.addWinMatch();
-            player2.addLostMatch();
+            player1.addWinMatch();                  // aggiungo la vittoria al player vincitore
+            player2.addLostMatch();                  // aggiungo la vittoria al player sconfitto
         }
         // a questo punto resetto le vittorie Temporanee
         player1.setVittorieTemporanee(0);
         player2.setVittorieTemporanee(0);
         // Salvo i dati dei due giocatori (e li salvo nel "Database" che contiene tutti i player)
-        salvaDati(player1, player2);
+        salvaDati(player1);
+        salvaDati(player2);
+
+        // Sovrascrivo il file con il nuovo aggiornamento dati
+        try {
+            databaseDatiPlayer.salvaSuFile(databaseDatiPlayer.getPathFileDatabase());
+        }catch(IOException e){
+            System.out.println("Il File non esiste");
+        }
+
+        // DEBUG
+        System.out.println("/////////////////////////////////////////////////////////////////////////////////////");
+        try {
+            databaseDatiPlayer.caricaDaFile(databaseDatiPlayer.getPathFileDatabase());
+            System.out.println(databaseDatiPlayer.getPlayerSalvati());
+            System.out.println("/////////////////////////////////////////////////////////////////////////////////////");
+        }catch(IOException e){
+            System.out.println("Il File non esiste");
+        }
+
+
         // Tornare al menu principale
+        schermataVittoria();
     }
 
-    private void salvaDati(Player player1, Player player2) {
-        // Logica per salvare i dati dei giocatori
+    private void salvaDati(Player player) {
+        // Mi ricavo la lista di tutti i player salvati
+        int playerId = player.getId();
+        List<Player> listaPlayer = databaseDatiPlayer.getPlayerSalvati();
+
+        if(playerId == -1){
+            // se id == -1 il player non è nella lista, lo aggiungo
+            player.setId(listaPlayer.size());
+            listaPlayer.add(player);
+        }else if(playerId >=0 && playerId < listaPlayer.size()){
+            // Altrimenti modifico il player già nella lista
+            listaPlayer.set(playerId, player);
+        }
+    }
+
+
+    private void schermataVittoria() {
+
     }
 
 
@@ -210,13 +260,6 @@ public class BattleModel {
         return turnoGiocatore1;
     }
 
-    // Metodo usato per testare la fine della battaglia
-    public void volereDiDio(Player player) {
-        for (Pokemon pokemon : player.getTeam()) {
-            pokemon.setHealth(0);
-            pokemon.setAlive(false);
-        }
-    }
 
 
 }       // FINE CLASSE

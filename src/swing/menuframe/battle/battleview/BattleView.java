@@ -101,20 +101,6 @@ public class BattleView extends JFrame implements Serializable {
         setResizable(false);
 
 
-        // Bottone per far terminare subito la battaglia
-        JButton occhioDiDio = new JButton("Occhio di Dio");
-        occhioDiDio.setBounds(250,24,133,33);
-        occhioDiDio.setBackground(Color.CYAN);
-        occhioDiDio.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                controllerBattaglia.volereDiDio(giocatore2);
-            }
-        });
-        add(occhioDiDio);
-
-
-
         // Carico l'IMMAGINE DELLO SFONDO DEL COMBATTIMENTO
         BufferedImage img = null ;
         try {

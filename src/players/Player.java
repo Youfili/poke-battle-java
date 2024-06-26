@@ -23,6 +23,8 @@ public class Player implements Serializable {
     private List<Pokemon> team = new ArrayList<>();
     private int vittorieTemporanee;
 
+    private int id;
+
 
     //Constructor
     public Player(String name, int winMatch, int lossMatch, String gender) {
@@ -30,6 +32,7 @@ public class Player implements Serializable {
         this.winMatch = winMatch;
         this.lostMatch = lossMatch;
         this.gender = gender;
+        this.id = -1;
         for(int i=0;i<6;i++){
             team.add(null);
         }
@@ -202,6 +205,13 @@ public class Player implements Serializable {
     }
     public void addLostMatch(){
         this.lostMatch ++;
+    }
+
+    public int getId() {
+        return id;
+    }
+    public void setId(int id) {
+        this.id = id;
     }
 }
 

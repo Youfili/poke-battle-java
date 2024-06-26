@@ -10,7 +10,8 @@ import java.util.List;
 public class Database {
 
     // Lo metto statico cosi viene inteso come variabile della classe e non di istanza
-    private static List<Player> playerSalvati = new ArrayList<>();         // List dei player salvati su file
+    private List<Player> playerSalvati = new ArrayList<>();         // List dei player salvati su file
+    private File pathFileDatabase = new File("src/database/databasePlayers.txt");
 
     public Database (){
 
@@ -58,17 +59,21 @@ public class Database {
     }
 
     // Aggiungere giocatore alla lista dei playerSalvati
-    public static void addListPlayer(Player playerDaAggiungere){
+    public void addListPlayer(Player playerDaAggiungere){
         playerSalvati.add(playerDaAggiungere);
     }
 
     // per ottenere la lista quando dovrò operare su di essa (il campo è privato, quindi devo inserire questo)
-    public static List<Player> getPlayerSalvati() {
+    public List<Player> getPlayerSalvati() {
         return playerSalvati;
     }
 
     // Per modifica la lista quando deve essere aggiornata
-    public static void setPlayerSalvati(List<Player> playerSalvati) {
-        Database.playerSalvati = playerSalvati;
+    public void setPlayerSalvati(List<Player> listaPlayerSalvati) {
+        this.playerSalvati = listaPlayerSalvati;
+    }
+
+    public File getPathFileDatabase() {
+        return pathFileDatabase;
     }
 }
