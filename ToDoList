@@ -5,6 +5,10 @@ COSA PRINCIPALE:
 - Ripristino / Caricamento quando si sceglie il giocatore
 - MVC --> in tutto il progetto utilizzare questo Design Pattern
 
+- Problemi:
+	Enumerate il sesso maschio Femmina
+	Enumerate Type del pokemon, che in questo caso è null quando andiamo a stampare le info dei pokemon
+
 
 -hasMap livelli —> mosse       --> Apprendimento di una mossa a un determinato livello --> Key : Livello , Valore --> Mossa, in cui si sceglie quale modificare
 
