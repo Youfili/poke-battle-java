@@ -2,6 +2,7 @@ package swing.menuframe;
 
 import database.Database;
 import swing.BackgroundImageJFrame;
+import swing.menuframe.battle.battleview.BattleView;
 import swing.menupanel.ChoosePlayerPanel;
 import swing.menupanel.GameSelectPanel;
 import players.Player;
@@ -29,6 +30,9 @@ public class Menu extends JFrame {
         private JButton bottoneConferma;
         private JButton selectPlayerButton1;
         private JButton selectPlayerButton2;
+        private Player player;
+        private Player player1;
+        private Player player2;
 
         // Costruttore Menu
         public Menu() {
@@ -79,6 +83,59 @@ public class Menu extends JFrame {
             Image dimgPokeball = imgPokeball.getScaledInstance(60, 60,
                     Image.SCALE_SMOOTH);
             ImageIcon imageIconPokeball = new ImageIcon(dimgPokeball);
+
+
+            /*  ACTION LISTENER DEL PANELLO CONTINUA-PARTITA  */
+
+            // VANNO RIVISTI BENE QUESTI LISTENER --> NON SONO CORRETTI
+            selectPlayerButton1.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    player = player1;
+                }
+            });
+            selectPlayerButton2.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    player = player2;
+                }
+            });
+
+
+            bottoneConferma = pannelloContinuaPartita.getBottoneConferma();
+            bottoneConferma.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    JOptionPane.setRootFrame(new BattleView(player1, player2));
+                    Menu.super.setVisible(false);
+                }
+            });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
             // MALE Button
