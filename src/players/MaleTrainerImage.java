@@ -1,12 +1,15 @@
 package players;
 
+import swing.menuframe.battle.battleview.ScoreOfBattles;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 
-public class MaleTrainerImage {
+public class MaleTrainerImage implements Serializable {
     ImageIcon immagineMaleTrainer;
 
     public MaleTrainerImage(){

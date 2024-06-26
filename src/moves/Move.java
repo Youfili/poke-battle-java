@@ -2,7 +2,9 @@ package moves;
 
 import pokemon.Pokemon;
 
-public abstract class Move {
+import java.io.Serializable;
+
+public abstract class Move implements Serializable {
     private String name;
     private String description;
     private int damage;

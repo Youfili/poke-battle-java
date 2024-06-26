@@ -189,12 +189,12 @@ public class BattleModel {
         // Logica per salvare i dati e terminare la partita
         System.out.println("Partita terminata!");
         // Vado a modificare le stats dei giocatori (aumentato vittorie/sconfitte totali)
-        if(player1.getVittorieTemporanee() == 3){
-            player1.addWinMatch();                  // aggiungo la vittoria al player vincitore
-            player2.addLostMatch();                 // aggiungo la vittoria al player sconfitto
-        }else if(player2.getVittorieTemporanee() == 3){
-            player1.addWinMatch();                  // aggiungo la vittoria al player vincitore
-            player2.addLostMatch();                  // aggiungo la vittoria al player sconfitto
+        if (player1.getVittorieTemporanee() == 3) {
+            player1.addWinMatch();
+            player2.addLostMatch();
+        } else if (player2.getVittorieTemporanee() == 3) {
+            player2.addWinMatch();
+            player1.addLostMatch();
         }
         // a questo punto resetto le vittorie Temporanee
         player1.setVittorieTemporanee(0);
@@ -206,8 +206,8 @@ public class BattleModel {
         // Sovrascrivo il file con il nuovo aggiornamento dati
         try {
             databaseDatiPlayer.salvaSuFile(databaseDatiPlayer.getPathFileDatabase());
-        }catch(IOException e){
-            System.out.println("Il File non esiste");
+        } catch (IOException e) {
+            System.out.println("Errore durante il salvataggio del file: " + e.getMessage());
         }
 
         // DEBUG
@@ -216,14 +216,15 @@ public class BattleModel {
             databaseDatiPlayer.caricaDaFile(databaseDatiPlayer.getPathFileDatabase());
             System.out.println(databaseDatiPlayer.getPlayerSalvati());
             System.out.println("/////////////////////////////////////////////////////////////////////////////////////");
-        }catch(IOException e){
-            System.out.println("Il File non esiste");
+        } catch (IOException e) {
+            System.out.println("Errore durante il caricamento del file: " + e.getMessage());
         }
-
 
         // Tornare al menu principale
         schermataVittoria();
     }
+
+
 
     private void salvaDati(Player player) {
         // Mi ricavo la lista di tutti i player salvati

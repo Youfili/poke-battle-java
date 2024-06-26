@@ -10,13 +10,14 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  *
  */
-public  class Pokemon {
+public  class Pokemon implements Serializable {
 
      private String name;
      private String gender;
@@ -83,7 +84,9 @@ public  class Pokemon {
         //this.maxExp= level*ps; DA IMPLEMENTARE
 
         //assegna l'immagine
-        BufferedImage img = null;
+
+                                                                    // per serializzarla
+        BufferedImage img = new BufferedImage(100,100, BufferedImage.TYPE_INT_ARGB);
         try {
             img = ImageIO.read(new File(imgPath));
         } catch (IOException ex) {
