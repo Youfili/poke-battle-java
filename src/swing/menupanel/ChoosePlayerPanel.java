@@ -56,11 +56,6 @@ public class ChoosePlayerPanel extends JPanel {
         buttonChoicePanel.setPreferredSize(new Dimension(400, 30));  //
         this.add(buttonChoicePanel, BorderLayout.SOUTH);
 
-//        // modifico il selectGamePlayer per centrare il testo "Player 1" e "Player" scritta al centro del JComboBox
-//        DefaultListCellRenderer listRenderer = new DefaultListCellRenderer();
-//        listRenderer.setHorizontalAlignment(DefaultListCellRenderer.CENTER);
-//        selectGamePlayer.setRenderer(listRenderer);
-//        this.add(selectGamePlayer, BorderLayout.NORTH);
     }
 
     public JButton getMaleButton() {

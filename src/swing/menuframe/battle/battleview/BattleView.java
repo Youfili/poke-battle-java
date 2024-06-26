@@ -1,5 +1,8 @@
 package swing.menuframe.battle.battleview;
 
+import swing.BackgroundImageJFrame;
+import swing.menuframe.ChooseTeam;
+import swing.menuframe.Menu;
 import swing.menuframe.battle.battlecontroller.BattleController;
 import moves.base.Action;
 import moves.base.BodySlam;
@@ -9,6 +12,7 @@ import players.Player;
 import pokemon.Pokedex;
 import pokemon.Pokemon;
 import swing.menuframe.battle.battlemodel.BattleModel;
+import swing.menuframe.battle.battlemodel.FrameProvaVictPanel;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -82,9 +86,6 @@ public class BattleView extends JFrame implements Serializable {
 
     private Pokemon pokeTemp;
     private VictoryPanel pannelloVittoria;
-
-
-
 
 
 
@@ -346,7 +347,7 @@ public class BattleView extends JFrame implements Serializable {
             });
         }
 
-        /*  ACTIONLISTENER BOTTNI CAMBIOPOKEMON   */
+        /*  ACTIONLISTENER BOTTONI CAMBIOPOKEMON   */
         for(Component bottone : pannelloCambio2.getComponents()){
             // Casting del Component in PokeButton
             PokeButton bottoneCambio = (PokeButton) bottone;
@@ -359,15 +360,6 @@ public class BattleView extends JFrame implements Serializable {
                 }
             });
         }
-
-
-
-
-
-
-
-
-
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);     // in questo modo, quando premo x chiuderò anche la pagina
         setVisible(true);
@@ -690,9 +682,19 @@ public class BattleView extends JFrame implements Serializable {
 
             // Crea e aggiungi il nuovo pannello della vittoria
             pannelloVittoria = new VictoryPanel(playerVincitore);
-            this.getContentPane().add(pannelloVittoria);
-//            this.getContentPane().add(pannelloVittoria, BorderLayout.CENTER);
 
+            /* ACTION LISTENER BOTTONE "TORNA AL MENU" NEL PANNELLO VITTORIA */
+            JButton bottoneTornaAlMenu = pannelloVittoria.getMenuButton();
+            bottoneTornaAlMenu.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    // Creo un nuovo Frame che mi riporta al menu principale e da li posso scegliere cosa fare
+                    JOptionPane.setRootFrame(new BackgroundImageJFrame());
+                    setVisible(false);
+                }
+            });
+
+            this.getContentPane().add(pannelloVittoria);
 
             // Ricalcola e ridisegna la GUI
             revalidate();

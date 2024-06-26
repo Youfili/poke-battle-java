@@ -1,61 +1,104 @@
 package swing.menuframe.battle.battleview;
 
 import players.Player;
+import pokemon.Pokemon;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 // Pannello per la vittoria del giocatore
+
 public class VictoryPanel extends JPanel {
 
     private Player winner; // Giocatore vincitore
+    private JButton menuButton;
+    private JTextArea playerInfoText;
+    private JTextArea pokemonInfoText;
 
     public VictoryPanel(Player winner) {
         this.winner = winner;
 
         setLayout(null);
         // lo faccio della stessa dimensione del frame
-        setSize(600,650);//600 width and 650 height
-
-
+        setSize(600, 650); // 600 width and 650 height
 
         // Pannello per l'immagine del giocatore vincitore (sinistra)
         JPanel playerImagePanel = new JPanel();
-        playerImagePanel.setLayout(new FlowLayout());
         JLabel playerImageLabel = new JLabel(winner.getImage());
+        playerImagePanel.setBounds(30, 30, 300, 400);
         playerImagePanel.add(playerImageLabel);
-        add(playerImagePanel, BorderLayout.WEST);
+        add(playerImagePanel);
 
         // Pannello per i bottoni delle squadre Pokemon (sotto l'immagine)
         JPanel pokemonPanel = new JPanel();
+        pokemonPanel.setBounds(30, 440, 300, 150); // Posizionato sotto l'immagine del giocatore
         pokemonPanel.setLayout(new GridLayout(2, 3)); // 2 righe, 3 colonne
 
         // Aggiungi i bottoni delle squadre Pokemon (esempio)
-        for (int i = 1; i <= 6; i++) {
-            JButton pokemonButton = new JButton("Pokemon " + i);
+        for (int i = 0; i < winner.getTeam().size(); i++) {
+            Pokemon pokemonIterazioneAttuale = winner.getTeam().get(i);
+            JButton pokemonButton = new JButton(new ImageIcon(pokemonIterazioneAttuale.getImagePath()));
+            pokemonButton.setEnabled(true);
+            // MouseListener
+            pokemonButton.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseEntered(MouseEvent e) {
+                    pokemonInfoText.setText(pokemonIterazioneAttuale.toString());
+                }
+            });
+            // ActionListener
+            pokemonButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    pokemonInfoText.setText(pokemonIterazioneAttuale.toString());
+                }
+            });
+
+            // Aggiungo il bottone al pannello
             pokemonPanel.add(pokemonButton);
         }
-        add(pokemonPanel, BorderLayout.CENTER);
+        add(pokemonPanel);
 
         // Pannello per le informazioni del player che ha vinto (destra)
         JPanel playerInfoPanel = new JPanel();
         playerInfoPanel.setLayout(new BorderLayout());
-
-        JTextArea playerInfoText = new JTextArea();
-        playerInfoText.setText("Nome del giocatore: " + winner.getName() + "\nAltre informazioni...");
+        playerInfoPanel.setBounds(350, 30, 220, 180); // Ridimensionato
+        JLabel playerInfoLabel = new JLabel("Informazioni Giocatore");
+        playerInfoPanel.add(playerInfoLabel, BorderLayout.NORTH);
+        // Inserisco un area di testo al suo interno
+        playerInfoText = new JTextArea();
+        playerInfoText.setText(winner.playerInfo()); // inserisco le informazioni del player
         playerInfoText.setEditable(false);
-        playerInfoPanel.add(playerInfoText, BorderLayout.CENTER);
+        playerInfoPanel.add(new JScrollPane(playerInfoText), BorderLayout.CENTER);
+        add(playerInfoPanel);
 
-        add(playerInfoPanel, BorderLayout.EAST);
+        // Pannello per le informazioni del Pokemon selezionato (sotto l'informazione del player)
+        JPanel pokemonInfoPanel = new JPanel();
+        pokemonInfoPanel.setLayout(new BorderLayout());
+        pokemonInfoPanel.setBounds(350, 220, 220, 200); // Posizionato sotto l'informazione del player
+        JLabel pokemonInfoLabel = new JLabel("Informazioni Pokemon");
+        pokemonInfoPanel.add(pokemonInfoLabel, BorderLayout.NORTH);
+        // Inserisco un area di testo al suo interno
+        pokemonInfoText = new JTextArea();
+        pokemonInfoText.setEditable(false);
+        pokemonInfoPanel.add(new JScrollPane(pokemonInfoText), BorderLayout.CENTER);
+        add(pokemonInfoPanel);
 
         // Pannello per il bottone "Torna al Menu" (in basso a destra)
-        JPanel menuButtonPanel = new JPanel();
-        menuButtonPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
 
-        JButton menuButton = new JButton("Torna al Menu");
-        menuButtonPanel.add(menuButton);
 
-        add(menuButtonPanel, BorderLayout.SOUTH);
+
+        menuButton = new JButton("Torna al Menu");
+        menuButton.setBounds(370, 500, 200, 70); // Posizionato in basso a destra
+
+        add(menuButton);
     }
 
+    public JButton getMenuButton() {
+        return menuButton;
+    }
 }
