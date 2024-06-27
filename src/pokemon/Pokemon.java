@@ -25,7 +25,7 @@ public  class Pokemon implements Serializable {
      private int ps;
      private int expBase;
      private int currentExp;
-     private int maxExp;
+     private int expNecessaria;
 
      private int attack;
      private int defense;
@@ -79,6 +79,9 @@ public  class Pokemon implements Serializable {
         this.evolution = evolution;
         this.imagePath = imgPath;
         this.health=maxPs;
+
+        calcolaExpNecessaria(this.level);
+
 
 
 
@@ -169,14 +172,45 @@ public  class Pokemon implements Serializable {
         }
     }
 
-    public void removeMove(Move move){
-        moves.remove(move);
+    //METODO PER RIMPIAZZARE UNA MOSSA
+    public void replaceMove(Move move,Move newMove){
+
+        for(int i=0;i<moves.size();i++){
+           if(moves.get(i).getName()==move.getName()){
+
+               moves.set(i,newMove);
+           }
+        }
+
+    }
+
+    public void increaseExp(Pokemon avversario)
+    {
+        int exp= (int) ((avversario.getLevel() * 1.5 * avversario.expBase)/6);
+        this.currentExp=currentExp+exp;
+
+        if(currentExp>=expNecessaria){
+            updateLevel();
+        }
 
     }
 
     public void updateLevel(){
         setLevel(level+1);
         //Aggiungere modifiche ai valori hp ecc
+
+        calcolaExpNecessaria(this.level);
+        this.ps = ps + (ps*10/100);
+        this.attack = attack + (attack*10/100);;
+        this.defense = defense + (defense*10/100);;
+        this.speed = speed + (speed*10/100);;
+        this.health=ps;
+
+
+    }
+
+    public void calcolaExpNecessaria(int level){
+        this.expNecessaria= (int) ((level^3 *( 100- level))/60);
     }
 
 
@@ -295,12 +329,56 @@ public  class Pokemon implements Serializable {
         this.currentExp = currentExp;
     }
 
-    public int getMaxExp() {
-        return maxExp;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void setMaxExp(int maxExp) {
-        this.maxExp = maxExp;
+    public void setType(Type type) {
+        this.type = type;
+    }
+
+    public int getExpNecessaria() {
+        return expNecessaria;
+    }
+
+    public void setExpNecessaria(int expNecessaria) {
+        this.expNecessaria = expNecessaria;
+    }
+
+    public Boolean getAlive() {
+        return isAlive;
+    }
+
+    public Map<Integer, Move> getMovesByLevel() {
+        return movesByLevel;
+    }
+
+    public void setMovesByLevel(Map<Integer, Move> movesByLevel) {
+        this.movesByLevel = movesByLevel;
+    }
+
+    public List<DefaultMoves> getDefaultMoves() {
+        return defaultMoves;
+    }
+
+    public String getImageBase64() {
+        return imageBase64;
+    }
+
+    public void setImageBase64(String imageBase64) {
+        this.imageBase64 = imageBase64;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
+    }
+
+    public PokeButton getButtonAssociato() {
+        return buttonAssociato;
+    }
+
+    public void setButtonAssociato(PokeButton buttonAssociato) {
+        this.buttonAssociato = buttonAssociato;
     }
 
     public void setMoves(List<Move> moves) {

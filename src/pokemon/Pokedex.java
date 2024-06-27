@@ -1,5 +1,6 @@
 package pokemon;
 
+import moves.Move;
 import pokemon.pokemonClass.Bulbasaur;
 import pokemon.pokemonClass.Charmender;
 import pokemon.pokemonClass.Squirtle;
@@ -26,11 +27,27 @@ public class Pokedex {
 
     }
 
-    public static void main(String[] args){
+
+    //PROVA REPLACE MOSSE e incremento livello
+
+   public static void main(String[] args){
         Pokedex p = new Pokedex();
 
         Pokemon po=p.getPokedex().get(0);
-        System.out.println(po.getMoveByLevel(8));
-    }
+        System.out.println(po.getMoves());
+
+        po.replaceMove(po.getMoves().get(0),po.getMoveByLevel(8));
+
+        System.out.println(po.getMoves());
+
+       System.out.println(po);
+       po.updateLevel();
+       System.out.println(po);
+
+
+
+
+
+   }
 
 }
