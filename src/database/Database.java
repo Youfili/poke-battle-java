@@ -7,10 +7,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class Database implements Serializable{
+public class Database implements Serializable {
 
-    private List<Player> playerSalvati = new ArrayList<>(); // Lista dei player salvati su file
-    private File pathFileDatabase = new File("src/database/databasePlayers.txt");
+    private static List<Player> playerSalvati = new ArrayList<>(); // Lista dei player salvati su file
+    private static File pathFileDatabase = new File("src/database/databasePlayers.txt");
 
     public Database() {
         // Creazione del file se non esiste
@@ -18,13 +18,15 @@ public class Database implements Serializable{
             try {
                 pathFileDatabase.getParentFile().mkdirs(); // Crea le directory se non esistono
                 pathFileDatabase.createNewFile(); // Crea il file
+                // Inizializza il file con un array vuoto di Player
+                salvaSuFile(pathFileDatabase);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
     }
 
-    public void salvaSuFile(File fileDaSalvare) throws IOException {
+    public static void salvaSuFile(File fileDaSalvare) throws IOException {
         FileOutputStream fos = new FileOutputStream(fileDaSalvare);
         ObjectOutputStream oos = new ObjectOutputStream(fos);
 
@@ -39,9 +41,15 @@ public class Database implements Serializable{
         fos.close();
     }
 
-    public void caricaDaFile(File fileDaCaricare) throws IOException {
+    public static void caricaDaFile(File fileDaCaricare) throws IOException {
         if (!fileDaCaricare.exists()) {
             throw new FileNotFoundException("Il file " + fileDaCaricare.getName() + " non esiste.");
+        }
+
+        // Controlla se il file è vuoto
+        if (fileDaCaricare.length() == 0) {
+            playerSalvati = new ArrayList<>(); // Inizializza con un arrayList vuoto se il file è vuoto
+            return;
         }
 
         FileInputStream fis = new FileInputStream(fileDaCaricare);
@@ -66,11 +74,11 @@ public class Database implements Serializable{
         fis.close();
     }
 
-    public void addListPlayer(Player playerDaAggiungere) {
+    public static void addListPlayer(Player playerDaAggiungere) {
         playerSalvati.add(playerDaAggiungere);
     }
 
-    public List<Player> getPlayerSalvati() {
+    public static List<Player> getPlayerSalvati() {
         try {
             caricaDaFile(getPathFileDatabase());
         } catch (IOException e) {
@@ -79,14 +87,15 @@ public class Database implements Serializable{
         return playerSalvati;
     }
 
-    public void setPlayerSalvati(List<Player> listaPlayerSalvati) {
-        this.playerSalvati = listaPlayerSalvati;
+    public static void setPlayerSalvati(List<Player> listaPlayerSalvati) {
+        playerSalvati = listaPlayerSalvati;
     }
 
-    public File getPathFileDatabase() {
+    public static File getPathFileDatabase() {
         return pathFileDatabase;
     }
 }
+
 
 
 

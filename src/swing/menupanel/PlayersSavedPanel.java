@@ -91,36 +91,6 @@ public class PlayersSavedPanel extends JPanel {
         // Aggiungo il pannello al Pannello principale
         this.add(bottoneConferma);
 
-
-
-        // Do il Listener ai pulsanti
-        // Listener Bottone Player1
-        selectPlayerButton1.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                player1=player ; // imposto come player che è in fase di scelta, quello premuto dal bottone
-                playerInfoTextArea.setText(player1.playerInfo());
-
-                // cambiare l'immagine del pannello in base al player1 in questo caso
-            }
-        });
-
-        // Listener Bottone Player2
-        selectPlayerButton2.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                player2=player;
-                playerInfoTextArea.setText(player2.playerInfo());
-                // cambiare l'immagine del pannello in base al player2 in questo caso
-
-            }
-        });
-
-
-
-
-
-
         // Aggiungi i giocatori alla lista
         addPlayers(listaGiocatoriSalvati);
     }
@@ -134,11 +104,11 @@ public class PlayersSavedPanel extends JPanel {
             button.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-
+                    // Imposto queste info nella textArea e assegno al player corrente (in base al pulsante player che ho premuto)
+                    // il valore del player associato al bottone
                     playerInfoTextArea.setText(player.playerInfo());
                     setPlayer(player);
                     // cambiare l'immagine del pannello in base al player2 in questo caso
-
                 }
             });
             playerButtonsPanel.add(button);
@@ -183,8 +153,8 @@ public class PlayersSavedPanel extends JPanel {
     public JButton getSelectPlayerButton2() {
         return selectPlayerButton2;
     }
-    public void setPlayerInfoTextArea(JTextArea playerInfoTextArea) {
-        this.playerInfoTextArea = playerInfoTextArea;
+    public void setPlayerInfoTextArea(String infoPassate) {
+        this.playerInfoTextArea.setText(infoPassate);
     }
 
 

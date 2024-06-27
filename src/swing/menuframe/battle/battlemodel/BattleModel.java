@@ -251,6 +251,8 @@ public class BattleModel {
             // Altrimenti modifico il player già nella lista
             listaPlayer.set(playerId, player);
         }
+        // Setto la lista dei player Salvati ora che è modificata
+        databaseDatiPlayer.setPlayerSalvati(listaPlayer);
     }
 
 

@@ -25,7 +25,8 @@ public class Menu extends JFrame {
         private GameSelectPanel gameSelect;
         private ChoosePlayerPanel choosePlayerPanel;
         private JButton maleButton, femaleButton, continueToChooseTeamButton, backToChoiceGame;
-        private List<Player> giocatoriSalvati = new ArrayList<>();   // creo un ArrayList di giocatori (dovranno essere minimo due)
+        private List<Player> giocatoriSalvati = new ArrayList<>();      // hiocatori salvati tra i due da scegliere (maschio /femmina)
+        // Dal pannello continua partita
         private PlayersSavedPanel pannelloContinuaPartita;
         private JButton bottoneConferma;
         private JButton selectPlayerButton1;
@@ -33,6 +34,8 @@ public class Menu extends JFrame {
         private Player player;
         private Player player1;
         private Player player2;
+        private List<Player> playerSalvatiInDataBase;
+
 
         // Costruttore Menu
         public Menu() {
@@ -49,9 +52,10 @@ public class Menu extends JFrame {
             choosePlayerPanel = new ChoosePlayerPanel(new BorderLayout());
 
             // Devo caricare gli elementi all'interno del fileDataBase
-            Database db = new Database();
-            giocatoriSalvati = db.getPlayerSalvati();
-            pannelloContinuaPartita = new PlayersSavedPanel(giocatoriSalvati);
+            pannelloContinuaPartita = new PlayersSavedPanel(Database.getPlayerSalvati());
+
+            // Assegno a questa variabile il corrente contenuto del database
+            playerSalvatiInDataBase = Database.getPlayerSalvati();
 
 
             // Creo un panels di Cards, cosi posso muovermi nella cards
@@ -86,56 +90,39 @@ public class Menu extends JFrame {
 
 
             /*  ACTION LISTENER DEL PANELLO CONTINUA-PARTITA  */
-
-            // VANNO RIVISTI BENE QUESTI LISTENER --> NON SONO CORRETTI
+            // LISTENER Bottone seleziona Player1
+            selectPlayerButton1= pannelloContinuaPartita.getSelectPlayerButton1();
             selectPlayerButton1.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     player = player1;
+                    pannelloContinuaPartita.setPlayerInfoTextArea(player1.playerInfo());
+                    System.out.println("Seleziona Player1");
                 }
             });
+            // LISTENER Bottone seleziona Player2
+            selectPlayerButton2 = pannelloContinuaPartita.getSelectPlayerButton2();
             selectPlayerButton2.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     player = player2;
+                    pannelloContinuaPartita.setPlayerInfoTextArea(player2.playerInfo());
+                    System.out.println("Seleziona Player2");
                 }
             });
-
-
+            // LISTENER DEL BOTTONE CONFERMA
             bottoneConferma = pannelloContinuaPartita.getBottoneConferma();
             bottoneConferma.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    JOptionPane.setRootFrame(new BattleView(player1, player2));
-                    Menu.super.setVisible(false);
+                    if(player1!=null && player2!= null) {
+                        JOptionPane.setRootFrame(new BattleView(player1, player2));
+                        Menu.super.setVisible(false);
+                    }else{
+                        System.out.println("Tutte e due i giocatori devono essere Selezionati");
+                    }
                 }
             });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
             // MALE Button
@@ -260,15 +247,28 @@ public class Menu extends JFrame {
                 }
             });
 
+            // DEBUG
+//            System.out.println("PLAYER IN DATABASE: \n\n" + playerSalvatiInDataBase);
+
             JButton continueButton = gameSelect.getContinueButton();
             // Aggiungo il listener al mio StartButton
-            continueButton.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    // Mi sposto nel pannello del Continua Partita, quello con i playerSalvati.
-                    cl.show(panels, "Panel ContinuaPartita");
-                }
-            });
-
+            // Se la lista dei giocatori salvati è vuota , ha solo un giocatore o è  null(non dovrebbe essere null per un controllo nella classe Database
+            // Allora non si può cliccare sul pulsante di continuaPartita
+            if(playerSalvatiInDataBase==null || playerSalvatiInDataBase.size() <= 1){
+                continueButton.setEnabled(false);
+                continueButton.setOpaque(true);
+                System.out.println("Non ci sono giocatori Salvati :(");
+            }else{
+                // Altrimenti se ci sono almeno 2 giocatori, posso
+                continueButton.setEnabled(true);
+                continueButton.setOpaque(false);
+                continueButton.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        // Mi sposto nel pannello del Continua Partita, quello con i playerSalvati.
+                        cl.show(panels, "Panel ContinuaPartita");
+                    }
+                });
+            }
 
             setVisible(true);//making the frame visible
 //            choosePlayerPanel.setVisible(false);    // set visibile of panel choose "False"
