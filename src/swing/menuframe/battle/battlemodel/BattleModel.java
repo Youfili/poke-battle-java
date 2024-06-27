@@ -12,6 +12,7 @@ import swing.menuframe.battle.battleview.VictoryPanel;
 
 import javax.sound.midi.MidiDeviceTransmitter;
 import javax.swing.*;
+import javax.xml.crypto.Data;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
@@ -24,12 +25,11 @@ public class BattleModel {
     private Player player2;
 
     // inizializzo
-    private Database databaseDatiPlayer = new Database();
     private BattleView viewBattaglia;
     private boolean turnoGiocatore1 = true;
     private Pokemon pokemonInAttacco;
     private Pokemon pokemonInDifesa;
-    private int battaglieGiocate = 0;
+    private int battaglieGiocate;
     private Player winnerPlayer;
     private int battaglieMax = 1;           // numero di battaglie totali da giocare
 
@@ -41,6 +41,7 @@ public class BattleModel {
         this.player2 = player2;
         this.viewBattaglia = viewBattaglia;
 
+        battaglieGiocate = 0;               // Re- imposto le battaglie giocate = 0 ogni volta che viene chiamato il costruttore della battaglia (si crea una nuova battaglia)
 
         // NOTA: il "playerInTurno" è il playerInAttacco chiaramente. --> il player in Attacco è il player1 per iniziare, poi si switchano
         iniziaPartita();            // avvio l'inizio della partita
@@ -211,13 +212,19 @@ public class BattleModel {
         // a questo punto resetto le vittorie Temporanee
         player1.setVittorieTemporanee(0);
         player2.setVittorieTemporanee(0);
+
+
+        /* PROBLEMA --> SALVA SOLO HASH NEL BATTLEVIEW, IN GENERALE SALVA SOLO CHI PERDE? */
         // Salvo i dati dei due giocatori (e li salvo nel "Database" che contiene tutti i player)
-        salvaDati(player1);
-        salvaDati(player2);
+        salvaDati(player1);                 // salvo i dati del giocatore 1
+        salvaDati(player2);                 // salvo i dati del giocatore 2
+
+
+
 
         // Sovrascrivo il file con il nuovo aggiornamento dati
         try {
-            databaseDatiPlayer.salvaSuFile(databaseDatiPlayer.getPathFileDatabase());
+            Database.salvaSuFile(Database.getPathFileDatabase());
         } catch (IOException e) {
             System.out.println("Errore durante il salvataggio del file: " + e.getMessage());
         }
@@ -225,8 +232,8 @@ public class BattleModel {
         // DEBUG
         System.out.println("/////////////////////////////////////////////////////////////////////////////////////");
         try {
-            databaseDatiPlayer.caricaDaFile(databaseDatiPlayer.getPathFileDatabase());
-            System.out.println(databaseDatiPlayer.getPlayerSalvati());
+            Database.caricaDaFile(Database.getPathFileDatabase());
+            System.out.println(Database.getPlayerSalvati());
             System.out.println("/////////////////////////////////////////////////////////////////////////////////////");
         } catch (IOException e) {
             System.out.println("Errore durante il caricamento del file: " + e.getMessage());
@@ -241,18 +248,17 @@ public class BattleModel {
     private void salvaDati(Player player) {
         // Mi ricavo la lista di tutti i player salvati
         int playerId = player.getId();
-        List<Player> listaPlayer = databaseDatiPlayer.getPlayerSalvati();
 
         if(playerId == -1){
             // se id == -1 il player non è nella lista, lo aggiungo
-            player.setId(listaPlayer.size());
-            listaPlayer.add(player);
-        }else if(playerId >=0 && playerId < listaPlayer.size()){
+            player.setId(Database.getPlayerSalvati().size());
+            Database.getPlayerSalvati().add(player);
+        }else{
             // Altrimenti modifico il player già nella lista
-            listaPlayer.set(playerId, player);
+            Database.getPlayerSalvati().set(playerId, player);
         }
         // Setto la lista dei player Salvati ora che è modificata
-        databaseDatiPlayer.setPlayerSalvati(listaPlayer);
+        Database.setPlayerSalvati(Database.getPlayerSalvati());
     }
 
 
@@ -276,7 +282,4 @@ public class BattleModel {
         return turnoGiocatore1;
     }
 
-    public Database getDatabaseDatiPlayer() {
-        return databaseDatiPlayer;
-    }
 }       // FINE CLASSE

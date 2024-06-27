@@ -676,6 +676,10 @@ public class BattleView extends JFrame implements Serializable {
             // Rimuovi tutti gli elementi dalla view corrente
             this.getContentPane().removeAll();
 
+            // IN REALTA' FORSE NON C'è BISOGNO DI RIMUOVE TUTTO, MA BASTA AGGIUNGERLO IN UN CARD-LAYOUT e quando
+            // c'è una vittoria con questo metodo si fa
+            // cl.show(nomePannelloCardLayout, "Pannello Vittoria")
+
             // Crea e aggiungi il nuovo pannello della vittoria
             pannelloVittoria = new VictoryPanel(playerVincitore);
 
