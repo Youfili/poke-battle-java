@@ -144,6 +144,10 @@ public class PlayersSavedPanel extends JPanel {
     // GETTERS E SETTERS
 
 
+    public Player getPlayer() {
+        return player;
+    }
+
     public JButton getBottoneConferma() {
         return bottoneConferma;
     }

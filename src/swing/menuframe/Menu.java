@@ -95,7 +95,7 @@ public class Menu extends JFrame {
             selectPlayerButton1.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    player = player1;
+                     player1=pannelloContinuaPartita.getPlayer();
                     pannelloContinuaPartita.setPlayerInfoTextArea(player1.playerInfo());
                     System.out.println("Seleziona Player1");
                 }
@@ -105,7 +105,7 @@ public class Menu extends JFrame {
             selectPlayerButton2.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    player = player2;
+                    player2=pannelloContinuaPartita.getPlayer();
                     pannelloContinuaPartita.setPlayerInfoTextArea(player2.playerInfo());
                     System.out.println("Seleziona Player2");
                 }

@@ -31,8 +31,8 @@ public class BattleModel {
     private Pokemon pokemonInDifesa;
     private int battaglieGiocate;
     private Player winnerPlayer;
-    private int battaglieMax = 1;           // numero di battaglie totali da giocare
-
+    private int battaglieMax = 1;        // numero di battaglie totali da giocare
+    private List<Player> playerSalvati;
 
     // Costruttore
     public BattleModel(Player player1, Player player2, BattleView viewBattaglia){
@@ -40,6 +40,7 @@ public class BattleModel {
         this.player1 = player1;
         this.player2 = player2;
         this.viewBattaglia = viewBattaglia;
+        this.playerSalvati=Database.getPlayerSalvati();
 
         battaglieGiocate = 0;               // Re- imposto le battaglie giocate = 0 ogni volta che viene chiamato il costruttore della battaglia (si crea una nuova battaglia)
 
@@ -251,14 +252,14 @@ public class BattleModel {
 
         if(playerId == -1){
             // se id == -1 il player non è nella lista, lo aggiungo
-            player.setId(Database.getPlayerSalvati().size());
-            Database.getPlayerSalvati().add(player);
+            player.setId(playerSalvati.size());
+            playerSalvati.add(player);
         }else{
             // Altrimenti modifico il player già nella lista
-            Database.getPlayerSalvati().set(playerId, player);
+            playerSalvati.set(playerId, player);
         }
         // Setto la lista dei player Salvati ora che è modificata
-        Database.setPlayerSalvati(Database.getPlayerSalvati());
+        Database.setPlayerSalvati(playerSalvati);
     }
 
 

@@ -29,6 +29,9 @@ public class ChooseTeam extends JFrame {
     private Player player2;
     private JTextArea pokeInfoTextArea;
     private Pokedex pokedex;
+    private Pokedex pokedex1=new Pokedex();
+    private Pokedex pokedex2= new Pokedex();
+
     private JLabel playerIcon;
     private JTextArea playerInfo;
     private JButton addTeam;
@@ -54,7 +57,7 @@ public class ChooseTeam extends JFrame {
         // di base metto che il player con qui si pre la scelta team è il primo
 
         //lista pokemon .. magari prendere da una classe Pokedex
-        pokedex= new Pokedex();
+        pokedex= pokedex1;
 
 //        playerInfo=new JTextArea();
         playerIcon=new JLabel();
@@ -162,6 +165,143 @@ public class ChooseTeam extends JFrame {
         });
         add(battleButtonPanel);             // Aggiungo il pannello al frame ChooseTeam
 
+        // PANNELLO POKEDEX 1 ------------------------------------------------//
+        JPanel pokedexPanel = new JPanel();
+        pokedexPanel.setLayout(null);
+        pokedexPanel.setBorder(new TitledBorder(BorderFactory.createCompoundBorder(BorderFactory.createBevelBorder(0),BorderFactory.createBevelBorder(3)),"POKEDEX",0,0,Font.getFont("Arail"),Color.BLACK));
+        pokedexPanel.setBounds(5,5,300,450);
+        BufferedImage img =null ;
+        try {
+            img = ImageIO.read(new File("src/Img/wallpaper.jpeg"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        //ImageIcon img =new ImageIcon( "/Users/leonardo/Desktop/wallpaper.jpg");
+
+        Image im = img.getScaledInstance(getWidth(), getHeight(),
+                Image.SCALE_SMOOTH);
+
+        ImageIcon imgicn = new ImageIcon(im);
+
+        JLabel back= new JLabel("",imgicn,JLabel.CENTER);
+        back.setBounds(10,15,280,425);
+
+
+
+
+
+
+        //CREAZIONE PULSANTI POKEMON PER OGNI POKEMON NEL POKEDEX
+        int x=20;
+        int y=30;
+        for (Pokemon poke : pokedex1.getPokedex()) {
+
+            Image dimg = poke.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+            ImageIcon imageIcon = new ImageIcon(dimg);
+
+            JButton pokeButton = new JButton(poke.getName());//creating instance of JButton --> Return pokemon name
+            pokeButton.setBounds(x,y, 50, 50);//x axis, y axis, width, height
+            pokeButton.setIcon(imageIcon);
+            pokeButton.setOpaque(false);
+            pokeButton.setBorderPainted(false);
+
+            pokeButton.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+
+                    //MOSTRO LE INFO DEL POKEMON SELEZIONATO
+                    selectedPokemon=poke;
+                    pokeInfoTextArea.setText("");
+                    pokeInfoTextArea.append(poke.toString());
+                    pokeInfoTextArea.repaint();
+                    pokeIcon.setIcon(imageIcon);
+                    pokeIcon.repaint();
+                    wrapper.repaint();
+                    /*playerButton.setText(player.toString());
+                    playerButton.repaint();
+                    repaint();*/
+                }
+            });
+            y+=60;
+
+
+            pokedexPanel.add(pokeButton);
+
+
+        }
+        pokedexPanel.add(back);                         // aggiungo il back al pokedeb Panel
+        pokedexPanel.setVisible(true);                  // metto il pannello visibile
+        add(pokedexPanel);                              // aggiungo il pannello Pokedex al ChooseTeam Frame
+
+        // PANNELLO POKEDEX 2 ------------------------------------------------//
+
+        JPanel pokedexPanel2 = new JPanel();
+        pokedexPanel2.setLayout(null);
+        pokedexPanel2.setBorder(new TitledBorder(BorderFactory.createCompoundBorder(BorderFactory.createBevelBorder(0),BorderFactory.createBevelBorder(3)),"POKEDEX",0,0,Font.getFont("Arail"),Color.BLACK));
+        pokedexPanel2.setBounds(5,5,300,450);
+
+        BufferedImage imgi =null ;
+        try {
+            imgi = ImageIO.read(new File("src/Img/wallpaper.jpeg"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        //ImageIcon img =new ImageIcon( "/Users/leonardo/Desktop/wallpaper.jpg");
+
+        Image imm = imgi.getScaledInstance(getWidth(), getHeight(),
+                Image.SCALE_SMOOTH);
+
+        ImageIcon imgic = new ImageIcon(im);
+
+        JLabel backg= new JLabel("",imgic,JLabel.CENTER);
+        backg.setBounds(10,15,280,425);
+
+
+
+
+
+
+        //CREAZIONE PULSANTI POKEMON PER OGNI POKEMON NEL POKEDEX
+        int x2=20;
+        int y2=30;
+        for (Pokemon poke : pokedex2.getPokedex()) {
+
+            Image dimg = poke.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+            ImageIcon imageIcon2 = new ImageIcon(dimg);
+
+            JButton pokeButton2 = new JButton(poke.getName());//creating instance of JButton --> Return pokemon name
+            pokeButton2.setBounds(x2,y2, 50, 50);//x axis, y axis, width, height
+            pokeButton2.setIcon(imageIcon2);
+            pokeButton2.setOpaque(false);
+            pokeButton2.setBorderPainted(false);
+
+            pokeButton2.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+
+                    //MOSTRO LE INFO DEL POKEMON SELEZIONATO
+                    selectedPokemon=poke;
+                    pokeInfoTextArea.setText("");
+                    pokeInfoTextArea.append(poke.toString());
+                    pokeInfoTextArea.repaint();
+                    pokeIcon.setIcon(imageIcon2);
+                    pokeIcon.repaint();
+                    wrapper.repaint();
+                    /*playerButton.setText(player.toString());
+                    playerButton.repaint();
+                    repaint();*/
+                }
+            });
+            y2+=60;
+
+
+            pokedexPanel2.add(pokeButton2);
+
+
+        }
+        pokedexPanel2.add(backg);                         // aggiungo il back al pokedeb Panel
+        pokedexPanel2.setVisible(false);                  // metto il pannello visibile
+        add(pokedexPanel2);                              // aggiungo il pannello Pokedex al ChooseTeam Frame
+
+
 
 
         // SELECT PLAYER TEAM BUTTON /////////////////////////////////////////////////////////////////7
@@ -177,13 +317,18 @@ public class ChooseTeam extends JFrame {
         selectPlayerTeamButton1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                player = player1;   // imposto come player che è in fase di scelta, quello premuto dal bottone
+                player = player1;
+                pokedex=pokedex1;// imposto come player che è in fase di scelta, quello premuto dal bottone
                 ChooseTeam.super.repaint();          // faccio il repaint cosi si aggiorna
-//                pokeInfoTextArea.setText(player.playerInfo()+player.pokemonStringList());
+//                pokeInfoTextArea.setText(player.playerInfo()+player.pokemonStringList())
+                pokedexPanel.repaint();
+                pokedexPanel.setVisible(true);
+                pokedexPanel2.setVisible(false);
+
                 teamPanel.repaint();
-//                teamPanel2.repaint();
                 teamPanel.setVisible(true);
                 teamPanel2.setVisible(false);
+
                 playerInfo.setText(player1.playerInfo());
                 playerIcon.setIcon(player1.getImage());
 
@@ -196,12 +341,18 @@ public class ChooseTeam extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 player = player2;
+                pokedex=pokedex2;
                 ChooseTeam.super.repaint();
 //                pokeInfoTextArea.setText(player.playerInfo()+player.pokemonStringList());
 //                teamPanel.repaint();
+                pokedexPanel2.repaint();
+                pokedexPanel2.setVisible(true);
+                pokedexPanel.setVisible(false);
+
                 teamPanel2.repaint();
                 teamPanel2.setVisible(true);
                 teamPanel.setVisible(false);
+
                 playerInfo.setText(player2.playerInfo());
                 playerIcon.setIcon(player2.getImage());
 
@@ -546,72 +697,6 @@ public class ChooseTeam extends JFrame {
 
 
 
-        // PANNELLO POKEDEX ------------------------------------------------//
-        JPanel pokedexPanel = new JPanel();
-        pokedexPanel.setLayout(null);
-        pokedexPanel.setBorder(new TitledBorder(BorderFactory.createCompoundBorder(BorderFactory.createBevelBorder(0),BorderFactory.createBevelBorder(3)),"POKEDEX",0,0,Font.getFont("Arail"),Color.BLACK));
-        pokedexPanel.setBounds(5,5,300,450);
-        BufferedImage img =null ;
-        try {
-            img = ImageIO.read(new File("src/Img/wallpaper.jpeg"));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        //ImageIcon img =new ImageIcon( "/Users/leonardo/Desktop/wallpaper.jpg");
-
-        Image im = img.getScaledInstance(getWidth(), getHeight(),
-                Image.SCALE_SMOOTH);
-
-        ImageIcon imgicn = new ImageIcon(im);
-
-        JLabel back= new JLabel("",imgicn,JLabel.CENTER);
-        back.setBounds(10,15,280,425);
-
-
-
-
-
-
-        //CREAZIONE PULSANTI POKEMON PER OGNI POKEMON NEL POKEDEX
-        int x=20;
-        int y=30;
-        for (Pokemon poke : pokedex.getPokedex()) {
-
-            Image dimg = poke.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
-            ImageIcon imageIcon = new ImageIcon(dimg);
-
-            JButton pokeButton = new JButton(poke.getName());//creating instance of JButton --> Return pokemon name
-            pokeButton.setBounds(x,y, 50, 50);//x axis, y axis, width, height
-            pokeButton.setIcon(imageIcon);
-            pokeButton.setOpaque(false);
-            pokeButton.setBorderPainted(false);
-
-            pokeButton.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-
-                    //MOSTRO LE INFO DEL POKEMON SELEZIONATO
-                    selectedPokemon=poke;
-                    pokeInfoTextArea.setText("");
-                    pokeInfoTextArea.append(poke.toString());
-                    pokeInfoTextArea.repaint();
-                    pokeIcon.setIcon(imageIcon);
-                    pokeIcon.repaint();
-                    wrapper.repaint();
-                    /*playerButton.setText(player.toString());
-                    playerButton.repaint();
-                    repaint();*/
-                }
-            });
-            y+=60;
-
-
-            pokedexPanel.add(pokeButton);
-
-
-        }
-        pokedexPanel.add(back);                         // aggiungo il back al pokedeb Panel
-        pokedexPanel.setVisible(true);                  // metto il pannello visibile
-        add(pokedexPanel);                              // aggiungo il pannello Pokedex al ChooseTeam Frame
 
 
         // Alla chiusura di X si chiude tutto il frame
