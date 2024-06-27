@@ -1,6 +1,7 @@
 package moves.base;
 
 import moves.Move;
+import pokemon.Type;
 
 import java.util.ArrayList;
 
@@ -10,10 +11,11 @@ public class DefaultMoves extends Move{
     private int damage;
     private String description;
     private int pp;
+    private Type type;
 
-    public DefaultMoves(String name, int damage,int pp, String description) {
+    public DefaultMoves(String name,Type type, int damage,int pp, String description) {
 
-       super( name,  damage, pp,  description);
+       super( name, type, damage, pp,  description);
 
     }
 

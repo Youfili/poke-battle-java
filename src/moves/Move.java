@@ -1,6 +1,7 @@
 package moves;
 
 import pokemon.Pokemon;
+import pokemon.Type;
 
 import java.io.Serializable;
 
@@ -10,12 +11,22 @@ public abstract class Move implements Serializable {
     private int damage;
     private int pp;
     private int accuracy;
+    private Type type;
 
     public Move(String name, int damage,int pp, String description) {
         this.name = name;
         this.damage = damage;
         this.description = description;
         this.pp = pp;
+
+    }
+
+    public Move(String name, Type type, int damage, int pp, String description) {
+        this.name = name;
+        this.damage = damage;
+        this.description = description;
+        this.pp = pp;
+        this.type=type;
 
     }
 

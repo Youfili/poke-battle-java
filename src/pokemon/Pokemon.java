@@ -9,8 +9,7 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Base64;
+import java.util.*;
 import java.util.List;
 
 /**
@@ -37,6 +36,7 @@ public  class Pokemon implements Serializable {
      private Boolean isAlive;
      private Pokemon evolution;
 
+     private Map<Integer, Move> movesByLevel=new TreeMap<>();
      private List<Move> moves=new ArrayList<>();
      private List<DefaultMoves> defaultMoves= new ArrayList<>(); // questo va inizializzato con le mosse base
 
@@ -67,6 +67,7 @@ public  class Pokemon implements Serializable {
                     , Pokemon evolution) {
         this.name = name;
         this.level = level;
+        this.type=type;
         this.ps = maxPs;
         this.gender = gender;//da implementare casuale
         this.attack = attack;
@@ -78,6 +79,9 @@ public  class Pokemon implements Serializable {
         this.evolution = evolution;
         this.imagePath = imgPath;
         this.health=maxPs;
+
+
+
 
         //this.maxExp= level*ps; DA IMPLEMENTARE
 
@@ -204,6 +208,14 @@ public  class Pokemon implements Serializable {
     public Boolean isAlive() {
 
         return !isDead();
+    }
+
+    public void addMoveByLevel(int level, Move move) {
+        movesByLevel.put(level, move);
+    }
+
+    public Move getMoveByLevel(int level) {
+        return movesByLevel.get(level);
     }
 
     public void setAlive(Boolean alive) {
