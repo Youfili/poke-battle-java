@@ -1,11 +1,11 @@
 COSA PRINCIPALE:
-- Problema: quando parto dall'inizio e devo andare in battaglia, finisce subito
+(RISOLTO)- Problema: quando parto dall'inizio e devo andare in battaglia, finisce subito
 
 
-- Unicità Pokemon pokedex : copy? Pokédex per ogni player?  -->  new Bulbasaur() ..> creo una nuova istanza di questo pokeomon Pokedex al Player ogni volta creato
-- Salvataggio
-- Ripristino / Caricamento quando si sceglie il giocatore
-- MVC --> in tutto il progetto utilizzare questo Design Pattern
+(RISOLTO)- Unicità Pokemon pokedex : copy? Pokédex per ogni player?  -->  new Bulbasaur() ..> creo una nuova istanza di questo pokeomon Pokedex al Player ogni volta creato
+(RISOLTO)- Salvataggio
+(RISOLTO)- Ripristino / Caricamento quando si sceglie il giocatore
+(RISOLTO)- MVC --> in tutto il progetto utilizzare questo Design Pattern
 
 - Problemi:
 	Enumerate il sesso maschio Femmina
@@ -33,9 +33,9 @@ CHOOSE TEAM
 	-sfondo
 
 BATTLE
-	-Battaglia al meglio delle 3
+	(RISOLTO)-Battaglia al meglio delle 3
 
-	- ( RISOLTO MA VA AGGIORNATO ALLE VITTORIE )Pannello battle che segna il punteggio 
+	(RISOLTO)- ( RISOLTO MA VA AGGIORNATO ALLE VITTORIE )Pannello battle che segna il punteggio 
 
 	- Algoritmo calcolo danno in base al tipo ecc. vedi allo officiale --> formula già esistente --> implementare la formula come calcolo del danno
 
@@ -47,9 +47,9 @@ BATTLE
 
 FINEPARTITA:
 
-	-giocatore vincitore --> Aggiornamento delle stats del giocato vincitore (win) e perdente (lost)
+	(RISOLTO)-giocatore vincitore --> Aggiornamento delle stats del giocato vincitore (win) e perdente (lost)
 
-	-chiedi se si vuole salvare i dati —> salva dati giocatori e torna alla home --> Si sovrascrivono i dati nel file testuale
+	(RISOLTO)-chiedi se si vuole salvare i dati —> salva dati giocatori e torna alla home --> Si sovrascrivono i dati nel file testuale
 
 
 GENDER:
