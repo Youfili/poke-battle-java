@@ -52,15 +52,12 @@ public class PokeBattleInfoPanel extends JPanel {
         this.pokeInfo = pokeInfo;
     }
 
-    public void setHpBar(int valoreVita,int vitaBase) {
-        int hp= (int)  ((valoreVita*100)/vitaBase) ;
-        this.hpBar.setValue(hp);
+    public void setHpBar(int valoreVita) {
+        this.hpBar.setValue(valoreVita);
     }
 
-    public void setExperienceBar(int valoreEsperienza , int expNecessaria) {
-        int exp= (int)  ((valoreEsperienza*100)/expNecessaria) ;
-
-        this.experienceBar.setValue(exp);
+    public void setExperienceBar(int valoreEsperienza) {
+        this.experienceBar.setValue(valoreEsperienza);
     }
 
     public Pokemon getPokemon() {

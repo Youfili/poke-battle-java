@@ -413,8 +413,8 @@ public class BattleView extends JFrame implements Serializable {
 
         // Rimposta l'infoPanel del pokemon in campo
         panelAttacco.setPokemon(pokeInAttacco);
-        panelAttacco.setHpBar(pokeInAttacco.getHealth(),pokeInAttacco.getPs());
-        panelAttacco.setExperienceBar(pokeInAttacco.getCurrentExp(),pokeInAttacco.getExpNecessaria());
+        panelAttacco.setHpBar(pokeInAttacco.getHealth());
+        panelAttacco.setExperienceBar(pokeInAttacco.getExpBase());
         panelAttacco.setVisible(true);
         panelAttacco.repaint();
 
@@ -764,10 +764,10 @@ public class BattleView extends JFrame implements Serializable {
             red.addPokemon(pokem);
         }
 
-            BattleView battle = new BattleView(red,hash);
-            battle.setVisible(true);
+        BattleView battle = new BattleView(red,hash);
+        battle.setVisible(true);
 
-            System.out.println(red.pokemonStringList());
+        System.out.println(red.pokemonStringList());
     }
 
 

@@ -124,7 +124,6 @@ public class BattleModel {
             // Altrimenti il pokemon è Esausto!
             pokemonInDifesa.setHealth(0);       // imposto la vita a 0 del pokemon
             pokemonInDifesa.setAlive(false);    // imposto che il pokemon non è più vivo
-            pokemonInAttacco.increaseExp(pokemonInDifesa);
         }
         // Dopo aver eseguito l'attacco, cambia il turno
         turnoGiocatore1 = !turnoGiocatore1;             // inverto il valore del turno
