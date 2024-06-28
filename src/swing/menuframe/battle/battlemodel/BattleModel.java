@@ -95,6 +95,9 @@ public class BattleModel {
             if(battaglieGiocate == battaglieMax) {
                 terminaPartita();           // termino la partita
             }else {
+
+
+
                 // Inizio una nuova battaglia
                 nuovaBattaglia();
             }
@@ -119,11 +122,31 @@ public class BattleModel {
             pokemonInDifesa.setHealth(vitaPostAttacco);
             // Debug in terminale
             System.out.println("Vita Pokemon difensore: " + pokemonInDifesa.getName() +" è : " + pokemonInDifesa.getHealth());
+            System.out.println("Exp corrente pokeInAttacco:  //////  " + pokemonInAttacco.getCurrentExp() + "  ///////");
+
 
         }else {
             // Altrimenti il pokemon è Esausto!
             pokemonInDifesa.setHealth(0);       // imposto la vita a 0 del pokemon
             pokemonInDifesa.setAlive(false);    // imposto che il pokemon non è più vivo
+            pokemonInAttacco.increaseExp(pokemonInDifesa);      // aumenta l'exp del pokemon in attacco
+            viewBattaglia.setPanelAttaccoDopoEsaustoPokemonInDifesa(pokemonInAttacco);
+
+            // In questo caso controllo il livello del pokemon in attacco
+            Move nuovaMossa = pokemonInAttacco.getMoveByLevel(pokemonInAttacco.getLevel());
+            if(nuovaMossa != null && pokemonInAttacco.isImparaMosse()){     // controllo anche se il pokemon è "propenso" a imparare una nuova mossa
+                Move mossaDaSostituire = viewBattaglia.mostraSchermataNuovaMossa(pokemonInAttacco, nuovaMossa);
+                // Vado a sostituire la mossa del pokemon in attacco
+                pokemonInAttacco.replaceMove(mossaDaSostituire, nuovaMossa);
+                // Aggiorno in modo che il pokemon non sia obbligato a imparare una nuova mossa finché non arriva a un'altro livello che lo permetta
+                pokemonInAttacco.setImparaMosse(false);     // appena impara una mossa metto che non può impararne un'altra fino a che non sale di livello
+                // Aggiorno la grafica del pannelloMosse
+                viewBattaglia.aggiornaPannelloMossePostCambioMossa();
+
+            }
+
+            // Se non deve imaparare una nuova mossa, vado avanti normalmente
+
         }
         // Dopo aver eseguito l'attacco, cambia il turno
         turnoGiocatore1 = !turnoGiocatore1;             // inverto il valore del turno
@@ -282,5 +305,6 @@ public class BattleModel {
     public boolean isTurnoGiocatore1() {
         return turnoGiocatore1;
     }
+
 
 }       // FINE CLASSE

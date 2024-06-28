@@ -1,5 +1,6 @@
 package swing.menuframe.battle.battleview;
 
+import moves.Move;
 import swing.BackgroundImageJFrame;
 import swing.menuframe.battle.battlecontroller.BattleController;
 import moves.base.Action;
@@ -22,6 +23,7 @@ import java.io.IOException;
 import java.io.Serializable;
 
 public class BattleView extends JFrame implements Serializable {
+
 
     // Controller della battaglia, collega la BattleView con la BattleModel
 
@@ -65,12 +67,18 @@ public class BattleView extends JFrame implements Serializable {
     // SottoPannelli
     private JPanel pannelloAzioni1;
     private JPanel pannelloAzioni2;
+    // Questo generale che cambia referenza in base al pokemon di attacco
+    private JPanel panPrincAziAttacco = new JPanel();
+
+
     // SottoPannelli Giocatore 1
     private PannelloMosse pannelloMosse1;
     private PannelloCambioPokemon pannelloCambio1;
     // SottoPannelli Giocatore 2
     private PannelloMosse pannelloMosse2;
     private PannelloCambioPokemon pannelloCambio2;
+
+    private PannelloMosse pannelloMosseAttacco;
 
     private JButton attaccoButton1;
     private JButton attaccoButton2;
@@ -279,6 +287,9 @@ public class BattleView extends JFrame implements Serializable {
         panPrincAzi1.setVisible(true);
         panPrincAzi2.setVisible(false);
 
+        // setto di default al primo giocatore
+        panPrincAziAttacco = panPrincAzi1;
+
 
         // Carico il controller e il model
         this.modelBattaglia = new BattleModel(this.giocatore1, this.giocatore2, this);
@@ -418,6 +429,16 @@ public class BattleView extends JFrame implements Serializable {
         panelAttacco.setVisible(true);
         panelAttacco.repaint();
 
+        // Aggiorno il pannello dell'attacco
+        pannelloMosseAttacco.setPokemonInCampo(pokeInAttacco);
+        pannelloMosseAttacco.aggiornaMosse();
+        pannelloMosseAttacco.revalidate();
+        pannelloMosseAttacco.repaint();
+
+        panPrincAziAttacco.revalidate();
+        panPrincAziAttacco.repaint();
+
+
         // Cambia il pokemon in attacco
         statoBattaglia.setText("Scegli un'azione per " + pokeInAttacco.getName());
         // Reset del pannello altrimenti resta sulla schermata cambio pokemon
@@ -496,6 +517,9 @@ public class BattleView extends JFrame implements Serializable {
             pokeImgDifesa = pokemon2Image;
             panPrincAziAtt = panPrincAzi1;
             panPrincAziDif = panPrincAzi2;
+            pannelloMosseAttacco = pannelloMosse1;
+            panPrincAziAttacco = panPrincAzi1;
+
         }else{
             // Caso in cui in ATTACCO c'è il GIOCATORE2
             playerInAttacco = giocatore2;
@@ -509,7 +533,11 @@ public class BattleView extends JFrame implements Serializable {
             pokeImgDifesa = pokemon1Image;
             panPrincAziAtt = panPrincAzi2;
             panPrincAziDif = panPrincAzi1;
+            pannelloMosseAttacco = pannelloMosse2;
+            panPrincAziAttacco = panPrincAzi2;
+
         }
+
         // Aggiorno la turnazione
         turnazioni = !turnazioni;
         // Imposto il pannello delle azioni corrente
@@ -770,6 +798,30 @@ public class BattleView extends JFrame implements Serializable {
         System.out.println(red.pokemonStringList());
     }
 
+    public void setPanelAttaccoDopoEsaustoPokemonInDifesa(Pokemon pokemonInAttacco) {
+        pokeInAttacco = pokemonInAttacco;
+        panelAttacco.setExperienceBar(pokeInAttacco.getCurrentExp());
+        panelAttacco.setPokeInfo(pokemonInAttacco);
+        panelAttacco.repaint();
+    }
 
+    public Move mostraSchermataNuovaMossa(Pokemon pokemonInAttacco, Move nuovaMossa) {
+        FrameImparaMossa frameNuovaMossa = new FrameImparaMossa(null, pokemonInAttacco, nuovaMossa);
+        Move mossaDaCambiare = frameNuovaMossa.returnMossaDaCambiare();
+        return mossaDaCambiare;
+    }
+
+
+    public void aggiornaPannelloMossePostCambioMossa() {
+        pannelloMosseAttacco.aggiornaMosse(); // Aggiorna le mosse nei bottoni
+
+        // Forza l'aggiornamento dell'interfaccia grafica
+        pannelloMosseAttacco.revalidate();
+        pannelloMosseAttacco.repaint();
+        // Aggiorno entrambi i pannelli
+        panPrincAziAttacco.revalidate();
+        panPrincAziAttacco.repaint();
+
+    }
 
 }

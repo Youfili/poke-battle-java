@@ -25,7 +25,7 @@ public class PokeBattleInfoPanel extends JPanel {
 
         //UIManager.put("ProgressBar.foreground", Color.GREEN);
 
-        hpBar = new JProgressBar(0,100);
+        hpBar = new JProgressBar(0,pokemon.getPs());
         hpBar.setString("hp");
         hpBar.setStringPainted(true);
         hpBar.setValue(this.pokemon.getHealth());
@@ -33,10 +33,10 @@ public class PokeBattleInfoPanel extends JPanel {
 
 
 
-        experienceBar = new JProgressBar(0,100);
+        experienceBar = new JProgressBar(0, pokemon.getExpNecessaria());
         experienceBar.setString("exp");
         experienceBar.setStringPainted(true);
-        experienceBar.setValue(this.pokemon.getExpBase());
+        experienceBar.setValue(this.pokemon.getCurrentExp());
         //experienceBar.setBounds(360,470,170,20);
         add(experienceBar,BorderLayout.LINE_END);
 
@@ -48,8 +48,8 @@ public class PokeBattleInfoPanel extends JPanel {
         return pokeInfo;
     }
 
-    public void setPokeInfo(JLabel pokeInfo) {
-        this.pokeInfo = pokeInfo;
+    public void setPokeInfo(Pokemon pokeAggiornato) {
+        this.pokeInfo.setText(pokeAggiornato.getName()+"                  LV. "+pokeAggiornato.getLevel()) ;
     }
 
     public void setHpBar(int valoreVita) {

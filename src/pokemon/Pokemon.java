@@ -44,6 +44,7 @@ public  class Pokemon implements Serializable {
     private String imageBase64; // For storing the serialized image
     private String imagePath;
     private PokeButton buttonAssociato;
+    private boolean imparaMosse;
 
 
     //Constructor
@@ -56,6 +57,7 @@ public  class Pokemon implements Serializable {
         this.defense = defense;
         this.speed = speed;
         this.isAlive = true;
+        this.imparaMosse = true;
 
 
 
@@ -75,12 +77,14 @@ public  class Pokemon implements Serializable {
         this.speed = speed;
         this.isAlive = true;
         this.expBase = expBase;
+        this.currentExp = expBase;                  // il valore dell'esperienza attuale del pokemon
         this.evolutionLevel = evolutionLevel;
         this.evolution = evolution;
         this.imagePath = imgPath;
         this.health=maxPs;
+        this.imparaMosse = true;
 
-        calcolaExpNecessaria(this.level);
+        calcolaExpNecessaria(this.level);           // calcolo exp in base a livello in cui inizializzo il pokemon
 
 
 
@@ -176,12 +180,10 @@ public  class Pokemon implements Serializable {
     public void replaceMove(Move move,Move newMove){
 
         for(int i=0;i<moves.size();i++){
-           if(moves.get(i).getName()==move.getName()){
-
+           if(moves.get(i).getName() == move.getName()){
                moves.set(i,newMove);
            }
         }
-
     }
 
     public void increaseExp(Pokemon avversario)
@@ -189,8 +191,10 @@ public  class Pokemon implements Serializable {
         int exp= (int) ((avversario.getLevel() * 1.5 * avversario.expBase)/6);
         this.currentExp=currentExp+exp;
 
-        if(currentExp>=expNecessaria){
+        if(currentExp >= expNecessaria){
+            currentExp -= expNecessaria;        // tolgo lo scarto e lo setto come exp corrente
             updateLevel();
+
         }
 
     }
@@ -200,17 +204,20 @@ public  class Pokemon implements Serializable {
         //Aggiungere modifiche ai valori hp ecc
 
         calcolaExpNecessaria(this.level);
-        this.ps = ps + (ps*10/100);
-        this.attack = attack + (attack*10/100);;
+        this.ps += ((ps*10)/100);
+        this.attack = attack + (attack*10/100);
         this.defense = defense + (defense*10/100);;
         this.speed = speed + (speed*10/100);;
-        this.health=ps;
+
+        this.imparaMosse = true;        // ogni volta che aumenta il livello lo rendo "possibilitato" ad apprendere nuovo mosse
+                                        // ovviamente non impara mosse a tutti i livelli
 
 
     }
 
     public void calcolaExpNecessaria(int level){
-        this.expNecessaria= (int) ((level^3 *( 100- level))/60);
+        int levelCubed = (int) Math.pow(level, 3);
+        this.expNecessaria =  (int) (((levelCubed) *( 100- level))/60);
     }
 
 
@@ -248,8 +255,7 @@ public  class Pokemon implements Serializable {
         movesByLevel.put(level, move);
     }
 
-    public Move getMoveByLevel(int level) {
-        return movesByLevel.get(level);
+    public Move getMoveByLevel(int level) {return movesByLevel.get(level);
     }
 
     public void setAlive(Boolean alive) {
@@ -433,6 +439,13 @@ public  class Pokemon implements Serializable {
         return this.imagePath;
     }
 
+    public boolean isImparaMosse() {
+        return imparaMosse;
+    }
+
+    public void setImparaMosse(boolean imparaMosse) {
+        this.imparaMosse = imparaMosse;
+    }
 }
 
 

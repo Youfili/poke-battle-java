@@ -39,13 +39,11 @@ public class Pokedex {
         po.replaceMove(po.getMoves().get(0),po.getMoveByLevel(8));
 
         System.out.println(po.getMoves());
+       System.out.println( "Esperienza necessaria : " + po.getExpNecessaria());
 
        System.out.println(po);
        po.updateLevel();
        System.out.println(po);
-
-
-
 
 
    }

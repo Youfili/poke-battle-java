@@ -56,4 +56,5 @@ public class BattleController {
         return modelBattaglia.getPokemonInAttacco();
     }
 
+
 }

@@ -42,11 +42,35 @@ public class PannelloMosse extends JPanel {
 
 
     public void aggiornaMosse(){
+        // ci setto la mossa
         this.bottoneMossa1.setMove(pokemonInCampo.getMoves().get(0));
+        // ci setto il testo del bottone
+        this.bottoneMossa1.setText("" + pokemonInCampo.getMoves().get(0));
+
+        // ci setto la mossa
         this.bottoneMossa2.setMove(pokemonInCampo.getMoves().get(1));
+        // ci setto il testo del bottone
+        this.bottoneMossa2.setText("" + pokemonInCampo.getMoves().get(1));
+
+        // ci setto la mossa
         this.bottoneMossa3.setMove(pokemonInCampo.getMoves().get(2));
+        // ci setto il testo del bottone
+        this.bottoneMossa3.setText("" + pokemonInCampo.getMoves().get(2));
+
+        // ci setto la mossa
         this.bottoneMossa4.setMove(pokemonInCampo.getMoves().get(3));
+        // ci setto il testo del bottone
+        this.bottoneMossa4.setText("" + pokemonInCampo.getMoves().get(3));
+
+
+
+        // Aggiorno la grafica dei bottoni per riflettere le nuove mosse
+        this.bottoneMossa1.repaint();
+        this.bottoneMossa2.repaint();
+        this.bottoneMossa3.repaint();
+        this.bottoneMossa4.repaint();
     }
+
 
     // SetPokemon in campo per cambiare il pokemon che è in campo
 
