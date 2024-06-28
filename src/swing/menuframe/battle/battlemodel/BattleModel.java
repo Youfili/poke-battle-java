@@ -204,7 +204,7 @@ public class BattleModel {
 
     private void ripristinaVitaPokemon(Player player) {
         for (Pokemon pokemon : player.getTeam()) {
-            pokemon.setHealth(100);
+            pokemon.setHealth(pokemon.getPs());         // re-imposto la vita al massimo --> i ps massimi del pokemon
             pokemon.setAlive(true);
             // Print di Debug
             System.out.println(pokemon);
