@@ -435,9 +435,6 @@ public class BattleView extends JFrame implements Serializable {
         pannelloMosseAttacco.revalidate();
         pannelloMosseAttacco.repaint();
 
-        panPrincAziAttacco.revalidate();
-        panPrincAziAttacco.repaint();
-
 
         // Cambia il pokemon in attacco
         statoBattaglia.setText("Scegli un'azione per " + pokeInAttacco.getName());

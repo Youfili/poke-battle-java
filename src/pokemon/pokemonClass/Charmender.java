@@ -30,7 +30,7 @@ public class Charmender extends Pokemon implements Serializable {
 
 
         //settiamo il  dizionario delle mosse da imparare in base al livello --> mossa
-        addMoveByLevel(8,new Ember());
+        addMoveByLevel(7,new Ember());
         addMoveByLevel(12,new FireFang());
         addMoveByLevel(16,new Flamethrower());
     }
