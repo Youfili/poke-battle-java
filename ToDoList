@@ -7,14 +7,10 @@ COSA PRINCIPALE:
 (RISOLTO)- Ripristino / Caricamento quando si sceglie il giocatore
 (RISOLTO)- MVC --> in tutto il progetto utilizzare questo Design Pattern
 
-- Problemi:
-	Enumerate il sesso maschio Femmina
-	Enumerate Type del pokemon, che in questo caso è null quando andiamo a stampare le info dei pokemon
+(RISOLTO)-Enumerate Type del pokemon, che in questo caso è null quando andiamo a stampare le info dei pokemon
 
 
--hasMap livelli —> mosse       --> Apprendimento di una mossa a un determinato livello --> Key : Livello , Valore --> Mossa, in cui si sceglie quale modificare
-
--Pannello inserisci nome giocatore con immagine		--> TextField che raccoglie la stringa ..> il Text Field 										
+(RISOLTO) -hasMap livelli —> mosse       --> Apprendimento di una mossa a un determinato livello --> Key : Livello , Valore --> Mossa, in cui si sceglie quale modificare									
 
  -Foto pagine iniziali					---> Cambiare la foto in una partita
 
@@ -39,17 +35,17 @@ BATTLE
 
 	- Algoritmo calcolo danno in base al tipo ecc. vedi allo officiale --> formula già esistente --> implementare la formula come calcolo del danno
 
-	 - Calcolo Exp guadagnata	--> Calcolo già esistente, va aggiunto --> sistemare quando uno dei due pokemon è morto modifichi il valore della barra
+	 (RISOLTO) - Calcolo Exp guadagnata	--> Calcolo già esistente, va aggiunto --> sistemare quando uno dei due pokemon è morto modifichi il valore della barra
 										   esperienza del pokemon singolo che sconfigge l'altro pokemon
 
-	- aumento di livello --> Durante la battaglia con l'esperienza
+	(RISOLTO) - aumento di livello --> Durante la battaglia con l'esperienza
 
 
 FINEPARTITA:
 
 	(RISOLTO)-giocatore vincitore --> Aggiornamento delle stats del giocato vincitore (win) e perdente (lost)
 
-	(RISOLTO)-chiedi se si vuole salvare i dati —> salva dati giocatori e torna alla home --> Si sovrascrivono i dati nel file testuale
+	(RISOLTO) -> salva dati giocatori e torna alla home --> Si sovrascrivono i dati nel file testuale
 
 
 GENDER:
