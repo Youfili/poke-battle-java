@@ -31,7 +31,7 @@ public class BattleModel {
     private Pokemon pokemonInDifesa;
     private int battaglieGiocate;
     private Player winnerPlayer;
-    private int battaglieMax = 1;        // numero di battaglie totali da giocare
+    private int battaglieMax = 2;        // numero di battaglie totali da giocare
     private List<Player> playerSalvati;
 
     // Costruttore
@@ -56,7 +56,7 @@ public class BattleModel {
 
     private void nuovaBattaglia() {
 
-        // ALTRIMENTI
+        // Ripristino la vita dei pokemon solo se sono esausti
         ripristinaVitaPokemon(player1);
         ripristinaVitaPokemon(player2);
         viewBattaglia.inizializzaView(player1, player2, viewBattaglia.getScorePanel());
@@ -204,12 +204,14 @@ public class BattleModel {
 
     private void ripristinaVitaPokemon(Player player) {
         for (Pokemon pokemon : player.getTeam()) {
-            pokemon.setHealth(pokemon.getPs());         // re-imposto la vita al massimo --> i ps massimi del pokemon
-            pokemon.setAlive(true);
+            if(!pokemon.isAlive()) {        // pokemon.isAlive() == false
+                // se il pokemon è ESAUSTO gli rigenero la vita, altrimenti prosegue con quella che ha
+                pokemon.setHealth(pokemon.getPs());         // re-imposto la vita al massimo --> i ps massimi del pokemon
+                pokemon.setAlive(true);
+            }
             // Print di Debug
             System.out.println(pokemon);
         }
-
     }
 
     private void terminaPartita() {

@@ -737,6 +737,31 @@ public class BattleView extends JFrame implements Serializable {
         });
     }
 
+    public void setPanelAttaccoDopoEsaustoPokemonInDifesa(Pokemon pokemonInAttacco) {
+        pokeInAttacco = pokemonInAttacco;
+        panelAttacco.setExperienceBar(pokeInAttacco.getCurrentExp());
+        panelAttacco.setPokeInfo(pokemonInAttacco);
+        panelAttacco.repaint();
+    }
+
+    public Move mostraSchermataNuovaMossa(Pokemon pokemonInAttacco, Move nuovaMossa) {
+        FrameImparaMossa frameNuovaMossa = new FrameImparaMossa(null, pokemonInAttacco, nuovaMossa);
+        Move mossaDaCambiare = frameNuovaMossa.returnMossaDaCambiare();
+        return mossaDaCambiare;
+    }
+
+
+    public void aggiornaPannelloMossePostCambioMossa() {
+        pannelloMosseAttacco.aggiornaMosse(); // Aggiorna le mosse nei bottoni
+
+        // Forza l'aggiornamento dell'interfaccia grafica
+        pannelloMosseAttacco.revalidate();
+        pannelloMosseAttacco.repaint();
+        // Aggiorno entrambi i pannelli
+        panPrincAziAttacco.revalidate();
+        panPrincAziAttacco.repaint();
+
+    }
 
 
 
@@ -744,6 +769,12 @@ public class BattleView extends JFrame implements Serializable {
 
 
 
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
     // MAIN PROVA
@@ -793,32 +824,6 @@ public class BattleView extends JFrame implements Serializable {
         battle.setVisible(true);
 
         System.out.println(red.pokemonStringList());
-    }
-
-    public void setPanelAttaccoDopoEsaustoPokemonInDifesa(Pokemon pokemonInAttacco) {
-        pokeInAttacco = pokemonInAttacco;
-        panelAttacco.setExperienceBar(pokeInAttacco.getCurrentExp());
-        panelAttacco.setPokeInfo(pokemonInAttacco);
-        panelAttacco.repaint();
-    }
-
-    public Move mostraSchermataNuovaMossa(Pokemon pokemonInAttacco, Move nuovaMossa) {
-        FrameImparaMossa frameNuovaMossa = new FrameImparaMossa(null, pokemonInAttacco, nuovaMossa);
-        Move mossaDaCambiare = frameNuovaMossa.returnMossaDaCambiare();
-        return mossaDaCambiare;
-    }
-
-
-    public void aggiornaPannelloMossePostCambioMossa() {
-        pannelloMosseAttacco.aggiornaMosse(); // Aggiorna le mosse nei bottoni
-
-        // Forza l'aggiornamento dell'interfaccia grafica
-        pannelloMosseAttacco.revalidate();
-        pannelloMosseAttacco.repaint();
-        // Aggiorno entrambi i pannelli
-        panPrincAziAttacco.revalidate();
-        panPrincAziAttacco.repaint();
-
     }
 
 }
