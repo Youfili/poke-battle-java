@@ -91,12 +91,10 @@ public class BattleModel {
             }
             battaglieGiocate ++;
 
-            // Faccio un controllo per vedere a quante partite giocate stanno
-            if(battaglieGiocate == battaglieMax) {
+            // Faccio un controllo per vedere a quante partite vinte stanno a testa --> per vedere se uno di loro ha effettivamente vinto
+            if( player1.getVittorieTemporanee() == battaglieMax ||  player2.getVittorieTemporanee() == battaglieMax) {
                 terminaPartita();           // termino la partita
             }else {
-
-
 
                 // Inizio una nuova battaglia
                 nuovaBattaglia();

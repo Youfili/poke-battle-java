@@ -35,14 +35,14 @@ class BackgroundPanel extends JPanel {
 public class FrameImparaMossa extends JDialog {
 
     private Pokemon pokemonInAttacco;
-    private Move mossaDaImpara;
+    private Move mossaDaImparare;
     private Move mossaDaCambiare;
     MoveButton bottoneMossa;
 
     public FrameImparaMossa(JFrame parent, Pokemon pokemonImparaMossa, Move mosaDaImparare) {
         super(parent, true); // Imposta la modalità del dialogo
         this.pokemonInAttacco = pokemonImparaMossa;
-        this.mossaDaImpara = mosaDaImparare;
+        this.mossaDaImparare = mosaDaImparare;
 
         // Dimensioni Frame Battaglia
         setSize(450, 350); // larghezza e altezza
@@ -62,7 +62,7 @@ public class FrameImparaMossa extends JDialog {
         Border bordoNuovaMossa = BorderFactory.createTitledBorder("Nuova Mossa");
         pannelloNuovaMossa.setBorder(bordoNuovaMossa);
         pannelloNuovaMossa.setOpaque(false); // Imposta il pannello come trasparente
-        JLabel nomeMossaLabel = new JLabel("Vuoi far imparare a " + pokemonInAttacco.getName() + " la mossa: " + mossaDaImpara.getName(), SwingConstants.CENTER);
+        JLabel nomeMossaLabel = new JLabel("Vuoi far imparare a " + pokemonInAttacco.getName() + " la mossa: " + mossaDaImparare.getName(), SwingConstants.CENTER);
         nomeMossaLabel.setFont(new Font("Arial", Font.BOLD, 16)); // Imposta la dimensione del testo
         nomeMossaLabel.setForeground(Color.WHITE); // Imposta il colore del testo in bianco
         pannelloNuovaMossa.add(nomeMossaLabel);

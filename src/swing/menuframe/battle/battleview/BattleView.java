@@ -240,6 +240,9 @@ public class BattleView extends JFrame implements Serializable {
         this.pannelloMosse2 = new PannelloMosse(pokeInDifesa);
         this.pannelloCambio2 = new PannelloCambioPokemon(giocatore2);
 
+//        // Setto come da default
+//        pannelloMosseAttacco = pannelloMosse1;
+
 
         // Inizializzo e posiziono il Pannello del Punteggio
         scorePanel = new ScoreOfBattles(giocatore1, giocatore2);
@@ -289,6 +292,8 @@ public class BattleView extends JFrame implements Serializable {
 
         // setto di default al primo giocatore
         panPrincAziAttacco = panPrincAzi1;
+        // Setto come da default
+        pannelloMosseAttacco = pannelloMosse1;
 
 
         // Carico il controller e il model
@@ -437,7 +442,8 @@ public class BattleView extends JFrame implements Serializable {
 
 
         // Cambia il pokemon in attacco
-        statoBattaglia.setText("Scegli un'azione per " + pokeInAttacco.getName());
+        statoBattaglia.setText("Scegli un'azione " +
+                "per " + pokeInAttacco.getName());
         // Reset del pannello altrimenti resta sulla schermata cambio pokemon
         resettaPannello(playerInAttacco);
 
