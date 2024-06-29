@@ -506,7 +506,9 @@ public class BattleView extends JFrame implements Serializable {
 
     public void scambiaTurnazioniView(){
         // Mi dice che questo ritornato è null... non capisco il motivo
-//        boolean turnazioni = controllerBattaglia.isTurnoGiocatore1();
+        boolean turnazioni = controllerBattaglia.isTurnoGiocatore1();
+        turnazioni = !turnazioni;
+
         if(turnazioni){     // se turnazioni == true
             // Caso in cui in ATTACCO c'è il GIOCATORE1
             playerInAttacco = giocatore1;

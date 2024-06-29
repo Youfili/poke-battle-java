@@ -124,7 +124,6 @@ public class BattleModel {
             System.out.println("Vita Pokemon difensore: " + pokemonInDifesa.getName() +" è : " + pokemonInDifesa.getHealth());
             System.out.println("Exp corrente pokeInAttacco:  //////  " + pokemonInAttacco.getCurrentExp() + "  ///////");
 
-
         }else {
             // Altrimenti il pokemon è Esausto!
             pokemonInDifesa.setHealth(0);       // imposto la vita a 0 del pokemon
@@ -149,16 +148,9 @@ public class BattleModel {
                 viewBattaglia.aggiornaPannelloMossePostCambioMossa();
 
             }
-
-
-
-
             // Se non deve imaparare una nuova mossa, vado avanti normalmente
-
         }
         // Dopo aver eseguito l'attacco, cambia il turno
-        turnoGiocatore1 = !turnoGiocatore1;             // inverto il valore del turno
-
         // Scambio le turnazioni a livello logico del Pokemon
         scambiaTurnazioniModel(pokemonInAttacco, pokemonInDifesa);
 
@@ -171,6 +163,7 @@ public class BattleModel {
 
     private void scambiaTurnazioniModel(Pokemon vecchioPokemonInCampoAttaccante, Pokemon vecchioPokemonInCampoDifensore) {
         // Scambio i ruoli dei pokemon in campo
+        turnoGiocatore1 = !turnoGiocatore1;             // inverto il valore del turno
         setPokemonInAttacco(vecchioPokemonInCampoDifensore);
         setPokemonInDifesa(vecchioPokemonInCampoAttaccante);
         viewBattaglia.scambiaTurnazioni(this.pokemonInDifesa, this.pokemonInAttacco);
