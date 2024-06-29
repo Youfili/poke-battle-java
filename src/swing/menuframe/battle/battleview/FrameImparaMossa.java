@@ -77,20 +77,19 @@ public class FrameImparaMossa extends JDialog {
         pannelloBottoniMossa.setOpaque(false); // Imposta il pannello come trasparente
 
         for (Move mossa : pokemonInAttacco.getMoves()) {
-            bottoneMossa = new MoveButton(mossa);
-            bottoneMossa.setForeground(Color.BLACK); // Imposta il colore del testo dei bottoni in bianco
+            MoveButton bottoneMossa = new MoveButton(mossa); // Crea un nuovo bottone per ogni mossa
+            bottoneMossa.setForeground(Color.BLACK);
 
-            // Faccio l'ActionListener del bottone
+            // Crea un ActionListener specifico per ogni bottone
             bottoneMossa.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    // il bottone che clicco mi indica quale mossa voglio sostituire
-
                     // Immagine da inserire come dialogo di conferma
                     ImageIcon returnBackCustomIcon = new ImageIcon("src/Img/backToMenu.png");
                     // Inserisco il dialogo di conferma
                     int risposta = JOptionPane.showConfirmDialog(null, "Vuoi cambiare questa mossa?", "Si", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, returnBackCustomIcon);
-                    if (risposta == JOptionPane.YES_OPTION) { // se conferma il bottone premuto, torno indietro al menu
+                    if (risposta == JOptionPane.YES_OPTION) {
+                        // Imposta la mossa da cambiare e chiudi il dialogo
                         setMossaDaCambiare(bottoneMossa.getMove());
                         System.out.println("La mossa che ho deciso di cambiare è: " + mossaDaCambiare);
                         dispose();  // Chiudi il frame dopo la conferma di risposta
@@ -100,9 +99,10 @@ public class FrameImparaMossa extends JDialog {
                 }
             });
 
-            // Aggiungo il bottone mossa al pannello
+            // Aggiungi il bottone mossa al pannello
             pannelloBottoniMossa.add(bottoneMossa);
         }
+
 
         // Aggiungo il pannello al frame
         backgroundPanel.add(pannelloBottoniMossa);

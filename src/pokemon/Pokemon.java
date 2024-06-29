@@ -177,14 +177,17 @@ public  class Pokemon implements Serializable {
     }
 
     //METODO PER RIMPIAZZARE UNA MOSSA
-    public void replaceMove(Move move,Move newMove){
-
-        for(int i=0;i<moves.size();i++){
-           if(moves.get(i).getName() == move.getName()){
-               moves.set(i,newMove);
-           }
+    public void replaceMove(Move move, Move newMove) {
+        for (int i = 0; i < moves.size(); i++) {
+            if (moves.get(i).getName().equals(move.getName())) {
+                moves.set(i, newMove);
+                break; // Break dopo aver trovato la mossa da sostituire
+            }
         }
+        // Stampa di debug per verificare l'aggiornamento delle mosse
+        System.out.println("Mossee aggiornate: " + moves);
     }
+
 
     public void increaseExp(Pokemon avversario)
     {
