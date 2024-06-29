@@ -66,6 +66,8 @@ public class BattleModel {
         pokemonInAttacco = player1.getTeam().get(0);
         pokemonInDifesa = player2.getTeam().get(0);
 
+        scambiaTurnazioniModel(pokemonInDifesa, pokemonInAttacco);
+
         cicloBattaglia();
     }
 
