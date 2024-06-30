@@ -1,9 +1,7 @@
 package pokemon;
 
 import moves.Move;
-import pokemon.pokemonClass.Bulbasaur;
-import pokemon.pokemonClass.Charmender;
-import pokemon.pokemonClass.Squirtle;
+import pokemon.pokemonClass.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,9 +13,11 @@ public class Pokedex {
         pokedex.add(new Bulbasaur());
         pokedex.add(new Charmender());
         pokedex.add(new Squirtle());
-        pokedex.add(new Bulbasaur());
-        pokedex.add(new Charmender());
-        pokedex.add(new Squirtle());
+        pokedex.add(new Meowth());
+        pokedex.add(new Growlithe());
+        pokedex.add(new Nidoran());
+        pokedex.add(new Pikachu());
+        pokedex.add(new Snorlax());
 
     }
 

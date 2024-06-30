@@ -128,4 +128,12 @@ public class PartyPokemonPanel extends JPanel {
     public JButton getPokemon6() {
         return pokemon6;
     }
+
+    public void setPokemon1(JButton pokemon1) {this.pokemon1 = pokemon1;}
+    public void setPokemon2(JButton pokemon2) {this.pokemon2 = pokemon2;}
+    public void setPokemon3(JButton pokemon3) {this.pokemon3 = pokemon3;}
+    public void setPokemon4(JButton pokemon4) {this.pokemon4 = pokemon4;}
+    public void setPokemon5(JButton pokemon5) {this.pokemon5 = pokemon5;}
+    public void setPokemon6(JButton pokemon6) {this.pokemon6 = pokemon6;}
+
 }

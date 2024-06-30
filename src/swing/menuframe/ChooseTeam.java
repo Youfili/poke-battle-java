@@ -387,14 +387,15 @@ public class ChooseTeam extends JFrame {
         // Action Listener del tasto Pokemon1
         pokemon1.addActionListener( new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+
                 if(pokemon1.getIcon()!=imgPokeball){
                     selectedPartyPokemon=player.getTeam().get(0);
                     Image immPokemon = selectedPartyPokemon.getImage().getScaledInstance(30,30,Image.SCALE_SMOOTH);
                     ImageIcon selectPartyPokeImage = new ImageIcon(immPokemon);
                    int input= JOptionPane.showConfirmDialog(new JButton("Elimina"),"Vuoi rimuovere "+ player.getTeam().get(0).getName()+ " dalla squadra?","remove?",2,1,selectPartyPokeImage);
                    if(input==0){
-                       player.replacePokemon(selectedPartyPokemon,null);
 
+                       player1.getTeam().set(0,null);
                        System.out.println(player.pokemonStringList());
                        pokemon1.setIcon(imgPokeball);
                        teamPanel.repaint();
@@ -406,6 +407,7 @@ public class ChooseTeam extends JFrame {
         // Action Listener del tasto Pokemon2
         pokemon2.addActionListener( new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+
                 if(pokemon2.getIcon()!=imgPokeball){
                     selectedPartyPokemon=player.getTeam().get(1);
                     Image immPokemon = selectedPartyPokemon.getImage().getScaledInstance(30,30, Image.SCALE_SMOOTH);
@@ -481,7 +483,7 @@ public class ChooseTeam extends JFrame {
                     ImageIcon selectPartyPokeImage = new ImageIcon(immPokemon);
                     int input= JOptionPane.showConfirmDialog(new JButton("elimina"),"Vuoi rimuovere "+ selectedPartyPokemon.getName()+ " dalla squadra?","remove?",2,1,selectPartyPokeImage);
                     if(input==0){       // Rimuovo il pokemon dalla squadra
-                        player.getTeam().set(6,null);
+                        player.getTeam().set(5,null);
                         pokemon6.setIcon(imgPokeball);
                         teamPanel.repaint();
 //                        teamPanel2.repaint();
@@ -500,8 +502,7 @@ public class ChooseTeam extends JFrame {
                     ImageIcon selectPartyPokeImage = new ImageIcon(immPokemon);
                     int input= JOptionPane.showConfirmDialog(new JButton("Elimina"),"Vuoi rimuovere "+ player.getTeam().get(0).getName()+ " dalla squadra?","remove?",2,1,selectPartyPokeImage);
                     if(input==0){
-                        player2.replacePokemon(selectedPartyPokemon,null);
-
+                        player2.getTeam().set(0,null);
                         System.out.println(player2.pokemonStringList());
                         pokemon1_2.setIcon(imgPokeball);
 //                        teamPanel.repaint();
@@ -520,7 +521,6 @@ public class ChooseTeam extends JFrame {
                     int input= JOptionPane.showConfirmDialog(new JButton("elimina"),"Vuoi rimuovere "+ selectedPartyPokemon.getName()+ " dalla squadra?","remove?",2,1,selectPartyPokeImage);
                     if(input==0){
                         player2.getTeam().set(1,null);
-
                         pokemon2_2.setIcon(imgPokeball);
 //                        teamPanel.repaint();
                         teamPanel2.repaint();
@@ -589,7 +589,7 @@ public class ChooseTeam extends JFrame {
                     ImageIcon selectPartyPokeImage = new ImageIcon(immPokemon);
                     int input= JOptionPane.showConfirmDialog(new JButton("elimina"),"Vuoi rimuovere "+ selectedPartyPokemon.getName()+ " dalla squadra?","remove?",2,1,selectPartyPokeImage);
                     if(input==0){       // Rimuovo il pokemon dalla squadra
-                        player2.getTeam().set(6,null);
+                        player2.getTeam().set(5,null);
                         pokemon6_2.setIcon(imgPokeball);
 //                        teamPanel.repaint();
                         teamPanel2.repaint();
@@ -659,7 +659,6 @@ public class ChooseTeam extends JFrame {
 
 
                 // IMPOSTO L'IMMAGINE DEL BOTTONE
-                // Metodo sostitutivo agli if sotto .... che eleganza !!
                 if(player == player1) {
                     switch (index) {
                         case 0: pokemon1.setIcon(selectPokeImage); break;
