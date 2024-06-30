@@ -26,4 +26,5 @@ public class PokeButton extends JButton {
     public Pokemon getPokemonDelBottone() {
         return pokemonDelBottone;
     }
+    public void setPokemonDelBottone(Pokemon pokemonDelBottone) {this.pokemonDelBottone = pokemonDelBottone;}
 }

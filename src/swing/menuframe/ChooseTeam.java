@@ -1,6 +1,7 @@
 package swing.menuframe;
 
 import swing.menuframe.battle.battleview.BattleView;
+import swing.menuframe.battle.battleview.PokeButton;
 import swing.menupanel.PartyPokemonPanel;
 import players.Player;
 import pokemon.Pokedex;
@@ -42,6 +43,8 @@ public class ChooseTeam extends JFrame {
 
     private Pokemon selectedPokemon;
     private  Pokemon selectedPartyPokemon;
+
+    private PokeButton bottonePokemonSelezionato;
 
     public ChooseTeam(Player player1, Player player2) {
         // Nel costruttore va aggiunto un altro Player che si interfacci con la propria squadra, cosi da farli entrare in battaglia
@@ -191,7 +194,7 @@ public class ChooseTeam extends JFrame {
 
 
 
-        //CREAZIONE PULSANTI POKEMON PER OGNI POKEMON NEL POKEDEX
+        //CREAZIONE PULSANTI POKEMON PER OGNI POKEMON NEL POKEDEX1
         int x=20;
         int y=30;
         for (Pokemon poke : pokedex1.getPokedex()) {
@@ -199,7 +202,7 @@ public class ChooseTeam extends JFrame {
             Image dimg = poke.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
             ImageIcon imageIcon = new ImageIcon(dimg);
 
-            JButton pokeButton = new JButton(poke.getName());//creating instance of JButton --> Return pokemon name
+            PokeButton pokeButton = new PokeButton(poke);//creating instance of JButton --> Return pokemon name
             pokeButton.setBounds(x,y, 50, 50);//x axis, y axis, width, height
             pokeButton.setIcon(imageIcon);
             pokeButton.setOpaque(false);
@@ -260,7 +263,7 @@ public class ChooseTeam extends JFrame {
 
 
 
-        //CREAZIONE PULSANTI POKEMON PER OGNI POKEMON NEL POKEDEX
+        //CREAZIONE PULSANTI POKEMON PER OGNI POKEMON NEL POKEDEX2
         int x2=20;
         int y2=30;
         for (Pokemon poke : pokedex2.getPokedex()) {
@@ -268,7 +271,7 @@ public class ChooseTeam extends JFrame {
             Image dimg = poke.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
             ImageIcon imageIcon2 = new ImageIcon(dimg);
 
-            JButton pokeButton2 = new JButton(poke.getName());//creating instance of JButton --> Return pokemon name
+            PokeButton pokeButton2 = new PokeButton(poke);//creating instance of JButton --> Return pokemon name
             pokeButton2.setBounds(x2,y2, 50, 50);//x axis, y axis, width, height
             pokeButton2.setIcon(imageIcon2);
             pokeButton2.setOpaque(false);
@@ -395,9 +398,16 @@ public class ChooseTeam extends JFrame {
                    int input= JOptionPane.showConfirmDialog(new JButton("Elimina"),"Vuoi rimuovere "+ player.getTeam().get(0).getName()+ " dalla squadra?","remove?",2,1,selectPartyPokeImage);
                    if(input==0){
 
-                       player1.getTeam().set(0,null);
+                       // Imposto che il pokemon è di nuovo selezionabile dal pokedex
+                       bottonePokemonSelezionato = player.getTeam().get(0).getPokeButton();
+                       bottonePokemonSelezionato.setOpaque(false);
+                       bottonePokemonSelezionato.setEnabled(true);
+
+                       player.getTeam().set(0,null);
                        System.out.println(player.pokemonStringList());
                        pokemon1.setIcon(imgPokeball);
+
+                       // aggiorno il pannello
                        teamPanel.repaint();
 //                       teamPanel2.repaint();
                    }
@@ -414,8 +424,17 @@ public class ChooseTeam extends JFrame {
                     ImageIcon selectPartyPokeImage = new ImageIcon(immPokemon);
                     int input= JOptionPane.showConfirmDialog(new JButton("elimina"),"Vuoi rimuovere "+ selectedPartyPokemon.getName()+ " dalla squadra?","remove?",2,1,selectPartyPokeImage);
                     if(input==0){
+
+                        // Imposto che il pokemon è di nuovo selezionabile dal pokedex
+                        bottonePokemonSelezionato = player.getTeam().get(1).getPokeButton();
+                        bottonePokemonSelezionato.setOpaque(false);
+                        bottonePokemonSelezionato.setEnabled(true);
+
                         player.getTeam().set(1,null);
                         pokemon2.setIcon(imgPokeball);
+
+                        // aggiorno il pannello
+
                         teamPanel.repaint();
 //                        teamPanel2.repaint();
                 }
@@ -431,8 +450,15 @@ public class ChooseTeam extends JFrame {
                     ImageIcon selectPartyPokeImage = new ImageIcon(immPokemon);
                     int input= JOptionPane.showConfirmDialog(new JButton("elimina"),"Vuoi rimuovere "+ selectedPartyPokemon.getName()+ " dalla squadra?","remove?",2,1,selectPartyPokeImage);
                     if(input==0){
+                        // Imposto che il pokemon è di nuovo selezionabile dal pokedex
+                        bottonePokemonSelezionato = player.getTeam().get(2).getPokeButton();
+                        bottonePokemonSelezionato.setOpaque(false);
+                        bottonePokemonSelezionato.setEnabled(true);
+
                         player.getTeam().set(2,null);
                         pokemon3.setIcon(imgPokeball);
+
+                        // aggiorno il pannello
                         teamPanel.repaint();
 //                        teamPanel2.repaint();
                     }
@@ -449,8 +475,16 @@ public class ChooseTeam extends JFrame {
                     ImageIcon selectPartyPokeImage = new ImageIcon(immPokemon);
                     int input= JOptionPane.showConfirmDialog(new JButton("elimina"),"Vuoi rimuovere "+ selectedPartyPokemon.getName()+ " dalla squadra?","remove?",2,1,selectPartyPokeImage);
                     if(input==0){
+                        // Imposto che il pokemon è di nuovo selezionabile dal pokedex
+                        bottonePokemonSelezionato = player.getTeam().get(3).getPokeButton();
+                        bottonePokemonSelezionato.setOpaque(false);
+                        bottonePokemonSelezionato.setEnabled(true);
+
                         player.getTeam().set(3,null);
                         pokemon4.setIcon(imgPokeball);
+
+                        // aggiorno il pannello
+
                         teamPanel.repaint();
 //                        teamPanel2.repaint();
                     }
@@ -466,8 +500,15 @@ public class ChooseTeam extends JFrame {
                     ImageIcon selectPartyPokeImage = new ImageIcon(immPokemon);
                     int input= JOptionPane.showConfirmDialog(new JButton("elimina"),"Vuoi rimuovere "+ selectedPartyPokemon.getName()+ " dalla squadra?","remove?",2,1,selectPartyPokeImage);
                     if(input==0){
+                        // Imposto che il pokemon è di nuovo selezionabile dal pokedex
+                        bottonePokemonSelezionato = player.getTeam().get(4).getPokeButton();
+                        bottonePokemonSelezionato.setOpaque(false);
+                        bottonePokemonSelezionato.setEnabled(true);
+
                         player.getTeam().set(4,null);
                         pokemon5.setIcon(imgPokeball);
+
+                        // aggiorno il pannello
                         teamPanel.repaint();
 //                        teamPanel2.repaint();
                     }
@@ -482,9 +523,17 @@ public class ChooseTeam extends JFrame {
                     Image immPokemon = selectedPartyPokemon.getImage().getScaledInstance(30,30,Image.SCALE_SMOOTH);
                     ImageIcon selectPartyPokeImage = new ImageIcon(immPokemon);
                     int input= JOptionPane.showConfirmDialog(new JButton("elimina"),"Vuoi rimuovere "+ selectedPartyPokemon.getName()+ " dalla squadra?","remove?",2,1,selectPartyPokeImage);
-                    if(input==0){       // Rimuovo il pokemon dalla squadra
+                    if(input==0){
+                        // Imposto che il pokemon è di nuovo selezionabile dal pokedex
+                        bottonePokemonSelezionato = player.getTeam().get(5).getPokeButton();
+                        bottonePokemonSelezionato.setOpaque(false);
+                        bottonePokemonSelezionato.setEnabled(true);
+
+                        // Rimuovo il pokemon dalla squadra
                         player.getTeam().set(5,null);
                         pokemon6.setIcon(imgPokeball);
+
+                        // aggiorno il pannello
                         teamPanel.repaint();
 //                        teamPanel2.repaint();
                     }
@@ -502,10 +551,16 @@ public class ChooseTeam extends JFrame {
                     ImageIcon selectPartyPokeImage = new ImageIcon(immPokemon);
                     int input= JOptionPane.showConfirmDialog(new JButton("Elimina"),"Vuoi rimuovere "+ player.getTeam().get(0).getName()+ " dalla squadra?","remove?",2,1,selectPartyPokeImage);
                     if(input==0){
+                        // Imposto che il pokemon è di nuovo selezionabile dal pokedex
+                        bottonePokemonSelezionato = player2.getTeam().get(0).getPokeButton();
+                        bottonePokemonSelezionato.setOpaque(false);
+                        bottonePokemonSelezionato.setEnabled(true);
+
                         player2.getTeam().set(0,null);
                         System.out.println(player2.pokemonStringList());
                         pokemon1_2.setIcon(imgPokeball);
-//                        teamPanel.repaint();
+
+                        // aggiorno il pannello
                         teamPanel2.repaint();
                     }
                 }
@@ -520,9 +575,15 @@ public class ChooseTeam extends JFrame {
                     ImageIcon selectPartyPokeImage = new ImageIcon(immPokemon);
                     int input= JOptionPane.showConfirmDialog(new JButton("elimina"),"Vuoi rimuovere "+ selectedPartyPokemon.getName()+ " dalla squadra?","remove?",2,1,selectPartyPokeImage);
                     if(input==0){
+                        // Imposto che il pokemon è di nuovo selezionabile dal pokedex
+                        bottonePokemonSelezionato = player2.getTeam().get(1).getPokeButton();
+                        bottonePokemonSelezionato.setOpaque(false);
+                        bottonePokemonSelezionato.setEnabled(true);
+
                         player2.getTeam().set(1,null);
                         pokemon2_2.setIcon(imgPokeball);
-//                        teamPanel.repaint();
+
+                        // aggiorno il pannello
                         teamPanel2.repaint();
                     }
                 }
@@ -537,9 +598,15 @@ public class ChooseTeam extends JFrame {
                     ImageIcon selectPartyPokeImage = new ImageIcon(immPokemon);
                     int input= JOptionPane.showConfirmDialog(new JButton("elimina"),"Vuoi rimuovere "+ selectedPartyPokemon.getName()+ " dalla squadra?","remove?",2,1,selectPartyPokeImage);
                     if(input==0){
+                        // Imposto che il pokemon è di nuovo selezionabile dal pokedex
+                        bottonePokemonSelezionato = player2.getTeam().get(2).getPokeButton();
+                        bottonePokemonSelezionato.setOpaque(false);
+                        bottonePokemonSelezionato.setEnabled(true);
+
                         player2.getTeam().set(2,null);
                         pokemon3_2.setIcon(imgPokeball);
-//                        teamPanel.repaint();
+
+                        // aggiorno il pannello
                         teamPanel2.repaint();
                     }
                 }
@@ -555,9 +622,15 @@ public class ChooseTeam extends JFrame {
                     ImageIcon selectPartyPokeImage = new ImageIcon(immPokemon);
                     int input= JOptionPane.showConfirmDialog(new JButton("elimina"),"Vuoi rimuovere "+ selectedPartyPokemon.getName()+ " dalla squadra?","remove?",2,1,selectPartyPokeImage);
                     if(input==0){
+                        // Imposto che il pokemon è di nuovo selezionabile dal pokedex
+                        bottonePokemonSelezionato = player2.getTeam().get(3).getPokeButton();
+                        bottonePokemonSelezionato.setOpaque(false);
+                        bottonePokemonSelezionato.setEnabled(true);
+
                         player2.getTeam().set(3,null);
                         pokemon4_2.setIcon(imgPokeball);
-//                        teamPanel.repaint();
+
+                        // aggiorno il pannello
                         teamPanel2.repaint();
                     }
                 }
@@ -572,9 +645,15 @@ public class ChooseTeam extends JFrame {
                     ImageIcon selectPartyPokeImage = new ImageIcon(immPokemon);
                     int input= JOptionPane.showConfirmDialog(new JButton("elimina"),"Vuoi rimuovere "+ selectedPartyPokemon.getName()+ " dalla squadra?","remove?",2,1,selectPartyPokeImage);
                     if(input==0){
+                        // Imposto che il pokemon è di nuovo selezionabile dal pokedex
+                        bottonePokemonSelezionato = player2.getTeam().get(4).getPokeButton();
+                        bottonePokemonSelezionato.setOpaque(false);
+                        bottonePokemonSelezionato.setEnabled(true);
+
                         player2.getTeam().set(4,null);
                         pokemon5_2.setIcon(imgPokeball);
-//                        teamPanel.repaint();
+
+                        // aggiorno il pannello
                         teamPanel2.repaint();
                     }
                 }
@@ -588,10 +667,17 @@ public class ChooseTeam extends JFrame {
                     Image immPokemon = selectedPartyPokemon.getImage().getScaledInstance(30,30,Image.SCALE_SMOOTH);
                     ImageIcon selectPartyPokeImage = new ImageIcon(immPokemon);
                     int input= JOptionPane.showConfirmDialog(new JButton("elimina"),"Vuoi rimuovere "+ selectedPartyPokemon.getName()+ " dalla squadra?","remove?",2,1,selectPartyPokeImage);
-                    if(input==0){       // Rimuovo il pokemon dalla squadra
+                    if(input==0){
+                        // Imposto che il pokemon è di nuovo selezionabile dal pokedex
+                        bottonePokemonSelezionato = player2.getTeam().get(5).getPokeButton();
+                        bottonePokemonSelezionato.setOpaque(false);
+                        bottonePokemonSelezionato.setEnabled(true);
+
+                        // Rimuovo il pokemon dalla squadra
                         player2.getTeam().set(5,null);
                         pokemon6_2.setIcon(imgPokeball);
-//                        teamPanel.repaint();
+
+                        // aggiorno il pannello
                         teamPanel2.repaint();
                     }
                 }
@@ -618,12 +704,7 @@ public class ChooseTeam extends JFrame {
         //addTeam.setBounds(330,100, 50, 50);
         addTeam.addActionListener( new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                /*Pokemon inGame=player.getTeam().get(0);
-                Pokemon evolution = player.getTeam().get(0).getEvolution();
 
-                *//**//*player.replacePokemon(inGame,evolution);
-                 *//*playerInfo.setText(player.toString());
-                playerInfo.repaint();*/
                 List<Pokemon> newTeam=player.getTeam();
                 List<Pokemon> newTeam2=player2.getTeam();
 
@@ -637,6 +718,13 @@ public class ChooseTeam extends JFrame {
                             index = i;
                             System.out.println(player1.playerInfo());
                             System.out.println(player1.pokemonStringList());       // stampo in concsole il team del player per debuggare
+
+                            // Imposto che il bottone di quel pokemon dopo che è stato selezionato, diventa non utilizzabile e opaco
+                            PokeButton bottonePokemonAppenaAggiuntoInSquadra = selectedPokemon.getPokeButton();
+                            bottonePokemonAppenaAggiuntoInSquadra.setOpaque(true);
+                            bottonePokemonAppenaAggiuntoInSquadra.setEnabled(false);
+
+
                             break;
                         }
                     }
@@ -648,6 +736,13 @@ public class ChooseTeam extends JFrame {
                             index = i;
                             System.out.println(player2.playerInfo());
                             System.out.println(player2.pokemonStringList());      // stampo in concsole il team del player per debuggare
+
+                            // Imposto che il bottone di quel pokemon dopo che è stato selezionato, diventa non utilizzabile e opaco
+                            PokeButton bottonePokemonAppenaAggiuntoInSquadra = selectedPokemon.getPokeButton();
+                            bottonePokemonAppenaAggiuntoInSquadra.setOpaque(true);
+                            bottonePokemonAppenaAggiuntoInSquadra.setEnabled(false);
+
+
                             break;
                         }
                     }
