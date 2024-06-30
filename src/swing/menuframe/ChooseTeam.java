@@ -17,6 +17,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.Set;
 
 /*
 IMPLEMENTARE VARIE CLASSI PANNELLI OGNUNA CON RELATIVE INFORMAZIONI E PULSANTI
@@ -409,7 +410,7 @@ public class ChooseTeam extends JFrame {
 
                        // aggiorno il pannello
                        teamPanel.repaint();
-//                       teamPanel2.repaint();
+
                    }
                 }
             }
@@ -436,7 +437,7 @@ public class ChooseTeam extends JFrame {
                         // aggiorno il pannello
 
                         teamPanel.repaint();
-//                        teamPanel2.repaint();
+
                 }
             }
         }});
@@ -460,7 +461,7 @@ public class ChooseTeam extends JFrame {
 
                         // aggiorno il pannello
                         teamPanel.repaint();
-//                        teamPanel2.repaint();
+
                     }
                 }
             }});
@@ -486,7 +487,7 @@ public class ChooseTeam extends JFrame {
                         // aggiorno il pannello
 
                         teamPanel.repaint();
-//                        teamPanel2.repaint();
+
                     }
                 }
             }});
@@ -510,7 +511,6 @@ public class ChooseTeam extends JFrame {
 
                         // aggiorno il pannello
                         teamPanel.repaint();
-//                        teamPanel2.repaint();
                     }
                 }
             }});
@@ -535,7 +535,7 @@ public class ChooseTeam extends JFrame {
 
                         // aggiorno il pannello
                         teamPanel.repaint();
-//                        teamPanel2.repaint();
+
                     }
                 }
             }});
@@ -684,10 +684,7 @@ public class ChooseTeam extends JFrame {
             }});
 
 
-
-
-
-
+        /*       POSSIBILE SOLUZIONE IMPLEMENTATA ALLA FINE DELLA CLASSE CHOOSETEAM         */
 
 
 
@@ -793,4 +790,76 @@ public class ChooseTeam extends JFrame {
 
     }       // FINE COSTRUTTORE:
 
-}
+
+
+//    /*          SOLUZIONE IPOTIZZATA PER RIMPIAZZARE IL MEGA-CODICE DEI BOTTONI IMPLEMENTATI UNO AD UNO         */
+//
+//        // Set up action listener per il player1 e quindi teamPanel1
+//        setupPokemonButtonListener(pokemon1, 0, player, teamPanel, imgPokeball);
+//        setupPokemonButtonListener(pokemon2, 1, player, teamPanel, imgPokeball);
+//        setupPokemonButtonListener(pokemon3, 2, player, teamPanel, imgPokeball);
+//        setupPokemonButtonListener(pokemon4, 3, player, teamPanel, imgPokeball);
+//        setupPokemonButtonListener(pokemon5, 4, player, teamPanel, imgPokeball);
+//        setupPokemonButtonListener(pokemon6, 5, player, teamPanel, imgPokeball);
+//
+//        / Set up action listener per il player2 e quindi teamPanel2
+//        setupPokemonButtonListener(pokemon1_2, 0, player2, teamPanel2, imgPokeball);
+//        setupPokemonButtonListener(pokemon2_2, 1, player2, teamPanel2, imgPokeball);
+//        setupPokemonButtonListener(pokemon3_2, 2, player2, teamPanel2, imgPokeball);
+//        setupPokemonButtonListener(pokemon4_2, 3, player2, teamPanel2, imgPokeball);
+//        setupPokemonButtonListener(pokemon5_2, 4, player2, teamPanel2, imgPokeball);
+//        setupPokemonButtonListener(pokemon6_2, 5, player2, teamPanel2, imgPokeball);
+//
+//
+//    private void setupPokemonButtonListener(JButton button, int index, Player player, JPanel teamPanel, ImageIcon imgPokeball) {
+//        button.addActionListener(new ActionListener() {
+//            public void actionPerformed(ActionEvent e) {
+//                if (button.getIcon() != imgPokeball) {
+//                    selectedPartyPokemon = player.getTeam().get(index);
+//                    Image immPokemon = selectedPartyPokemon.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+//                    ImageIcon selectPartyPokeImage = new ImageIcon(immPokemon);
+//                    int input = JOptionPane.showConfirmDialog(new JButton("Elimina"),
+//                            "Vuoi rimuovere " + selectedPartyPokemon.getName() + " dalla squadra?",
+//                            "remove?",
+//                            JOptionPane.YES_NO_OPTION,
+//                            JOptionPane.INFORMATION_MESSAGE,
+//                            selectPartyPokeImage);
+//                    if (input == JOptionPane.YES_OPTION) {
+//                        // Make the Pokémon selectable again in the pokedex
+//                        JButton bottonePokemonSelezionato = selectedPartyPokemon.getPokeButton();
+//                        bottonePokemonSelezionato.setOpaque(false);
+//                        bottonePokemonSelezionato.setEnabled(true);
+//
+//                        // Remove the Pokémon from the team
+//                        player.getTeam().set(index, null);
+//                        button.setIcon(imgPokeball);
+//
+//                        // Update the panel
+//                        teamPanel.repaint();
+//                    }
+//                }
+//            }
+//        });
+//    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}     // FINE CLASSE
