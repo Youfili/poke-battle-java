@@ -188,25 +188,25 @@ public class PlayersSavedPanel extends JPanel {
         this.playerInfoTextArea.setText(infoPassate);
     }
 
-    // MAIN PROVA
-    public static void main(String[] args) {
-        Database databaseDatiPlayer = new Database();
-        SwingUtilities.invokeLater(() -> {
-            JFrame frame = new JFrame("Players Saved Panel Test");
-            frame.setSize(600, 650);
-            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-            // Creazione del pannello PlayersSavedPanel con dei giocatori di esempio
-            try {
-                databaseDatiPlayer.caricaDaFile(databaseDatiPlayer.getPathFileDatabase());
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-
-            PlayersSavedPanel panel = new PlayersSavedPanel(databaseDatiPlayer.getPlayerSalvati());
-            frame.add(panel);
-
-            frame.setVisible(true);
-        });
-    }
+//    // MAIN PROVA
+//    public static void main(String[] args) {
+//        Database databaseDatiPlayer = new Database();
+//        SwingUtilities.invokeLater(() -> {
+//            JFrame frame = new JFrame("Players Saved Panel Test");
+//            frame.setSize(600, 650);
+//            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//
+//            // Creazione del pannello PlayersSavedPanel con dei giocatori di esempio
+//            try {
+//                databaseDatiPlayer.caricaDaFile(databaseDatiPlayer.getPathFileDatabase());
+//            } catch (IOException e) {
+//                throw new RuntimeException(e);
+//            }
+//
+//            PlayersSavedPanel panel = new PlayersSavedPanel(databaseDatiPlayer.getPlayerSalvati());
+//            frame.add(panel);
+//
+//            frame.setVisible(true);
+//        });
+//    }
 }

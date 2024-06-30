@@ -693,16 +693,10 @@ public class ChooseTeam extends JFrame {
         wrapper.add(addTeam,BorderLayout.PAGE_END);
 
 
-
-
-
-
-
-
         // Alla chiusura di X si chiude tutto il frame
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);     // in questo modo, quando premo x chiuderò anche la pagina
         setVisible(true);
 
-    }
+    }       // FINE COSTRUTTORE:
 
 }

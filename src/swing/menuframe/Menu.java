@@ -130,7 +130,7 @@ public class Menu extends JFrame {
             maleButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
 
-                    String name = JOptionPane.showInputDialog("Inserisci nome: ");
+                    String name = JOptionPane.showInputDialog(null,"Inserisci il Nome: ", "Choose Name", JOptionPane.PLAIN_MESSAGE);
 
 
                     if(name != null && !name.trim().isEmpty()) {
@@ -167,7 +167,7 @@ public class Menu extends JFrame {
             femaleButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
 
-                    String name = JOptionPane.showInputDialog(null,"Scegli il Nome: ", "Choose Name", JOptionPane.PLAIN_MESSAGE);
+                    String name = JOptionPane.showInputDialog(null,"Inserisci il Nome: ", "Choose Name", JOptionPane.PLAIN_MESSAGE);
 
                     if(name != null && !name.trim().isEmpty()) {
                         // IMMAGINE ICONA FEMMINILE --> ChoosePlayerPanel
@@ -204,11 +204,12 @@ public class Menu extends JFrame {
             continueToChooseTeamButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    if(Menu.this.giocatoriSalvati.get(0)!= null && Menu.this.giocatoriSalvati.get(1)!= null) {
+                    if (Menu.this.giocatoriSalvati.size() >= 2 && Menu.this.giocatoriSalvati.get(0) != null && Menu.this.giocatoriSalvati.get(1) != null) {
                         // Se i due giocatori non sono null, quindi sono stati modificati
-                                        // player1             // player2
-                        JOptionPane.setRootFrame( new ChooseTeam(Menu.this.giocatoriSalvati.get(0), Menu.this.giocatoriSalvati.get(1)));
+                        JOptionPane.setRootFrame(new ChooseTeam(Menu.this.giocatoriSalvati.get(0), Menu.this.giocatoriSalvati.get(1)));
                         setVisible(false);
+                    } else {
+                        System.out.println("Entrambi i giocatori devono essere selezionati prima di continuare.");
                     }
                 }
             });
@@ -286,5 +287,3 @@ public class Menu extends JFrame {
 
     }
 
-
-    // Commento per vedere il commit
