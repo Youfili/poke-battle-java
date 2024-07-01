@@ -10,6 +10,8 @@ import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 // Classe per il pannello di sfondo
 class BackgroundPanel extends JPanel {
@@ -120,6 +122,16 @@ public class FrameImparaMossa extends JDialog {
         backgroundPanel.add(immaginePokemonLabel);
         backgroundPanel.add(nomePokemonLabel);
 
+
+        // Imposto il comportamento di chiusura della finestra --> ritorno null quando chiudo la finestra senza cambiare la mossa
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                setMossaDaCambiare(null);
+                dispose();
+            }
+        });
+
         setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE); // in questo modo, quando premo x chiuderò anche la pagina
         setVisible(true);
     }
@@ -135,32 +147,17 @@ public class FrameImparaMossa extends JDialog {
 
 
 
+//// MAIN DI PROVA
+//
+//
+//public static void main(String[] args) {
+//        Charmender charm = new Charmender();
+//        FireFang mossaFireFange = new FireFang();
+//
+//        FrameImparaMossa frameImparaMossa = new FrameImparaMossa(null, charm, mossaFireFange);
+//
+//
+//    }
 
 
-
-
-
-
-
-
-
-
-
-
-
-// MAIN DI PROVA
-
-
-public static void main(String[] args) {
-        Charmender charm = new Charmender();
-        FireFang mossaFireFange = new FireFang();
-
-        FrameImparaMossa frameImparaMossa = new FrameImparaMossa(null, charm, mossaFireFange);
-
-
-    }
-
-
-
-
-}
+}           // FINE CLASSE FRAME

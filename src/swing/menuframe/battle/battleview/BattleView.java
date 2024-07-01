@@ -755,7 +755,11 @@ public class BattleView extends JFrame implements Serializable {
     public Move mostraSchermataNuovaMossa(Pokemon pokemonInAttacco, Move nuovaMossa) {
         FrameImparaMossa frameNuovaMossa = new FrameImparaMossa(null, pokemonInAttacco, nuovaMossa);
         Move mossaDaCambiare = frameNuovaMossa.returnMossaDaCambiare();
-        System.out.println("Mossa da sostituire ritornata dal frame: " + mossaDaCambiare + " MI TROVO NEL BATTLE-VIEW");
+        if(mossaDaCambiare != null) {
+            System.out.println("Mossa da sostituire ritornata dal frame: " + mossaDaCambiare + " MI TROVO NEL BATTLE-VIEW");
+        }else{
+            System.out.println("Il ritorno della mossa da cambiare è NULL perché ha scelto di non cambiare la mossa");
+        }
         return mossaDaCambiare;
     }
 

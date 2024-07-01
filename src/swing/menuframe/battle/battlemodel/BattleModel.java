@@ -134,18 +134,27 @@ public class BattleModel {
             // In questo caso controllo il livello del pokemon in attacco
             Move nuovaMossa = pokemonInAttacco.getMoveByLevel(pokemonInAttacco.getLevel());
             if (nuovaMossa != null && pokemonInAttacco.isImparaMosse()) { // Controllo se il pokemon è propenso a imparare una nuova mossa
+                // Avvio il frame per cambiare la mossa e in base al ritorno capisco se il player ha scelto di far imparare una nuova
+                // mossa (e QUALE) o se ha deciso di non fargliela impararw
                 Move mossaDaSostituire = viewBattaglia.mostraSchermataNuovaMossa(pokemonInAttacco, nuovaMossa);
-                // Stampa di debug prima della sostituzione
-                System.out.println("Mossa da sostituire: " + mossaDaSostituire);
-                System.out.println("Mosse prima della sostituzione: " + pokemonInAttacco.getMoves());
-                // Vado a sostituire la mossa del pokemon in attacco
-                pokemonInAttacco.replaceMove(mossaDaSostituire, nuovaMossa);
-                // Stampa di debug dopo la sostituzione
-                System.out.println("Mosse dopo la sostituzione: " + pokemonInAttacco.getMoves());
-                // Aggiorno in modo che il pokemon non sia obbligato a imparare una nuova mossa finché non arriva a un altro livello che lo permetta
-                pokemonInAttacco.setImparaMosse(false); // Appena impara una mossa metto che non può impararne un'altra fino a che non sale di livello
-                // Aggiorno la grafica del pannelloMosse
-                viewBattaglia.aggiornaPannelloMossePostCambioMossa();
+
+                // Se effettivamente il player ha deciso far IMPARARE la nuova mossa al pokemon
+                if(mossaDaSostituire != null) {
+                    // Stampa di debug prima della sostituzione
+                    System.out.println("Mossa da sostituire: " + mossaDaSostituire);
+                    System.out.println("Mosse prima della sostituzione: " + pokemonInAttacco.getMoves());
+                    // Vado a sostituire la mossa del pokemon in attacco
+                    pokemonInAttacco.replaceMove(mossaDaSostituire, nuovaMossa);
+                    // Stampa di debug dopo la sostituzione
+                    System.out.println("Mosse dopo la sostituzione: " + pokemonInAttacco.getMoves());
+                    // Aggiorno in modo che il pokemon non sia obbligato a imparare una nuova mossa finché non arriva a un altro livello che lo permetta
+                    pokemonInAttacco.setImparaMosse(false); // Appena impara una mossa metto che non può impararne un'altra fino a che non sale di livello
+                    // Aggiorno la grafica del pannelloMosse
+                    viewBattaglia.aggiornaPannelloMossePostCambioMossa();
+                }else{
+                    // ALTRIMENTI --> se ha deciso di non fargli imparare nessuna mossa
+                    pokemonInAttacco.setImparaMosse(false); // HA deciso di non far imparare la mossa, potrà comunque impararne solo un'altra al prossimo livello
+                }
 
             }
             // Se non deve imaparare una nuova mossa, vado avanti normalmente
