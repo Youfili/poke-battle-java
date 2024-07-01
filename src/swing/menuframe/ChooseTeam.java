@@ -212,6 +212,12 @@ public class ChooseTeam extends JFrame {
             pokeButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
 
+                    // Una volta cliccato un pokemon nel pokedex metto che è di nuovo cliccabile il tasto add per aggiungere quel pokemon
+                    // al propria squadra
+                    addTeam.setOpaque(false);
+                    addTeam.setEnabled(true);
+
+
                     //MOSTRO LE INFO DEL POKEMON SELEZIONATO
                     selectedPokemon=poke;
                     pokeInfoTextArea.setText("");
@@ -280,6 +286,12 @@ public class ChooseTeam extends JFrame {
 
             pokeButton2.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
+
+                    // Una volta cliccato un pokemon nel pokedex metto che è di nuovo cliccabile il tasto add per aggiungere quel pokemon
+                    // al propria squadra
+                    addTeam.setOpaque(false);
+                    addTeam.setEnabled(true);
+
 
                     //MOSTRO LE INFO DEL POKEMON SELEZIONATO
                     selectedPokemon=poke;
@@ -416,9 +428,22 @@ public class ChooseTeam extends JFrame {
         //--PULSANTE AGGINGI POKEMON SELEZIONATO ALLA SQUADRA &  CAMBIA IMMAGINE RELATIVA AL PULSANTE DEL POKEMON NEL TEAM
 
         addTeam=new JButton("Add");
+
+        // Parto che fino a quando non viene selezionato un pokemon dal pokedex questo tasto non è cliccabile
+        addTeam.setOpaque(true);
+        addTeam.setEnabled(false);
+
+
+
         //addTeam.setBounds(330,100, 50, 50);
         addTeam.addActionListener( new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+
+                // Una volta cliccato il bottone metto che non è più cliccabile fino a che non viene ricliccato un pokemon all'interno
+                // dei pokedex.
+                addTeam.setOpaque(true);
+                addTeam.setEnabled(false);
+
 
                 List<Pokemon> newTeam=player.getTeam();
                 List<Pokemon> newTeam2=player2.getTeam();
@@ -439,7 +464,7 @@ public class ChooseTeam extends JFrame {
                             bottonePokemonAppenaAggiuntoInSquadra.setOpaque(true);
                             bottonePokemonAppenaAggiuntoInSquadra.setEnabled(false);
 
-
+                            // dopo averlo aggiunto, faccio il break
                             break;
                         }
                     }

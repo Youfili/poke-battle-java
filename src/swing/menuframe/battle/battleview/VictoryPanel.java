@@ -28,7 +28,16 @@ public class VictoryPanel extends JPanel {
 
         // Pannello per l'immagine del giocatore vincitore (sinistra)
         JPanel playerImagePanel = new JPanel();
-        JLabel playerImageLabel = new JLabel(winner.getImage());
+        JLabel playerImageLabel = new JLabel();     // inizializzo poi lo implemento in base al gender
+
+        // In base al gender scelgo quale immagine dell'allenatore selezionare
+        if(winner.getGender().equals("Male")){
+            playerImageLabel = new JLabel(new ImageIcon("src/Img/male_trainer_victory.png"));
+        }else{
+            playerImageLabel = new JLabel(new ImageIcon("src/Img/femaleTrainer.png"));
+
+        }
+
         playerImagePanel.setBounds(30, 30, 300, 400);
         playerImagePanel.add(playerImageLabel);
         add(playerImagePanel);

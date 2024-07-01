@@ -145,7 +145,7 @@ public class Menu extends JFrame {
                                 Image.SCALE_SMOOTH);
                         ImageIcon imageIcon = new ImageIcon(dimg);
 
-                        // SOSTITUIBILE CON UNO SWITCH CASE --> DA FARE
+                        // Controllo se già ho selezionato almeno 2 giocatori --> nel caso rimuovo il primo "creato" --> FIFO
                         if (Menu.this.giocatoriSalvati.size() >= 2) {
                                 Menu.this.giocatoriSalvati.remove(0);    // prima rimuovo l'ultimo ad essere stato aggiunto
                                 // Poi aggiungo il player
@@ -181,7 +181,7 @@ public class Menu extends JFrame {
                                 Image.SCALE_SMOOTH);
                         ImageIcon imageIcon = new ImageIcon(dimg);
 
-                        // SOSTITUIBILE CON UNO SWITCH CASE --> DA FARE
+                        // Controllo se già ho selezionato almeno 2 giocatori --> nel caso rimuovo il primo "creato" --> FIFO
                         if (Menu.this.giocatoriSalvati.size() >= 2) {
                             Menu.this.giocatoriSalvati.remove(0);    // prima rimuovo l'ultimo ad essere stato aggiunto
                             // Poi aggiungo il player
