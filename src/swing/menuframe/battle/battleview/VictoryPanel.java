@@ -45,12 +45,15 @@ public class VictoryPanel extends JPanel {
 
         playerImagePanel.setBounds(30, 30, 300, 400);
         playerImagePanel.add(playerImageLabel);
+        playerImagePanel.setBorder(BorderFactory.createLineBorder(Color.ORANGE, 8)); // Bordo arancione spessore 8 pixel
+
         add(playerImagePanel);
 
         // Pannello per i bottoni delle squadre Pokemon (sotto l'immagine)
         JPanel pokemonPanel = new JPanel();
         pokemonPanel.setBounds(30, 440, 300, 150); // Posizionato sotto l'immagine del giocatore
         pokemonPanel.setLayout(new GridLayout(2, 3)); // 2 righe, 3 colonne
+        pokemonPanel.setBorder(BorderFactory.createLineBorder(Color.ORANGE, 5)); // Bordo arancione spessore 5 pixel
 
         // Aggiungi i bottoni delle squadre Pokemon (esempio)
         for (int i = 0; i < winner.getTeam().size(); i++) {
@@ -88,6 +91,8 @@ public class VictoryPanel extends JPanel {
         playerInfoText.setText(winner.playerInfo()); // inserisco le informazioni del player
         playerInfoText.setEditable(false);
         playerInfoPanel.add(new JScrollPane(playerInfoText), BorderLayout.CENTER);
+        playerInfoPanel.setBorder(BorderFactory.createLineBorder(Color.ORANGE, 3)); // Bordo arancione spessore 3 pixel
+
         add(playerInfoPanel);
 
         // Pannello per le informazioni del Pokemon selezionato (sotto l'informazione del player)
@@ -100,6 +105,8 @@ public class VictoryPanel extends JPanel {
         pokemonInfoText = new JTextArea();
         pokemonInfoText.setEditable(false);
         pokemonInfoPanel.add(new JScrollPane(pokemonInfoText), BorderLayout.CENTER);
+        pokemonInfoPanel.setBorder(BorderFactory.createLineBorder(Color.ORANGE, 3)); // Bordo arancione spessore 3 pixel
+
         add(pokemonInfoPanel);
 
         // Pannello per il bottone "Torna al Menu" (in basso a destra)
@@ -108,6 +115,8 @@ public class VictoryPanel extends JPanel {
 
         menuButton = new JButton("Torna al Menu");
         menuButton.setBounds(370, 500, 200, 70); // Posizionato in basso a destra
+        menuButton.setBackground(Color.YELLOW);
+        menuButton.setBorder(BorderFactory.createLineBorder(Color.ORANGE, 5)); // Bordo arancione spessore 5 pixel
 
         add(menuButton);
     }
