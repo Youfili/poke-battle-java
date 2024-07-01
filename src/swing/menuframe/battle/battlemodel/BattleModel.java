@@ -116,8 +116,8 @@ public class BattleModel {
     public void eseguiMossa(MoveButton selectedMove, Pokemon pokemonInCampoAttaccante, Pokemon pokemonInCampoDifensore){
 
         // Faccio eseguire la Mossa
-        Move mossaScelta = selectedMove.getMove();
-        int vitaPostAttacco = pokemonInDifesa.getHealth() - mossaScelta.getDamage();
+        Move mossaScelta = selectedMove.getMove();          // calcolo il danno della mossa in base alle stats att e def dei rispettivi pokemon
+        int vitaPostAttacco = pokemonInDifesa.getHealth() - mossaScelta.calculateDamage(pokemonInAttacco.getAttack(), pokemonInDifesa.getDefense());
         if(vitaPostAttacco > 0) {
             pokemonInDifesa.setHealth(vitaPostAttacco);
             // Debug in terminale

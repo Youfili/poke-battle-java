@@ -6,6 +6,6 @@ import pokemon.Type;
 public class WaterPulse extends Move {
 
     public WaterPulse(){
-        super("Water Pulse", Type.WATER,60,15,"");
+        super("Water Pulse", Type.WATER,28,"");
     }
 }

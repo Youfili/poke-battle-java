@@ -6,7 +6,7 @@ import pokemon.Type;
 public class WaterGun extends Move {
 
     public WaterGun(){
-        super("Water Gun", Type.WATER,40,15,"");
+        super("Water Gun", Type.WATER,24,"");
 
     }
 }

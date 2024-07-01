@@ -11,7 +11,7 @@ public enum Type implements Serializable {
     PSYCHIC,
     DRAGON,
     FIGHTING,
-    VELEN;
+    POISON;
 
 
 

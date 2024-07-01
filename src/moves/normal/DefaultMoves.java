@@ -1,4 +1,4 @@
-package moves.base;
+package moves.normal;
 
 import moves.Move;
 import pokemon.Type;
@@ -13,9 +13,9 @@ public class DefaultMoves extends Move{
     private int pp;
     private Type type;
 
-    public DefaultMoves(String name,Type type, int damage,int pp, String description) {
+    public DefaultMoves(String name,Type type, int damage, String description) {
 
-       super( name, type, damage, pp,  description);
+       super( name, type, damage, description);
 
     }
 

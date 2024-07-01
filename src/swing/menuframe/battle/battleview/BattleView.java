@@ -3,10 +3,10 @@ package swing.menuframe.battle.battleview;
 import moves.Move;
 import swing.BackgroundImageJFrame;
 import swing.menuframe.battle.battlecontroller.BattleController;
-import moves.base.Action;
-import moves.base.BodySlam;
-import moves.base.Frustration;
-import moves.base.GigaImpact;
+import moves.normal.Action;
+import moves.normal.BodySlam;
+import moves.normal.Frustration;
+import moves.normal.GigaImpact;
 import players.Player;
 import pokemon.Pokedex;
 import pokemon.Pokemon;
@@ -31,7 +31,6 @@ public class BattleView extends JFrame implements Serializable {
     private Player giocatore1;
     private Player giocatore2;
 
-    private boolean turnazioni;
     private Player playerInAttacco;
     private Player playerInDifesa;
     private Pokemon pokeInAttacco;

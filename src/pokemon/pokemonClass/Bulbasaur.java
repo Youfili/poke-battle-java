@@ -16,10 +16,9 @@ public class Bulbasaur extends Pokemon implements Serializable {
                 100,
                 "MALE",
                 Type.GRASS,
-                50,
-                49,
+                35,
+                39,
                 45,
-                64,
                 "src/Img/bulbasaur.png");
 
         //settiamo il  dizionario delle mosse da imparare in base al livello --> mossa

@@ -6,6 +6,6 @@ import pokemon.Type;
 public class FireFang extends Move {
 
     public FireFang(){
-        super("Fire Fang", Type.FIRE,65,15,"");
+        super("Fire Fang", Type.FIRE,28,"");
     }
 }

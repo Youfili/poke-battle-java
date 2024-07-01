@@ -10,21 +10,20 @@ public class Growlithe extends Pokemon {
 
     public Growlithe(){
         super("Growlithe",
-                6,
-                100,
+                16,
+                170,
                 "MALE",
                 Type.FIRE,
-                55,
-                52,
+                37,
+                42,
                 47,
-                60,
                 "src/Img/growlithe.png");
 
 
         //settiamo il  dizionario delle mosse da imparare in base al livello --> mossa
-        addMoveByLevel(7,new Ember());
-        addMoveByLevel(12,new FireFang());
-        addMoveByLevel(16,new Flamethrower());
+        addMoveByLevel(17,new Ember());
+        addMoveByLevel(20,new FireFang());
+        addMoveByLevel(24,new Flamethrower());
     }
 
 

@@ -9,32 +9,22 @@ public abstract class Move implements Serializable {
     private String name;
     private String description;
     private int damage;
-    private int pp;
-    private int accuracy;
     private Type type;
 
-    public Move(String name, int damage,int pp, String description) {
+//    public Move(String name, int damage, String description) {
+//        this.name = name;
+//        this.damage = damage;
+//        this.description = description;
+//
+//    }
+
+    public Move(String name, Type type, int damage, String description) {
         this.name = name;
         this.damage = damage;
         this.description = description;
-        this.pp = pp;
-
-    }
-
-    public Move(String name, Type type, int damage, int pp, String description) {
-        this.name = name;
-        this.damage = damage;
-        this.description = description;
-        this.pp = pp;
         this.type=type;
 
     }
-
-
-    public void use(Pokemon pokeUser,Pokemon pokeTarget) {
-        //da implementare
-    }
-
 
 
     @Override
@@ -42,42 +32,22 @@ public abstract class Move implements Serializable {
         return name;
     }
 
-
-
-
-
-
     //Getter and Setter
-
     public String getName() {
         return name;
     }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public int getDamage() {
         return damage;
     }
-
-    public void setDamage(int damage) {
+    public void setDamage(int pokemonLevel) {
         this.damage = damage;
     }
 
-    public String getDescription() {
-        return description;
+    // Metodo per calcolare il danno
+    public int calculateDamage(int puntiAttackDelPokemonInAttacco, int puntiDifesaDelPokemonInDIfesa) {
+        double attackMultiplier = 1 + 0.05 * puntiAttackDelPokemonInAttacco;
+        double defenseMultiplier = 1 / (1 + 0.01 * puntiDifesaDelPokemonInDIfesa); // riduce il danno in base ai punti difesa
+        return (int) (this.damage * attackMultiplier * defenseMultiplier);
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public int getPp() {
-        return pp;
-    }
-
-    public void setPp(int pp) {
-        this.pp = pp;
-    }
 }

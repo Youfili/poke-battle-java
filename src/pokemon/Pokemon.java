@@ -1,8 +1,8 @@
 package pokemon;
 
 import moves.Move;
-import moves.base.*;
-import moves.base.Action;
+import moves.normal.*;
+import moves.normal.Action;
 import swing.menuframe.battle.battleview.PokeButton;
 
 import javax.imageio.ImageIO;
@@ -15,7 +15,7 @@ import java.util.List;
 /**
  *
  */
-public  class Pokemon implements Serializable {
+public class Pokemon implements Serializable {
 
      private String name;
      private String gender;
@@ -29,7 +29,6 @@ public  class Pokemon implements Serializable {
 
      private int attack;
      private int defense;
-     private int speed;
      private int health; //livello attuale di salute
 
      private Boolean isAlive;
@@ -45,25 +44,23 @@ public  class Pokemon implements Serializable {
     private boolean imparaMosse;
 
 
-    //Constructor
-    public Pokemon(String name, int level, int ps, String gender, int attack, int defense, int speed) {
-        this.name = name;
-        this.level = level;
-        this.ps = ps;
-        this.gender = gender;//da implementare casuale
-        this.attack = attack;
-        this.defense = defense;
-        this.speed = speed;
-        this.isAlive = true;
-        this.imparaMosse = true;
-
-
-
-    }
+//    //Constructor
+//    public Pokemon(String name, int level, int ps, String gender, int attack, int defense) {
+//        this.name = name;
+//        this.level = level;
+//        this.ps = ps;
+//        this.gender = gender;
+//        this.attack = attack;
+//        this.defense = defense;
+//        this.isAlive = true;
+//        this.imparaMosse = true;
+//
+//
+//
+//    }
     //Constructor with image
     public Pokemon(String name, int level, int maxPs, String gender,
-                   Type type,int attack, int defense,
-                   int speed,int expBase, String imgPath) {
+                   Type type,int attack, int defense, int expBase, String imgPath) {
         this.name = name;
         this.level = level;
         this.type=type;
@@ -71,7 +68,6 @@ public  class Pokemon implements Serializable {
         this.gender = gender;//da implementare casuale
         this.attack = attack;
         this.defense = defense;
-        this.speed = speed;
         this.isAlive = true;
         this.expBase = expBase;
         this.currentExp = expBase;                  // il valore dell'esperienza attuale del pokemon
@@ -88,7 +84,6 @@ public  class Pokemon implements Serializable {
         } catch (IOException ex) {
             throw new RuntimeException(ex);
         }
-
 
         //*****AGGIUNGO MOSSE DEFAULT PER PROVA BATTAGLIA ********
         addMove(new Action());
@@ -197,7 +192,6 @@ public  class Pokemon implements Serializable {
         this.ps += ((ps*10)/100);
         this.attack = attack + (attack*10/100);
         this.defense = defense + (defense*10/100);;
-        this.speed = speed + (speed*10/100);;
 
         this.imparaMosse = true;        // ogni volta che aumenta il livello lo rendo "possibilitato" ad apprendere nuovo mosse
                                         // ovviamente non impara mosse a tutti i livelli
@@ -221,7 +215,6 @@ public  class Pokemon implements Serializable {
                 " Gender = " + gender + '\n' +
                 " Attack = " + attack + '\n' +
                 " Defense = " + defense +'\n' +
-                " Speed = " + speed +'\n' +
                 " Moves = " + moves +'\n';
 
 
@@ -292,17 +285,7 @@ public  class Pokemon implements Serializable {
         return defense;
     }
 
-    public void setDefense(int defense) {
-        this.defense = defense;
-    }
-
-    public int getSpeed() {
-        return speed;
-    }
-
-    public void setSpeed(int speed) {
-        this.speed = speed;
-    }
+    public void setDefense(int defense) {this.defense = defense;}
 
     public Type getType() {
         return type;

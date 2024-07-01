@@ -6,6 +6,6 @@ import pokemon.Type;
 public class Ember extends Move {
 
     public Ember(){
-        super("Ember", Type.FIRE,40,15,"");
+        super("Ember", Type.FIRE,25,"Ember move");
     }
 }

@@ -1,5 +1,8 @@
 package pokemon.pokemonClass;
 
+import moves.electric.Thunder;
+import moves.electric.ThunderBolt;
+import moves.electric.ThunderShock;
 import moves.fire.Ember;
 import moves.fire.FireFang;
 import moves.fire.Flamethrower;
@@ -11,20 +14,19 @@ public class Electabuzz extends Pokemon {
     public Electabuzz(){
         super("Electabuzz",
                 25,
-                100,
+                210,
                 "MALE",
                 Type.ELECTRIC,
-                58,
+                61,
                 59,
                 45,
-                62,
                 "src/Img/electabuzz.png");
 
 
-//        //settiamo il  dizionario delle mosse da imparare in base al livello --> mossa
-//        addMoveByLevel(7,new Ember());
-//        addMoveByLevel(12,new FireFang());
-//        addMoveByLevel(16,new Flamethrower());
+        //settiamo il  dizionario delle mosse da imparare in base al livello --> mossa
+        addMoveByLevel(26,new Thunder());
+        addMoveByLevel(29,new ThunderBolt());
+        addMoveByLevel(33,new ThunderShock());
     }
 
 }

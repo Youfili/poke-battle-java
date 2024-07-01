@@ -17,19 +17,18 @@ public class Squirtle extends Pokemon implements Serializable {
         super ("Squirtle",
                 6,
                 100,
-                "MALE",
+                "FEMALE",
                 Type.WATER,
-                52,
-                49,
+                32,
+                29,
                 45,
-                64,
                 "src/Img/squirtle.png");
 
 
 
         //settiamo il  dizionario delle mosse da imparare in base al livello --> mossa
-        addMoveByLevel(7,new WaterGun());
-        addMoveByLevel(12,new WaterPulse());
-        addMoveByLevel(16,new AquaTail());
+        addMoveByLevel(7,new AquaTail());
+        addMoveByLevel(12,new WaterGun());
+        addMoveByLevel(16,new WaterPulse());
     }
 }

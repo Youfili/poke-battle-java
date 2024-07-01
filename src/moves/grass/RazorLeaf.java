@@ -6,6 +6,6 @@ import pokemon.Type;
 public class RazorLeaf extends Move {
 
     public RazorLeaf(){
-        super("Razor Leaf", Type.GRASS,55,10,"");
+        super("Razor Leaf", Type.GRASS,25,"");
     }
 }

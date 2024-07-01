@@ -1,5 +1,8 @@
 package pokemon.pokemonClass;
 
+import moves.fighting.CloseCombat;
+import moves.fighting.DynamicPunch;
+import moves.fighting.KarateChop;
 import moves.fire.Ember;
 import moves.fire.FireFang;
 import moves.fire.Flamethrower;
@@ -10,20 +13,19 @@ public class Machamp extends Pokemon {
     public Machamp(){
         super("Machamp",
                 27,
-                100,
+                230,
                 "MALE",
                 Type.FIGHTING,
-                68,
+                58,
                 79,
                 35,
-                44,
                 "src/Img/machamp.png");
 
 
         //settiamo il  dizionario delle mosse da imparare in base al livello --> mossa
-//        addMoveByLevel(7,new Ember());
-//        addMoveByLevel(12,new FireFang());
-//        addMoveByLevel(16,new Flamethrower());
+        addMoveByLevel(28,new DynamicPunch());
+        addMoveByLevel(31,new KarateChop());
+        addMoveByLevel(35,new CloseCombat());
     }
 
 }
