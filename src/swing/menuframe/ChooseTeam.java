@@ -231,8 +231,13 @@ public class ChooseTeam extends JFrame {
                     repaint();*/
                 }
             });
-            y+=60;
-
+            // Faccio un controllo di spazio
+            if (y < 300 && x < 400) {           // non sforo dalle dimensioni
+                y += 60;
+            }else{
+                x+= 70;
+                y = 30;      // imposto le cordinate per spostarmi nella colonna dopo e scendere con la nuova y da capo
+            }
 
             pokedexPanel.add(pokeButton);
 

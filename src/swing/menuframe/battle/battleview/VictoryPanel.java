@@ -18,10 +18,15 @@ public class VictoryPanel extends JPanel {
     private JButton menuButton;
     private JTextArea playerInfoText;
     private JTextArea pokemonInfoText;
+    private Image backgroundImage;
 
     public VictoryPanel(Player winner) {
         this.winner = winner;
 
+        // Carico l'immagine di BackGround
+        backgroundImage = new ImageIcon("src/Img/victoryPanel_background.jpg").getImage();
+
+        // Imposto il Pannello
         setLayout(null);
         // lo faccio della stessa dimensione del frame
         setSize(600, 650); // 600 width and 650 height
@@ -109,5 +114,12 @@ public class VictoryPanel extends JPanel {
 
     public JButton getMenuButton() {
         return menuButton;
+    }
+
+    // Metodo per "Disegnare" il background --> Imposto l'immagine di sfondo
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
     }
 }
