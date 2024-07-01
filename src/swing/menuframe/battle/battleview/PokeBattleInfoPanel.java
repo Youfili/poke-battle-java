@@ -25,7 +25,7 @@ public class PokeBattleInfoPanel extends JPanel {
 
         //UIManager.put("ProgressBar.foreground", Color.GREEN);
 
-        hpBar = new JProgressBar(0,pokemon.getPs());
+        hpBar = new JProgressBar(0 , pokemon.getPs());
         hpBar.setString("hp");
         hpBar.setStringPainted(true);
         hpBar.setValue(this.pokemon.getHealth());
@@ -33,7 +33,7 @@ public class PokeBattleInfoPanel extends JPanel {
 
 
 
-        experienceBar = new JProgressBar(0, pokemon.getExpNecessaria());
+        experienceBar = new JProgressBar(0 , pokemon.getExpNecessaria());
         experienceBar.setString("exp");
         experienceBar.setStringPainted(true);
         experienceBar.setValue(this.pokemon.getCurrentExp());

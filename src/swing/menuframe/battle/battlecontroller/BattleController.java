@@ -37,9 +37,13 @@ public class BattleController {
         this.modelBattaglia.eseguiMossa(selectedMove, pokemonInCampoAttacco, pokemonInCampoDifensore);
         // Aggiorno la barraHp del pokemon difensore
         // NOTA: getPokeInfoPanel va generalizzato come pannello della difesa (per decrementare vita). --> e quello di attacco va generalizzato come PokeInfoPanelAttacco (serve a aumentare exp)
+
+        /*
+        DEVO FARE UNA PROPORZIONE IN BASE ALLA BARRA
+         */
+
         this.viewBattaglia.getPokeAttPanel().getHpBar().setValue(pokemonInCampoDifensore.getHealth());
-        // Aggiungere anche l'aggiornamento dell'area di testo quando il pokemon di attacco sferra l'attacco.
-        // es: Bulbasaur usa "Azione"
+
     }
 
 
