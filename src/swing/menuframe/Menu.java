@@ -137,7 +137,7 @@ public class Menu extends JFrame {
                         // IMMAGINE ICONA MASCHILE --> ChoosePlayerPanel
                         Image img = null;
                         try {
-                            img = ImageIO.read(new File("src/Img/maleTrainer.png"));
+                            img = ImageIO.read(new File("src/Img/red_trainer_miniature.png"));
                         } catch (IOException er) {
                             throw new RuntimeException(er);
                         }
@@ -173,7 +173,7 @@ public class Menu extends JFrame {
                         // IMMAGINE ICONA FEMMINILE --> ChoosePlayerPanel
                         Image img = null;
                         try {
-                            img = ImageIO.read(new File("src/Img/maleTrainer.png"));
+                            img = ImageIO.read(new File("src/Img/leaf_trainer_miniature.png"));
                         } catch (IOException er) {
                             throw new RuntimeException(er);
                         }

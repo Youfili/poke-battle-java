@@ -231,7 +231,6 @@ public class BattleView extends JFrame implements Serializable {
         pannelloStato.add(statoBattaglia);
 
 
-
         /*    SottoPannelli del pannelloAzioni   */
         // SottoPannelli Giocatore 1
         this.pannelloMosse1 = new PannelloMosse(pokeInAttacco);

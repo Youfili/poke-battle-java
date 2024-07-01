@@ -7,9 +7,12 @@ public enum Type implements Serializable {
     FIRE,
     WATER,
     ELECTRIC,
-    POISON,
     NORMAL,
+    PSYCHIC,
+    DRAGON,
+    FIGHTING,
     VELEN;
+
 
 
 }
