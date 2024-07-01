@@ -23,9 +23,7 @@ public class Squirtle extends Pokemon implements Serializable {
                 49,
                 45,
                 64,
-                "src/Img/squirtle.png",
-                16,
-                null);
+                "src/Img/squirtle.png");
 
 
 

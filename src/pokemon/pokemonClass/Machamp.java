@@ -17,9 +17,7 @@ public class Machamp extends Pokemon {
                 79,
                 35,
                 44,
-                "src/Img/machamp.png",
-                100,
-                null);
+                "src/Img/machamp.png");
 
 
         //settiamo il  dizionario delle mosse da imparare in base al livello --> mossa

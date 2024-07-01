@@ -17,9 +17,7 @@ public class MrMime extends Pokemon {
                 69,
                 35,
                 24,
-                "src/Img/mrmime.png",
-                100,
-                null);
+                "src/Img/mrmime.png");
 
 
         //settiamo il  dizionario delle mosse da imparare in base al livello --> mossa

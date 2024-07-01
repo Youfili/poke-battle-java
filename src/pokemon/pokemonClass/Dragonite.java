@@ -18,9 +18,7 @@ public class Dragonite extends Pokemon {
                 79,
                 75,
                 34,
-                "src/Img/dragonite.png",
-                100,
-                null);
+                "src/Img/dragonite.png");
 
 
         //settiamo il  dizionario delle mosse da imparare in base al livello --> mossa

@@ -18,9 +18,7 @@ public class Golduck extends Pokemon {
                 51,
                 38,
                 40,
-                "src/Img/golduck.png",
-                16,
-                null);
+                "src/Img/golduck.png");
 
 //
 //        //settiamo il  dizionario delle mosse da imparare in base al livello --> mossa

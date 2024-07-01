@@ -31,10 +31,8 @@ public  class Pokemon implements Serializable {
      private int defense;
      private int speed;
      private int health; //livello attuale di salute
-     private int evolutionLevel;
 
      private Boolean isAlive;
-     private Pokemon evolution;
 
      private Map<Integer, Move> movesByLevel=new TreeMap<>();
      private List<Move> moves=new ArrayList<>();
@@ -65,8 +63,7 @@ public  class Pokemon implements Serializable {
     //Constructor with image
     public Pokemon(String name, int level, int maxPs, String gender,
                    Type type,int attack, int defense,
-                   int speed,int expBase, String imgPath, int evolutionLevel
-                    , Pokemon evolution) {
+                   int speed,int expBase, String imgPath) {
         this.name = name;
         this.level = level;
         this.type=type;
@@ -78,21 +75,11 @@ public  class Pokemon implements Serializable {
         this.isAlive = true;
         this.expBase = expBase;
         this.currentExp = expBase;                  // il valore dell'esperienza attuale del pokemon
-        this.evolutionLevel = evolutionLevel;
-        this.evolution = evolution;
         this.imagePath = imgPath;
         this.health=maxPs;
         this.imparaMosse = true;
 
         calcolaExpNecessaria(this.level);           // calcolo exp in base a livello in cui inizializzo il pokemon
-
-
-
-
-
-        //this.maxExp= level*ps; DA IMPLEMENTARE
-
-        //assegna l'immagine
 
 
         try {
@@ -414,21 +401,6 @@ public  class Pokemon implements Serializable {
         this.health = health;
     }
 
-    public int getEvolutionLevel() {
-        return evolutionLevel;
-    }
-
-    public void setEvolutionLevel(int evolutionLevel) {
-        this.evolutionLevel = evolutionLevel;
-    }
-
-    public Pokemon getEvolution() {
-        return evolution;
-    }
-
-    public void setEvolution(Pokemon evplution) {
-        this.evolution = evplution;
-    }
 
     public void setPokeButton(PokeButton bottoneAssociatoAlPokemon){
         this.buttonAssociato = bottoneAssociatoAlPokemon;

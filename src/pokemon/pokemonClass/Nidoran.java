@@ -18,9 +18,7 @@ public class Nidoran extends Pokemon {
                 48,
                 47,
                 61,
-                "src/Img/nidoran.png",
-                16,
-                null);
+                "src/Img/nidoran.png");
 
 
 //        //settiamo il  dizionario delle mosse da imparare in base al livello --> mossa

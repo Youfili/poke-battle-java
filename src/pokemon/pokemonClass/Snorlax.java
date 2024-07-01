@@ -18,9 +18,7 @@ public class Snorlax extends Pokemon {
                 73,
                 30,
                 64,
-                "src/Img/snorlax.png",
-                160,
-                null);
+                "src/Img/snorlax.png");
 
 
         //settiamo il  dizionario delle mosse da imparare in base al livello --> mossa

@@ -18,9 +18,7 @@ public class Growlithe extends Pokemon {
                 52,
                 47,
                 60,
-                "src/Img/growlithe.png",
-                16,
-                null);
+                "src/Img/growlithe.png");
 
 
         //settiamo il  dizionario delle mosse da imparare in base al livello --> mossa

@@ -24,9 +24,7 @@ public class Charmender extends Pokemon implements Serializable {
                 49,
                 45,
                 64,
-                "src/Img/charmander.png",
-                16,
-                null);
+                "src/Img/charmander.png");
 
 
         //settiamo il  dizionario delle mosse da imparare in base al livello --> mossa

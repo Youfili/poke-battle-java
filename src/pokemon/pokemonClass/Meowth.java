@@ -18,9 +18,7 @@ public class Meowth extends Pokemon {
                 65,
                 38,
                 67,
-                "src/Img/meowth.png",
-                16,
-                null);
+                "src/Img/meowth.png");
 
 
         //settiamo il  dizionario delle mosse da imparare in base al livello --> mossa

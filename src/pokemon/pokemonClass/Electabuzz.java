@@ -18,9 +18,7 @@ public class Electabuzz extends Pokemon {
                 59,
                 45,
                 62,
-                "src/Img/electabuzz.png",
-                100,
-                null);
+                "src/Img/electabuzz.png");
 
 
 //        //settiamo il  dizionario delle mosse da imparare in base al livello --> mossa

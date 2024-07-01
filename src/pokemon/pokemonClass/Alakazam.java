@@ -18,9 +18,7 @@ public class Alakazam extends Pokemon {
                 59,
                 48,
                 34,
-                "src/Img/alakazam.png",
-                16,
-                null);
+                "src/Img/alakazam.png");
 
 
         //settiamo il  dizionario delle mosse da imparare in base al livello --> mossa

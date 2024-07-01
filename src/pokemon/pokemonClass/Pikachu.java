@@ -15,9 +15,7 @@ public class Pikachu extends Pokemon {
                 53,
                 42,
                 64,
-                "src/Img/pikachu.png",
-                16,
-                null);
+                "src/Img/pikachu.png");
 
 
 //        //settiamo il  dizionario delle mosse da imparare in base al livello --> mossa

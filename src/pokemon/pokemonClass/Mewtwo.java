@@ -18,9 +18,7 @@ public class Mewtwo extends Pokemon {
                 89,
                 85,
                 14,
-                "src/Img/mewtwo.png",
-                600,
-                null);
+                "src/Img/mewtwo.png");
 
 
 //        //settiamo il  dizionario delle mosse da imparare in base al livello --> mossa
