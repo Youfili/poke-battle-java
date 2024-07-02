@@ -13,7 +13,8 @@ import java.util.*;
 import java.util.List;
 
 /**
- *
+        * La classe `Pokemon` rappresenta un personaggio Pokemon in un gioco. Include proprietà come nome, livello, tipo, salute e vari attributi relativi alla meccanica di battaglia.
+        * Gestisce anche la gestione delle immagini e la serializzazione per salvare lo stato di un oggetto Pokemon.
  */
 public class Pokemon implements Serializable {
 
@@ -44,20 +45,20 @@ public class Pokemon implements Serializable {
     private boolean imparaMosse;
 
 
-//    //Constructor
-//    public Pokemon(String name, int level, int ps, String gender, int attack, int defense) {
-//        this.name = name;
-//        this.level = level;
-//        this.ps = ps;
-//        this.gender = gender;
-//        this.attack = attack;
-//        this.defense = defense;
-//        this.isAlive = true;
-//        this.imparaMosse = true;
-//
-//
-//
-//    }
+    /**
+     * Costruisce un nuovo oggetto Pokemon con i parametri specificati.
+     *
+     * @param name      il nome del Pokemon
+     * @param level     il livello del Pokemon
+     * @param maxPs     i punti salute massimi del Pokemon
+     * @param gender    il genere del Pokemon
+     * @param type      il tipo del Pokemon
+     * @param attack    il valore di attacco del Pokemon
+     * @param defense   il valore di difesa del Pokemon
+     * @param expBase   l'esperienza base del Pokemon
+     * @param imgPath   il percorso dell'immagine del Pokemon
+     */
+
     //Constructor with image
     public Pokemon(String name, int level, int maxPs, String gender,
                    Type type,int attack, int defense, int expBase, String imgPath) {
