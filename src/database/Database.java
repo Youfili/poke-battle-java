@@ -74,9 +74,9 @@ public class Database implements Serializable {
         fis.close();
     }
 
-    public static void addListPlayer(Player playerDaAggiungere) {
-        playerSalvati.add(playerDaAggiungere);
-    }
+//    public static void addListPlayer(Player playerDaAggiungere) {
+//        playerSalvati.add(playerDaAggiungere);
+//    }
 
     public static List<Player> getPlayerSalvati() {
         try {
