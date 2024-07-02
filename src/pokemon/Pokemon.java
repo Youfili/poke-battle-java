@@ -85,11 +85,6 @@ public class Pokemon implements Serializable {
             throw new RuntimeException(ex);
         }
 
-        //*****AGGIUNGO MOSSE DEFAULT PER PROVA BATTAGLIA ********
-        addMove(new Action());
-        addMove(new Frustration());
-        addMove(new GigaImpact());
-        addMove(new BodySlam());
 
     }
 
@@ -152,9 +147,6 @@ public class Pokemon implements Serializable {
     public void addMove(Move move){
         if (moves.size()<4){
             moves.add(move);
-        }
-        else{
-            //Rimuovi mossa selezionata
         }
     }
 

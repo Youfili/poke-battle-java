@@ -1,6 +1,7 @@
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 
+import com.sun.tools.javac.Main;
 import database.Database;
 import players.Player;
 import swing.BackgroundImageJFrame;
@@ -20,6 +21,8 @@ public class JPokeBattle {
 
         // Avvio il programma
         new BackgroundImageJFrame();
+
+        // Main principale del programma
         
 
     }

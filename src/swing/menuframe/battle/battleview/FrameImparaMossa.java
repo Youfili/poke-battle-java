@@ -146,18 +146,4 @@ public class FrameImparaMossa extends JDialog {
 
 
 
-
-//// MAIN DI PROVA
-//
-//
-//public static void main(String[] args) {
-//        Charmender charm = new Charmender();
-//        FireFang mossaFireFange = new FireFang();
-//
-//        FrameImparaMossa frameImparaMossa = new FrameImparaMossa(null, charm, mossaFireFange);
-//
-//
-//    }
-
-
 }           // FINE CLASSE FRAME
