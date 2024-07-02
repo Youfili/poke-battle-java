@@ -229,6 +229,10 @@ public class BattleModel {
         ripristinaVitaPokemon(player1);
         ripristinaVitaPokemon(player2);
 
+        // incremento le corrispettive partite giocate dai giocatori
+        player1.addPlayedMatches();
+        player2.addPlayedMatches();
+
         // Logica per salvare i dati e terminare la partita
         System.out.println("Partita terminata!");
         // Vado a modificare le stats dei giocatori (aumentato vittorie/sconfitte totali)

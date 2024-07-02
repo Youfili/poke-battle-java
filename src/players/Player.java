@@ -19,6 +19,7 @@ public class Player implements Serializable{
 
     private int winMatch;
     private int lostMatch;
+    private int playedMatches;
 
     private ImageIcon image;
     private Pokemon pokemonAttivo;
@@ -36,6 +37,7 @@ public class Player implements Serializable{
         this.winMatch = winMatch;
         this.lostMatch = lossMatch;
         this.gender = gender;
+        this.playedMatches = 0;     // inizializzo a 0
         this.id = -1;
         for(int i=0;i<6;i++){
             team.add(null);
@@ -140,7 +142,7 @@ public class Player implements Serializable{
                         " Gender = " + gender + '\n' +
                         " Won Match = " + winMatch + '\n' +
                         " Lost Match = " + lostMatch + '\n'+
-
+                        " Played Matches = " + playedMatches + "\n" +
                         (teamIsEmpty()?"L'allenatore non ha pokemon":" Team: " + pokemonStringList() )+'\n';
     }
 
@@ -277,6 +279,11 @@ public class Player implements Serializable{
     }
     public void setId(int id) {
         this.id = id;
+    }
+
+    // metodo per aumentare le partite giocate in totale
+    public void addPlayedMatches(){
+        this.playedMatches++;
     }
 }
 
