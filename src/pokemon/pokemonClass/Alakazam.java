@@ -6,9 +6,7 @@ import moves.fire.FireFang;
 import moves.fire.Flamethrower;
 import moves.normal.Action;
 import moves.normal.BodySlam;
-import moves.psychic.Confusion;
-import moves.psychic.Psybeam;
-import moves.psychic.Psychic;
+import moves.psychic.*;
 import pokemon.Pokemon;
 import pokemon.Type;
 
@@ -17,7 +15,6 @@ import java.util.List;
 
 public class Alakazam extends Pokemon {
 
-    List<Move> moves = new ArrayList<>();
 
     public Alakazam(){
         super("Alakazam",
@@ -27,22 +24,19 @@ public class Alakazam extends Pokemon {
                 Type.PSYCHIC,
                 42,
                 49,
-                68,
+                64,
                 "src/Img/alakazam.png");
 
-        moves.add(new Action());
-        moves.add(new BodySlam());
-        moves.add(new Confusion());
-        moves.add(new Psybeam());
-
-
+        addMove(new Action());
+        addMove(new BodySlam());
+        addMove(new Confusion());
+        addMove(new Psybeam());
 
         //settiamo il  dizionario delle mosse da imparare in base al livello --> mossa
         addMoveByLevel(15,new Psychic());
+        addMoveByLevel(18,new PsyHit());
+        addMoveByLevel(20,new ZenHeadbutt());
     }
 
-    @Override
-    public List<Move> getMoves() {
-        return moves;
-    }
+
 }

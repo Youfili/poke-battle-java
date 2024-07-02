@@ -9,7 +9,7 @@ public class SludgeBomb extends Move {
     public SludgeBomb() {
         super("Sludge Bomb",
                 Type.POISON,
-                23,
+                21,
                 "Sludge Bomb");
     }
 }

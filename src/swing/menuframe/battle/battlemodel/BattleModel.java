@@ -59,7 +59,6 @@ public class BattleModel {
         // Ripristino la vita dei pokemon solo se sono esausti
         ripristinaVitaPokemon(player1);
         ripristinaVitaPokemon(player2);
-        viewBattaglia.inizializzaView(player1, player2, viewBattaglia.getScorePanel());
 
         // Impsto i turni e i Pokemon Iniziali
         turnoGiocatore1 = true;
@@ -67,6 +66,8 @@ public class BattleModel {
         pokemonInDifesa = player2.getTeam().get(0);
 
         scambiaTurnazioniModel(pokemonInDifesa, pokemonInAttacco);
+
+        viewBattaglia.inizializzaView(player1, player2, viewBattaglia.getScorePanel());
 
         cicloBattaglia();
     }
@@ -224,10 +225,20 @@ public class BattleModel {
         }
     }
 
+    public void ripristinaVitaPokemonSempre(Player player){
+        for (Pokemon pokemon : player.getTeam()) {
+            pokemon.setHealth(pokemon.getPs());         // re-imposto la vita al massimo --> i ps massimi del pokemon
+            pokemon.setAlive(true);
+            // Print di Debug
+            System.out.println(pokemon);
+        }
+
+    }
+
     private void terminaPartita() {
         // Ripristino la vita dei pokemon
-        ripristinaVitaPokemon(player1);
-        ripristinaVitaPokemon(player2);
+        ripristinaVitaPokemonSempre(player1);
+        ripristinaVitaPokemonSempre(player2);
 
         // incremento le corrispettive partite giocate dai giocatori
         player1.addPlayedMatches();

@@ -8,6 +8,6 @@ public class Thunder extends Move {
         super("Thunder",
                 Type.ELECTRIC,
                 17,
-                "Thunder has a 30% chance of paralyzing the target.");
+                "Thunder");
     }
 }

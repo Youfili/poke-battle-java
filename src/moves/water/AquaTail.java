@@ -5,6 +5,6 @@ import pokemon.Type;
 
 public class AquaTail extends Move {
     public AquaTail(){
-        super("Aqua Tail", Type.WATER,20,"");
+        super("Aqua Tail", Type.WATER,18,"");
     }
 }

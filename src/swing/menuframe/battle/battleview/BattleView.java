@@ -238,9 +238,6 @@ public class BattleView extends JFrame implements Serializable {
         this.pannelloMosse2 = new PannelloMosse(pokeInDifesa);
         this.pannelloCambio2 = new PannelloCambioPokemon(giocatore2);
 
-//        // Setto come da default
-//        pannelloMosseAttacco = pannelloMosse1;
-
 
         // Inizializzo e posiziono il Pannello del Punteggio
         scorePanel = new ScoreOfBattles(giocatore1, giocatore2);
@@ -629,6 +626,7 @@ public class BattleView extends JFrame implements Serializable {
             pannelloStato.add(statoBattaglia);
             layeredPane.add(pannelloStato, JLayeredPane.PALETTE_LAYER);
 
+
             // Rinizializzo i bottoni dei pokemon nel pannello cambio pokemon
             rinizializzaBottoniPokemon(layeredPane);
 
@@ -639,13 +637,23 @@ public class BattleView extends JFrame implements Serializable {
     }
 
     private void rinizializzaBottoniPokemon(JLayeredPane layeredPane) {
-        // player 1
+        // player 1 Bottoni
         for (Component bottone1 : pannelloCambio1.getComponents()) {
             PokeButton bottoneCambio1 = (PokeButton) bottone1;
             bottoneCambio1.setEnabled(true);
             bottoneCambio1.setOpaque(false);
         }
         pannelloCambio1.repaint();
+
+       // Pannello Mosse player1
+        pannelloMosse1.setPokemonInCampo(pokeInAttacco);
+        pannelloMosse1.aggiornaMosse();
+        pannelloMosse1.repaint();
+        // Pannello Mosse player2
+        pannelloMosse2.setPokemonInCampo(pokeInDifesa);
+        pannelloMosse2.aggiornaMosse();
+        pannelloMosse2.repaint();
+
 
         // player 2
         for (Component bottone2 : pannelloCambio2.getComponents()) {

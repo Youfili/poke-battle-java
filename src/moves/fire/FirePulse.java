@@ -3,12 +3,11 @@ package moves.fire;
 import moves.Move;
 import pokemon.Type;
 
-public class FireFang extends Move {
-
-    public FireFang(){
-        super("Fire Fang",
+public class FirePulse extends Move {
+    public FirePulse() {
+        super("Fire Pulse",
                 Type.FIRE,
-                22,
+                29,
                 "");
     }
 }

@@ -3,11 +3,11 @@ package moves.fighting;
 import moves.Move;
 import pokemon.Type;
 
-public class DynamicPunch extends Move {
-    public DynamicPunch() {
-        super("Dynamic Punch",
+public class FocusPunch extends Move {
+    public FocusPunch() {
+        super("Focus Punch",
                 Type.FIGHTING,
-                18,
+                28,
                 "");
     }
 }

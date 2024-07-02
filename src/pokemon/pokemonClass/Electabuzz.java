@@ -1,9 +1,7 @@
 package pokemon.pokemonClass;
 
 import moves.Move;
-import moves.electric.Thunder;
-import moves.electric.ThunderBolt;
-import moves.electric.ThunderShock;
+import moves.electric.*;
 import moves.fire.Ember;
 import moves.fire.FireFang;
 import moves.fire.Flamethrower;
@@ -19,8 +17,6 @@ import java.util.List;
 
 public class Electabuzz extends Pokemon {
 
-    List<Move> moves = new ArrayList<>();
-
     public Electabuzz(){
         super("Electabuzz",
                 13,
@@ -29,22 +25,19 @@ public class Electabuzz extends Pokemon {
                 Type.ELECTRIC,
                 31,
                 49,
-                55,
+                64,
                 "src/Img/electabuzz.png");
 
 
-        moves.add(new Growl());
-        moves.add(new Tackle());
-        moves.add(new Thunder());
-        moves.add(new ThunderBolt());
-
+        addMove(new Growl());
+        addMove(new Tackle());
+        addMove(new Thunder());
+        addMove(new ThunderBolt());
 
         //settiamo il  dizionario delle mosse da imparare in base al livello --> mossa
         addMoveByLevel(14,new ThunderShock());
-    }
-    @Override
-    public List<Move> getMoves() {
-        return moves;
+        addMoveByLevel(17,new VoltTackle());
+        addMoveByLevel(20,new Spark());
     }
 
 }

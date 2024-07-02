@@ -1,9 +1,7 @@
 package pokemon.pokemonClass;
 
 import moves.Move;
-import moves.fire.Ember;
-import moves.fire.FireFang;
-import moves.fire.Flamethrower;
+import moves.fire.*;
 import moves.grass.GigaDrain;
 import moves.grass.RazorLeaf;
 import moves.grass.VineWhip;
@@ -15,12 +13,11 @@ import pokemon.Pokemon;
 import pokemon.Type;
 
 import java.io.Serializable;
+import java.text.FieldPosition;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Charmender extends Pokemon implements Serializable {
-
-    List<Move> moves = new ArrayList<>();
 
     public Charmender(){
         super("Charmender",
@@ -30,24 +27,20 @@ public class Charmender extends Pokemon implements Serializable {
                 Type.FIRE,
                 35,
                 49,
-                75,
+                64,
                 "src/Img/charmander.png");
 
 
-        moves.add(new Growl());
-        moves.add(new Scratch());
-        moves.add(new Ember());
-        moves.add(new FireFang());
+        addMove(new Growl());
+        addMove(new Scratch());
+        addMove(new Ember());
+        addMove(new FireFang());
 
 
         //settiamo il  dizionario delle mosse da imparare in base al livello --> mossa
         addMoveByLevel(7,new Flamethrower());
+        addMoveByLevel(10,new HeatWave());
+        addMoveByLevel(14,new FirePulse());
     }
-
-    @Override
-    public List<Move> getMoves() {
-        return moves;
-    }
-
 
 }

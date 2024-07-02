@@ -1,9 +1,7 @@
 package pokemon.pokemonClass;
 
 import moves.Move;
-import moves.grass.GigaDrain;
-import moves.grass.RazorLeaf;
-import moves.grass.VineWhip;
+import moves.grass.*;
 import moves.normal.Action;
 import moves.normal.BodySlam;
 import moves.normal.Growl;
@@ -19,8 +17,6 @@ import java.util.List;
 
 public class Bulbasaur extends Pokemon implements Serializable {
 
-    List<Move> moves = new ArrayList<>();
-
     public Bulbasaur(){
         super("Bulbasaur",
                 6,
@@ -29,24 +25,23 @@ public class Bulbasaur extends Pokemon implements Serializable {
                 Type.GRASS,
                 35,
                 39,
-                65,
+                64,
                 "src/Img/bulbasaur.png");
 
 
-        moves.add(new Growl());
-        moves.add(new Tackle());
-        moves.add(new VineWhip());
-        moves.add(new RazorLeaf());
 
+        addMove(new Growl());
+        addMove(new Tackle());
+        addMove(new VineWhip());
+        addMove(new RazorLeaf());
 
         //settiamo il  dizionario delle mosse da imparare in base al livello --> mossa
         addMoveByLevel(7,new GigaDrain());
+        addMoveByLevel(10,new LeafBlade());
+        addMoveByLevel(14,new SeedBomb());
 
 
     }
 
-    @Override
-    public List<Move> getMoves() {
-        return moves;
-    }
+
 }

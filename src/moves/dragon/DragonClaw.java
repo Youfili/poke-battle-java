@@ -7,7 +7,7 @@ public class DragonClaw extends Move {
     public DragonClaw() {
         super("Dragon Claw",
                 Type.DRAGON,
-                28,
+                23,
                 "Dragon Claw deals damage and has no secondary effect.");
     }
 }

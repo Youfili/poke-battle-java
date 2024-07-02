@@ -143,13 +143,11 @@ public class Pokemon implements Serializable {
     }
 
 
-
-
-//    public void addMove(Move move){
-//        if (moves.size()<4){
-//            moves.add(move);
-//        }
-//    }
+    public void addMove(Move move){
+        if (moves.size()<4){
+            moves.add(move);
+        }
+    }
 
     //METODO PER RIMPIAZZARE UNA MOSSA
     public void replaceMove(Move move, Move newMove) {
@@ -166,7 +164,7 @@ public class Pokemon implements Serializable {
 
     public void increaseExp(Pokemon avversario)
     {
-        int exp= (int) ((avversario.getLevel() * 1.5 * avversario.expBase)/6);
+        int exp= (int) ((avversario.getLevel() * 1.5 * avversario.expBase)/100);
         this.currentExp=currentExp+exp;
 
         if(currentExp >= expNecessaria){
@@ -193,8 +191,7 @@ public class Pokemon implements Serializable {
     }
 
     public void calcolaExpNecessaria(int level){
-        int levelCubed = (int) Math.pow(level, 3);
-        this.expNecessaria =  (int) (((levelCubed) *( 100- level))/60);
+        this.expNecessaria = 100;
     }
 
 

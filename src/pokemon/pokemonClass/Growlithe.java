@@ -1,9 +1,7 @@
 package pokemon.pokemonClass;
 
 import moves.Move;
-import moves.fire.Ember;
-import moves.fire.FireFang;
-import moves.fire.Flamethrower;
+import moves.fire.*;
 import moves.normal.Growl;
 import moves.normal.Scratch;
 import pokemon.Pokemon;
@@ -14,8 +12,6 @@ import java.util.List;
 
 public class Growlithe extends Pokemon {
 
-    List<Move> moves = new ArrayList<>();
-
     public Growlithe(){
         super("Growlithe",
                 9,
@@ -24,21 +20,19 @@ public class Growlithe extends Pokemon {
                 Type.FIRE,
                 27,
                 32,
-                67,
+                64,
                 "src/Img/growlithe.png");
 
 
-        moves.add(new Growl());
-        moves.add(new Scratch());
-        moves.add(new Ember());
-        moves.add(new FireFang());
+        addMove(new Growl());
+        addMove(new Scratch());
+        addMove(new Ember());
+        addMove(new FireFang());
 
         //settiamo il  dizionario delle mosse da imparare in base al livello --> mossa
-        addMoveByLevel(24,new Flamethrower());
-    }
-    @Override
-    public List<Move> getMoves() {
-        return moves;
+        addMoveByLevel(10,new Flamethrower());
+        addMoveByLevel(13,new HeatWave());
+        addMoveByLevel(16,new FirePulse());
     }
 
 

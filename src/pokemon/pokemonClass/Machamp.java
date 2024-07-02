@@ -1,9 +1,7 @@
 package pokemon.pokemonClass;
 
 import moves.Move;
-import moves.fighting.CloseCombat;
-import moves.fighting.DynamicPunch;
-import moves.fighting.KarateChop;
+import moves.fighting.*;
 import moves.fire.Ember;
 import moves.fire.FireFang;
 import moves.fire.Flamethrower;
@@ -19,8 +17,6 @@ import java.util.List;
 
 public class Machamp extends Pokemon {
 
-    List<Move> moves = new ArrayList<>();
-
     public Machamp(){
         super("Machamp",
                 14,
@@ -29,22 +25,20 @@ public class Machamp extends Pokemon {
                 Type.FIGHTING,
                 38,
                 49,
-                65,
+                64,
                 "src/Img/machamp.png");
 
-
-        moves.add(new Growl());
-        moves.add(new Tackle());
-        moves.add(new DynamicPunch());
-        moves.add(new KarateChop());
+        addMove(new Growl());
+        addMove(new Tackle());
+        addMove(new DynamicPunch());
+        addMove(new KarateChop());
 
         //settiamo il  dizionario delle mosse da imparare in base al livello --> mossa
         addMoveByLevel(15,new CloseCombat());
+        addMoveByLevel(18,new CrossChop());
+        addMoveByLevel(22,new FocusPunch());
     }
-    @Override
-    public List<Move> getMoves() {
-        return moves;
-    }
+
 }
 
 

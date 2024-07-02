@@ -7,7 +7,7 @@ public class ThunderShock extends Move {
     public ThunderShock() {
         super("Thunder Shock",
                 Type.ELECTRIC,
-                28,
-                "Thunder Shock has a 10% chance of paralyzing the target.");
+                23,
+                "Thunder Shock");
     }
 }

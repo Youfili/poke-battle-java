@@ -57,9 +57,4 @@ public class BackgroundImageJFrame extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);     // in questo modo, quando premo x chiuderò anche la pagina
 
     }
-
-
-    public static void main(String[] args) {
-    new BackgroundImageJFrame();
-    }
 }

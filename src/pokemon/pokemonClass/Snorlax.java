@@ -13,8 +13,6 @@ import java.util.List;
 
 public class Snorlax extends Pokemon {
 
-    List<Move> moves = new ArrayList<>();
-
     public Snorlax(){
         super("Snorlax",
                 16,
@@ -23,23 +21,18 @@ public class Snorlax extends Pokemon {
                 Type.NORMAL,
                 56,
                 79,
-                70,
+                64,
                 "src/Img/snorlax.png");
 
 
-        moves.add(new Growl());
-        moves.add(new Scratch());
-        moves.add(new BodySlam());
-        moves.add(new GigaImpact());
-
-
+        addMove(new Growl());
+        addMove(new Scratch());
+        addMove(new BodySlam());
+        addMove(new GigaImpact());
 
         //settiamo il  dizionario delle mosse da imparare in base al livello --> mossa
         addMoveByLevel(17,new Tackle());
-        addMoveByLevel(20,new HyperBeam());
+        addMoveByLevel(22,new HyperBeam());
     }
-    @Override
-    public List<Move> getMoves() {
-        return moves;
-    }
+
 }

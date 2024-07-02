@@ -8,9 +8,7 @@ import moves.normal.Action;
 import moves.normal.BodySlam;
 import moves.normal.Tackle;
 import moves.normal.TailWhip;
-import moves.psychic.Confusion;
-import moves.psychic.Psybeam;
-import moves.psychic.Psychic;
+import moves.psychic.*;
 import moves.water.AquaTail;
 import moves.water.WaterGun;
 import pokemon.Pokemon;
@@ -21,8 +19,6 @@ import java.util.List;
 
 public class MrMime extends Pokemon {
 
-    List<Move> moves = new ArrayList<>();
-
     public MrMime(){
         super("MrMime",
                 10,
@@ -31,20 +27,18 @@ public class MrMime extends Pokemon {
                 Type.PSYCHIC,
                 35,
                 39,
-                68,
+                64,
                 "src/Img/mrmime.png");
 
-        moves.add(new Action());
-        moves.add(new BodySlam());
-        moves.add(new Psychic());
-        moves.add(new Psybeam());
+        addMove(new Action());
+        addMove(new BodySlam());
+        addMove(new Psychic());
+        addMove(new Psybeam());
 
         //settiamo il  dizionario delle mosse da imparare in base al livello --> mossa
         addMoveByLevel(11,new Confusion());
-    }
-    @Override
-    public List<Move> getMoves() {
-        return moves;
+        addMoveByLevel(14,new PsyHit());
+        addMoveByLevel(17,new ZenHeadbutt());
     }
 
 }

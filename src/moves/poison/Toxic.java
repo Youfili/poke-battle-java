@@ -7,7 +7,7 @@ public class Toxic extends Move {
     public Toxic() {
         super("Toxic",
                 Type.POISON,
-                26,
+                24,
                 "Toxic");
     }
 }
