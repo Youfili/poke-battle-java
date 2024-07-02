@@ -77,6 +77,13 @@ public class PlayersSavedPanel extends JPanel {
         selectPlayerButton2.setBorder(BorderFactory.createLineBorder(Color.BLUE, 2)); // Bordo blu spesso 2 pixel
         selectPlayerButton2.setBackground(Color.cyan);
 
+        // Di default li metto non cliccabili e opachi fino a quando uno dei bottoni dei giocatori non viene cliccato
+        selectPlayerButton1.setOpaque(true);
+        selectPlayerButton1.setEnabled(false);
+        selectPlayerButton2.setOpaque(true);
+        selectPlayerButton2.setEnabled(false);
+
+
         // Inserisco i bottoni nel pannello
         bottoniPlayer.add(selectPlayerButton1);
         bottoniPlayer.add(selectPlayerButton2);
@@ -116,6 +123,12 @@ public class PlayersSavedPanel extends JPanel {
                     playerInfoTextArea.setText(player.playerInfo());
                     setPlayer(player);
                     // cambiare l'immagine del pannello in base al player2 in questo caso
+
+                    // Setto i bottoni del Player1, Player2 cliccabili
+                    selectPlayerButton1.setOpaque(false);
+                    selectPlayerButton1.setEnabled(true);
+                    selectPlayerButton2.setOpaque(false);
+                    selectPlayerButton2.setEnabled(true);
                 }
             });
             playerButtonsPanel.add(button);
@@ -188,25 +201,5 @@ public class PlayersSavedPanel extends JPanel {
         this.playerInfoTextArea.setText(infoPassate);
     }
 
-//    // MAIN PROVA
-//    public static void main(String[] args) {
-//        Database databaseDatiPlayer = new Database();
-//        SwingUtilities.invokeLater(() -> {
-//            JFrame frame = new JFrame("Players Saved Panel Test");
-//            frame.setSize(600, 650);
-//            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//
-//            // Creazione del pannello PlayersSavedPanel con dei giocatori di esempio
-//            try {
-//                databaseDatiPlayer.caricaDaFile(databaseDatiPlayer.getPathFileDatabase());
-//            } catch (IOException e) {
-//                throw new RuntimeException(e);
-//            }
-//
-//            PlayersSavedPanel panel = new PlayersSavedPanel(databaseDatiPlayer.getPlayerSalvati());
-//            frame.add(panel);
-//
-//            frame.setVisible(true);
-//        });
-//    }
+
 }

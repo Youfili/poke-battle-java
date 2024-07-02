@@ -88,6 +88,7 @@ public class Menu extends JFrame {
                     Image.SCALE_SMOOTH);
             ImageIcon imageIconPokeball = new ImageIcon(dimgPokeball);
 
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
             /*  ACTION LISTENER DEL PANELLO CONTINUA-PARTITA  */
             // LISTENER Bottone seleziona Player1
@@ -124,6 +125,7 @@ public class Menu extends JFrame {
                 }
             });
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
             // MALE Button
             maleButton = choosePlayerPanel.getMaleButton();         // Istanzio il Bottone Maschile

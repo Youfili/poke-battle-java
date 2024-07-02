@@ -144,11 +144,11 @@ public class Pokemon implements Serializable {
 
 
 
-    public void addMove(Move move){
-        if (moves.size()<4){
-            moves.add(move);
-        }
-    }
+//    public void addMove(Move move){
+//        if (moves.size()<4){
+//            moves.add(move);
+//        }
+//    }
 
     //METODO PER RIMPIAZZARE UNA MOSSA
     public void replaceMove(Move move, Move newMove) {
