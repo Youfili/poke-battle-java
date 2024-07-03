@@ -12,8 +12,6 @@ COSA PRINCIPALE:
 
 (RISOLTO) -hasMap livelli —> mosse       --> Apprendimento di una mossa a un determinato livello --> Key : Livello , Valore --> Mossa, in cui si sceglie quale modificare									
 
- -Foto pagine iniziali					---> Cambiare la foto in una partita
-
 
 
 CHOOSE TEAM
@@ -24,19 +22,17 @@ CHOOSE TEAM
 	
 	-(RISOLTO) crea aggiorna i pannelli in base al player (tipo come fai nella battaglia)
 
-	-bug quando aggiungi un Pokemon null o clicchi su un Pokemon 	null
+	- (RISOLTO) bug quando aggiungi un Pokemon null o clicchi su un Pokemon 	null
 
-	-sfondo
+	- (RISOLTO) sfondo
 
 BATTLE
 	(RISOLTO)-Battaglia al meglio delle 3
 
 	(RISOLTO)- ( RISOLTO MA VA AGGIORNATO ALLE VITTORIE )Pannello battle che segna il punteggio 
 
-	- Algoritmo calcolo danno in base al tipo ecc. vedi allo officiale --> formula già esistente --> implementare la formula come calcolo del danno
-
 	 (RISOLTO) - Calcolo Exp guadagnata	--> Calcolo già esistente, va aggiunto --> sistemare quando uno dei due pokemon è morto modifichi il valore della barra
-										   esperienza del pokemon singolo che sconfigge l'altro pokemon
+									   esperienza del pokemon singolo che sconfigge l'altro pokemon
 
 	(RISOLTO) - aumento di livello --> Durante la battaglia con l'esperienza
 
@@ -47,8 +43,5 @@ FINEPARTITA:
 
 	(RISOLTO) -> salva dati giocatori e torna alla home --> Si sovrascrivono i dati nel file testuale
 
-
-GENDER:
-	- mettere il Gender di un personaggio come Enum e non come String (Coding Error)
 
 
