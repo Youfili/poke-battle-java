@@ -163,7 +163,7 @@ public class ChooseTeam extends JFrame {
                     JOptionPane.setRootFrame(new BattleView(player1, player2));
                     setVisible(false);              // rendo questo frame non più visibile
                 }else{
-                    System.out.println("Il Team deve essere Completo!");
+                    System.out.println("The Team must be Complete!");
                 }
             }
         });
@@ -555,14 +555,14 @@ public class ChooseTeam extends JFrame {
 
                     // Verifica se il selectedPartyPokemon è null
                     if (selectedPartyPokemon == null) {
-                        JOptionPane.showMessageDialog(null, "Nessun Pokémon selezionato in questa posizione.", "Errore", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "No Pokémon selected in this location.", "Error", JOptionPane.ERROR_MESSAGE);
                         return;
                     }
 
                     Image immPokemon = selectedPartyPokemon.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
                     ImageIcon selectPartyPokeImage = new ImageIcon(immPokemon);
-                    int input = JOptionPane.showConfirmDialog(new JButton("Elimina"),
-                            "Vuoi rimuovere " + selectedPartyPokemon.getName() + " dalla squadra?",
+                    int input = JOptionPane.showConfirmDialog(new JButton("Delete"),
+                            "Do you want to remove " + selectedPartyPokemon.getName() + " from the team?",
                             "remove?",
                             JOptionPane.YES_NO_OPTION,
                             JOptionPane.INFORMATION_MESSAGE,

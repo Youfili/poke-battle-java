@@ -131,7 +131,7 @@ public class Player implements Serializable{
                 " Won Match = " + winMatch + '\n' +
                 " Lost Match = " + lostMatch + '\n'+
 
-            (teamIsEmpty()?"L'allenatore non ha pokemon":" Team: " + pokemonStringList() )+'\n';
+            (teamIsEmpty()?"The trainer has no pokemon" : " Team: " + pokemonStringList() )+'\n';
     }
 
     //TO STRING SENZA POKEMON
@@ -143,7 +143,7 @@ public class Player implements Serializable{
                         " Won Match = " + winMatch + '\n' +
                         " Lost Match = " + lostMatch + '\n'+
                         " Played Matches = " + playedMatches + "\n" +
-                        (teamIsEmpty()?"L'allenatore non ha pokemon":" Team: " + pokemonStringList() )+'\n';
+                        (teamIsEmpty()?"The trainer has no pokemon" : " Team: " + pokemonStringList() )+'\n';
     }
 
     //matodo per aggiungere pokemon alla squadra durante la creazione
@@ -177,7 +177,7 @@ public class Player implements Serializable{
 
     //stampa le informazioni di un pokemon della squadra
     public String getPokemonInfo(int i){
-        return (team.get(i)==null?"Non hai selezionato nessun Pokemon":team.get(i).toString());
+        return (team.get(i)==null?"You have not selected any Pokemon":team.get(i).toString());
     }
 
     public boolean teamIsEmpty(){

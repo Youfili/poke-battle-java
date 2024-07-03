@@ -84,7 +84,7 @@ public class VictoryPanel extends JPanel {
         JPanel playerInfoPanel = new JPanel();
         playerInfoPanel.setLayout(new BorderLayout());
         playerInfoPanel.setBounds(350, 30, 220, 180); // Ridimensionato
-        JLabel playerInfoLabel = new JLabel("Informazioni Giocatore");
+        JLabel playerInfoLabel = new JLabel("Player Information");
         playerInfoPanel.add(playerInfoLabel, BorderLayout.NORTH);
         // Inserisco un area di testo al suo interno
         playerInfoText = new JTextArea();
@@ -99,7 +99,7 @@ public class VictoryPanel extends JPanel {
         JPanel pokemonInfoPanel = new JPanel();
         pokemonInfoPanel.setLayout(new BorderLayout());
         pokemonInfoPanel.setBounds(350, 220, 220, 200); // Posizionato sotto l'informazione del player
-        JLabel pokemonInfoLabel = new JLabel("Informazioni Pokemon");
+        JLabel pokemonInfoLabel = new JLabel("Pokemon Information");
         pokemonInfoPanel.add(pokemonInfoLabel, BorderLayout.NORTH);
         // Inserisco un area di testo al suo interno
         pokemonInfoText = new JTextArea();
@@ -113,7 +113,7 @@ public class VictoryPanel extends JPanel {
 
 
 
-        menuButton = new JButton("Torna al Menu");
+        menuButton = new JButton("Return to Menu");
         menuButton.setBounds(370, 500, 200, 70); // Posizionato in basso a destra
         menuButton.setBackground(Color.YELLOW);
         menuButton.setBorder(BorderFactory.createLineBorder(Color.ORANGE, 5)); // Bordo arancione spessore 5 pixel

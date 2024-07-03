@@ -16,7 +16,7 @@ public class Snorlax extends Pokemon {
     public Snorlax(){
         super("Snorlax",
                 16,
-                120,
+                100,
                 "MALE",
                 Type.NORMAL,
                 56,

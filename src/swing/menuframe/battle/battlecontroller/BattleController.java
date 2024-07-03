@@ -53,6 +53,7 @@ public class BattleController {
 
     public void cambioPokemon(Pokemon pokeInAttacco) {
         this.modelBattaglia.cambioPokemon(pokeInAttacco);
+        // Stampa Debug
         System.out.println("cambioPokemon() nel controller");
     }
 

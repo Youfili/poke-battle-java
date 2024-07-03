@@ -98,7 +98,7 @@ public class Menu extends JFrame {
                 public void actionPerformed(ActionEvent e) {
                      player1=pannelloContinuaPartita.getPlayer();
                     pannelloContinuaPartita.setPlayerInfoTextArea(player1.playerInfo());
-                    System.out.println("Seleziona Player1");
+                    System.out.println("You have selected Player1");
                 }
             });
             // LISTENER Bottone seleziona Player2
@@ -108,7 +108,7 @@ public class Menu extends JFrame {
                 public void actionPerformed(ActionEvent e) {
                     player2=pannelloContinuaPartita.getPlayer();
                     pannelloContinuaPartita.setPlayerInfoTextArea(player2.playerInfo());
-                    System.out.println("Seleziona Player2");
+                    System.out.println("You have selected Player2");
                 }
             });
             // LISTENER DEL BOTTONE CONFERMA
@@ -120,7 +120,7 @@ public class Menu extends JFrame {
                         JOptionPane.setRootFrame(new BattleView(player1, player2));
                         Menu.super.setVisible(false);
                     }else{
-                        System.out.println("Tutte e due i giocatori devono essere Selezionati");
+                        System.out.println("Both players must be Selected");
                     }
                 }
             });
@@ -132,7 +132,7 @@ public class Menu extends JFrame {
             maleButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
 
-                    String name = JOptionPane.showInputDialog(null,"Inserisci il Nome: ", "Choose Name", JOptionPane.PLAIN_MESSAGE);
+                    String name = JOptionPane.showInputDialog(null,"Enter your name:", "Choose Name", JOptionPane.PLAIN_MESSAGE);
 
 
                     if(name != null && !name.trim().isEmpty()) {
@@ -169,7 +169,7 @@ public class Menu extends JFrame {
             femaleButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
 
-                    String name = JOptionPane.showInputDialog(null,"Inserisci il Nome: ", "Choose Name", JOptionPane.PLAIN_MESSAGE);
+                    String name = JOptionPane.showInputDialog(null,"Enter your name:", "Choose Name", JOptionPane.PLAIN_MESSAGE);
 
                     if(name != null && !name.trim().isEmpty()) {
                         // IMMAGINE ICONA FEMMINILE --> ChoosePlayerPanel
@@ -211,7 +211,7 @@ public class Menu extends JFrame {
                         JOptionPane.setRootFrame(new ChooseTeam(Menu.this.giocatoriSalvati.get(0), Menu.this.giocatoriSalvati.get(1)));
                         setVisible(false);
                     } else {
-                        System.out.println("Entrambi i giocatori devono essere selezionati prima di continuare.");
+                        System.out.println("Both players must be selected before continuing.");
                     }
                 }
             });
@@ -228,9 +228,9 @@ public class Menu extends JFrame {
                     if (response == JOptionPane.YES_OPTION) {           // se conferma il bottone premuto, torno indietro al menu
                         new BackgroundImageJFrame();                    // torno al Menu Principale
                         Menu.super.setVisible(false);
-                        System.out.println("Torno indietro...");
+                        System.out.println("Go back...");
                     } else {
-                        System.out.println("Debug su console annulla Operazione di tornare indietro");              // Azione se l'utente sceglie "No"
+//                        System.out.println("Debug su console annulla Operazione di tornare indietro");              // Azione se l'utente sceglie "No"
                     }
                 }
             });
@@ -260,7 +260,7 @@ public class Menu extends JFrame {
             if(playerSalvatiInDataBase==null || playerSalvatiInDataBase.size() <= 1){
                 continueButton.setEnabled(false);
                 continueButton.setOpaque(true);
-                System.out.println("Non ci sono giocatori Salvati :(");
+                System.out.println("There are no saved players :(");
             }else{
                 // Altrimenti se ci sono almeno 2 giocatori, posso
                 continueButton.setEnabled(true);
@@ -269,6 +269,9 @@ public class Menu extends JFrame {
                     public void actionPerformed(ActionEvent e) {
                         // Mi sposto nel pannello del Continua Partita, quello con i playerSalvati.
                         cl.show(panels, "Panel ContinuaPartita");
+
+                        System.out.println("Instructions: first select the player from the list of saved players," + "\n" +
+                                " then click on the \"Player 1\" or \"Player 2\" button depending on which player you choose to associate it with");
                     }
                 });
             }

@@ -180,7 +180,7 @@ public class Pokemon implements Serializable {
         //Aggiungere modifiche ai valori hp ecc
 
         calcolaExpNecessaria(this.level);
-        this.ps += ((ps*10)/100);
+//        this.ps += ((ps*10)/100);
         this.attack = attack + (attack*10/100);
         this.defense = defense + (defense*10/100);;
 

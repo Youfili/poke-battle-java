@@ -125,23 +125,23 @@ public class BattleView extends JFrame implements Serializable {
         // Aggiunta dei Pokémon alle squadre dei giocatori
 
         // Impostazione della finestra
-        setTitle("Battaglia Pokémon");
+        setTitle("Pokémon Battle");
 
         // Pannello per le azioni del giocatore
         pannelloAzioni1 = new JPanel(new GridLayout(2,2,3,3));
         pannelloAzioni1.setBounds(245,500,345,100);
         pannelloAzioni1.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createRaisedBevelBorder(), BorderFactory.createLoweredBevelBorder()));
         // Bottoni del pannello azioni
-        attaccoButton1 = new JButton("Attacca");
-        cambioButton1 = new JButton("Cambia Pokémon");
+        attaccoButton1 = new JButton("Attack");
+        cambioButton1 = new JButton("Change Pokémon");
 
         // Pannello per le azioni del giocatore
         pannelloAzioni2 = new JPanel(new GridLayout(2,2,2,2));
         pannelloAzioni2.setBounds(245,500,345,100);
         pannelloAzioni2.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createRaisedBevelBorder(), BorderFactory.createLoweredBevelBorder()));
         // Bottoni del pannello azioni
-        attaccoButton2 = new JButton("Attacca");
-        cambioButton2 = new JButton("Cambia Pokémon");
+        attaccoButton2 = new JButton("Attack");
+        cambioButton2 = new JButton("Change Pokémon");
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -151,7 +151,7 @@ public class BattleView extends JFrame implements Serializable {
         attaccoButton1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                statoBattaglia.setText(playerInAttacco.getName() + " Scegli un Attacco!");
+                statoBattaglia.setText(playerInAttacco.getName() + " Choose an Attack");
                 cambiaPannello(panPrincAzi1, "Mosse1");
 
             }
@@ -160,7 +160,7 @@ public class BattleView extends JFrame implements Serializable {
         cambioButton1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                statoBattaglia.setText(playerInAttacco.getName() + " Cambia il Pokemon in campo");
+                statoBattaglia.setText(playerInAttacco.getName() + " Change the Pokemon on the field");
                 cambiaPannello(panPrincAzi1, "Cambio1");
             }
         });
@@ -169,7 +169,7 @@ public class BattleView extends JFrame implements Serializable {
         attaccoButton2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                statoBattaglia.setText(playerInAttacco.getName() + " Scegli un Attacco!");
+                statoBattaglia.setText(playerInAttacco.getName() + " Choose an Attack");
                 cambiaPannello(panPrincAzi2, "Mosse2");
 
             }
@@ -178,7 +178,7 @@ public class BattleView extends JFrame implements Serializable {
         cambioButton2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                statoBattaglia.setText(playerInAttacco.getName() + " Cambia il Pokemon in campo");
+                statoBattaglia.setText(playerInAttacco.getName() + " Change the Pokemon on the field");
                 cambiaPannello(panPrincAzi2, "Cambio2");
 
             }
@@ -223,7 +223,7 @@ public class BattleView extends JFrame implements Serializable {
         this.add(poke2InfoPanel);
 
         // Pannello per lo stato della battaglia
-        statoBattaglia = new JLabel(playerInAttacco.getName() + " Scegli cosa fare:");
+        statoBattaglia = new JLabel(playerInAttacco.getName() + " Choose what to do: ");
         JPanel pannelloStato = new JPanel(new BorderLayout());
         pannelloStato.setBounds(10,500,230,100);
         pannelloStato.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createRaisedBevelBorder(), BorderFactory.createLoweredBevelBorder()));
@@ -328,7 +328,7 @@ public class BattleView extends JFrame implements Serializable {
                 public void actionPerformed(ActionEvent e) {
                     // cambio con il pokemon del bottone --> a livello Logico
                     controllerBattaglia.cambioPokemon(bottoneCambio.getPokemonDelBottone());
-                    // debug
+                    // Debug
                     System.out.println("Il pokemon del bottone è: " + bottoneCambio.getPokemonDelBottone().getName());
 
 
@@ -385,10 +385,10 @@ public class BattleView extends JFrame implements Serializable {
     public void resettaPannello(Player playerInAttacco) {
         if(playerInAttacco == giocatore1) {
             cardLayout1.show(panPrincAzi1, "Azioni1");
-            statoBattaglia.setText(playerInAttacco.getName() + " Scegli cosa fare: ");
+            statoBattaglia.setText(playerInAttacco.getName() + " Choose what to do: ");
         }else if(playerInAttacco == giocatore2){
             cardLayout2.show(panPrincAzi2, "Azioni2");
-            statoBattaglia.setText(playerInAttacco.getName() + " Scegli cosa fare: ");
+            statoBattaglia.setText(playerInAttacco.getName() + " Choose what to do: ");
         }
     }
 
@@ -397,11 +397,11 @@ public class BattleView extends JFrame implements Serializable {
     public void forzaPannelloCambio(){
         if(playerInAttacco == giocatore1) {
             cardLayout1.show(panPrincAzi1, "Cambio1");
-            statoBattaglia.setText(playerInAttacco.getName() + " Pokemon Esauto :( "+"Effettua lo scambio");
+            statoBattaglia.setText(playerInAttacco.getName() + " Pokemon Exhausted, Make the change");
             // Forzo il giocatore ad avere davanti i tasti per cambiare pokemon
         }else if(playerInAttacco == giocatore2){
             cardLayout2.show(panPrincAzi2, "Cambio2");
-            statoBattaglia.setText(playerInAttacco.getName() + " Pokemon Esauto :( "+"Effettua lo scambio");
+            statoBattaglia.setText(playerInAttacco.getName() + " Pokemon Exhausted, Make the change");
             // Forzo il giocatore ad avere davanti i tasti per cambiare pokemon
         }
     }
@@ -437,8 +437,8 @@ public class BattleView extends JFrame implements Serializable {
 
 
         // Cambia il pokemon in attacco
-        statoBattaglia.setText("Scegli un'azione " +
-                "per " + pokeInAttacco.getName());
+        statoBattaglia.setText("Choose an action " +
+                "for " + pokeInAttacco.getName());
         // Reset del pannello altrimenti resta sulla schermata cambio pokemon
         resettaPannello(playerInAttacco);
 
@@ -589,7 +589,7 @@ public class BattleView extends JFrame implements Serializable {
             layeredPane.add(wallpaper, JLayeredPane.DEFAULT_LAYER);
 
             // Impostazione della finestra
-            setTitle("Battaglia Pokémon");
+            setTitle("Pokémon Battle");
 
             // inserisco lo Score della Battaglia
             this.scorePanel = pannelloScore;
@@ -619,7 +619,7 @@ public class BattleView extends JFrame implements Serializable {
             layeredPane.add(poke2InfoPanel, JLayeredPane.PALETTE_LAYER);
 
             // faccio un Update dello stato battaglia
-            statoBattaglia = new JLabel(playerInAttacco.getName() + " Scegli cosa fare:");
+            statoBattaglia = new JLabel(playerInAttacco.getName() + " Choose what to do: ");
             JPanel pannelloStato = new JPanel(new BorderLayout());
             pannelloStato.setBounds(10, 500, 230, 100);
             pannelloStato.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createRaisedBevelBorder(), BorderFactory.createLoweredBevelBorder()));
@@ -731,13 +731,13 @@ public class BattleView extends JFrame implements Serializable {
                     // Metto l'immagine del showConfirmDialog
                     ImageIcon returnBackCustomIcon = new ImageIcon("src/Img/backToMenu.png");
 
-                    int risposta = JOptionPane.showConfirmDialog(null, "Sei sicuro di voler tornare al Menù?", "Conferma", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, returnBackCustomIcon);
+                    int risposta = JOptionPane.showConfirmDialog(null, "Are you sure you want to return to the Menu?", "Confirm", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, returnBackCustomIcon);
                     if (risposta == JOptionPane.YES_OPTION) {           // se conferma il bottone premuto, torno indietro al menu
                         JOptionPane.setRootFrame(new BackgroundImageJFrame());      // torno al menu principale
                         setVisible(false);
-                        System.out.println("Torno indietro...");
+                        System.out.println("Go back...");
                     } else {
-                        System.out.println("Debug su console --> resto ancora nella schermata di vittoria");              // Azione se l'utente sceglie "No"
+//                        System.out.println("Debug su console --> resto ancora nella schermata di vittoria");              // Azione se l'utente sceglie "No"
                     }
 
                 }
@@ -762,8 +762,10 @@ public class BattleView extends JFrame implements Serializable {
         FrameImparaMossa frameNuovaMossa = new FrameImparaMossa(null, pokemonInAttacco, nuovaMossa);
         Move mossaDaCambiare = frameNuovaMossa.returnMossaDaCambiare();
         if(mossaDaCambiare != null) {
+            // Debug
             System.out.println("Mossa da sostituire ritornata dal frame: " + mossaDaCambiare + " MI TROVO NEL BATTLE-VIEW");
         }else{
+            // Debug
             System.out.println("Il ritorno della mossa da cambiare è NULL perché ha scelto di non cambiare la mossa");
         }
         return mossaDaCambiare;

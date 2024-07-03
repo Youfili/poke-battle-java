@@ -82,14 +82,14 @@ public class BattleModel {
                 // Aggiorno lo Scorer in alto
                 viewBattaglia.aggiornaScorerPunteggio1(player2);
                 viewBattaglia.repaint();
-                JOptionPane.showMessageDialog(new JButton("Nuova Partita"),player2.getName() + " Ha vinto, ora si trova a " + player2.getVittorieTemporanee() + " Vittorie!");
+                JOptionPane.showMessageDialog(new JButton("New Game"),player2.getName() + " won, now has " + player2.getVittorieTemporanee() + " Victories!");
 
             } else {
                 player1.incrementaVittorieTemporanee();
                 // aggiorno lo scorer in alto
                 viewBattaglia.aggiornaScorerPunteggio2(player1);
                 viewBattaglia.repaint();
-                JOptionPane.showMessageDialog(new JButton("Nuova Partita"),player1.getName() + " Ha vinto, ora si trova a " + player1.getVittorieTemporanee() + " Vittorie!");
+                JOptionPane.showMessageDialog(new JButton("New Game"),player1.getName() + " won, now has " + player1.getVittorieTemporanee() + " Victories!");
 
             }
             battaglieGiocate ++;
@@ -141,12 +141,12 @@ public class BattleModel {
 
                 // Se effettivamente il player ha deciso far IMPARARE la nuova mossa al pokemon
                 if(mossaDaSostituire != null) {
-                    // Stampa di debug prima della sostituzione
+                    // Stampa di Debug prima della sostituzione
                     System.out.println("Mossa da sostituire: " + mossaDaSostituire);
                     System.out.println("Mosse prima della sostituzione: " + pokemonInAttacco.getMoves());
                     // Vado a sostituire la mossa del pokemon in attacco
                     pokemonInAttacco.replaceMove(mossaDaSostituire, nuovaMossa);
-                    // Stampa di debug dopo la sostituzione
+                    // Stampa di Debug dopo la sostituzione
                     System.out.println("Mosse dopo la sostituzione: " + pokemonInAttacco.getMoves());
                     // Aggiorno in modo che il pokemon non sia obbligato a imparare una nuova mossa finché non arriva a un altro livello che lo permetta
                     pokemonInAttacco.setImparaMosse(false); // Appena impara una mossa metto che non può impararne un'altra fino a che non sale di livello
@@ -179,6 +179,7 @@ public class BattleModel {
         viewBattaglia.scambiaTurnazioni(this.pokemonInDifesa, this.pokemonInAttacco);
 
 
+        // Stampa Debug
         System.out.println("Posizioni nel prossimo Turno: ");
         System.out.println("Pokemon in attacco nel MODEL : " + pokemonInAttacco.getName());
         System.out.println("Pokemon in difesa nel MODEL : " + pokemonInDifesa.getName());
@@ -188,17 +189,20 @@ public class BattleModel {
         // Implementare la logica di cambiamento del pokemon esausto
         // Dopo aver implementato a livello logico la "morte" del pokemon notifico al controller il cambiamento della view
         viewBattaglia.aggiornaPokemonEsausto(pokeEsausto);
+        // Stampa Debug
         System.out.println("Sono nel BattleModel in aggiornaPokemonEsausto");
         // Devo inserire la logica che mi permetta di aggiornare un pokemon
 
     }
 
     public void cambioPokemon(Pokemon pokemonInCampoScelto){
+        // Stampa Debug
         System.out.println("cambioPokemon nel Model");
         this.pokemonInAttacco = pokemonInCampoScelto;
         // Debug per vedere se il riferimento del pokemon è aggiornato
         viewBattaglia.cambioPokemonGrafica();
 
+        // Stampa Debug
         System.out.println("Pokemon in attacco nel modello: " + this.pokemonInAttacco.getName());
         // continuo il ciclo battaglia
         cicloBattaglia();
@@ -245,7 +249,7 @@ public class BattleModel {
         player2.addPlayedMatches();
 
         // Logica per salvare i dati e terminare la partita
-        System.out.println("Partita terminata!");
+        System.out.println("Game over!");
         // Vado a modificare le stats dei giocatori (aumentato vittorie/sconfitte totali)
         if (player1.getVittorieTemporanee() > player2.getVittorieTemporanee()) {
             // Imposto il giocatore vincitore

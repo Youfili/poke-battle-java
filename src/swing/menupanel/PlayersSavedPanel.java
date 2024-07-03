@@ -92,7 +92,7 @@ public class PlayersSavedPanel extends JPanel {
         backgroundPanel.add(bottoniPlayer);
 
         // Creo il pannello che conterrà i bottoni
-        bottoneConferma.setText("Conferma");
+        bottoneConferma.setText("Confirm");
         bottoneConferma.setBounds(125, 535, 340, 60);
         bottoneConferma.setBorder(BorderFactory.createLineBorder(Color.BLUE, 4)); // Bordo nero spesso 2 pixel
         bottoneConferma.setBackground(Color.CYAN);

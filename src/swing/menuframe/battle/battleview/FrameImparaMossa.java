@@ -61,10 +61,10 @@ public class FrameImparaMossa extends JDialog {
         // Parte superiore: scritta del nome della mossa da imparare con bordo
         JPanel pannelloNuovaMossa = new JPanel();
         pannelloNuovaMossa.setBounds(10, 10, 430, 50);
-        Border bordoNuovaMossa = BorderFactory.createTitledBorder("Nuova Mossa");
+        Border bordoNuovaMossa = BorderFactory.createTitledBorder("New Move");
         pannelloNuovaMossa.setBorder(bordoNuovaMossa);
         pannelloNuovaMossa.setOpaque(false); // Imposta il pannello come trasparente
-        JLabel nomeMossaLabel = new JLabel("Vuoi far imparare a " + pokemonInAttacco.getName() + " la mossa: " + mossaDaImparare.getName(), SwingConstants.CENTER);
+        JLabel nomeMossaLabel = new JLabel("You want to make " + pokemonInAttacco.getName() + " learn the move: " + mossaDaImparare.getName(), SwingConstants.CENTER);
         nomeMossaLabel.setFont(new Font("Arial", Font.BOLD, 16)); // Imposta la dimensione del testo
         nomeMossaLabel.setForeground(Color.WHITE); // Imposta il colore del testo in bianco
         pannelloNuovaMossa.add(nomeMossaLabel);
@@ -73,7 +73,7 @@ public class FrameImparaMossa extends JDialog {
         // Parte centrale-bassa: GridLayout con bordo
         JPanel pannelloBottoniMossa = new JPanel(new GridLayout(2, 2, 2, 2));
         pannelloBottoniMossa.setBounds(25, 75, 225, 200);
-        Border bordo = BorderFactory.createTitledBorder("Scegli la mossa da sostituire");
+        Border bordo = BorderFactory.createTitledBorder("Choose the move to replace");
         ((javax.swing.border.TitledBorder) bordo).setTitleColor(Color.WHITE); // Imposta il colore del titolo del bordo in bianco
         pannelloBottoniMossa.setBorder(bordo);
         pannelloBottoniMossa.setOpaque(false); // Imposta il pannello come trasparente
@@ -89,14 +89,14 @@ public class FrameImparaMossa extends JDialog {
                     // Immagine da inserire come dialogo di conferma
                     ImageIcon returnBackCustomIcon = new ImageIcon("src/Img/backToMenu.png");
                     // Inserisco il dialogo di conferma
-                    int risposta = JOptionPane.showConfirmDialog(null, "Vuoi cambiare questa mossa?", "Si", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, returnBackCustomIcon);
+                    int risposta = JOptionPane.showConfirmDialog(null, "Want to change this move?", "Yes", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, returnBackCustomIcon);
                     if (risposta == JOptionPane.YES_OPTION) {
                         // Imposta la mossa da cambiare e chiudi il dialogo
                         setMossaDaCambiare(bottoneMossa.getMove());
-                        System.out.println("La mossa che ho deciso di cambiare è: " + mossaDaCambiare);
+                        System.out.println("The move I decided to change is: " + mossaDaCambiare);
                         dispose();  // Chiudi il frame dopo la conferma di risposta
                     } else {
-                        System.out.println("Ancora non ho deciso..."); // Azione se l'utente sceglie "No"
+                        System.out.println("I haven't decided yet..."); // Azione se l'utente sceglie "No"
                     }
                 }
             });
