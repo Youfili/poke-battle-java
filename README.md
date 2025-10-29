@@ -73,11 +73,6 @@ As the game progresses, Pokémon can evolve, learn new moves, and grow stronger,
 
 3. **Enjoy the Game**:
    - Follow the prompts to create your player and start your journey.
-
-## Contribution
-
-Contributions are welcome! Feel free to submit pull requests or report issues to improve the game. Please review the [CONTRIBUTING.md](CONTRIBUTING.md) file for guidelines.
-
 ---
 
 Start your Pokémon adventure today and build the ultimate team to conquer battles!
