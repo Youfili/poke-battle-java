@@ -6,7 +6,7 @@
 [![Contribute](https://img.shields.io/badge/Contribute-Welcome-brightgreen)](https://github.com/Youfili/poke-battle-java/pulls) 
 [![Collaboration](https://img.shields.io/badge/Collaboration-Open-blue)](https://github.com/Youfili/poke-battle-java/issues)
 
-[Download the project report (PDF)](Docs/Poke_Battle_Java.pdf)
+[Download the project report (PDF)](Docs/Poke_Battle_Java_Report.pdf)
 
 ---
 
