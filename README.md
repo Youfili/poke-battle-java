@@ -1,5 +1,15 @@
 # Pokémon Battle Game in Java
 
+![Java](https://img.shields.io/badge/Java-17-blue)
+![JavaSwing](https://img.shields.io/badge/JavaSwing-1.8-orange)
+![License](https://img.shields.io/badge/License-GNU%20GPL%20v3.0-green)  
+[![Contribute](https://img.shields.io/badge/Contribute-Welcome-brightgreen)](https://github.com/Youfili/poke-battle-java/pulls) 
+[![Collaboration](https://img.shields.io/badge/Collaboration-Open-blue)](https://github.com/Youfili/poke-battle-java/issues)
+
+[Download the project report (PDF)](Docs/Poke_Battle_Java.pdf)
+
+---
+
 ## Project Description
 
 This repository contains a Java-based Pokémon Battle Game that allows players to step into the role of a Pokémon Trainer. 
