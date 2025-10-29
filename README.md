@@ -50,7 +50,7 @@ As the game progresses, Pokémon can evolve, learn new moves, and grow stronger,
 
 1. **Clone the Repository**:
    ```
-   git clone https://github.com/sk3llig/JPokeBattle_Beta.git
+   git clone https://github.com/Youfili/poke-battle-java.git
    ```
 
 2. **Compile and Run**:
